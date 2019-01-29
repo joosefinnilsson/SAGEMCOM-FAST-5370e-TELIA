@@ -8,6 +8,8 @@
 
 ##### A notice to all nerds. If you will copy the wiki and steal the real developers work will not make you a hacker.
 
+##### This is the most powerful router I've ever played with. It is also possible to use lxc for almost all distros included in standard. You can setup your linux container with the lxc- * commands, will add a howto for this later.
+
 ![Screenshot](https://nr1.nu/sagem/felia1.jpg)
 
 - Big thanks to [kevdagoat](https://github.com/kevdagoat) who got me on the right track.
