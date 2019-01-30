@@ -258,9 +258,9 @@ Alright, after few weeks with this "most powerful router" from Telia i finally m
     /usr/share/lxs/archlinux.common.conf
 
 
-##### General Admin Stuff (Edit after your neeeds)
+###### General Admin Stuff (Edit after your neeeds)
 
-##### USERS (USER/1 = admin)
+###### USERS (USER/1 = admin)
 
       $.xmo.getValuesTree("Device/UserAccounts/Users/User[@uid='1']");
       $.xmo.getValuesTree("Device/UserAccounts/Users/User[@uid='1']/Role");
@@ -275,7 +275,7 @@ Alright, after few weeks with this "most powerful router" from Telia i finally m
       $.xmo.getValuesTree("Device/UserAccounts/Users/User[@uid='3']/RemoteAccesses/RemoteAccess[@uid='1']");
       $.xmo.getValuesTree("Device/UserAccounts/Users/User[@uid='2']/RemoteAccesses/RemoteAccess[@uid='1']");
 
-####### Firmware
+###### Firmware
       
       http://MASKED
       USER: MASKED
