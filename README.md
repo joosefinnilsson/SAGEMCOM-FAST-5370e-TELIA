@@ -2,13 +2,17 @@
 
 #### This wiki and **all** scripts that will be made by wuseman is licensed under GPL Version 3.
 
-##### This is the first wiki online that will help you to bring the power back from Telia and Sagemcom developers via telnet.
+##### This is the first wiki online that will help you to bring the power back from Telia and Sagemcom developers via _telnet_.
 
 ##### No intrusion on Telia or Sagemcom's servers has occurred and no damage on hardware has been done. It's all about extremely poor security in the firmware.
 
 ##### A notice to all nerds. If you will copy the wiki and steal the real developers work will not make you a hacker.
 
+<<<<<<< HEAD
 ##### For all lazy people, just use misc/sagemcom-settings.txt for list any setting without getting tired to do it manually all the time. :-)
+=======
+##### This is the most powerful router I've ever played with. It is also possible to use lxc for almost all distros included in standard. You can setup your linux container with the lxc- * commands, will add a howto for this later.
+>>>>>>> 6d293730ee518dd3281b55e1dff3ef35496a2e9f
 
 ![Screenshot](https://nr1.nu/sagem/felia1.jpg)
 
