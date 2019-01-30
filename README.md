@@ -1376,6 +1376,12 @@ A linux setup would be good ;)
 
 If you have problems, questions, ideas or suggestions please contact me by posting to wuseman@nr1.nu
 
+#### GOOD INFO
+
+You can find more info and good answers from this thread below from whirlpool where i am active too, if you know something that we don't please feel free to contribute in the thread or use my issue template. Thanks:-)
+
+https://forums.whirlpool.net.au/archive/2746904
+
 #### WEB SITE
 
 Visit my websites and profiles for the latest info and updated tools
