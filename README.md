@@ -10,7 +10,7 @@
 
 ##### For all lazy people, just use misc/sagemcom-settings.txt for list any setting without getting tired to do it manually all the time. :-)
 
-##### This is the most powerful router I've ever played with. It is also possible to use lxc for almost all distros included in standard. You can setup your linux container with the lxc- * commands, will add a howto for this later.
+##### This is the most powerful router I've ever played with. It is also possible to use lxc for almost all distros included in default setup. You can setup your linux container with the lxc- * commands, will add a howto for this later.
 
 ![Screenshot](https://nr1.nu/sagem/felia1.jpg)
 
