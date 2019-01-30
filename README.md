@@ -8,6 +8,8 @@
 
 ##### A notice to all nerds. If you will copy the wiki and steal the real developers work will not make you a hacker.
 
+##### For all lazy people, just use misc/sagemcom-settings.txt for list any setting without getting tired to do it manually all the time. :-)
+
 ![Screenshot](https://nr1.nu/sagem/felia1.jpg)
 
 - Big thanks to [kevdagoat](https://github.com/kevdagoat) who got me on the right track.
