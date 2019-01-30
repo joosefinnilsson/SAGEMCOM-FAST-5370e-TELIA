@@ -2,7 +2,7 @@
 
 #### This wiki and **all** scripts that will be made by wuseman is licensed under GPL Version 3.
 
-##### This is the first wiki online that will help you to bring the power back from Telia and Sagemcom developers via telnet.
+##### This is the first wiki online that will help you to bring the power back from Telia and Sagemcom developers via _telnet_.
 
 ##### No intrusion on Telia or Sagemcom's servers has occurred and no damage on hardware has been done. It's all about extremely poor security in the firmware.
 
