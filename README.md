@@ -1313,59 +1313,24 @@ http://192.168.1.1/0.1/gui/views-mobile/wifi-strength.html
 -    Crack 'nobody' password from teliaLxc, unshadow has been done in ~/.crackem
 
 -    Figure out why below command is not allowed? 
+
      $.xmo.getValuesTree("true", "Device/DeviceInfo/FlushDeviceLog");
 
--    Find why samba deny us from login on GUI after we allowing more features? Printed log below
+-    Find the reason why samba deny us from login on GUI after we allowing more features? Printed log below
   
-  /home/WORKSPACE/TELIA/BP_TELIA_5370_v0-58-x_20181126_2_90/fw-scos/openwrt/build_dir/target-sagemcom_5370e-telia_arm_uClibc-0.9.32_eabi/samba-3.0.37/source/lib/pidfile.c:pidfile_create(116)
-
-  ERROR: smbd is already running. File /var/run/smbd.pid exists and process id 2421 is running.
-
-[2019/01/30 06:21:38, 0] smbd/server.c:main(979)
-
-  smbd version 3.0.37 started.
-
-  Copyright Andrew Tridgell and the Samba Team 1992-2009
-
-[2019/01/30 06:21:38, 2] smbd/server.c:main(983)
-
-  uid=0 gid=0 euid=0 egid=0
-
-[2019/01/30 06:21:38, 0] param/loadparm.c:map_parameter(2794)
-
-  Unknown parameter encountered: "change notify timeout"
-
-[2019/01/30 06:21:38, 0] param/loadparm.c:lp_do_parameter(3535)
-
-  Ignoring unknown parameter "change notify timeout"
-
-[2019/01/30 06:21:38, 0] param/loadparm.c:map_parameter(2794)
-
-  Unknown parameter encountered: "character set"
-
-[2019/01/30 06:21:38, 0] param/loadparm.c:lp_do_parameter(3535)
-
-  Ignoring unknown parameter "character set"
-
-[2019/01/30 06:21:38, 2] lib/util_unistr.c:init_valid_table(251)
-
-  creating default valid table
-
-[2019/01/30 06:21:38, 2] lib/util_unistr.c:init_valid_table(251)
-
-  creating default valid table
-
-[2019/01/30 06:21:38, 2] lib/interface.c:add_interface(81)
-
-  added interface ip=192.168.1.1 bcast=192.168.1.255 nmask=255.255.255.0
-
-[2019/01/30 06:21:38, 0] smbd/server.c:main(1023)
-
-  standard input is not a socket, assuming -D option
-
-[2019/01/30 06:21:38, 0] 
-
-/home/WORKSPACE/TELIA/BP_TELIA_5370_v0-58-x_20181126_2_90/fw-scos/openwrt/build_dir/target-sagemcom_5370e-telia_arm_uClibc-0.9.32_eabi/samba-3.0.37/source/lib/pidfile.c:pidfile_create(116)
+     /home/WORKSPACE/TELIA/BP_TELIA_5370_v0-58-x_20181126_2_90/fw-scos/openwrt/build_dir/target-sagemcom_5370e-telia_arm_uClibc-0.9.32_eabi/samba-3.0.37/source/lib/pidfile.c:pidfile_create(116)
+     ERROR: smbd is already running. File /var/run/smbd.pid exists and process id 2421 is running.
+     [2019/01/30 06:21:38, 0] smbd/server.c:main(979)
+     smbd version 3.0.37 started.
+     Copyright Andrew Tridgell and the Samba Team 1992-2009
+     [2019/01/30 06:21:38, 2] smbd/server.c:main(983)
+     uid=0 gid=0 euid=0 egid=0
+     [2019/01/30 06:21:38, 0] param/loadparm.c:map_parameter(2794)
+     [2019/01/30 06:21:38, 2] lib/util_unistr.c:init_valid_table(251)
+     creating default valid table
+     [2019/01/30 06:21:38, 2] lib/interface.c:add_interface(81)
+     [2019/01/30 06:21:38, 0] 
+     /home/WORKSPACE/TELIA/BP_TELIA_5370_v0-58-x_20181126_2_90/fw-scos/openwrt/build_dir/target-sagemcom_5370e-telia_arm_uClibc-0.9.32_eabi/samba-3.0.37/source/lib/pidfile.c:pidfile_create(116)
 
 
 #### REQUIREMENTS
