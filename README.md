@@ -68,9 +68,9 @@ Alright, after few weeks with this "most powerful router" from Telia i finally m
 
 ![Screenshot](https://nr1.nu/sagem/device-info.png)
 
-###### Gather info for users and such things faster by list advancedOptions as an example: 
+###### Gather info for users
 
-    $.xmo.getValuesTree($.xpaths.mySagemcomBox.advancedOptions);
+    $.xmo.getValuesTree("Device/UserAccounts/Users");
 
 ![Screenshot](https://nr1.nu/sagem/userpass.png)
 
