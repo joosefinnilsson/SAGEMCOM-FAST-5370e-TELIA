@@ -12,6 +12,8 @@
 
 ##### This is the most powerful router I've ever played with. It is also possible to use lxc for almost all distros included in default setup. You can setup your linux container with the lxc- * commands, will add a howto for this later.
 
+##### This wiki is far away from done, things may be added or deleted at any time and there might be duplicates of few settings so no issue report is wanted. 
+
 ![Screenshot](https://nr1.nu/sagem/felia1.jpg)
 
 - Big thanks to [kevdagoat](https://github.com/kevdagoat) who got me on the right track.
@@ -258,7 +260,7 @@ Alright, after few weeks with this "most powerful router" from Telia i finally m
 
 ##### General Admin Stuff (Edit after your neeeds)
 
-# USERS (USER/1 = admin)
+##### USERS (USER/1 = admin)
 
       $.xmo.getValuesTree("Device/UserAccounts/Users/User[@uid='1']");
       $.xmo.getValuesTree("Device/UserAccounts/Users/User[@uid='1']/Role");
@@ -273,7 +275,7 @@ Alright, after few weeks with this "most powerful router" from Telia i finally m
       $.xmo.getValuesTree("Device/UserAccounts/Users/User[@uid='3']/RemoteAccesses/RemoteAccess[@uid='1']");
       $.xmo.getValuesTree("Device/UserAccounts/Users/User[@uid='2']/RemoteAccesses/RemoteAccess[@uid='1']");
 
-######## Firmware
+####### Firmware
       
       http://MASKED
       USER: MASKED
@@ -300,10 +302,10 @@ Alright, after few weeks with this "most powerful router" from Telia i finally m
 ###### Logs
 
       $.xmo.getValuesTree("Device/DeviceInfo/FlushDeviceLog");
-      $.xmo.getValuesTree("true", "Device/DeviceInfo/FlushDeviceLog");    **# REMINDER WUSEMAN -  WHY THIS NOT WORK?**
+      $.xmo.getValuesTree("true", "Device/DeviceInfo/FlushDeviceLog");
 	
 
-# Cwmpd Disable
+###### Cwmpd
 
       $.xmo.getValuesTree("Device/ManagementServer/EnableCWMP")
       $.xmo.setValuesTree(false, "Device/ManagementServer/EnableCWMP")
@@ -323,7 +325,7 @@ Alright, after few weeks with this "most powerful router" from Telia i finally m
       $.xmo.getValuesTree("Device/Services/ParentalControl/Enable");
       $.xmo.setValuesTree("true", "Device/Services/ParentalControl/Enable");
 
-###### .......and so on......
+###### .......and so on.......
 
 ###### Default login screen:
 
