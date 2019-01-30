@@ -77,15 +77,15 @@ Alright, after few weeks with this "most powerful router" from Telia i finally m
 
      $.xmo.client._options
 
-##### List pending requests:
+###### List pending requests:
 
      $.xmo.client._pendingRequests
 
-##### Find your UID or SESSION ID wich is needed for set settings permanent:
+###### Find your UID or SESSION ID wich is needed for set settings permanent:
 
     $.xmo.client._sessionId
 
-##### List and set different name on any setting, you can use your own js script for example:
+###### List and set different name on any setting, you can use your own js script for example:
 
     $.xmo.client.__proto__
 
@@ -124,6 +124,8 @@ Alright, after few weeks with this "most powerful router" from Telia i finally m
 
    
     $.xmo.setValuesTree(4, $.xpaths.runlevel);
+
+-   Where levels are:
 
 -   Runlevel 1: - Lock most modem functions including wifi.
 
@@ -299,7 +301,7 @@ Alright, after few weeks with this "most powerful router" from Telia i finally m
 
       $.xmo.getValuesTree("Device/DeviceInfo/FlushDeviceLog");
       $.xmo.getValuesTree("true", "Device/DeviceInfo/FlushDeviceLog");    **# REMINDER WUSEMAN -  WHY THIS NOT WORK?**
-
+	
 
 # Cwmpd Disable
 
@@ -897,6 +899,45 @@ http://192.168.1.1/0.1/gui/views-mobile/wifi-strength.html
       30000authenticationErrorFunc: ƒ (d,e)authenticationResponseFunc: ƒ (e,d)autoRequestForEvents: truebasicAuth: falsecontains: ƒ (str)cookie: "session"dataModel: {name: "Internal", 
       nss: Array(1)}getEventsRetryDelay: 15lang: "en"notifyCurrentValue: falsepriority: falserefreshTimer: 5requestErrorFunc: ƒ (a,b)requestResponseFunc: ƒ (d)synchronous: 
       false__proto__: Object_uploadFiles: _.fn.init []__proto__: Object
+
+
+##### Reminders for myself otherwise i forget, my brain goes in 100 24/7 cant remember everything ;)
+
+###### Don't forget too. 
+
+-    1) Crack 'nobody' password from teliaLxc, unshadow has been done in ~/.crackem
+
+-    2) Figure out why below command is not allowed? 
+     2) $.xmo.getValuesTree("true", "Device/DeviceInfo/FlushDeviceLog");
+
+-    3) Find why samba deny us from login on GUI after we allowing more features? Printed log below
+  
+  /home/WORKSPACE/TELIA/BP_TELIA_5370_v0-58-x_20181126_2_90/fw-scos/openwrt/build_dir/target-sagemcom_5370e-telia_arm_uClibc-0.9.32_eabi/samba-3.0.37/source/lib/pidfile.c:pidfile_create(116)
+  ERROR: smbd is already running. File /var/run/smbd.pid exists and process id 2421 is running.
+[2019/01/30 06:21:38, 0] smbd/server.c:main(979)
+  smbd version 3.0.37 started.
+  Copyright Andrew Tridgell and the Samba Team 1992-2009
+[2019/01/30 06:21:38, 2] smbd/server.c:main(983)
+  uid=0 gid=0 euid=0 egid=0
+[2019/01/30 06:21:38, 0] param/loadparm.c:map_parameter(2794)
+  Unknown parameter encountered: "change notify timeout"
+[2019/01/30 06:21:38, 0] param/loadparm.c:lp_do_parameter(3535)
+  Ignoring unknown parameter "change notify timeout"
+[2019/01/30 06:21:38, 0] param/loadparm.c:map_parameter(2794)
+  Unknown parameter encountered: "character set"
+[2019/01/30 06:21:38, 0] param/loadparm.c:lp_do_parameter(3535)
+  Ignoring unknown parameter "character set"
+[2019/01/30 06:21:38, 2] lib/util_unistr.c:init_valid_table(251)
+  creating default valid table
+[2019/01/30 06:21:38, 2] lib/util_unistr.c:init_valid_table(251)
+  creating default valid table
+[2019/01/30 06:21:38, 2] lib/interface.c:add_interface(81)
+  added interface ip=192.168.1.1 bcast=192.168.1.255 nmask=255.255.255.0
+[2019/01/30 06:21:38, 0] smbd/server.c:main(1023)
+  standard input is not a socket, assuming -D option
+[2019/01/30 06:21:38, 0] 
+/home/WORKSPACE/TELIA/BP_TELIA_5370_v0-58-x_20181126_2_90/fw-scos/openwrt/build_dir/target-sagemcom_5370e-telia_arm_uClibc-0.9.32_eabi/samba-3.0.37/source/lib/pidfile.c:pidfile_create(116)
+
 
 #### REQUIREMENTS
 
