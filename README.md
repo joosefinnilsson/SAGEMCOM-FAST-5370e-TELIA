@@ -32,10 +32,162 @@ Alright, after few weeks with this "most powerful router" from Telia i finally m
 
 ![Screenshot](https://nr1.nu/sagem/sagem-owned2.png)
 
+# Stop/Start LXC From TelialXC Rootfs:
+
+    lxc-stop -n teliaLxc -F
+    lxc-start -n teliaLxc -F
+
+###### UCI Settings:
+
+    uci show network
+    uci show dhcp
+    uci show system
+
+###### Login as another user:
+
+    var x = $.xmo;
+    $.xmo.init();
+    $.xmo.login("username", "password");
+    $.dosomethingherewithoutloginongui
+    
+###### Route INFO:
+
+    $.xmo.getValuesTree("Device/Routing/RouteInformation/Enable");
+    $.xmo.setValuesTree("true", "Device/Routing/RouteInformation/Enable");
+
+###### Enable ADVANCED Mode:
+
+    $.xmo.getValuesTree("Device/UserInterface/AdvancedMode");
+    $.xmo.setValuesTree("true", "Device/UserInterface/AdvancedMode");
+
+###### Set user settings for Administrator/admin/internal:
+
+    $.xmo.getValuesTree("Device/UserAccounts/Users/User[@uid='1']");
+    $.xmo.getValuesTree("Device/UserAccounts/Users/User[@uid='1']/Role");
+    $.xmo.setValuesTree("SuperUser", "Device/UserAccounts/Users/User[@uid='1']/Role");
+    $.xmo.setValuesTree("true", "Device/UserAccounts/Users/User[@uid='1']/CurrentlyRemoteAccess");
+    $.xmo.setValuesTree("wuseman@nr1.nu", "Device/UserAccounts/Users/User[@uid='1']/Email");
+    $.xmo.setValuesTree("Sweden", "Device/UserAccounts/Users/User[@uid='1']/Country");
+    $.xmo.setValuesTree("wuseman", "Device/UserAccounts/Users/User[@uid='1']/Lastname");
+    $.xmo.setValuesTree("true", "Device/UserAccounts/Users/User[@uid='1']/OwnPass");
+    $.xmo.getValuesTree("Device/UserAccounts/Users/User[@uid='1']/RemoteAccesses/RemoteAccess[@uid='1']");
+    $.xmo.getValuesTree("Device/UserAccounts/Users/User[@uid='2']/RemoteAccesses/RemoteAccess[@uid='1']");
+    $.xmo.getValuesTree("Device/UserAccounts/Users/User[@uid='3']/RemoteAccesses/RemoteAccess[@uid='1']");
+    $.xmo.getValuesTree("Device/UserAccounts/Users/User[@uid='2']/RemoteAccesses/RemoteAccess[@uid='1']");
+
+###### BACKDOORS (DONT PLAY WITH THIS IF YOU DONT KNOW WHAT YOU ARE DOING IT WILL FREEZE ROUTER AND FACTORY RESET IS REQUIRED)
+
+    $.xmo.getValuesTree("Device/UserAccounts/Users/User[@uid='3']/RemoteAccesses/RemoteAccess[@uid='2']/Enabled"); # SSH FOR TELIA ENABLE BY DEFAULT
+    $.xmo.setValuesTree("false", "Device/UserAccounts/Users/User[@uid='3']/RemoteAccesses/RemoteAccess[@uid='3']/Enabled");
+    $.xmo.setValuesTree("false", "Device/UserAccounts/Users/User[@uid='3']/RemoteAccesses/RemoteAccess[@uid='4']/Enabled");
+
+###### Response to PING:
+
+    $.xmo.getValuesTree("$.xmo.getValuesTree("Device/Firewall/RespondToPing");");
+    $.xmo.setValuesTree("", "");
+
+###### Print/Set DYNDNS Stuff:
+
+    $.xmo.getValuesTree("Device/Services/DynamicDNS/Clients/Client[@uid='1']/Enable");
+    $.xmo.getValuesTree("Device/Services/DynamicDNS/Clients/Client[@uid='1']/Status");
+    $.xmo.getValuesTree("Device/Services/DynamicDNS/Clients/Client[@uid='1']/Username");
+    $.xmo.getValuesTree("Device/Services/DynamicDNS/Clients/Client[@uid='1']/Password");
+
+
+###### Storageservices GET INFO
+    $.xmo.getValuesTree("Device/Services/StorageServices/StorageService[@uid='1']/Capabilities/SFTPCapable");
+    $.xmo.getValuesTree("Device/Services/StorageServices/StorageService[@uid='1']/Capabilities/FTPCapable");
+    $.xmo.getValuesTree("Device/Services/StorageServices/StorageService[@uid='1']/Capabilities/HTTPWritable");
+
+###### Storageservices SET INFO
+    $.xmo.setValuesTree("true", "Device/Services/StorageServices/StorageService[@uid='1']/Capabilities/SFTPCapable");
+    $.xmo.setValuesTree("true", "Device/Services/StorageServices/StorageService[@uid='1']/Capabilities/FTPCapable");
+    $.xmo.setValuesTree("true", "Device/Services/StorageServices/StorageService[@uid='1']/Capabilities/HTTPWritable");
+    $.xmo.setValuesTree("true", "Device/Services/StorageServices/StorageService[@uid='1']/Capabilities/VolumeEncryptionCapable");
+    $.xmo.getValuesTree("Device/Services/StorageServices/StorageService[@uid='1']/Capabilities/VolumeEncryptionCapable");
+    $.xmo.getValuesTree("Device/Services/StorageServices/StorageService[@uid='1']/Capabilities/SupportedNetworkProtocols");
+    $.xmo.getValuesTree("SMB,SSH,TELNET,HTTP", Device/Services/StorageServices/StorageService[@uid='1']/Capabilities/SupportedNetworkProtocols");
+    $.xmo.setValuesTree("true", "Device/Services/StorageServices/StorageService[@uid='1']/FTPServer/Enable");
+    $.xmo.getValuesTree("Device/Services/StorageServices/StorageService[@uid='1']/FTPServer/Enable");
+    $.xmo.getValuesTree("Device/Services/StorageServices/StorageService[@uid='1']/FTPServer/Status");
+
+
+###### Print IPV4 Addresses:
+     $.xmo.getValuesTree("Device/IP/Interfaces/Interface[Alias=\"IP_DATA\"]/IPv4Addresses/IPv4Address[Alias=\"IP_DATA_ADDRESS\"]/IPAddress");
+
+###### Enable Telnet
+$.xmo.setValuesTree("ACCESS_ENABLE_ALL", "Device/UserAccounts/Users/User[@uid='1']/RemoteAccesses/RemoteAccess[@uid='4']/LANRestriction");
+
+###### Enable SSH
+
+      $.xmo.setValuesTree("ACCESS_ENABLE_ALL", "Device/UserAccounts/Users/User[@uid='1']/RemoteAccesses/RemoteAccess[@uid='4']/LANRestriction");
+
+###### Print hardware version:
+
+    $.xmo.getValuesTree("Device/DeviceInfo/HardwareVersion");
+
+###### Remove BLACKLISTED ports:
+
+    $.xmo.setValuesTree("", "Device/Managers/NetworkData/BlacklistedPorts");
+    $.xmo.getValuesTree("", "Device/Managers/NetworkData/BlacklistedPorts");
+
+###### Enable SFTP:
+
+    $.xmo.getValuesTree("Device/ServicesStorageService[1]/Enable");
+    $.xmo.getValuesTree("Device/Services/StorageServices/StorageService[@uid='1']/Enable");
+    $.xmo.setValuesTree('true', "Device/Services/StorageServices/StorageService[@uid='1']/SFTPServer/Enable");
+
+###### Enable FTP:
+
+    $.xmo.getValuesTree("Device/Services/StorageServices/StorageService[@uid='1']/FTPServer");
+    $.xmo.setValuesTree("true", "Device/Services/StorageServices/StorageService[@uid='1']/FTPServer/Enable");
+    $.xmo.getValuesTree("Device/Services/StorageServices/StorageService[@uid='1']/FTPServer/Enable"); 
+
+###### Edit first connection:
+
+    $.xmo.getValuesTree("Device/DeviceInfo/FirstConnection");
+
+###### Interface: 
+
+    $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Role='WAN']");
+
+###### Print MAC Addr:
+
+    $.xmo.getValuesTree("Device/DeviceInfo/MACAddress");
+
+###### UPNP Stuff:
+
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/UPnPMediaServerPort");
+    $.xmo.setValuesTree("wusemans home", "Device/UPnP/Settings/UPnPMediaServer/FriendlyName");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/FriendlyName");
+    $.xmo.setValuesTree("https://nr1.nu", "Device/UPnP/Settings/UPnPMediaServer/PresentationUrl");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/PresentationUrl");
+    $.xmo.setValuesTree("/", "Device/UPnP/Settings/UPnPMediaServer/RootFolder");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/RootFolder");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/UPnPNMCServer");
+    $.xmo.setValuesTree("true", "Device/UPnP/Settings/UPnPMediaServer/UPnPNMCServer");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/UploadEnabled");
+    $.xmo.setValuesTree("1", "Device/UPnP/Settings/UPnPMediaServer/UploadEnabled");
+
+###### Enable more AccessControl Settings:
+
+    $.xmo.getValuesTree("Device/Managers/NetworkLan/AccessControlEnable");
+    $.xmo.setValuesTree('true', "Device/Managers/NetworkLan/AccessControlEnable");
+    $.xmo.setValuesTree("true", "Device/Managers/NetworkLan/GuestAccessControlEnable");
+$.xmo.getValuesTree("Device/Managers/NetworkLan/GuestAccessControlEnable");
+
+
 ###### Misc
 
       $.xmo.setValuesTree("true", "Device/UserInterface/AdvancedMode"); # # ENABLE ADVANCED MODE
       $.xmo.getValuesTree("Device/UserInterface/AdvancedMode");  # Confirm advanced mode has been set
+
+###### Syslog Settings
+
+      $.xmo.setValuesTree("192.168.1.104", "Device/DeviceInfo/Logging/Syslog/Server/IPv4Address");
+      $.xmo.setValuesTree(".*", "Device/DeviceInfo/Logging/Syslog/Server/SyslogConfig");
+      sed -i 's/81.236.57.18/192.168.1.104/g' /etc/syslog-ng/syslog-ng.conf 
+      sed -i 's/1.1.1.1/192.168.1.104/g' /telia/lxc/rootfs/etc/syslog-ng/syslog-ng.conf
 
 ###### Colors
 
@@ -54,14 +206,179 @@ Alright, after few weeks with this "most powerful router" from Telia i finally m
       $.xmo.setValuesTree("", "Device/ManagementServer/URL");
       $.xmo.getValuesTree("Device/Managers/NetworkData")
 
-###### Set a new hostname/dns
+###### Print Serial Number
+
+      $.xmo.getValuesTree("Device/GatewayInfo/SerialNumber");
+
+###### Set/Print hostname/dns
 
       $.xmo.getValuesTree("Device/DNS/Client/HostName");
+      $.xmo.getValuesTree("Device/DNS/Client/LocalDomains");
+      $.xmo.setValuesTree("router, "Device/DNS/Client/LocalDomains");
       $.xmo.setValuesTree("router", "Device/DNS/Client/HostName");
+      $.xmo.getValuesTree("Device/DNS/Client/Servers[0]/DNSServer")"; # NOT WORK
+      $.xmo.getValuesTree("Device/Services/DynamicDNS/Clients/Client[1]/Enable");
+
+###### Print DNS Server IP:s
+
+      $.xmo.getValuesTree("Device/DNS/Client/Servers/Server[1]/DNSServer");
+      $.xmo.getValuesTree("Device/DNS/Client/Servers/Server[2]/DNSServer");
+
+# Print Time & Date status
+
+      $.xmo.getValuesTree("Device/Time/Enable");
+      $.xmo.getValuesTree("Device/Time/Status");
+
+# QOS Settings - (Insane many different ip adresses)
+
+      $.xmo.getValuesTree("Device/QoS/DefaultDSCPMark");
+
+# USB
+      
+     $.xmo.getValuesTree("Device/USB/Enable");
+
+###### Print info about interfaces:
+
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/BroadcastPacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/BroadcastPacketsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/BytesReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/BytesSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/CurrentBitRate");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Diagnostics/CurrentBitRate");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/DiscardPacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/DiscardPacketsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Diagnostics/CurrentDuplexMode");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/ErrorsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/ErrorsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/MulticastPacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/MulticastPacketsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/PacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/PacketsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Status");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/UnicastPacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/UnicastPacketsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/BroadcastPacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/BroadcastPacketsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/BytesReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/BytesSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/CurrentBitRate");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Diagnostics/CurrentBitRate");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/DiscardPacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/DiscardPacketsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Diagnostics/CurrentDuplexMode");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/ErrorsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/ErrorsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/MulticastPacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/MulticastPacketsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/PacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/PacketsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Status");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/UnicastPacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/UnicastPacketsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/BroadcastPacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/BroadcastPacketsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/BytesReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/BytesSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/CurrentBitRate");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Diagnostics/CurrentBitRate");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/DiscardPacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/DiscardPacketsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Diagnostics/CurrentDuplexMode");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/ErrorsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/ErrorsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/MulticastPacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/MulticastPacketsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/PacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/PacketsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Status");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/UnicastPacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/UnicastPacketsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/BroadcastPacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/BroadcastPacketsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/BytesReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/BytesSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/CurrentBitRate");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Diagnostics/CurrentBitRate");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/DiscardPacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/DiscardPacketsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Diagnostics/CurrentDuplexMode");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/ErrorsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/ErrorsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/MulticastPacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/MulticastPacketsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/PacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/PacketsSent");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Status");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/UnicastPacketsReceived");
+     $.xmo.getValuesTree("Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/UnicastPacketsSent");
+
+###### Disable blacklists:
+
+     $.xmo.getValuesTree("Device/Hosts/Hosts/Host[@uid='1']");
+     $.xmo.setValuesTree('false', "Device/Hosts/Hosts/Host[@uid='1']/BlacklistEnable");
+     $.xmo.setValuesTree('false', "Device/Hosts/Hosts/Host[@uid='1']/BlacklistedAccordingToSchedule");
+     $.xmo.getValuesTree("Device/Hosts/Hosts");
+
+
+# VOIP
+
+     $.xmo.getValuesTree("Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid=1]/Enable");
+     $.xmo.getValuesTree("Device/Services/VoiceServices/VoiceService[@uid='1']/PhyInterfaces/PhyInterface/OutGoingLine");
+
+###### Edit RIP:
+
+     $.xmo.getValuesTree("Device/Routing/RIP/Enable");
+     $.xmo.setValuesTree('true', "Device/Routing/RIP/Enable");
+
+###### Get Country Settings:
+
+    $.xmo.getValuesTree("Device/DeviceInfo/Country");
+
+###### Print/Set CWPD Settings:
+
+    $.xmo.setValuesTree("", "Device/ManagementServer/TR69InternalData/Settings/Port");
+    $.xmo.getValuesTree("Device/ManagementServer/TR69InternalData/Settings/Port")
 
 ###### Grab passwords for any user:
 
      $.xmo.client.getPassword('username')
+
+###### UPNP/Twonky settings:
+
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/AllName");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/AllPictures");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/AllRadio");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/AllTracks");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/AllVideos");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/InternetRadio");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/MusicNodes/MusicNode[@uid='1']/Attributes");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/MusicNodes/MusicNode[@uid='2']/Attributes");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/MusicNodes/MusicNode[@uid='3']/Attributes");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/MusicNodes/MusicNode[@uid='4']/Attributes");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/MusicNodes/MusicNode[@uid='5']/Attributes");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/PictureNodes/PictureNode[@uid='1']/Attributes");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/PictureNodes/PictureNode[@uid='2']/Attributes");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/PictureNodes/PictureNode[@uid='3']/Attributes");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/PlaylistLastPlayed");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/PlaylistMostPlayed");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/Playlists");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/RootMusic");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/RootPicture");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/RootVideo");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/TagsPicture");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/VideoNodes/VideoNode[@uid='1']/Attributes");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/VideoNodes/VideoNode[@uid='2']/Attributes");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/VideoNodes/VideoNode[@uid='3']/Attributes");
+    $.xmo.getValuesTree("Device/UPnP/Settings/UPnPMediaServer/Language");
+
+###### Print WIFI Settings:
+
+     $.xmo.getValuesTree("Device/WiFi/SSIDs");
+
+###### Print/Set portscan detection:
+
+     $.xmo.getValuesTree("Device/Firewall/PortScanDetection");
+     $.xmo.setValuesTree('true', "Device/Firewall/PortScanDetection");
 
 ###### And for hashPasswords:
 
@@ -310,6 +627,10 @@ Alright, after few weeks with this "most powerful router" from Telia i finally m
       $.xmo.getValuesTree("Device/ManagementServer/EnableCWMP")
       $.xmo.setValuesTree(false, "Device/ManagementServer/EnableCWMP")
 
+###### Print masstorage data:
+
+      $.xmo.setValuesTree("wuseman", $.xpaths.mySagemcomBox.massStorage.dlnaMediaName)
+
 ###### Route info
 
       $.xmo.getValuesTree("Device/Routing/RouteInformation/Enable");
@@ -324,6 +645,30 @@ Alright, after few weeks with this "most powerful router" from Telia i finally m
 
       $.xmo.getValuesTree("Device/Services/ParentalControl/Enable");
       $.xmo.setValuesTree("true", "Device/Services/ParentalControl/Enable");
+
+###### Random stuff:
+
+      $.xmo.getValuesTree($.xpaths.management);
+      $.xmo.getValuesTree($.xpaths.main);
+      $.xmo.getValuesTree($.xpaths.rpc);
+      $.xmo.getValuesTree($.xpaths.technicalLogFast);
+      $.xmo.getValuesTree($.xpaths.adminAdvanced);
+      $.xmo.getValuesTree($.xpaths.internetConnectivity);
+      $.xmo.getValuesTree($.xpaths.trafficStats); < SSH HERE
+      $.xmo.getValuesTree("Device/Routing/RIP/X_SAGEMCOM_RIPIPPrefix/X_SAGEMCOM_RIPIPPrefix/RIPDefaultGateway");
+       $.xmo.getValuesTree($.xpaths.mySagemcomBox)
+      ipSecEnable: "Device/NAT/IPSecPassthroughEnable"
+      portScanDetection: "Device/Firewall/PortScanDetection"
+      pptpEnable: "Device/NAT/PPTPPassthroughEnable"
+      remoteConfig:             "Device/UserAccounts/Users/User[@uid="#uid#"]/RemoteAccesses/RemoteAccess[@uid="#uidRemoteAccess#"]/WANRestriction"
+      remoteIPAddress:       "Device/IP/Interfaces/Interface[Alias='IP_DATA']/IPv4Addresses/IPv4Address[Alias='IP_DATA_ADDRESS']/IPAddress"
+      remoteServicePort: "Device/UserAccounts/Users/User[@uid='3']/RemoteAccesses/RemoteAccess[@uid='3']/Port"
+      sipAlgEnable: "Device/NAT/SIPALGEnable"
+      upnpEnable: "Device/UPnP/Device/Enable"
+      users: "Device/UserAccounts/Users"
+      wanBlockingEnable: "Device/Firewall/WanBlocking"
+
+##### Find more info in configuration file in this repo. 
 
 ###### .......and so on.......
 
@@ -1331,6 +1676,10 @@ http://192.168.1.1/0.1/gui/views-mobile/wifi-strength.html
      [2019/01/30 06:21:38, 2] lib/interface.c:add_interface(81)
      [2019/01/30 06:21:38, 0] 
      /home/WORKSPACE/TELIA/BP_TELIA_5370_v0-58-x_20181126_2_90/fw-scos/openwrt/build_dir/target-sagemcom_5370e-telia_arm_uClibc-0.9.32_eabi/samba-3.0.37/source/lib/pidfile.c:pidfile_create(116)
+
+##### Main configurations is stored in LXC Telia dir:
+
+    /telia/lxc/rootfs/etc/hosts
 
 
 #### REQUIREMENTS
