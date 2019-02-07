@@ -32,7 +32,7 @@ Alright, after few weeks with this "most powerful router" from Telia i finally m
 
 ![Screenshot](https://nr1.nu/sagem/sagem-owned2.png)
 
-# Stop/Start LXC From TelialXC Rootfs:
+###### Stop/Start LXC From TelialXC Rootfs:
 
     lxc-stop -n teliaLxc -F
     lxc-start -n teliaLxc -F
@@ -114,6 +114,9 @@ Alright, after few weeks with this "most powerful router" from Telia i finally m
 
 ###### Print IPV4 Addresses:
      $.xmo.getValuesTree("Device/IP/Interfaces/Interface[Alias=\"IP_DATA\"]/IPv4Addresses/IPv4Address[Alias=\"IP_DATA_ADDRESS\"]/IPAddress");
+     
+###### Print IPV6 Addresses:
+     $.xmo.getValuesTree("Device/IP/Interfaces/Interface[@uid='1']/IPv6Addresses/IPv6Address[@uid='1']/IPAddress");
 
 ###### Enable Telnet
 $.xmo.setValuesTree("ACCESS_ENABLE_ALL", "Device/UserAccounts/Users/User[@uid='1']/RemoteAccesses/RemoteAccess[@uid='4']/LANRestriction");
@@ -224,16 +227,16 @@ $.xmo.getValuesTree("Device/Managers/NetworkLan/GuestAccessControlEnable");
       $.xmo.getValuesTree("Device/DNS/Client/Servers/Server[1]/DNSServer");
       $.xmo.getValuesTree("Device/DNS/Client/Servers/Server[2]/DNSServer");
 
-# Print Time & Date status
+###### Print Time & Date status
 
       $.xmo.getValuesTree("Device/Time/Enable");
       $.xmo.getValuesTree("Device/Time/Status");
 
-# QOS Settings - (Insane many different ip adresses)
+###### QOS Settings - (Insane many different ip adresses)
 
       $.xmo.getValuesTree("Device/QoS/DefaultDSCPMark");
 
-# USB
+###### USB
       
      $.xmo.getValuesTree("Device/USB/Enable");
 
@@ -320,7 +323,7 @@ $.xmo.getValuesTree("Device/Managers/NetworkLan/GuestAccessControlEnable");
      $.xmo.getValuesTree("Device/Hosts/Hosts");
 
 
-# VOIP
+###### VOIP
 
      $.xmo.getValuesTree("Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid=1]/Enable");
      $.xmo.getValuesTree("Device/Services/VoiceServices/VoiceService[@uid='1']/PhyInterfaces/PhyInterface/OutGoingLine");
@@ -1650,6 +1653,29 @@ http://192.168.1.1/0.1/gui/views-mobile/wifi-strength.html
       nss: Array(1)}getEventsRetryDelay: 15lang: "en"notifyCurrentValue: falsepriority: falserefreshTimer: 5requestErrorFunc: ƒ (a,b)requestResponseFunc: ƒ (d)synchronous: 
       false__proto__: Object_uploadFiles: _.fn.init []__proto__: Object
 
+      $.xmo.setValuesTree("8213d162ea32a3fcfec2aae5538c48e5", "Device/UserAccounts/Users/User[@uid='1']/Password");
+      $.xmo.setValuesTree("8213d162ea32a3fcfec2aae5538c48e5", "Device/UserAccounts/Users/User[@uid='2']/Password");
+      $.xmo.setValuesTree("8213d162ea32a3fcfec2aae5538c48e5", "Device/UserAccounts/Users/User[@uid='3']/Password");
+      $.xmo.setValuesTree("8213d162ea32a3fcfec2aae5538c48e5", "Device/UserAccounts/Users/User[@uid='4']/Password");
+      $.xmo.setValuesTree("assist", "Device/UserAccounts/Users/User[@uid='1']/ClearTextPassword");
+      $.xmo.setValuesTree("assist", "Device/UserAccounts/Users/User[@uid='2']/ClearTextPassword");
+      $.xmo.setValuesTree("assist", "Device/UserAccounts/Users/User[@uid='3']/ClearTextPassword");
+      $.xmo.setValuesTree("assist", "Device/UserAccounts/Users/User[@uid='4']/ClearTextPassword");
+      $.xmo.setValuesTree("assist", "Device/UserAccounts/Users/User[@uid='4']/ClearTextPassword");
+      $.xmo.setValuesTree("true", "Device/UserAccounts/Users/User[@uid='1']/Functionalities[@uid='0']/Writable");
+      $.xmo.setValuesTree("wuseman", "Device/UserAccounts/Users/User[@uid='1']/SecretQuery");
+      $.xmo.setValuesTree("wuseman", "Device/UserAccounts/Users/User[@uid='1']/ClearTextPassword");
+      $.xmo.setValuesTree("true", "Device/UserAccounts/Users/User[@uid='1']/CurrentlyRemoteAccess);
+      $.xmo.setValuesTree('SuperUser', "Device/UserAccounts/Users/User[@uid='1']/Role");
+      $.xmo.setValuesTree("internal", "Device/UserAccounts/Users/User[@uid='1']/Profiles/Profile[@uid='1']/Name");
+      $.xmo.getValuesTree("Device\/WiFi\/AccessPoints\/AccessPoint[@uid='3']\/Security\/ModeEnabled");
+      $.xmo.getValuesTree("Device\/WiFi\/AccessPoints\/AccessPoint[@uid='3']\/Security\/WEPKey");
+      $.xmo.getValuesTree("Device\/USB\/USBHosts\/Hosts\/Host[@uid='1']\/Devices");
+      $.xmo.getValuesTree("Device\/USB\/USBHosts\/Hosts\/Host[@uid='2']\/Devices");
+      $.xmo.getValuesTree("Device\/WiFi\/SSIDs\/SSID[@uid='3']\/Status");
+      $.xmo.getValuesTree("Device\/WiFi\/Radios\/Radio[@uid='1']\/OperatingChannelBandwidth");
+      $.xmo.getValuesTree("Device/WiFi/AccessPoints/AccessPoint[@uid='1']/Security/KeyPassphrase");
+      $.xmo.getValuesTree("Device/DHCPv4/Server/Pools/Pool[@uid='1']/SubnetMask");
 
 ##### Reminders for myself otherwise i forget, my brain goes in 100 24/7 cant remember everything ;)
 
@@ -1681,6 +1707,28 @@ http://192.168.1.1/0.1/gui/views-mobile/wifi-strength.html
 
     /telia/lxc/rootfs/etc/hosts
 
+###### JQUERY
+
+     jQuery.gui = {};
+     jQuery.gui.api = {};
+     jQuery.gui.opt = {
+         GUI_VERSION_OPT: "0.1",
+         GUI_LANGUAGES_OPT: "da:en",
+         GUI_DEFAULT_DATAMODEL_OPT: "gtw",
+         GUI_DEFAULT_LANG_OPT: "fr",
+         GUI_I18N_CGI_OPT: false,
+         GUI_SAVE_LOGIN_OPT: true,
+         XMO_REMOTE_HOST: "",
+         GUI_AJAX_TIMEOUT_OPT: 30,
+         GUI_ACTIVATE_GUI_CONSOLE_OPT: false,
+         GUI_ACTIVATE_SHA512ENCODE_OPT: 0
+     };
+
+###### Hidden hacks:
+
+    http://192.168.1.1/0.1/gui/?item=dhcpdstaticlease.cmd?action=add&mac=MAC:ADDR:HERE&static_ip=192.168.1.1&sessionKey=<session_key>#/
+    
+    
 
 #### REQUIREMENTS
 
