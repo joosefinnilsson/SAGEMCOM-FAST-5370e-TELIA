@@ -322,6 +322,64 @@ $.xmo.getValuesTree("Device/Managers/NetworkLan/GuestAccessControlEnable");
      $.xmo.setValuesTree('false', "Device/Hosts/Hosts/Host[@uid='1']/BlacklistedAccordingToSchedule");
      $.xmo.getValuesTree("Device/Hosts/Hosts");
 
+###### Control RULES:
+
+     sboxApp.controller("AntennaSettingsController", ["$scope", "$rootScope", "$timeout", "AntennaSettings", function($scope, $rootScope, $timeout, AntennaSettings) {
+    $scope.populate = function() {
+        $scope.antennaTypes = $.constants.antennaTypes;
+        var data = AntennaSettings.populate();
+        data.autoDetectionAntenna ? $scope.antennaType = 1 : data.enableExtMainAntenna || data.enableExtRXAntenna ? data.enableExtMainAntenna && !data.enableExtRXAntenna ? $scope.antennaType = 3 : data.enableExtMainAntenna && data.enableExtRXAntenna && ($scope.antennaType = 4) : $scope.antennaType = 2
+    }
+    ,
+    $scope.populate(),
+    $scope.save = function() {
+        var dataToSave = {};
+        switch ($scope.antennaType) {
+        case 1:
+            dataToSave.autoDetectionAntenna = !0;
+            break;
+        case 2:
+            dataToSave.autoDetectionAntenna = !1,
+            dataToSave.enableExtMainAntenna = !1,
+            dataToSave.enableExtRXAntenna = !1;
+            break;
+        case 3:
+            dataToSave.autoDetectionAntenna = !1,
+            dataToSave.enableExtMainAntenna = !0,
+            dataToSave.enableExtRXAntenna = !1;
+            break;
+        case 4:
+            dataToSave.autoDetectionAntenna = !1,
+            dataToSave.enableExtMainAntenna = !0,
+            dataToSave.enableExtRXAntenna = !0
+        }
+        AntennaSettings.save(dataToSave, {
+            success: function() {
+                $rootScope.globalWait = !1,
+                $rootScope.showMessage = !0,
+                $timeout(function() {
+                    $rootScope.$digest()
+                })
+            },
+            error: function() {
+                $rootScope.globalWait = !1,
+                $rootScope.showMessage = !1,
+                $timeout(function() {
+                    $rootScope.$digest()
+                })
+            }
+        })
+    }
+     }
+     ]),
+     sboxApp.controller("ExtendedMenuController", function($scope, $rootScope) {
+         $scope.checkUrlPath = function() {
+        $scope.active = "",
+        "user.home" === $rootScope.currentRouteName ? $scope.active = "home" : $rootScope.currentRouteName.indexOf("user.internetConnectivity") > -1 ? $scope.active = "connectivity" : $rootScope.currentRouteName.indexOf("user.mysagemcombox") > -1 ? $scope.active = "router" : $rootScope.currentRouteName.indexOf("user.accessControl") > -1 ? $scope.active = "access" : $rootScope.currentRouteName.indexOf("user.wifi") > -1 && ($scope.active = "wifi")
+    }
+    ,
+    $scope.checkUrlPath()
+     });
 
 ###### VOIP
 
