@@ -20,7 +20,7 @@
 
 #### Find hidden settings in latest firmware (3.42.3)
 
-![Screenshot](https://nr1.nu/hidden-settings.gif)
+![Screenshot](misc/hidden-settings.gif)
 
     $.xmo.getValuesTree("*")
     $.xmo.getValuesTree("*/*")
