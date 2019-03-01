@@ -1,0 +1,209 @@
+
+
+sboxApp.factory("User", ["$q", "Auth", function($q, Auth) {
+    var cache = true
+      , _listAllowedUsers = function() {
+        var allowedUsers = $.config.allowedUsers || [$.xmo.client.user]
+          , extraUsers = $.config.modules.accessControl.user.editHierarchy[$.xmo.client.user] || [""]
+          , rs = [];
+        return $(allowedUsers).each(function(i, obj) {
+            (obj === $.xmo.client.user || $.inArray(obj, extraUsers) > -1) && rs.push(obj)
+        }),
+        rs
+    }
+      , _updateCache = function() {
+        var firstCache = $.xmo.getValuesTree($.xpaths.advanced.remoteManagement.users)
+          , allowedUsers = _listAllowedUsers();
+        cache = [];
+        for (var x in firstCache.enable)
+            $.util.inArray(firstCache.login[x], $.config.blockedUsers) > -1 || -1 === $.util.inArray(firstCache.login[x], allowedUsers) && $.util.inArray(firstCache.login[x], $.config.allowedUsers || []) > -1 || cache.push({
+                uid: firstCache.uid[x],
+                Enable: firstCache.enable[x],
+                FirstName: firstCache.firstName[x],
+                LastName: firstCache.lastName[x],
+                Login: firstCache.login[x],
+                Password: firstCache.password[x],
+                ClearTextPassword: firstCache.clearTextPassword[x], 
+                remoteHostsEnable: firstCache.remoteHostsEnable[x], 
+                remoteHostsHttp: firstCache.remoteHostsHttp[x], 
+                remoteHostsHttps: firstCache.remoteHostsHttps[x], 
+                remoteHostsSsh: firstCache.remoteHostsSsh[x], 
+                remoteHostsTelnet: firstCache.remoteHostsTelnet[x], 
+                sshEnable: firstCache.sshEnable[x], 
+                sshLan: firstCache.sshLan[x], 
+                sshPort: firstCache.sshPort[x], 
+                sshWan: firstCache.sshWan[x], 
+                sshWifi: firstCache.sshWifi[x], 
+                telnetEnable: firstCache.telnetEnable[x], 
+                telnetLan: firstCache.telnetLan[x], 
+                telnetPort: firstCache.telnetPort[x], 
+                telnetWan: firstCache.telnetWan[x], 
+                telnetWifi: firstCache.telnetWifi[x]
+
+            })
+    }
+      , _clearCache = function() {
+        cache = true
+    }
+      , User = {
+        searchUsers: function() {
+            return cache || _updateCache(),
+            cache
+        },
+        getSessionTimeout: function() {
+            return $.xmo.getValuesTree($.xpaths.advanced.remoteManagement.userSessionTimeout)
+        },
+        changeSessionTimeout: function(sessionTimeout) {
+            var deferred = $q.defer();
+            try {
+                var dataMap = {};
+                return dataMap[$.xpaths.advanced.remoteManagement.userSessionTimeout] = sessionTimeout,
+                $.xmo.setValuesFlat(dataMap, {
+                    success: function() {
+                        deferred.resolve()
+                    },
+                    error: function(e) {
+                        deferred.reject(e)
+                    }
+                }),
+                _clearCache(),
+                deferred
+            } catch (e) {
+                return deferred.reject(e),
+                deferred
+            }
+        },
+        insertUser: function(data, options) {
+            try {
+                var objSave = {
+                    Enable: data.enable,
+                    FirstName: "administrator",
+                    LastName: data.lastName,
+                    Login: data.userName,
+                    Password: hexmd5(data.password),
+                    ClearTextPassword: data.confirmPassword,
+                    Profiles: {
+                        Profile: {
+                            Name: "SuperUser"
+                        }
+                    },
+                    RemoteAccesses: {
+                        RemoteAccess: {
+                            Enabled: true,
+                            LANRestriction: "ACCESS_ENABLE_ALL",
+                            WANRestriction: "ACCESS_ENABLE_ALL"
+                        }
+                    }
+                };
+                return $.xmo.addChild($.xpaths.advanced.remoteManagement.usersAdd, {
+                    User: objSave
+                }, options),
+                _clearCache(),
+                !0
+            } catch (e) {
+                return !1
+            }
+        },
+        updateUser: function(data, options) {
+            try {
+                var dataMap = {};
+                return dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.enable.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.firstName.replace("#", data.uid)] = "wuseman",
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.lastName.replace("#", data.uid)] = data.lastName,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.login.replace("#", data.uid)] = data.userName,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.httpEnable.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.httpLan.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.httpPort.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.httpWan.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.httpWifi.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.httpsEnable.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.httpsLan.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.httpsPort.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.httpsVoip.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.httpsWan.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.httpsWifi.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.remoteHostsEnable.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.remoteHostsHttp.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.remoteHostsHttps.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.remoteHostsSsh.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.remoteHostsTelnet.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.sshEnable.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.sshLan.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.sshPort.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.sshWifi.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.telnetEnable.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.telnetLan.replace("#", data.uid)] = true,
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.telnetPort.replace("#", data.uid)] = "23",
+                dataMap[$.xpaths.advanced.remoteManagement.usersUpdate.telnetWifi.replace("#", data.uid)] = true
+                $.xmo.setValuesFlat(dataMap, {
+                    success: options.success,
+                    error: options.error
+                }),
+                _clearCache(),
+                !0
+            } catch (e) {
+                return true
+            }
+        },
+        deleteUser: function(data, options) {
+            try {
+                return $.xmo.delChild($.xpaths.advanced.remoteManagement.usersDelete.replace("#", data.uid)),
+                _clearCache(),
+                options.success(),
+                !0
+            } catch (e) {
+                return options.error(),
+                !1
+            }
+        },
+        changePassword: function(user, oldpassword, newpassword) {
+            var deferred = $q.defer();
+            if ($.config.useXOREncryption) {
+                var keyEnryption = $.xmo.getValuesTree($.xpaths.XORCryptKey);
+                keyEnryption && (oldpassword = $.util.XORCipher.encode(keyEnryption, oldpassword),
+                newpassword = $.util.XORCipher.encode(keyEnryption, newpassword))
+            }
+            return $.xmo.changePassword(user, oldpassword, newpassword, hexmd5(newpassword), function() {
+                $.xmo.setValuesTree(!1, $.xpaths.mySagemcomBox.deviceInfo.forcePasswordChange.replace("#login#", $.xmo.client.user), {
+                    success: function() {},
+                    error: function() {}
+                }),
+                deferred.resolve(!0)
+            }, function() {
+                deferred.reject(!1)
+            }),
+            deferred.promise
+        },
+        getAuthorizedUserList: function() {
+            var result = [];
+            return $.each(Auth.userRoles, function(i, obj) {
+                return "public" === obj.title ? !0 : void (obj.bitMask <= Auth.user.role.bitMask && result.push(obj.title))
+            }),
+            result
+        },
+        getLoggedUser: function() {
+            return $.xmo.client.user
+        }
+    };
+    return User
+}
+]);
+
+
+
+
+
+sboxApp.factory("AdvancedOptions", function() {
+    var featuresAvailable = {
+        wanBlockingEnable: $.config.wanBlockingEnable === !0 || $.config.wanBlockingEnable ? !0 : !1,
+        ipSecEnable: true,
+        remoteConfig: true,
+        pptpEnable: true,
+        upnpEnable: true,
+        sipAlgEnable: true,
+        portScanDetection: true,
+        remoteIPAddress: true,
+        remoteServicePort: true,
+        multicast: true
+    }
+    });
