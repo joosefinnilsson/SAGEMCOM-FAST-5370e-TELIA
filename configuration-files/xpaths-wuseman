@@ -1,0 +1,2326 @@
+# $.xmo.getValuesTree($.xpaths.advanced.remoteManagement.users)
+
+$.xpaths = {
+    firstConnection: "Device/DeviceInfo/FirstConnection",
+    adminAdvanced: {
+        connectionType: 'Device/PPP/Interfaces/Interface[Alias="PPP_DATA"]/Enable',
+        connectionStatus: "Device/PPP/Interfaces/Interface[Alias='PPP_DATA']/ConnectionStatus",
+        login: "Device/PPP/Interfaces/Interface[Alias='PPP_DATA']/Username",
+        passwd: "Device/PPP/Interfaces/Interface[Alias='PPP_DATA']/Password",
+        lastErrorConnPPP: "Device/PPP/Interfaces/Interface[Alias='PPP_DATA']/LastConnectionError",
+        vlan: "Device/Ethernet/VLANTerminations/VLANTermination[Alias='VLAN_DATA']/VLANID",
+        ip: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/IPAddress',
+        mask: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/SubnetMask',
+        gateway: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/IPGateway',
+        dns: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/Dns',
+        wanType: "Device/Managers/NetworkData/WanType",
+        interfaceType: "Device/Managers/NetworkData/InterfaceType",
+        addressingType: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/AddressingType',
+        enableDhcp: 'Device/DHCPv4/Clients/Client[Alias="DHCLIENT_DATA"]/Enable',
+        enableIpv4Forwarding: 'Device/Routing/Routers/Router[@uid="1"]/IPv4Forwardings/IPv4Forwarding[Alias="STATIC_DEFAULT"]/Enable',
+        gatewayIpAddress: 'Device/Routing/Routers/Router[@uid="1"]/IPv4Forwardings/IPv4Forwarding[Alias="STATIC_DEFAULT"]/GatewayIPAddress',
+        enableDnsDhcp1: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="DHCPv4_1"]/Enable',
+        enableDnsDhcp2: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="DHCPv4_2"]/Enable',
+        enableDnsIPCP1: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="IPCP_1"]/Enable',
+        enableDnsIPCP2: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="IPCP_2"]/Enable',
+        dns1Dhcp: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="DHCPv4_1"]/DNSServer',
+        dns2Dhcp: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="DHCPv4_2"]/DNSServer',
+        enableDnsStatic1: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="STATIC_1"]/Enable',
+        enableDnsStatic2: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="STATIC_2"]/Enable',
+        enableDnsStatic: "Device/Managers/UserInterface/Dns/Static",
+        dns1Static: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="STATIC_1"]/DNSServer',
+        dns2Static: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="STATIC_2"]/DNSServer',
+        dnsIPCP1: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="IPCP_1"]/DNSServer',
+        dnsIPCP2: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="IPCP_2"]/DNSServer',
+        vcivpi: 'Device/ATM/Links/Link[@uid="1"]/DestinationAddress',
+        PPPoePassthrough: "Device/Managers/NetworkData/PPPoePassthroughEnable",
+        uptime: 'Device/PPP/Interfaces/Interface[Alias="PPP_DATA"]/LastChange',
+        resetInterface: "Device/PPP/Interfaces/Interface[Alias='#alias#']/Reset",
+        connectionTrigger: "Device/PPP/Interfaces/Interface[Alias='PPP_DATA']/ConnectionTrigger",
+        maxMRUSize: "Device/PPP/Interfaces/Interface[Alias='PPP_DATA']/MaxMRUSize",
+        ipv6CpEnable: "Device/PPP/Interfaces/Interface[Alias='PPP_DATA']/IPv6CPEnable",
+        globalWanMode: "Device/Managers/NetworkData/GlobalWanMode",
+        voipMngt: {
+            login: "Device/PPP/Interfaces/Interface[Alias='PPP_VOIP_MNGT']/Username",
+            passwd: "Device/PPP/Interfaces/Interface[Alias='PPP_VOIP_MNGT']/Password",
+            vlan: "Device/Ethernet/VLANTerminations/VLANTermination[Alias='VLAN_VOIP_MNGT']/VLANID",
+            addressingType: 'Device/IP/Interfaces/Interface[Alias="IP_VOIP_MNGT"]/IPv4Addresses/IPv4Address[Alias="IP_VOIP_MNGT_ADDRESS"]/AddressingType',
+            dns1Dhcp: "Device/DNS/Client/Servers/Server[Alias='PRIMARY_DNS_VOIP_MGNT']/DNSServer",
+            dns2Dhcp: "Device/DNS/Client/Servers/Server[Alias='SECONDARY_DNS_VOIP_MGNT']/DNSServer",
+            enableDnsDhcp1: 'Device/DNS/Client/Servers/Server[Alias="PRIMARY_DNS_VOIP_MGNT"]/Enable',
+            enableDnsDhcp2: 'Device/DNS/Client/Servers/Server[Alias="SECONDARY_DNS_VOIP_MGNT"]/Enable',
+            enableDnsStatic1: 'Device/DNS/Client/Servers/Server[Alias="PRIMARY_DNS_VOIP_MGNT"]/Enable',
+            enableDnsStatic2: 'Device/DNS/Client/Servers/Server[Alias="SECONDARY_DNS_VOIP_MGNT"]/Enable',
+            dns1Static: "Device/DNS/Client/Servers/Server[Alias='PRIMARY_DNS_VOIP_MGNT']/DNSServer",
+            dns2Static: "Device/DNS/Client/Servers/Server[Alias='SECONDARY_DNS_VOIP_MGNT']/DNSServer",
+            ip: 'Device/IP/Interfaces/Interface[Alias="IP_VOIP_MNGT"]/IPv4Addresses/IPv4Address[Alias="IP_VOIP_MNGT_ADDRESS"]/IPAddress',
+            mask: 'Device/IP/Interfaces/Interface[Alias="IP_VOIP_MNGT"]/IPv4Addresses/IPv4Address[Alias="IP_VOIP_MNGT_ADDRESS"]/SubnetMask',
+            gateway: 'Device/IP/Interfaces/Interface[Alias="IP_VOIP_MNGT"]/IPv4Addresses/IPv4Address[Alias="IP_VOIP_MNGT_ADDRESS"]/IPGateway',
+            dns: 'Device/IP/Interfaces/Interface[Alias="IP_VOIP_MNGT"]/IPv4Addresses/IPv4Address[Alias="IP_VOIP_MNGT_ADDRESS"]/Dns'
+        },
+        iptv: {
+            iptvEnable: 'Device/IP/Interfaces/Interface[Alias="IP_IGMP"]/Enable',
+            ipIptv: 'Device/IP/Interfaces/Interface[Alias="IP_IGMP"]/IPv4Addresses/IPv4Address[Alias="IP_IGMP_ADDRESS"]/IPAddress'
+        },
+        voip: {
+            voipEnable: 'Device/IP/Interfaces/Interface[Alias="IP_VOIP"]/Enable',
+            ipVoip: 'Device/IP/Interfaces/Interface[Alias="IP_VOIP"]/IPv4Addresses/IPv4Address[Alias="IP_VOIP_ADDRESS"]/IPAddress'
+        },
+        telefonyEnabled: "Device/Services/VoiceServices/VoiceService[@uid='1']/Enable",
+        telefonyStatus: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line[@uid='1']/StatusReason"
+    },
+    greTunnel: {
+        enable: "Device/GRE/Tunnels/Tunnel[@uid='1']/Enable",
+        server: "Device/GRE/Tunnels/Tunnel[@uid='1']/RemoteEndpoints",
+        vlanId: "Device/GRE/Vlans/Vlan[@uid='1']/VLANID"
+    },
+    wizard: {
+        wanStatus: "Device/IP/Interfaces/Interface[Alias='IP_DATA']/Status",
+        save: {
+            vlanId: "Device/Ethernet/VLANTerminations/VLANTermination[@uid='1']/VLANID"
+        }
+    },
+    neighborAps: {
+        search: "Device/WiFi/NeighboringWiFiDiagnostic/DiagnosticsState",
+        selectedRadio: "Device/WiFi/NeighboringWiFiDiagnostic/SelectedRadio",
+        results: "Device/WiFi/NeighboringWiFiDiagnostic/Result"
+    },
+    wifiRestoreDefault: "Device/Managers/Network/ReinitializeWifi",
+    wifiBandSteering: "Device/WiFi/BandSteering/Enable",
+    singleLine: 'Device/DSL/BondingGroups/BondingGroup[@uid="1"]/Enable',
+    wifi: {
+        backhaul: {
+            security: "Device/Managers/Network/SecurityBackHaul",
+            ssid: "Device/Managers/Network/SSIDBackHaul",
+            key: "Device/Managers/Network/KeyBackHaul",
+            wps: "Device/Managers/Button/WpsBackHaul"
+        },
+        macfilter: {
+            macFilterMode: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/MACFiltering/Mode',
+            wifiControlList: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/MACFiltering/MACAddresses'
+        },
+        recommendedChannel: {
+            testChannel: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/SiteSurvey/ChannelsToTest',
+            subscribe: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/SiteSurvey/State',
+            survey: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/SiteSurvey/ChannelSurveys'
+        },
+        stats: {
+            status: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/Status',
+            packetsreceived: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/Stats/PacketsReceived',
+            bytesreceived: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/Stats/BytesReceived',
+            errorsreceived: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/Stats/ErrorsReceived',
+            discardpacketsreceived: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/Stats/DiscardPacketsReceived',
+            packetssent: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/Stats/PacketsSent',
+            bytessent: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/Stats/BytesSent',
+            errorssent: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/Stats/ErrorsSent',
+            discardpacketssent: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/Stats/DiscardPacketsSent',
+            unicastpacketssent: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/Stats/UnicastPacketsSent',
+            unicastpacketsreceived: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/Stats/UnicastPacketsReceived',
+            multicastpacketssent: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/Stats/MulticastPacketsSent',
+            multicastpacketsreceived: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/Stats/MulticastPacketsReceived',
+            broadcastpacketssent: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/Stats/BroadcastPacketsSent',
+            broadcastpacketsreceived: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/Stats/BroadcastPacketsReceived',
+            operatingMode: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/OperatingStandards',
+            channelBandwidth: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/OperatingChannelBandwidth',
+            maxBitRate: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/MaxBitRate'
+        },
+        general: {
+            enable: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/Enable',
+            accessPointEnable: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Enable',
+            ecoMode: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/GreenAPEnabled',
+            ssidEnable: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/Enable',
+            broadcast: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/SSIDAdvertisementEnabled',
+            ssid: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/SSID',
+            bssid: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/BSSID',
+            passwordWep: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Security/WEPKey',
+            passwordKey: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Security/KeyPassphrase',
+            securityMode: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Security/ModeEnabled',
+            securityModesSupported: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Security/ModesSupported',
+            wpsEnable: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/WPS/Enable',
+            wpsRPC: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]',
+            wpsEnrolleePin: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/WPS/EnrolleePIN',
+            wpsDevicePin: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/WPS/DevicePIN',
+            configMethodsEnabled: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/WPS/ConfigMethodsEnabled',
+            configMethodsSupported: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/WPS/ConfigMethodsSupported',
+            wmm: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/WMMEnable',
+            wmmPowerSave: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/UAPSDEnable',
+            supportedOperatingStandars: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/SupportedStandards',
+            channel: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/Channel',
+            extensionChannel: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/ExtensionChannel',
+            transmitPower: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/TransmitPower',
+            mac: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/MACAddress',
+            frequencyBand: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/OperatingFrequencyBand',
+            autoChannel: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/AutoChannelEnable',
+            regulatoryDomain: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/RegulatoryDomain',
+            possibleChannels: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/PossibleChannels',
+            channelsInUse: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/ChannelsInUse',
+            possibleSecurityMode: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Security/ModesSupported',
+            radiusServerIp: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Security/RadiusServerIPAddr',
+            radiusServerPort: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Security/RadiusServerPort',
+            radiusServerPassword: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Security/RadiusSecret',
+            groupKeyUpdatePeriod: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Security/RekeyingInterval',
+            secondaryRadiusServerIp: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Security/SecondaryRadiusServerIPAddr',
+            secondaryRadiusServerPort: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Security/SecondaryRadiusServerPort',
+            secondaryRadiusServerSecret: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Security/SecondaryRadiusSecret',
+            maxBitRate: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/MaxBitRate',
+            macAddress: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/MACAddress',
+            operatingStandards: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/OperatingStandards',
+            channelBandwidth: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/OperatingChannelBandwidth',
+            wifiNetworkEnable: "Device/Managers/Network/WifiEnable",
+            wifiButton: "Device/Managers/Network/WifiButtonSet",
+            mfpMode: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Security/ManagementFramesProtection',
+            isolationEnable: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/IsolationEnable',
+            ssidIsolation2G: 'Device/Bridging/Filters/Filter[Alias="BR_PORT_PRIV2G"]/Enable',
+            ssidIsolation5G: 'Device/Bridging/Filters/Filter[Alias="BR_PORT_PRIV5G"]/Enable',
+            backupSSID: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/BackupSSID',
+            backupKeyPassphrase: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Security/BackupKeyPassphrase',
+            backupModeEnabled: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Security/BackupModeEnabled'
+        },
+        advanced: {
+            operatingStandards: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/OperatingStandards',
+            channel: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/Channel',
+            channelBandwidth: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/OperatingChannelBandwidth',
+            extensionChannel: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/ExtensionChannel',
+            transmitPower: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/TransmitPower',
+            wmmEnable: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/WMMEnable',
+            globalMaxClients: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/MaxAssociatedDevices',
+            apsd: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/UAPSDEnable',
+            regulatoryDomain: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/RegulatoryDomain',
+            supportedChannelBandwidth: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/SupportedChannelBandwidth',
+            securityMode: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Security/ModeEnabled',
+            cyclicPrefix: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/GuardInterval',
+            atfEnable: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/ATFEnable'
+        },
+        strength: {
+            accessPoints: "Device/WiFi/AccessPoints",
+            ipDevice: 'Device/UserAccounts/Users/User[Login="admin"]/CurrentSessions/UserSession[@SessionId="#SESSIONID#"]/RemoteAddress'
+        },
+        mainPage: {
+            ssidStatus: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/Status',
+            ssidName: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/SSID',
+            radioStatus: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/Status',
+            pass: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Security/KeyPassphrase',
+            passWep: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Security/WEPKey',
+            mode: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Security/ModeEnabled',
+            maxBitRate: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/MaxBitRate',
+            operatingMode: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/OperatingStandards',
+            channelBandwidth: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/OperatingChannelBandwidth',
+            associatedDevices: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/AssociatedDevices'
+        },
+        status: {
+            ssid: 'Device/WiFi/SSIDs/SSID[Alias="#SSID#"]/Status',
+            accessPoint: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#AP#"]/Status',
+            radio: 'Device/WiFi/Radios/Radio[Alias="#RADIO#"]/Status'
+        },
+        publicWifi: {
+            publicSSIDs: "Device/Managers/PublicWiFi/SSIDs",
+            ssid: 'Device/WiFi/SSIDs/SSID[Name="#SSIDRef#"]',
+            accessPoint: 'Device/WiFi/AccessPoints/AccessPoint[SSIDReference="#SSIDRef#"]',
+            aclMode: 'Device/WiFi/AccessPoints/AccessPoint[@uid="#"]/MACFiltering/Mode',
+            aclMacAddress: 'Device/WiFi/AccessPoints/AccessPoint[@uid="#"]/MACFiltering/MACAddresses',
+            vlan: "Device/Managers/PublicWiFi/SSIDs/SSID[@uid='#']/VLAN",
+            publicSSID: "Device/Managers/PublicWiFi/SSIDs/SSID[@uid='#']/SSIDName",
+            SSIDs: "Device/WiFi/SSIDs"
+        },
+        autoACL: {
+            enable: "Device/Managers/Network/ACL/AutomatedFilling",
+            allSSIDs: "Device/WiFi/SSIDs",
+            publicSSIDs: "Device/Managers/PublicWiFi/SSIDs",
+            sourceSSIDs: "Device/Managers/Network/ACL/SourceSSIDs",
+            targetSSIDs: "Device/Managers/Network/ACL/TargetSSIDs",
+            sourceSSIDsList: "Device/Managers/Network/ACL/SourceSSIDs/SourceSSID",
+            targetSSIDsList: "Device/Managers/Network/ACL/TargetSSIDs/TargetSSID",
+            sourceSSIDReference: 'Device/Managers/Network/ACL/SourceSSIDs/SourceSSID[@uid="#"]/SSIDReference',
+            targetSSIDReference: 'Device/Managers/Network/ACL/TargetSSIDs/TargetSSID[@uid="#"]/SSIDReference'
+        }
+    },
+    ssidCreation: {
+        update: {
+            ssid: {
+                enable: "Device/WiFi/SSIDs/SSID[@uid=#]/Enable",
+                lowerLayers: "Device/WiFi/SSIDs/SSID[@uid=#]/LowerLayers",
+                ssid: "Device/WiFi/SSIDs/SSID[@uid=#]/SSID"
+            }
+        },
+        insert: {
+            ssid: "Device/WiFi/SSIDs",
+            accessPoint: "Device/WiFi/AccessPoints"
+        },
+        remove: {
+            ssid: 'Device/WiFi/SSIDs/SSID[Alias="#"]',
+            accessPoint: 'Device/WiFi/AccessPoints/AccessPoint[Alias="#"]'
+        },
+        search: "Device/WiFi/SSIDs",
+        accessPointSsidReferenceValue: "Device/WiFi/SSIDs/SSID[#]"
+    },
+    main: {
+        eRouterMode: "Device/Managers/Network/WanProvisioningMode",
+        cableModem: {
+            status: "Device/Docsis/CableModem/Status",
+            ipv4: "Device/IP/Interfaces/Interface[Alias='IP_CM']/IPv4Addresses/IPv4Address[Alias='IP_LNK_CM']/IPAddress",
+            ipv6: "Device/IP/Interfaces/Interface[Alias='IP_CM']/IPv6Addresses"
+        },
+        ispHelpPage: "Device/UserInterface/ISPHelpPage",
+        cacheable: {
+            gwName: "Device/DeviceInfo/ProductClass",
+            hosts: "Device/Hosts/Hosts",
+            usbUnrecognizedHosts: "Device/USB/USBHosts/UnrecognizedDevice",
+            overConsumptionDevice: "Device/USB/USBHosts/OverConsumptionDevice",
+            overConsumptionDeviceTimeStamp: "Device/USB/USBHosts/OverConsumptionDeviceTimeStamp",
+            unrecognizedDeviceTimeStamp: "Device/USB/USBHosts/UnrecognizedDeviceTimeStamp",
+            usbHosts: "Device/USB/USBHosts/Hosts/Host/Devices",
+            stbList: "Device/Managers/TV/SetTopBoxList",
+            usbEnable: "Device/USB/Enable",
+            usbLogicalVolume: "Device/Services/StorageServices/StorageService[@uid='1']/LogicalVolumes",
+            mapEnable: "Device/MAP/Enable",
+            dect: {
+                enable: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[PhyInterfaceType="DECT_FP"]/X_SAGEMCOM_DECT_FP/Enable',
+                devices: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[PhyInterfaceType="DECT_PP"]',
+                status: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[PhyInterfaceType="DECT_FP"]/X_SAGEMCOM_DECT_FP/Status'
+            },
+            quantenna: {
+                MngtIPRemote: "Device/WiFi/Quantenna/MngtIPRemote",
+                BootIPLocal: "Device/WiFi/Quantenna/BootIPLocal",
+                BootIPRemote: "Device/WiFi/Quantenna/BootIPRemote",
+                InterfacePhy: "Device/WiFi/Quantenna/InterfacePhy"
+            },
+            eSATA: 'Device/Services/StorageServices/StorageService/PhysicalMediums/PhysicalMedium[ConnectionType="ESATA"]',
+            plcList: "Device/HomePlug/Interfaces",
+            plcUpdate: {
+                name: "Device/HomePlug/Interfaces/Interface[@uid='#uid#']/Name"
+            }
+        },
+        ringTest: {
+            phyInterface: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[@uid="#"]/Tests/TestState'
+        },
+        phones: {
+            cache: {
+                telephones: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/Lines',
+                contacts: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/Contacts',
+                contactsNew: "Device/Contacts/Contacts",
+                callLogs: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/CallControl/CallLogs',
+                regionName: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Region"
+            },
+            splitLines: {
+                uid: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line/@uid",
+                LineId: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line/LineId",
+                Name: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line/Name",
+                DirectoryNumber: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line/DirectoryNumber",
+                StatusReason: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line/StatusReason",
+                Enable: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line/Enable",
+                Status: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line/Status",
+                CallState: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line/CallState",
+                PhyReferenceList: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line/PhyReferenceList",
+                MultiCallEnable: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line/CallingFeatures/MultiCallEnable",
+                VoiceMail: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line/VoiceMail"
+            },
+            callingFeatures: {
+                MultiCallEnable: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line[@uid='#line#']/CallingFeatures/MultiCallEnable",
+                CallWaitingEnable: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line[@uid='#line#']/CallingFeatures/CallWaitingEnable",
+                CallForwardOnBusyEnable: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line[@uid='#line#']/CallingFeatures/CallForwardOnBusyEnable",
+                VoiceMail: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line[@uid='#line#']/VoiceMail"
+            },
+            AuthUserName: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line/SIP/AuthUserName",
+            remove: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/CallControl/CallLogs/CallLog[@uid="#"]'
+        },
+        contacts: {
+            allList: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/Contacts',
+            remove: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/Contacts/Contact[@uid="#"]',
+            update: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/Contacts/Contact[@uid="#"]/',
+            line: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/Lines/Line[@uid="#"]',
+            number: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/Contacts/Contact[last()]/Numbers',
+            callLog: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/CallControl/CallLogs/CallLog[@uid="#"]'
+        },
+        contactsNew: {
+            allList: "Device/Contacts/Contacts",
+            remove: 'Device/Contacts/Contacts/Contact[@uid="#"]',
+            update: 'Device/Contacts/Contacts/Contact[@uid="#"]/',
+            number: "Device/Contacts/Contacts/Contact[last()]/Numbers",
+            maxEntriesExternal: "Device/Contacts/MaxEntriesExternal"
+        },
+        wifiLayerInterface: {
+            wifi24: ["Device/WiFi/Radios/Radio[RADIO2G4]", "Device/WiFi/SSIDs/SSID[WL_PRIV]"],
+            wifi24Guest: ["Device/WiFi/Radios/Radio[RADIO2G4]", "Device/WiFi/SSIDs/SSID[WL_GUEST]"],
+            wifi5: ["Device/WiFi/Radios/Radio[RADIO5G]", "Device/WiFi/SSIDs/SSID[WL_VIDEO_5G]"],
+            wifi5Guest: ["Device/WiFi/Radios/Radio[RADIO5G]", "Device/WiFi/SSIDs/SSID[WL_GUEST_5G]"]
+        },
+        usbPhysicalMedium: "Device/Services/StorageServices/StorageService[@uid='1']/PhysicalMediums/PhysicalMedium[SerialNumber=\"#\"]",
+        usbPhysicalMediumUid: "Device/Services/StorageServices/StorageService[@uid='1']/PhysicalMediums/PhysicalMedium[@uid='#']",
+        ripv2: {
+            enable: "Device/Routing/RIP/Enable",
+            network1: {
+                ripIp: "Device/Routing/RIP/X_SAGEMCOM_RIPIPPrefix/X_SAGEMCOM_RIPIPPrefix[@uid='1']/RIPIP",
+                ripSubnet: "Device/Routing/RIP/X_SAGEMCOM_RIPIPPrefix/X_SAGEMCOM_RIPIPPrefix[@uid='1']/RIPSubnet",
+                ripDefaultGateway: "Device/Routing/RIP/X_SAGEMCOM_RIPIPPrefix/X_SAGEMCOM_RIPIPPrefix[@uid='1']/RIPDefaultGateway"
+            },
+            network2: {
+                ripIp: "Device/Routing/RIP/X_SAGEMCOM_RIPIPPrefix/X_SAGEMCOM_RIPIPPrefix[@uid='2']/RIPIP",
+                ripSubnet: "Device/Routing/RIP/X_SAGEMCOM_RIPIPPrefix/X_SAGEMCOM_RIPIPPrefix[@uid='2']/RIPSubnet",
+                ripDefaultGateway: "Device/Routing/RIP/X_SAGEMCOM_RIPIPPrefix/X_SAGEMCOM_RIPIPPrefix[@uid='2']/RIPDefaultGateway"
+            },
+            network3: {
+                ripIp: "Device/Routing/RIP/X_SAGEMCOM_RIPIPPrefix/X_SAGEMCOM_RIPIPPrefix[@uid='3']/RIPIP",
+                ripSubnet: "Device/Routing/RIP/X_SAGEMCOM_RIPIPPrefix/X_SAGEMCOM_RIPIPPrefix[@uid='3']/RIPSubnet",
+                ripDefaultGateway: "Device/Routing/RIP/X_SAGEMCOM_RIPIPPrefix/X_SAGEMCOM_RIPIPPrefix[@uid='3']/RIPDefaultGateway"
+            }
+        }
+    },
+    mySagemcomBox: {
+        dns: {
+            server: "Device/DHCPv4/Server/Pools/Pool[Alias='DEFAULT_POOL']/DNSServers",
+            server2: "Device/DHCPv4/Server/Pools/Pool[@uid='2']/DNSServers",
+            dynamic: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/Dns',
+            notEditable: "Device/DNS/Relay/Forwardings/Forwarding[@uid='1']/Enable"
+        },
+        advancedOptions: {
+            users: "Device/UserAccounts/Users",
+            wanBlockingEnable: "Device/Firewall/WanBlocking",
+            ipSecEnable: "Device/NAT/IPSecPassthroughEnable",
+            pptpEnable: "Device/NAT/PPTPPassthroughEnable",
+            remoteConfig: 'Device/UserAccounts/Users/User[@uid="#uid#"]/RemoteAccesses/RemoteAccess[@uid="#uidRemoteAccess#"]/WANRestriction',
+            upnpEnable: "Device/UPnP/Device/Enable",
+            sipAlgEnable: "Device/NAT/SIPALGEnable",
+            portScanDetection: "Device/Firewall/PortScanDetection",
+            remoteIPAddress: "Device/IP/Interfaces/Interface[Alias='IP_DATA']/IPv4Addresses/IPv4Address[Alias='IP_DATA_ADDRESS']/IPAddress",
+            remoteServicePort: "Device/UserAccounts/Users/User[@uid='3']/RemoteAccesses/RemoteAccess[@uid='3']/Port"
+        },
+        bridgeMode: {
+            enable: "Device/Managers/NetworkData/BridgedMode"
+        },
+        walledGarden: {
+            enable: "Device/CaptivePortal/Enable"
+        },
+        ledSlider: "Device/Managers/Led/MaxBrightness",
+        led: {
+            ledMode: "Device/Leds/LedMode",
+            frontLedPower: "Device/Managers/Led/FrontLedPowerSaving",
+            switchLedPower: "Device/Managers/Led/SwitchLedPowerSaving"
+        },
+        ledDimmed: {
+            dimmedMode: "Device/TELIA/Led/DimmedMode"
+        },
+        antennaSettings: {
+            autoDetectionAntenna: "Device/Services/mobileWan/ConfigAntenna/AutoDetectionAntenna",
+            enableExtMainAntenna: "Device/Services/mobileWan/ConfigAntenna/EnableExtMainAntenna",
+            enableExtRXAntenna: "Device/Services/mobileWan/ConfigAntenna/EnableExtRXAntenna"
+        },
+        ledHubLight: "Device/Managers/HubLightControl/LedEnable",
+        deviceInfo: {
+            deviceName1: "Device/DNS/Client/HostName",
+            deviceName2: "Device/DNS/Client/LocalDomains",
+            modelName: "Device/DeviceInfo/ModelName",
+            modelNumber: "Device/DeviceInfo/ModelNumber",
+            productClass: "Device/DeviceInfo/ProductClass",
+            serialNumber: "Device/DeviceInfo/SerialNumber",
+            hardwareVersion: "Device/DeviceInfo/HardwareVersion",
+            softwareVersion: "Device/DeviceInfo/SoftwareVersion",
+            guiVersion: "Device/DeviceInfo/GUIFirmwareVersion",
+            driverVersion: "Device/WiFi/WiFiDriverInfo/DriverVersion",
+            datapumpVersion: 'Device/DSL/Lines/Line[Alias="DSL0"]/FirmwareVersion',
+            wanMacAddress: "Device/DeviceInfo/MACAddress",
+            memoryStatus: "Device/DeviceInfo/MemoryStatus",
+            memoryTotal: "Device/DeviceInfo/MemoryStatus/Total",
+            memoryFree: "Device/DeviceInfo/MemoryStatus/Free",
+            defaultLinkIpv6: "Device/Routing/Routers/Router[@uid='1']/IPv6Forwardings/IPv6Forwarding[Alias='IPV6_DATA_GATEWAY']/NextHop",
+            dnsServerAddressIpv6: "Device/DHCPv6/Clients/Client[@uid='1']/ReceivedOptions/ReceivedOption[Tag='23']/Value",
+            cpuLoadUsage: "Device/DeviceInfo/ProcessStatus/CPUUsage",
+            loadAverage: "Device/DeviceInfo/ProcessStatus/LoadAverage",
+            upTime: "Device/DeviceInfo/UpTime",
+            localIpv4: 'Device/IP/Interfaces/Interface[Alias="IP_BR_LAN"]/IPv4Addresses/IPv4Address[Alias="IP_BR_LAN_ADDRESS"]/IPAddress',
+            localSubnetMask: "Device/DHCPv4/Server/Pools/Pool[Alias='DEFAULT_POOL']/SubnetMask",
+            localEthernetMac: "Device/Ethernet/Interfaces/Interface[Alias='PHY1']/MACAddress",
+            publicIpv4: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/IPAddress',
+            publicIpv4MAPT: "Device/MAP/Domains/Domain[Alias='DOMAIN-MAPT']/SharedIPv4Address",
+            publicSubnetMask: "Device/IP/Interfaces/Interface[Alias='IP_DATA']/IPv4Addresses/IPv4Address[Alias='IP_DATA_ADDRESS']/SubnetMask",
+            ipv4Duration: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/ConnectionTime',
+            defaultGateway: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address/IPGateway',
+            ipv4Enable: "Device/IP/IPv4Status",
+            ipv6Enable: "Device/IP/IPv6Status",
+            nat: "Device/Managers/Network/NatInternetService",
+            primaryMode: "Device/Managers/Network/PrimaryMode",
+            dns: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/Dns',
+            dnsStatic1Enable: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="STATIC_1"]/Enable',
+            dnsStatic2Enable: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="STATIC_2"]/Enable',
+            dnsStatic1: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="STATIC_1"]/DNSServer',
+            dnsStatic2: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="STATIC_2"]/DNSServer',
+            telephones: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/Lines',
+            ipv6PrimaryDns: "Device/DNS/Relay/Forwardings/Forwarding[@uid='1']/DNSServer",
+            ipv6SecondaryDns: "Device/DNS/Relay/Forwardings/Forwarding[@uid='2']/DNSServer",
+            voipIpv4Address: 'Device/IP/Interfaces/Interface[Alias="IP_VOIP"]/IPv4Addresses/IPv4Address[Alias="IP_VOIP_ADDRESS"]/IPAddress',
+            tvIpv4Address: 'Device/IP/Interfaces/Interface[Alias="IP_IGMP"]/IPv4Addresses/IPv4Address[Alias="IP_IGMP_ADDRESS"]/IPAddress',
+            mgmtIpv4Address: 'Device/IP/Interfaces/Interface[Alias="IP_MGMT"]/IPv4Addresses/IPv4Address[Alias="IP_MGMT_ADDRESS"]/IPAddress',
+            currentWanMode: "Device/Services/mobileWan/CurrentWanMode",
+            mainAccess: "Device/Managers/NetworkData/InterfaceType",
+            downstream: "Device/DSL/Channels/Channel[@uid='1']/DownstreamCurrRate",
+            upstream: "Device/DSL/Channels/Channel[@uid='1']/UpstreamCurrRate",
+            mobileMode: "Device/Cellular/Interfaces/Interface[@uid='1']/CurrentAccessTechnology",
+            operator: "Device/Cellular/Interfaces/Interface[@uid='1']/USIM/SimCardProvider",
+            imei: "Device/Cellular/Interfaces/Interface[@uid='1']/IMEI",
+            xdsl: {
+                standard: 'Device/DSL/Lines/Line[Alias="DSL0"]/StandardUsed',
+                connectionTimeDsl: 'Device/DSL/Lines/Line[@uid="1"]/LastChange',
+                linkEncapsulation: 'Device/DSL/Channels/Channel[LowerLayers="Device/DSL/Lines/Line[DSL0]"]/LinkEncapsulationUsed',
+                status: 'Device/DSL/Lines/Line[Alias="DSL0"]/Status',
+                linkStatus: 'Device/DSL/Lines/Line[Alias="DSL0"]/LinkStatus',
+                lineEncoding: 'Device/DSL/Lines/Line[Alias="DSL0"]/LineEncoding',
+                interfaceType: "Device/Managers/NetworkData/InterfaceType",
+                profile: 'Device/DSL/Lines/Line[Alias="DSL0"]/CurrentProfile',
+                numeric: {
+                    actualRateDown: 'Device/DSL/Channels/Channel[@uid="1"]/DownstreamCurrRate',
+                    actualRateUp: 'Device/DSL/Channels/Channel[@uid="1"]/UpstreamCurrRate',
+                    maximumRateDown: 'Device/DSL/Lines/Line[Alias="DSL0"]/DownstreamMaxBitRate',
+                    maximumRateUp: 'Device/DSL/Lines/Line[Alias="DSL0"]/UpstreamMaxBitRate',
+                    noiseMarginDown: 'Device/DSL/Lines/Line[Alias="DSL0"]/DownstreamNoiseMargin',
+                    noiseMarginUp: 'Device/DSL/Lines/Line[Alias="DSL0"]/UpstreamNoiseMargin',
+                    attenuationDown: 'Device/DSL/Lines/Line[Alias="DSL0"]/DownstreamAttenuation',
+                    attenuationUp: 'Device/DSL/Lines/Line[Alias="DSL0"]/UpstreamAttenuation',
+                    attenuationDownPerBand: 'Device/DSL/Lines/Line[Alias="DSL0"]/DownstreamAttenuationPerBand',
+                    attenuationUpPerBand: 'Device/DSL/Lines/Line[Alias="DSL0"]/UpstreamAttenuationPerBand',
+                    powerDown: 'Device/DSL/Lines/Line[Alias="DSL0"]/DownstreamPower',
+                    powerUp: 'Device/DSL/Lines/Line[Alias="DSL0"]/UpstreamPower',
+                    dataPath: 'Device/DSL/Channels/Channel[Alias="DSL0"]/LPATH',
+                    dataPathus: 'Device/DSL/Channels/Channel[Alias="DSL0"]/LPATHus',
+                    interLeaveDepth: 'Device/DSL/Channels/Channel[Alias="DSL0"]/INTLVDEPTH',
+                    interLeaveDepthus: 'Device/DSL/Channels/Channel[Alias="DSL0"]/INTLVDEPTHus',
+                    interLeaveDelay: 'Device/DSL/Channels/Channel[Alias="DSL0"]/ActualInterleavingDelay',
+                    interLeaveDelayus: 'Device/DSL/Channels/Channel[Alias="DSL0"]/ActualInterleavingDelayus',
+                    inp: 'Device/DSL/Channels/Channel[Alias="DSL0"]/ACTINP',
+                    inpus: 'Device/DSL/Channels/Channel[Alias="DSL0"]/ACTINPus',
+                    lossOfSignal: 'Device/DSL/Lines/Line[Alias="DSL0"]/SignalDownstreamAttenuation',
+                    lossOfSignalus: 'Device/DSL/Lines/Line[Alias="DSL0"]/SignalUpstreamAttenuation'
+                }
+            },
+            xdsl2: {
+                datapumpVersion: 'Device/DSL/Lines/Line[Alias="DSL1"]/FirmwareVersion',
+                standard: 'Device/DSL/Lines/Line[Alias="DSL1"]/StandardUsed',
+                connectionTimeDsl: 'Device/DSL/Lines/Line[@uid="2"]/LastChange',
+                linkEncapsulation: 'Device/DSL/Channels/Channel[LowerLayers="Device/DSL/Lines/Line[DSL1]"]/LinkEncapsulationUsed',
+                status: 'Device/DSL/Lines/Line[Alias="DSL1"]/Status',
+                linkStatus: 'Device/DSL/Lines/Line[Alias="DSL1"]/LinkStatus',
+                lineEncoding: 'Device/DSL/Lines/Line[Alias="DSL1"]/LineEncoding',
+                interfaceType: "Device/Managers/Network/InterfaceType",
+                profile: 'Device/DSL/Lines/Line[Alias="DSL1"]/CurrentProfile',
+                numeric: {
+                    actualRateDown: 'Device/DSL/Channels/Channel[@uid="2"]/DownstreamCurrRate',
+                    actualRateUp: 'Device/DSL/Channels/Channel[@uid="2"]/UpstreamCurrRate',
+                    maximumRateDown: 'Device/DSL/Lines/Line[Alias="DSL1"]/DownstreamMaxBitRate',
+                    maximumRateUp: 'Device/DSL/Lines/Line[Alias="DSL1"]/UpstreamMaxBitRate',
+                    noiseMarginDown: 'Device/DSL/Lines/Line[Alias="DSL1"]/DownstreamNoiseMargin',
+                    noiseMarginUp: 'Device/DSL/Lines/Line[Alias="DSL1"]/UpstreamNoiseMargin',
+                    attenuationDown: 'Device/DSL/Lines/Line[Alias="DSL1"]/DownstreamAttenuation',
+                    attenuationUp: 'Device/DSL/Lines/Line[Alias="DSL1"]/UpstreamAttenuation',
+                    attenuationDownPerBand: 'Device/DSL/Lines/Line[Alias="DSL1"]/DownstreamAttenuationPerBand',
+                    attenuationUpPerBand: 'Device/DSL/Lines/Line[Alias="DSL1"]/UpstreamAttenuationPerBand',
+                    powerDown: 'Device/DSL/Lines/Line[Alias="DSL1"]/DownstreamPower',
+                    powerUp: 'Device/DSL/Lines/Line[Alias="DSL1"]/UpstreamPower',
+                    dataPath: 'Device/DSL/Channels/Channel[Alias="DSL1"]/LPATH',
+                    dataPathus: 'Device/DSL/Channels/Channel[Alias="DSL1"]/LPATHus',
+                    interLeaveDepth: 'Device/DSL/Channels/Channel[Alias="DSL1"]/INTLVDEPTH',
+                    interLeaveDepthus: 'Device/DSL/Channels/Channel[Alias="DSL1"]/INTLVDEPTHus',
+                    interLeaveDelay: 'Device/DSL/Channels/Channel[Alias="DSL1"]/ActualInterleavingDelay',
+                    interLeaveDelayus: 'Device/DSL/Channels/Channel[Alias="DSL1"]/ActualInterleavingDelayus',
+                    inp: 'Device/DSL/Channels/Channel[Alias="DSL1"]/ACTINP',
+                    inpus: 'Device/DSL/Channels/Channel[Alias="DSL1"]/ACTINPus',
+                    lossOfSignal: 'Device/DSL/Lines/Line[Alias="DSL1"]/SignalDownstreamAttenuation',
+                    lossOfSignalus: 'Device/DSL/Lines/Line[Alias="DSL1"]/SignalUpstreamAttenuation'
+                }
+            },
+            globalLinkIpv6: 'Device/IP/Interfaces/Interface[Alias="IP_BR_LAN"]/IPv6Addresses',
+            linkLocalIpv6: 'Device/IP/Interfaces/Interface[Alias="IP_BR_LAN"]/IPv6Addresses/IPv6Address[Alias="LINK_LOCAL"]/IPAddress',
+            wan: {
+                conexionStatus: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/Status',
+                conexionIpv6Status: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv6Addresses/IPv6Address[IPAddressStatus="PREFERRED" and Origin="DHCPV6"]/Status',
+                wanStatus: 'Device/Ethernet/Interfaces/Interface[Role="WAN"]/Status',
+                bitrate: 'Device/Ethernet/Interfaces/Interface[Role="WAN"]/Diagnostics/CurrentBitRate',
+                connectionTime: 'Device/Ethernet/Interfaces/Interface[Role="WAN"]/LastChange',
+                connectionUpTime: "Device/Ethernet/Links/Link[Alias='FTTH_DATA']/ConnectionTime"
+            },
+            sfp: {
+                sfpStatus: 'Device/SFP/Interfaces/Interface[Alias="SFP0"]/Status'
+            },
+            wifi24: {
+                ssid: 'Device/WiFi/SSIDs/SSID[Alias="WL_PRIV"]/SSID',
+                status: 'Device/WiFi/SSIDs/SSID[Alias="WL_PRIV"]/Status',
+                upTime: 'Device/WiFi/SSIDs/SSID[Alias="WL_PRIV"]/ConnectionTime',
+                maxBitRate: 'Device/WiFi/Radios/Radio[Alias="RADIO2G4"]/MaxBitRate',
+                macAddress: 'Device/WiFi/SSIDs/SSID[Alias="WL_PRIV"]/MACAddress',
+                operatingMode: 'Device/WiFi/Radios/Radio[Alias="RADIO2G4"]/OperatingStandards',
+                channelBandwidth: 'Device/WiFi/Radios/Radio[Alias="RADIO2G4"]/OperatingChannelBandwidth',
+                securityMode: 'Device/WiFi/AccessPoints/AccessPoint[Alias="PRIV0"]/Security/ModeEnabled'
+            },
+            wifi5: {
+                ssid: 'Device/WiFi/SSIDs/SSID[Alias="WL_VIDEO_5G"]/SSID',
+                status: 'Device/WiFi/SSIDs/SSID[Alias="WL_VIDEO_5G"]/Status',
+                upTime: 'Device/WiFi/SSIDs/SSID[Alias="WL_VIDEO_5G"]/ConnectionTime',
+                macAddress: 'Device/WiFi/SSIDs/SSID[Alias="WL_VIDEO_5G"]/MACAddress',
+                operatingMode: 'Device/WiFi/Radios/Radio[Alias="RADIO5G"]/OperatingStandards',
+                maxBitRate: 'Device/WiFi/Radios/Radio[Alias="RADIO5G"]/MaxBitRate',
+                channelBandwidth: 'Device/WiFi/Radios/Radio[Alias="RADIO5G"]/OperatingChannelBandwidth',
+                securityMode: 'Device/WiFi/AccessPoints/AccessPoint[Alias="VID1"]/Security/ModeEnabled'
+            },
+            wifi24Guest: {
+                ssid: 'Device/WiFi/SSIDs/SSID[Alias="WL_GUEST"]/SSID',
+                status: 'Device/WiFi/SSIDs/SSID[Alias="WL_GUEST"]/Status',
+                upTime: 'Device/WiFi/SSIDs/SSID[Alias="WL_GUEST"]/ConnectionTime',
+                macAddress: 'Device/WiFi/SSIDs/SSID[Alias="WL_GUEST"]/MACAddress',
+                operatingMode: 'Device/WiFi/Radios/Radio[Alias="RADIO2G4"]/OperatingStandards',
+                maxBitRate: 'Device/WiFi/Radios/Radio[Alias="RADIO2G4"]/MaxBitRate',
+                channelBandwidth: 'Device/WiFi/Radios/Radio[Alias="RADIO2G4"]/OperatingChannelBandwidth',
+                securityMode: 'Device/WiFi/AccessPoints/AccessPoint[Alias="GUEST1"]/Security/ModeEnabled'
+            },
+            wifi5Guest: {
+                ssid: 'Device/WiFi/SSIDs/SSID[Alias="WL_GUEST_5G"]/SSID',
+                status: 'Device/WiFi/SSIDs/SSID[Alias="WL_GUEST_5G"]/Status',
+                upTime: 'Device/WiFi/SSIDs/SSID[Alias="WL_GUEST_5G"]/ConnectionTime',
+                macAddress: 'Device/WiFi/SSIDs/SSID[Alias="WL_GUEST_5G"]/MACAddress',
+                operatingMode: 'Device/WiFi/Radios/Radio[Alias="RADIO5G"]/OperatingStandards',
+                maxBitRate: 'Device/WiFi/Radios/Radio[Alias="RADIO5G"]/MaxBitRate',
+                channelBandwidth: 'Device/WiFi/Radios/Radio[Alias="RADIO5G"]/OperatingChannelBandwidth',
+                securityMode: 'Device/WiFi/AccessPoints/AccessPoint[Alias="GUEST3"]/Security/ModeEnabled'
+            },
+            docsis: {
+                publicIpv4: 'Device/IP/Interfaces/Interface[Alias="IP_CM_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_CM_DATA_ADDRESS"]/IPAddress',
+                publicSubnetMask: 'Device/IP/Interfaces/Interface[Alias="IP_CM_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_CM_DATA_ADDRESS"]/SubnetMask',
+                defaultGateway: 'Device/IP/Interfaces/Interface[Alias="IP_CM_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_CM_DATA_ADDRESS"]/IPGateway',
+                macAddress: 'Device/Ethernet/Links/Link[Alias="ETHLNK_CM"]/MACAddress',
+                cableModemStatus: "Device/Docsis/CableModem/Status",
+                networkAccessStatus: "Device/Docsis/CableModem/NACO",
+                standardSpecification: "Device/Docsis/CableModem/StandardSpecificationCompliant",
+                cmCertificates: "Device/Docsis/CableModem/Certificates",
+                timeServer: "Device/Docsis/CableModem/TimeServerIPAddress"
+            },
+            forcePasswordChange: "Device/UserAccounts/Users/User[Login='#login#']/ForcePasswordChange"
+        },
+        massStorage: {
+            usb: "Device/USB/Enable",
+            dlna: "Device/UPnP/Device/UPnPMediaServer",
+            dlnaMediaName: "Device/UPnP/Settings/UPnPMediaServer/FriendlyName",
+            routerModelName: "Device/DeviceInfo/ModelName",
+            macAddress: "Device/DeviceInfo/MACAddress",
+            samba: {
+                enable: 'Device/Services/StorageServices/StorageService[@uid="1"]/NetworkServer/SMBEnable',
+                host: "Device/DNS/Client/HostName",
+                ip: 'Device/IP/Interfaces/Interface[Alias="IP_BR_LAN"]/IPv4Addresses/IPv4Address[Alias="IP_BR_LAN_ADDRESS"]/IPAddress',
+                localDomains: "Device/DNS/Client/LocalDomains"
+            }
+        },
+        route: {
+            remove: 'Device/Routing/Routers/Router[@uid="1"]/IPv4Forwardings/IPv4Forwarding[@uid="#"]',
+            removeFromRoute2: 'Device/Routing/Routers/Router[@uid="2"]/IPv4Forwardings/IPv4Forwarding[@uid="#"]',
+            removeRouteIPv6: 'Device/Routing/Routers/Router[@uid="1"]/IPv6Forwardings/IPv6Forwarding[@uid="#"]',
+            staticRoute: {
+                ipv4: 'Device/Routing/Routers/Router[@uid="1"]/IPv4Forwardings',
+                ipv4Route2: 'Device/Routing/Routers/Router[@uid="2"]/IPv4Forwardings',
+                ipv6: 'Device/Routing/Routers/Router[@uid="1"]/IPv6Forwardings',
+                interfaces: "Device/IP/Interfaces"
+            }
+        },
+        dhcp: {
+            dnsServer: "Device/DHCPv4/Server/Pools/Pool[Alias='DEFAULT_POOL']/DNSServers",
+            dnsServerPoolTv: "Device/DHCPv4/Server/Pools/Pool[Alias='MLTV_DEVICES_POOL']/DNSServers",
+            guestDnsServer: "Device/DHCPv4/Server/Pools/Pool[Alias='GUEST_POOL']/DNSServers",
+            IPReservation: 'Device/DHCPv4/Server/Pools/Pool[Alias="DEFAULT_POOL"]/StaticAddresses',
+            IPReservationGuest: 'Device/DHCPv4/Server/Pools/Pool[Alias="GUEST_POOL"]/StaticAddresses',
+            host: "Device/DNS/Client/HostName",
+            enable: "Device/DHCPv4/Server/Enable",
+            subnetMaskDefault: "Device/DHCPv4/Server/Pools/Pool[Alias='DEFAULT_POOL']/SubnetMask",
+            subnetMaskMlTv: "Device/DHCPv4/Server/Pools/Pool[Alias='MLTV_DEVICES_POOL']/SubnetMask",
+            subnetMaskDsl: "Device/DHCPv4/Server/Pools/Pool[Alias='DEFAULT_POOL_DSLFORUM']/SubnetMask",
+            subnetMaskMlTvDsl: "Device/DHCPv4/Server/Pools/Pool[Alias='MLTV_DEVICES_POOL_DSLFORUM']/SubnetMask",
+            subnetMaskMlTvStb: "Device/DHCPv4/Server/Pools/Pool[Alias='STB_MLTV_POOL']/SubnetMask",
+            subnetMask: 'Device/IP/Interfaces/Interface[Alias="IP_BR_LAN"]/IPv4Addresses/IPv4Address[Alias="IP_BR_LAN_ADDRESS"]/SubnetMask',
+            dhcpv4LeaseTime: 'Device/DHCPv4/Server/Pools/Pool[Alias="DEFAULT_POOL"]/LeaseTime',
+            dhcpv4LeaseTimeNew: "Device/Managers/Network/DhcpLanLeaseTime",
+            dhcpv4LeaseTimeDSLForum: 'Device/DHCPv4/Server/Pools/Pool[Alias="DEFAULT_POOL_DSLFORUM"]/LeaseTime',
+            dhcpv4LeaseTimeTv1: 'Device/DHCPv4/Server/Pools/Pool[Alias="MLTV_DEVICES_POOL"]/LeaseTime',
+            dhcpv4LeaseTimeTv2: 'Device/DHCPv4/Server/Pools/Pool[Alias="MLTV_DEVICES_POOL_DSLFORUM"]/LeaseTime',
+            dhcpv4LeaseTimeTv3: 'Device/DHCPv4/Server/Pools/Pool[Alias="STB_MLTV_POOL"]/LeaseTime',
+            ipv4Address: 'Device/IP/Interfaces/Interface[Alias="IP_BR_LAN"]/IPv4Addresses/IPv4Address[Alias="IP_BR_LAN_ADDRESS"]/IPAddress',
+            ipv4AddressNew: "Device/Managers/Network/IpLan",
+            ipv4PoolTvIP: "Device/DHCPv4/Server/Pools/Pool[Alias='MLTV_DEVICES_POOL']/IPRouters",
+            ipv4PoolDslIP: "Device/DHCPv4/Server/Pools/Pool[Alias='DEFAULT_POOL_DSLFORUM']/IPRouters",
+            ipv4PoolTvDslIP: "Device/DHCPv4/Server/Pools/Pool[Alias='MLTV_DEVICES_POOL_DSLFORUM']/IPRouters",
+            ipv4PoolTvStbIP: "Device/DHCPv4/Server/Pools/Pool[Alias='STB_MLTV_POOL']/IPRouters",
+            natSourceIp: "Device/NAT/InterfaceSettings/InterfaceSetting/SourceIP",
+            ipv4PoolStart: 'Device/DHCPv4/Server/Pools/Pool[Alias="DEFAULT_POOL"]/MinAddress',
+            ipv4PoolEnd: 'Device/DHCPv4/Server/Pools/Pool[Alias="DEFAULT_POOL"]/MaxAddress',
+            ipv4PoolStartNew: "Device/Managers/Network/DhcpLanMinAddress",
+            ipv4PoolEndNew: "Device/Managers/Network/DhcpLanMaxAddress",
+            ipv4PoolStartDSLForum: 'Device/DHCPv4/Server/Pools/Pool[Alias="DEFAULT_POOL_DSLFORUM"]/MinAddress',
+            ipv4PoolEndDSLForum: 'Device/DHCPv4/Server/Pools/Pool[Alias="DEFAULT_POOL_DSLFORUM"]/MaxAddress',
+            ipv4PoolTvEnable1: 'Device/DHCPv4/Server/Pools/Pool[Alias="MLTV_DEVICES_POOL"]/Enable',
+            ipv4PoolTvEnable2: 'Device/DHCPv4/Server/Pools/Pool[Alias="MLTV_DEVICES_POOL_DSLFORUM"]/Enable',
+            ipv4PoolTvEnable3: 'Device/DHCPv4/Server/Pools/Pool[Alias="STB_MLTV_POOL"]/Enable',
+            ipv4PoolTvPoolStart1: 'Device/DHCPv4/Server/Pools/Pool[Alias="MLTV_DEVICES_POOL"]/MinAddress',
+            ipv4PoolTvPoolEnd1: 'Device/DHCPv4/Server/Pools/Pool[Alias="MLTV_DEVICES_POOL"]/MaxAddress',
+            ipv4PoolTvPoolStart2: 'Device/DHCPv4/Server/Pools/Pool[Alias="MLTV_DEVICES_POOL_DSLFORUM"]/MinAddress',
+            ipv4PoolTvPoolEnd2: 'Device/DHCPv4/Server/Pools/Pool[Alias="MLTV_DEVICES_POOL_DSLFORUM"]/MaxAddress',
+            ipv4PoolTvPoolStart3: 'Device/DHCPv4/Server/Pools/Pool[Alias="STB_MLTV_POOL"]/MinAddress',
+            ipv4PoolTvPoolEnd3: 'Device/DHCPv4/Server/Pools/Pool[Alias="STB_MLTV_POOL"]/MaxAddress',
+            ipv4PoolIP: 'Device/DHCPv4/Server/Pools/Pool[Alias="DEFAULT_POOL"]/IPRouters',
+            ipv4TvClassID: 'Device/DHCPv4/Server/Pools/Pool[Alias="DEFAULT_POOL"]/VendorClassID',
+            preferredIPBRLANAddr: 'Device/IP/Interfaces/Interface[Alias="IP_BR_LAN"]/IPv6Addresses/IPv6Address[IPAddressStatus="PREFERRED"]',
+            preferredIPBRLANPrefix: 'Device/IP/Interfaces/Interface[Alias="IP_BR_LAN"]/IPv6Prefixes',
+            macAddress: "Device/DeviceInfo/MACAddress",
+            upnp: "Device/UPnP/Device/UPnPIGD",
+            natEnable: 'Device/NAT/InterfaceSettings/InterfaceSetting[@uid="1"]/Enable',
+            natRange: 'Device/NAT/InterfaceSettings/InterfaceSetting[@uid="1"]/SourceIP',
+            ipv6Addresses: "Device/IP/Interfaces/Interface[Alias='IP_BR_LAN']/IPv6Addresses",
+            ipv6Prefixes: "Device/IP/Interfaces/Interface[Alias='IP_BR_LAN']/IPv6Prefixes",
+            macAddressLanSettings: "Device/Ethernet/Links/Link[Alias='ETHLNK_BR_LAN']/MACAddress",
+            IPblackListeds: "Device/Managers/Network/IPblackListeds"
+        },
+        dhcpv6: {
+            autoConfigType: "Device/RouterAdvertisement/InterfaceSettings/InterfaceSetting[@uid='1']/AdvManagedFlag",
+            startAddress: "Device/Managers/Network/Dhcpv6LanPrefix",
+            numberOfAddresses: "Device/Managers/Network/Dhcpv6NumberofAdresses",
+            validLifetime: "Device/Managers/Network/Dhcpv6ValidLifeTime",
+            advertisementLifetime: "Device/RouterAdvertisement/InterfaceSettings/InterfaceSetting[@uid='1']/AdvDefaultLifetime",
+            minRouterAdvInterval: "Device/RouterAdvertisement/InterfaceSettings/InterfaceSetting[@uid='1']/MinRtrAdvInterval",
+            maxRouterAdvInterval: "Device/RouterAdvertisement/InterfaceSettings/InterfaceSetting[@uid='1']/MaxRtrAdvInterval"
+        },
+        lanIPv6: {
+            dhcpv6Enable: "Device/DHCPv6/Server/Enable",
+            enableDHCPPD: "Device/DHCPv6/Server/Pools/Pool[Alias='DEFAULT_POOL']/IAPDEnable",
+            rangeMinAddress: "Device/DHCPv6/Server/Pools/Pool[Alias='DEFAULT_POOL']/RangeMinIPv6Address",
+            rangeMaxAddress: "Device/DHCPv6/Server/Pools/Pool[Alias='DEFAULT_POOL']/RangeMaxIPv6Address",
+            IPv6AddressPrefix: "Device/DHCPv6/Server/Pools/Pool[Alias='DEFAULT_POOL']/IPv6AddressPrefix",
+            lanIPv6: "Device/IP/Interfaces/Interface[Alias='IP_BR_LAN']/IPv6Addresses/IPv6Address[@uid='2']/IPAddress",
+            lanIPv6LinkLocal: "Device/IP/Interfaces/Interface[Alias='IP_BR_LAN']/IPv6Addresses/IPv6Address[Alias='LINK_LOCAL']/IPAddress",
+            enableAutoIPv6Assignment: "Device/RouterAdvertisement/Enable",
+            enableAutoIPv6Assignment1: "Device/RouterAdvertisement/InterfaceSettings/InterfaceSetting[@uid='1']/AdvOtherConfigFlag",
+            typeLan6Autoconfig: "Device/RouterAdvertisement/InterfaceSettings/InterfaceSetting[@uid='1']/AdvManagedFlag",
+            lanIPv6HighestIndex: 'Device/IP/Interfaces/Interface[Alias="IP_BR_LAN"]/IPv6Addresses',
+            ianaEnable: "Device/DHCPv6/Server/Pools/Pool[@uid='1']/IANAEnable",
+            ianaManualPrefixes: "Device/DHCPv6/Server/Pools/Pool[@uid='1']/IANAManualPrefixes",
+            wanDhcpv6UserClassOption: "Device/DHCPv6/Clients/Client[Alias='DHCLIENT6_DATA']/SentOptions/SentOption[Alias='user-class']/Value",
+            ulaIPv6Enabled: "Device/IP/Interfaces/Interface[@uid='1']/ULAEnable"
+        },
+        upnp: {
+            status: "Device/UPnP/Device/UPnPIGD",
+            adTTL: "Device/UPnP/Settings/UPnPIGD/AdvertisementTTL",
+            adPeriod: "Device/UPnP/Settings/UPnPIGD/AdvertisementInterval"
+        },
+        dynDns: {
+            enable: 'Device/Services/DynamicDNS/Clients/Client[@uid="1"]/Enable',
+            status: 'Device/Services/DynamicDNS/Clients/Client[@uid="1"]/Status',
+            client: 'Device/Services/DynamicDNS/Clients/Client[@uid="1"]',
+            services: "Device/Services/DynamicDNS/Services",
+            ipv4Address: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/IPAddress',
+            username: 'Device/Services/DynamicDNS/Clients/Client[@uid="1"]/Username',
+            password: 'Device/Services/DynamicDNS/Clients/Client[@uid="1"]/Password',
+            hostname: 'Device/Services/DynamicDNS/Clients/Client[@uid="1"]/Hostnames/Hostname[@uid="1"]/Name',
+            serviceReference: 'Device/Services/DynamicDNS/Clients/Client[@uid="1"]/ServiceReference',
+            serviceQuery: "Device/Services/DynamicDNS/Services/Service[Name='#']",
+            customServer: 'Device/Services/DynamicDNS/Services/Service[Name="Custom"]/Server',
+            customPort: 'Device/Services/DynamicDNS/Services/Service[Name="Custom"]/ServerPort',
+            customRequest: 'Device/Services/DynamicDNS/Services/Service[Name="Custom"]/Request',
+            customAuthentication: 'Device/Services/DynamicDNS/Services/Service[Name="Custom"]/Authentication',
+            customRetry: 'Device/Services/DynamicDNS/Services/Service[Name="Custom"]/RetryInterval',
+            customMax: 'Device/Services/DynamicDNS/Services/Service[Name="Custom"]/MaxRetries',
+            customUpdate: 'Device/Services/DynamicDNS/Services/Service[Name="Custom"]/UpdateInterval'
+        },
+        maintenance: {
+            firmwareVersion: "Device/DeviceInfo/ExternalFirmwareVersion",
+            intFirmwareVersion: "Device/DeviceInfo/InternalFirmwareVersion",
+            modelName: "Device/DeviceInfo/ModelName",
+            logs: "Device/DeviceInfo/SimpleLogs/SystemLog",
+            securityLog: "Device/DeviceInfo/SimpleLogs/FirewallLog",
+            logLevel: "Device/DeviceInfo/Logging/LogLevel",
+            saveRestore: {
+                save: 'Device/DeviceInfo/VendorConfigFiles/VendorConfigFile[Alias="DEVICE_CONFIG"]',
+                restore: "Device/DeviceInfo/VendorConfigFiles/VendorConfigFile[Alias='DEVICE_CONFIG']"
+            },
+            ntp: {
+                firstServer: "Device/Time/NTPServer1",
+                secondServer: "Device/Time/NTPServer2",
+                timeZoneName: "Device/Time/LocalTimeZoneName",
+                timeZone: "Device/Time/LocalTimeZone",
+                status: "Device/Time/Status",
+                localTime: "Device/Time/CurrentLocalTime",
+                daylightSavingTime: "Device/Time/DaylightSavingEnable"
+            },
+            tr69: {
+                enable: "Device/ManagementServer/EnableCWMP",
+                url: "Device/ManagementServer/URL",
+                username: "Device/ManagementServer/Username",
+                password: "Device/ManagementServer/Password",
+                informEnable: "Device/ManagementServer/PeriodicInformEnable",
+                informInterval: "Device/ManagementServer/PeriodicInformInterval",
+                connectionRequestUrl: "Device/ManagementServer/ConnectionRequestURL",
+                connectionRequestUsername: "Device/ManagementServer/ConnectionRequestUsername",
+                connectionRequestPassword: "Device/ManagementServer/ConnectionRequestPassword",
+                SslAuthenticationEnable: "Device/ManagementServer/TR69InternalData/Settings/SslAuthenticationEnable"
+            }
+        },
+        fon: {
+            globalInfo: {
+                status: "Device/Services/FonHotspotService/Status",
+                extStatus: "Device/Services/TLSHotspotServices/TLSHotspotService[@uid='1']/ExtendedStatus"
+            },
+            ssidsList: {
+                ssidName: "Device/WiFi/SSIDs/SSID[Alias='#WL_BUB_ALIAS#']/SSID",
+                ssidStatus: "Device/WiFi/SSIDs/SSID[Alias='#WL_BUB_ALIAS#']/Status",
+                connectedUsers: "Device/WiFi/AccessPoints/AccessPoint[SSIDReference='Device/WiFi/SSIDs/SSID[#WL_BUB_ALIAS#]']/AssociatedDevices"
+            }
+        },
+        firewall: {
+            ipv4: {
+                config: "Device/Firewall/ipv4Config",
+                fragIPPackect: "Device/Firewall/blockIPv4FragmentedIPPackets",
+                ipFloodDetect: "Device/Firewall/IPv4FloodDetection",
+                portScanDetect: "Device/Firewall/IPv4PortScanDetection"
+            },
+            ipv6: {
+                config: "Device/Firewall/ipv6Config",
+                fragIPPackect: "Device/Firewall/blockIPv6FragmentedIPPackets",
+                ipFloodDetect: "Device/Firewall/IPv6FloodDetection",
+                portScanDetect: "Device/Firewall/IPv6PortScanDetection"
+            },
+            provisioningMode: "Device/Managers/Network/WanProvisioningMode"
+        },
+        fastLineStatus: 'Device/FAST/Lines/Line[@uid="1"]/Status',
+        networkConfiguration: {
+            atmLinks: "Device/ATM/Links",
+            ethernetLinks: "Device/Ethernet/VLANTerminations",
+            update: {
+                destinationAddress: "Device/ATM/Links/Link[Alias='#']/DestinationAddress",
+                vlanid: "Device/Ethernet/VLANTerminations/VLANTermination[Alias='#']/VLANID"
+            }
+        }
+    },
+    cableModem: {
+        data: {
+            connection: {
+                upstream: "Device/Docsis/CableModem/Upstreams",
+                downstream: "Device/Docsis/CableModem/Downstreams"
+            },
+            configuration: {
+                favoriteFrequency: "Device/Docsis/CableModem/ForceScanFreq"
+            }
+        },
+        save: {
+            favoriteFrequency: "Device/Docsis/CableModem/ForceScanFreq"
+        }
+    },
+    accessControl: {
+        blacklistedPorts: "Device/Managers/NetworkData/BlacklistedPorts",
+        natMapping: {
+            blacklisted: {
+                ripDefaultGateways: "Device/Routing/RIP/X_SAGEMCOM_RIPIPPrefix/X_SAGEMCOM_RIPIPPrefix/RIPDefaultGateway"
+            },
+            natMappings: "Device/NAT/InterfaceSettings",
+            update: {
+                Enable: "Device/NAT/InterfaceSettings/InterfaceSetting[@uid=#]/Enable",
+                ExernelAdressNAT: "Device/NAT/InterfaceSettings/InterfaceSetting[@uid=#]/ExernelAdressNAT",
+                SourceIP: "Device/NAT/InterfaceSettings/InterfaceSetting[@uid=#]/SourceIP",
+                Alias: "Device/NAT/InterfaceSettings/InterfaceSetting[@uid=#]/Alias"
+            },
+            remove: "Device/NAT/InterfaceSettings/InterfaceSetting[@uid=#]"
+        },
+        portForwarding: {
+            portRangeConfig: {
+                psid: 'Device/MAP/Domains/Domain[Alias="DOMAIN-MAPT"]/PSID',
+                offset: 'Device/MAP/Domains/Domain[Alias="DOMAIN-MAPT"]/PSIDOffset',
+                psidLength: 'Device/MAP/Domains/Domain[Alias="DOMAIN-MAPT"]/PSIDLength'
+            },
+            validationData: {
+                tr69: "Device/ManagementServer/TR69InternalData/Settings/Port",
+                subnet: "Device/DHCPv4/Server/Pools/Pool[Alias='DEFAULT_POOL']/SubnetMask",
+                lanIp: "Device/IP/Interfaces/Interface[Alias='IP_BR_LAN']/IPv4Addresses/IPv4Address[Alias='IP_BR_LAN_ADDRESS']/IPAddress"
+            },
+            portmappings: "Device/NAT/PortMappings",
+            connectedMac: 'Device/Hosts/Hosts/Host[IPAddress="#"]/PhysAddress',
+            uid: "Device/NAT/PortMappings/PortMapping[@uid=#]",
+            update: {
+                Enable: "Device/NAT/PortMappings/PortMapping[@uid=#]/Enable",
+                Protocol: "Device/NAT/PortMappings/PortMapping[@uid=#]/Protocol",
+                Description: "Device/NAT/PortMappings/PortMapping[@uid=#]/Description",
+                RemoteHost: "Device/NAT/PortMappings/PortMapping[@uid=#]/RemoteHost",
+                ExternalAddress: "Device/NAT/PortMappings/PortMapping[@uid=#]/ExternalAddress",
+                InternalClient: "Device/NAT/PortMappings/PortMapping[@uid=#]/InternalClient",
+                ExternalPortEndRange: "Device/NAT/PortMappings/PortMapping[@uid=#]/ExternalPortEndRange",
+                InternalPort: "Device/NAT/PortMappings/PortMapping[@uid=#]/InternalPort",
+                ExternalPort: "Device/NAT/PortMappings/PortMapping[@uid=#]/ExternalPort",
+                Service: "Device/NAT/PortMappings/PortMapping[@uid=#]/Service",
+                Alias: "Device/NAT/PortMappings/PortMapping[@uid=#]/Alias"
+            },
+            ipv6: {
+                rulesLow: 'Device/Firewall/Chains/Chain[Name="Low"]/Rules/Rule[IPVersion="6"]',
+                rulesHigh: 'Device/Firewall/Chains/Chain[Name="High"]/Rules/Rule[IPVersion="6"]',
+                remove: "Device/Firewall/Chains/Chain[Name='#level#']/Rules/Rule[@uid='#']",
+                save: {
+                    list: "Device/Firewall/Chains/Chain[Name='#level#']/Rules",
+                    Enable: "Device/Firewall/Chains/Chain[Name='#level#']/Rules/Rule[@uid='#']/Enable",
+                    Description: "Device/Firewall/Chains/Chain[Name='#level#']/Rules/Rule[@uid='#']/Description",
+                    DestIP: "Device/Firewall/Chains/Chain[Name='#level#']/Rules/Rule[@uid='#']/DestIP",
+                    MacId: "Device/Firewall/Chains/Chain[Name='#level#']/Rules/Rule[@uid='#']/MacId",
+                    Protocol: "Device/Firewall/Chains/Chain[Name='#level#']/Rules/Rule[@uid='#']/Protocol",
+                    SourcePort: "Device/Firewall/Chains/Chain[Name='#level#']/Rules/Rule[@uid='#']/SourcePort",
+                    SourcePortRangeMax: "Device/Firewall/Chains/Chain[Name='#level#']/Rules/Rule[@uid='#']/SourcePortRangeMax",
+                    DestPort: "Device/Firewall/Chains/Chain[Name='#level#']/Rules/Rule[@uid='#']/DestPort",
+                    DestPortRangeMax: "Device/Firewall/Chains/Chain[Name='#level#']/Rules/Rule[@uid='#']/DestPortRangeMax"
+                }
+            },
+            upnpRules: "Device/NAT/PortMappings/PortMapping[Creator='UPNP']",
+            pcpEnable: 'Device/PCP/Clients/Client[Alias="cpe-1"]/Servers/Server[Alias="cpe-1"]/Enable',
+            pcpMappings: 'Device/PCP/Clients/Client[Alias="cpe-1"]/Servers/Server[Alias="cpe-1"]/InboundMappings',
+            externalIpDSLite: 'Device/PCP/Clients/Client[Alias="cpe-1"]/Servers/Server[Alias="cpe-1"]/ExternalIPAddress',
+            externalIpIPv4Dual: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[1]/IPAddress'
+        },
+        firewall: {
+            protocolCapability: 'Device/Firewall/Chains/Chain[@uid="4"]/Rules/Rule/Protocol',
+            serviceCapability: 'Device/Firewall/Chains/Chain[@uid="4"]/Rules/Rule/Service',
+            customRules: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules',
+            orderList: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule/Order',
+            lastRule: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[last()]',
+            lowRules: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules',
+            mediumRules: 'Device/Firewall/Chains/Chain[Name="Medium"]/Rules',
+            highRules: 'Device/Firewall/Chains/Chain[Name="High"]/Rules',
+            config: "Device/Firewall/Config",
+            respondToPing: "Device/Firewall/RespondToPing",
+            defaultPolicy: 'Device/Firewall/Levels/Level[Name="Custom"]/DefaultPolicy',
+            oneRule: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[@uid=#]',
+            iprouter: 'Device/DHCPv4/Server/Pools/Pool[Alias="DEFAULT_POOL"]/IPRouters',
+            subnetmask: 'Device/DHCPv4/Server/Pools/Pool[Alias="DEFAULT_POOL"]/SubnetMask',
+            rangestart: 'Device/DHCPv4/Server/Pools/Pool[Alias="DEFAULT_POOL"]/MinAddress',
+            rangeend: 'Device/DHCPv4/Server/Pools/Pool[Alias="DEFAULT_POOL"]/MaxAddress',
+            update: {
+                Enable: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[@uid="#"]/Enable',
+                Order: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[@uid="#"]/Order',
+                Alias: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[@uid="#"]/Alias',
+                Description: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[@uid="#"]/Description',
+                Target: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[@uid="#"]/Target',
+                SourceInterface: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[@uid="#"]/SourceInterface',
+                DestInterface: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[@uid="#"]/DestInterface',
+                DestIP: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[@uid="#"]/DestIP',
+                DestMask: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[@uid="#"]/DestMask',
+                SourceIP: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[@uid="#"]/SourceIP',
+                SourceMask: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[@uid="#"]/SourceMask',
+                Protocol: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[@uid="#"]/Protocol',
+                DestPort: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[@uid="#"]/DestPort',
+                DestPortRangeMax: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[@uid="#"]/DestPortRangeMax',
+                SourcePort: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[@uid="#"]/SourcePort',
+                SourcePortRangeMax: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[@uid="#"]/SourcePortRangeMax',
+                Service: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[@uid="#"]/Service',
+                IPVersion: 'Device/Firewall/Chains/Chain[Name="#level#"]/Rules/Rule[@uid="#"]/IPVersion'
+            }
+        },
+        ipv6Pinholling: {
+            rules: "Device/Firewall/Chains/Chain/Rules",
+            oneRule: "Device/Firewall/Chains/Chain/Rules/Rule[Alias=#]",
+            update: {
+                Enable: 'Device/Firewall/Chains/Chain/Rules/Rule[Alias="#"]/Enable',
+                Order: 'Device/Firewall/Chains/Chain/Rules/Rule[Alias="#"]/Order',
+                Alias: 'Device/Firewall/Chains/Chain/Rules/Rule[Alias="#"]/Alias',
+                Description: 'Device/Firewall/Chains/Chain/Rules/Rule[Alias="#"]/Description',
+                Target: 'Device/Firewall/Chains/Chain/Rules/Rule[Alias="#"]/Target',
+                SourceInterface: 'Device/Firewall/Chains/Chain/Rules/Rule[Alias="#"]/SourceInterface',
+                DestInterface: 'Device/Firewall/Chains/Chain/Rules/Rule[Alias="#"]/DestInterface',
+                DestIP: 'Device/Firewall/Chains/Chain/Rules/Rule[Alias="#"]/DestIP',
+                DestMask: 'Device/Firewall/Chains/Chain/Rules/Rule[Alias="#"]/DestMask',
+                SourceIP: 'Device/Firewall/Chains/Chain/Rules/Rule[Alias="#"]/SourceIP',
+                SourceMask: 'Device/Firewall/Chains/Chain/Rules/Rule[Alias="#"]/SourceMask',
+                Protocol: 'Device/Firewall/Chains/Chain/Rules/Rule[Alias="#"]/Protocol',
+                DestPort: 'Device/Firewall/Chains/Chain/Rules/Rule[Alias="#"]/DestPort',
+                DestPortRangeMax: 'Device/Firewall/Chains/Chain/Rules/Rule[Alias="#"]/DestPortRangeMax',
+                SourcePort: 'Device/Firewall/Chains/Chain/Rules/Rule[Alias="#"]/SourcePort',
+                SourcePortRangeMax: 'Device/Firewall/Chains/Chain/Rules/Rule[Alias="#"]/SourcePortRangeMax',
+                IPVersion: 'Device/Firewall/Chains/Chain/Rules/Rule[Alias="#"]/IPVersion'
+            }
+        },
+        dmzIPv6: {
+            rules: "Device/Firewall/Chains/Chain/Rules/Rule[Alias='DMZ']",
+            insert: "Device/Firewall/Chains/Chain/Rules",
+            update: {
+                DestIP: "Device/Firewall/Chains/Chain/Rules/Rule[Alias='DMZ']/DestIP"
+            }
+        },
+        parentalControl: {
+            websitefilter: {
+                insert: "Device/WebAccesses/WebRestriction",
+                remove: 'Device/WebAccesses/WebRestriction/WebAccess[@uid="#"]',
+                update: {
+                    enable: 'Device/WebAccesses/WebRestriction/WebAccess[@uid="#"]/Enable',
+                    site: 'Device/WebAccesses/WebRestriction/WebAccess[@uid="#"]/WebPage'
+                }
+            },
+            controlPlanning: {
+                hostBlacklisted1: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/Blacklisted',
+                hostBlacklisted2: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistStatus',
+                insert: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule',
+                remove: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule',
+                removeOne: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]',
+                update: {
+                    Child: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]',
+                    Hours0: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours0',
+                    Hours1: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours1',
+                    Hours2: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours2',
+                    Hours3: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours3',
+                    Hours4: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours4',
+                    Hours5: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours5',
+                    Hours6: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours6',
+                    Hours7: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours7',
+                    Hours8: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours8',
+                    Hours9: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours9',
+                    Hours10: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours10',
+                    Hours11: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours11',
+                    Hours12: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours12',
+                    Hours13: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours13',
+                    Hours14: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours14',
+                    Hours15: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours15',
+                    Hours16: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours16',
+                    Hours17: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours17',
+                    Hours18: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours18',
+                    Hours19: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours19',
+                    Hours20: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours20',
+                    Hours21: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours21',
+                    Hours22: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours22',
+                    Hours23: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/Hours23',
+                    DayIndex: 'Device/Hosts/Hosts/Host[@uid="#uidhost#"]/BlacklistedSchedule/ManagementDay[@uid="#"]/@DayIndex'
+                }
+            },
+            control: {
+                list: "Device/Services/ParentalControl/Categories",
+                profiles: "Device/Services/ParentalControl/Categories/UserProfiles/Profiles/Profile",
+                hosts: "Device/Services/ParentalControl/Categories/UserProfiles/Hosts"
+            },
+            activeService: "Device/Services/ParentalControl/Categories/ActiveService"
+        },
+        parentalControlNew: {
+            enable: "Device/Services/ParentalControl/Enable",
+            enableRules: "Device/Services/ParentalControl/Rules/Rule[Enable='true']",
+            parentalControl: "Device/Services/ParentalControl",
+            rule: "Device/Services/ParentalControl/Rules/Rule[@uid='#']",
+            timeSlotList: "Device/Services/ParentalControl/TimeSlotLists/TimeSlotList[@uid='#']",
+            macAddressList: "Device/Services/ParentalControl/MACAddressLists/MACAddressList[@uid='#']",
+            add: {
+                rule: "Device/Services/ParentalControl/Rules",
+                timeSlotList: "Device/Services/ParentalControl/TimeSlotLists",
+                timeSlot: "Device/Services/ParentalControl/TimeSlotLists/TimeSlotList[last()]/TimeSlots",
+                macAddressList: "Device/Services/ParentalControl/MACAddressLists",
+                timeSlotChild: "Device/Services/ParentalControl/TimeSlotLists/TimeSlotList[@uid='#']/TimeSlots"
+            },
+            update: {
+                enable: "Device/Services/ParentalControl/Rules/Rule[@uid='#']/Enable",
+                ruleTimeslot: "Device/Services/ParentalControl/Rules/Rule[@uid='#']/TimeSlots",
+                macAddressList: "Device/Services/ParentalControl/Rules/Rule[@uid='#']/MACAddresses"
+            }
+        },
+        portTriggering: {
+            list: "Device/WebAccesses/PortTrigger",
+            deletePath: 'Device/WebAccesses/PortTrigger/PortTrigger[@uid="#"]',
+            update: {
+                enable: 'Device/WebAccesses/PortTrigger/PortTrigger[@uid="#"]/Enable',
+                serviceName: 'Device/WebAccesses/PortTrigger/PortTrigger[@uid="#"]/ServiceName',
+                openPortStart: 'Device/WebAccesses/PortTrigger/PortTrigger[@uid="#"]/Open/DstPortStart',
+                openPortEnd: 'Device/WebAccesses/PortTrigger/PortTrigger[@uid="#"]/Open/DstPortEnd',
+                openProtocol: 'Device/WebAccesses/PortTrigger/PortTrigger[@uid="#"]/Open/Protocol',
+                triggerPortStart: 'Device/WebAccesses/PortTrigger/PortTrigger[@uid="#"]/Trigger/DstPortStart',
+                triggerPortEnd: 'Device/WebAccesses/PortTrigger/PortTrigger[@uid="#"]/Trigger/DstPortEnd',
+                triggerProtocol: 'Device/WebAccesses/PortTrigger/PortTrigger[@uid="#"]/Trigger/Protocol'
+            }
+        },
+        smartinterfaceRRM: {
+            enable: "Device/Services/SmartInterface/Enable"
+        }
+    },
+    wan: {
+        settings: {
+            wanProvisioningMode: "Device/Managers/Network/WanProvisioningMode",
+            ipv4: {
+                ipAddress: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address/IPAddress',
+                leaseTime: 'Device/DHCPv4/Clients/Client[Alias="DHCLIENT"]/LeaseDuration',
+                leaseTimeRemaining: 'Device/DHCPv4/Clients/Client[Alias="DHCLIENT"]/LeaseTimeRemaining',
+                defaultGateway: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address/IPGateway',
+                dnsServer: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/Dns'
+            }
+        }
+    },
+    internetConnectivity: {
+        ppp: {
+            username: "Device/PPP/Interfaces/Interface[Alias='PPP_DATA']/Username",
+            password: "Device/PPP/Interfaces/Interface[Alias='PPP_DATA']/Password"
+        },
+        routerAdvertisement: {
+            managed: "Device/RouterAdvertisement/InterfaceSettings/InterfaceSetting[@uid='1']/AdvManagedFlag",
+            other: "Device/RouterAdvertisement/InterfaceSettings/InterfaceSetting[@uid='1']/AdvOtherConfigFlag",
+            minimumRetryInterval: 'Device/RouterAdvertisement/InterfaceSettings/InterfaceSetting[Alias="RA_BR_LAN"]/MaxRtrAdvInterval',
+            maximumRetryInterval: 'Device/RouterAdvertisement/InterfaceSettings/InterfaceSetting[Alias="RA_BR_LAN"]/MinRtrAdvInterval',
+            prefixDelegateType: "Device/IP/Interfaces/Interface[@uid='1']/IPv6Prefixes/IPv6Prefix[@uid='2']/Origin"
+        },
+        ipv6: {
+            enable: "Device/IP/IPv6Enable",
+            ipStatus: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv6Addresses/IPv6Address[@uid="1"]/IPAddressStatus',
+            ipOrigin: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv6Addresses/IPv6Address[@uid="1"]/Origin',
+            delegatedprefix: 'Device/IP/Interfaces/Interface[Alias="IP_BR_LAN"]/IPv6Prefixes/IPv6Prefix[Alias="ULA_LAN"]/Prefix',
+            delegatedPrefixes: "Device/IP/Interfaces/Interface[Alias='IP_DATA']/IPv6Prefixes",
+            lanIPv6: 'Device/IP/Interfaces/Interface[Alias="IP_BR_LAN"]/IPv6Addresses/IPv6Address[Alias="LINK_LOCAL"]/IPAddress',
+            wanIPv6: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv6Addresses',
+            lanIPv6GUA: 'Device/IP/Interfaces/Interface[Alias="IP_BR_LAN"]/IPv6Addresses',
+            wanIPv6Internal: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv6Addresses',
+            enableDnsDhcp1: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="DHCPv6_1"]/Enable',
+            enableDnsDhcp2: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="DHCPv6_2"]/Enable',
+            dns1Dhcp: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="DHCPv6_1"]/DNSServer',
+            dns2Dhcp: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="DHCPv6_2"]/DNSServer',
+            enableDnsStatic1: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="STATIC6_1"]/Enable',
+            enableDnsStatic2: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="STATIC6_2"]/Enable',
+            dns1Static: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="STATIC6_1"]/DNSServer',
+            dns2Static: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="STATIC6_2"]/DNSServer',
+            preferedIPDATAAddr: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv6Addresses/IPv6Address[IPAddressStatus="PREFERRED"]',
+            wanLinkLocal: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv6Addresses/IPv6Address[Alias="LINK_LOCAL"]/IPAddress',
+            dnsV6: 'Device/DNS/Relay/Forwardings/Forwarding[Status="ENABLED"]/DNSServer',
+            defaultGateway: 'Device/Routing/Routers/Router[Alias="EROUTER"]',
+            DSLiteStatus: 'Device/DSLite/InterfaceSettings/InterfaceSetting[Alias="DSLITE0"]/Status',
+            AFTRFQDN: 'Device/DSLite/InterfaceSettings/InterfaceSetting[Alias="DSLITE0"]/EndpointName',
+            AFTRAddress: 'Device/DSLite/InterfaceSettings/InterfaceSetting[Alias="DSLITE0"]/EndpointAddressInUse',
+            macAddress: 'Device/Ethernet/Links/Link[Alias="ETHLNK_DATA"]/MACAddress',
+            enableFirewall: "Device/Firewall/Firewallv6Enable",
+            leaseTime: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv6Prefixes/IPv6Prefix[@uid="1"]/ValidLifetime',
+            serverLeaseExpire: "Device/DHCPv6/Clients/Client[Alias='DHCLIENT6_DATA']/Servers/Server[last()]",
+            lifeTime: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv6Addresses/IPv6Address[@uid="1"]/ValidLifetime',
+            vlan: "Device/Ethernet/VLANTerminations/VLANTermination[Alias='VLAN_DATA']/VLANID",
+            bridgeMode: "Device/Managers/NetworkData/BridgedMode"
+        },
+        wan: {
+            vlanTerminations: "Device/Ethernet/VLANTerminations",
+            ethernetWanInterfaces: 'Device/Ethernet/Interfaces/Interface[Role="WAN"]',
+            availableLines: "Device/DSL/Lines",
+            availableBonding: "Device/DSL/BondingGroups",
+            relatedChannel: 'Device/DSL/Channels/Channel[LowerLayers="Device/DSL/Lines/Line[#]"]',
+            globalWanMode: "Device/Managers/NetworkData/GlobalWanMode",
+            dslWanInterfaces: {
+                standardUsed: 'Device/DSL/Lines/Line[Alias="DSL0"]/StandardUsed',
+                enable: 'Device/DSL/Lines/Line[@uid="#"]/Enable',
+                currentProfile: 'Device/DSL/Lines/Line[@uid="#"]/CurrentProfile',
+                standardsSupported: 'Device/DSL/Lines/Line[@uid="#"]/StandardsSupported',
+                UpStream: 'Device/DSL/Channels/Channel[@uid="#"]/ActualInterleavingDelayus',
+                DownStream: 'Device/DSL/Channels/Channel[@uid="#"]/ActualInterleavingDelay',
+                bondingEnable: 'Device/DSL/BondingGroups/BondingGroup[@uid="#"]/Enable'
+            },
+            PPPoE: {
+                search: {
+                    pppInterfaces: "Device/PPP/Interfaces",
+                    ipInterfaces: "Device/IP/Interfaces",
+                    ethLinks: "Device/Ethernet/Links",
+                    dhcpClients: "Device/DHCPv4/Clients"
+                },
+                save: {
+                    IfcName: "Device/PPP/Interfaces/Interface[Alias='#']/IfcName",
+                    Enable: "Device/PPP/Interfaces/Interface[Alias='#']/Enable",
+                    TransportType: "Device/PPP/Interfaces/Interface[Alias='#']/TransportType",
+                    Username: "Device/PPP/Interfaces/Interface[Alias='#']/Username",
+                    Password: "Device/PPP/Interfaces/Interface[Alias='#']/Password",
+                    AuthenticationProtocol: "Device/PPP/Interfaces/Interface[Alias='#']/AuthenticationProtocol",
+                    LowerLayers: "Device/PPP/Interfaces/Interface[Alias='#']/LowerLayers",
+                    MaxMRUSize: "Device/PPP/Interfaces/Interface[Alias='#']/MaxMRUSize",
+                    ServiceName: "Device/PPP/Interfaces/Interface[Alias='#']/PPPoE/ServiceName",
+                    IPAddress: "Device/IP/Interfaces/Interface[Alias='#']/IPv4Addresses/IPv4Address[@uid='1']/IPAddress",
+                    SubnetMask: "Device/IP/Interfaces/Interface[Alias='#']/IPv4Addresses/IPv4Address[@uid='1']/SubnetMask",
+                    IPGateway: "Device/IP/Interfaces/Interface[Alias='#']/IPv4Addresses/IPv4Address[@uid='1']/IPGateway",
+                    AddressingType: "Device/IP/Interfaces/Interface[Alias='#']/IPv4Addresses/IPv4Address[@uid='1']/AddressingType",
+                    VLANID: "Device/Ethernet/VLANTerminations/VLANTermination[Alias='#']/VLANID"
+                }
+            },
+            IPoE: {
+                search: {
+                    ipInterfaces: "Device/IP/Interfaces",
+                    pppInterfaces: "Device/PPP/Interfaces",
+                    ethLinks: "Device/Ethernet/Links",
+                    dhcpClients: "Device/DHCPv4/Clients"
+                },
+                save: {
+                    Enable: "Device/IP/Interfaces/Interface[Alias='#']/Enable",
+                    IfcName: "Device/IP/Interfaces/Interface[Alias='#']/IfcName",
+                    LowerLayers: "Device/IP/Interfaces/Interface[Alias='#']/LowerLayers",
+                    IPAddress: "Device/IP/Interfaces/Interface[Alias='#']/IPv4Addresses/IPv4Address[@uid='1']/IPAddress",
+                    SubnetMask: "Device/IP/Interfaces/Interface[Alias='#']/IPv4Addresses/IPv4Address[@uid='1']/SubnetMask",
+                    IPGateway: "Device/IP/Interfaces/Interface[Alias='#']/IPv4Addresses/IPv4Address[@uid='1']/IPGateway",
+                    AddressingType: "Device/IP/Interfaces/Interface[Alias='#']/IPv4Addresses/IPv4Address[@uid='1']/AddressingType",
+                    VLANID: "Device/Ethernet/VLANTerminations/VLANTermination[Alias='#']/VLANID",
+                    optionValue: 'Device/DHCPv4/Clients/Client[Interface="#"]/SentOptions/SentOption[Alias="$"]/Value',
+                    dhcpv4Client: 'Device/DHCPv4/Clients/Client[Interface="#"]/Enable'
+                }
+            },
+            ptm: {
+                availablePTMLinks: "Device/PTM/Links",
+                ptmEnable: 'Device/PTM/Links/Link[Alias="#"]/Enable',
+                ptmIfcName: 'Device/PTM/Links/Link[Alias="#"]/IfcName'
+            },
+            atm: {
+                availableATMLinks: "Device/ATM/Links",
+                MACAddress: "Device/Ethernet/Links/Link[LowerLayers='#']/MACAddress",
+                base: 'Device/ATM/Links/Link[Alias="#"]/'
+            },
+            eth: {
+                interfaces: 'Device/Ethernet/Interfaces/Interface[Role="WAN"]',
+                links: 'Device/Ethernet/Links/Link[Status="UP"]'
+            },
+            sfp: {
+                interfaces: "Device/SFP/Interfaces/Interface[@uid='1']"
+            }
+        },
+        qos: {
+            queue: "Device/QoS/Queues",
+            schedulerAlgorithmList: 'Device/QoS/Queues/Queue[@uid="#"]/SchedulerAlgorithm',
+            interfaces: {
+                ethernetLinks: "Device/Ethernet/Links",
+                ptmLinks: "Device/PTM/Links",
+                atmLinks: "Device/ATM/Links"
+            },
+            update: {
+                enable: 'Device/QoS/Queues/Queue[@uid="#"]/Enable',
+                alias: 'Device/QoS/Queues/Queue[@uid="#"]/Alias',
+                interfac: 'Device/QoS/Queues/Queue[@uid="#"]/Interface',
+                precedence: 'Device/QoS/Queues/Queue[@uid="#"]/Precedence',
+                weigth: 'Device/QoS/Queues/Queue[@uid="#"]/Weight',
+                schedulerAlgorithm: 'Device/QoS/Queues/Queue[@uid="#"]/SchedulerAlgorithm',
+                minimRate: 'Device/QoS/Queues/Queue[@uid="#"]/MinimRate',
+                shapingRate: 'Device/QoS/Queues/Queue[@uid="#"]/ShapingRate',
+                shapingBurstSize: 'Device/QoS/Queues/Queue[@uid="#"]/ShapingBurstSize'
+            },
+            remove: 'Device/QoS/Queues/Queue[@uid="#"]',
+            classifications: {
+                allList: "Device/QoS/Classifications",
+                update: {
+                    base: 'Device/QoS/Classifications/Classification[@uid="#"]/'
+                },
+                remove: 'Device/QoS/Classifications/Classification[@uid="#"]'
+            },
+            shaper: {
+                allList: {
+                    list: "Device/QoS/Shapers",
+                    dscpMark: "Device/QoS/DefaultDSCPMark"
+                },
+                update: {
+                    base: 'Device/QoS/Shapers/Shaper[@uid="#"]/'
+                },
+                remove: 'Device/QoS/Shapers/Shaper[@uid="#"]'
+            },
+            policer: {
+                list: "Device/QoS/Policers",
+                removeItem: 'Device/QoS/Policers/Policer[@uid="#"]',
+                update: {
+                    Enable: 'Device/QoS/Policers/Policer[@uid="#"]/Enable',
+                    CommittedRate: 'Device/QoS/Policers/Policer[@uid="#"]/CommittedRate',
+                    CommittedBurstSize: 'Device/QoS/Policers/Policer[@uid="#"]/CommittedBurstSize',
+                    ExcessBurstSize: 'Device/QoS/Policers/Policer[@uid="#"]/ExcessBurstSize',
+                    PeakRate: 'Device/QoS/Policers/Policer[@uid="#"]/PeakRate',
+                    PeakBurstSize: 'Device/QoS/Policers/Policer[@uid="#"]/PeakBurstSize',
+                    MeterType: 'Device/QoS/Policers/Policer[@uid="#"]/MeterType',
+                    ConformingAction: 'Device/QoS/Policers/Policer[@uid="#"]/ConformingAction',
+                    PartialConformingAction: 'Device/QoS/Policers/Policer[@uid="#"]/PartialConformingAction',
+                    NonConformingAction: 'Device/QoS/Policers/Policer[@uid="#"]/NonConformingAction'
+                }
+            }
+        },
+        mptcp: {
+            status: {
+                status: "Device/Services/Mptcp/Status",
+                enable: "Device/Services/Mptcp/Enable",
+                showMPTCPButton: "Device/Services/Mptcp/GUI/ShowMPTCPButton",
+                showMPTCPPage: "Device/Services/Mptcp/GUI/ShowMPTCPPage"
+            },
+            kpiInformation: {
+                establishedSessionCount: "Device/Services/Mptcp/KPI_information/Established_session_count",
+                additionalSubflowCount: "Device/Services/Mptcp/KPI_information/Additional_subflow_count",
+                sessionAdditionalSubflow: "Device/Services/Mptcp/KPI_information/Session_with_additional_subflow",
+                closedSessionCount: "Device/Services/Mptcp/KPI_information/Closed_session_count"
+            },
+            statistics: {
+                totalBytesSent: "Device/IP/Interfaces/Interface[Alias='IP_DATA_MPTCP']/Stats/BytesSent",
+                totalBytesReceived: "Device/IP/Interfaces/Interface[Alias='IP_DATA_MPTCP']/Stats/BytesReceived",
+                totalPacketsSent: "Device/IP/Interfaces/Interface[Alias='IP_DATA_MPTCP']/Stats/PacketsSent",
+                totalPacketsReceived: "Device/IP/Interfaces/Interface[Alias='IP_DATA_MPTCP']/Stats/PacketsReceived",
+                totalErrosSent: "Device/IP/Interfaces/Interface[Alias='IP_DATA_MPTCP']/Stats/ErrorsSent",
+                totalErrosReceived: "Device/IP/Interfaces/Interface[Alias='IP_DATA_MPTCP']/Stats/ErrorsReceived",
+                totalDiscardPacketsSent: "Device/IP/Interfaces/Interface[Alias='IP_DATA_MPTCP']/Stats/DiscardPacketsSent",
+                totalDiscardPacketsReceived: "Device/IP/Interfaces/Interface[Alias='IP_DATA_MPTCP']/Stats/DiscardPacketsReceived",
+                totalUnicastPacketsSent: "Device/IP/Interfaces/Interface[Alias='IP_DATA_MPTCP']/Stats/UnicastPacketsSent",
+                totalUnicastPacketsReceived: "Device/IP/Interfaces/Interface[Alias='IP_DATA_MPTCP']/Stats/UnicastPacketsReceived",
+                totalMulticastPacketsSent: "Device/IP/Interfaces/Interface[Alias='IP_DATA_MPTCP']/Stats/MulticastPacketsSent",
+                totalMulticastPacketsReceived: "Device/IP/Interfaces/Interface[Alias='IP_DATA_MPTCP']/Stats/MulticastPacketsReceived",
+                totalBroadcastPacketsSent: "Device/IP/Interfaces/Interface[Alias='IP_DATA_MPTCP']/Stats/BroadcastPacketsSent",
+                totalBroadcastPacketsReceived: "Device/IP/Interfaces/Interface[Alias='IP_DATA_MPTCP']/Stats/BroadcastPacketsReceived"
+            }
+        },
+        backup3g: {
+            hsxpalte: {
+                basicConfig: {
+                    enable: 'Device/Services/WANBackup/Interfaces/Interface[Alias="WANBACKUP_0"]/Enable',
+                    pinCode: "Device/Hsxpalte/Dongles/Dongle[@uid='1']/PIN",
+                    apn: "Device/Hsxpalte/Dongles/Dongle[@uid='1']/Apn",
+                    authProtocol: 'Device/PPP/Interfaces/Interface[Alias="PPP_DATA"]/AuthenticationProtocol',
+                    username: 'Device/PPP/Interfaces/Interface[Alias="PPP_DATA"]/Username',
+                    password: 'Device/PPP/Interfaces/Interface[Alias="PPP_DATA"]/Password'
+                },
+                statusInfo: {
+                    state: "Device/Hsxpalte/Dongles/Dongle[@uid='1']/State",
+                    connectionUptime: "Device/Hsxpalte/Dongles/Dongle[@uid='1']/ConnectionUptime",
+                    signalLevel: "Device/Hsxpalte/Dongles/Dongle[@uid='1']/ModemSignal",
+                    manufacturer: "Device/Hsxpalte/Dongles/Dongle[@uid='1']/Manufacturer"
+                },
+                advancedConfig: {
+                    timeBeforeSwitch3g: 'Device/Services/WANBackup/Interfaces/Interface[Alias="WANBACKUP_0"]/ConnectionUp',
+                    pukCode: "Device/Hsxpalte/Dongles/Dongle[@uid='1']/PUK"
+                }
+            },
+            cellular: {
+                basicConfig: {
+                    enable: "Device/Cellular/Dongles/Dongle[@uid='1']/Enable",
+                    pinCode: "Device/Cellular/Dongles/Dongle[@uid='1']/Interfaces/USIM/PIN",
+                    apnList: "Device/Cellular/AccessPoints/AccessPoint",
+                    puk: ""
+                },
+                statusInfo: {
+                    state: "Device/Cellular/Dongles/Dongle[@uid='1']/State",
+                    signalLevel: "Device/Cellular/Dongles/Dongle[@uid='1']/ModemSignal",
+                    mobTechStatus: "Device/Cellular/Dongles/Dongle[@uid='1']/ConnectionType",
+                    mtstatus: "Device/Cellular/Dongles/Dongle[@uid='1']/ModemStatus",
+                    manufacturer: "Device/Cellular/Dongles/Dongle[@uid='1']/Manufacturer",
+                    model: "Device/Cellular/Dongles/Dongle[@uid='1']/Model",
+                    modemVersion: "",
+                    internetAvailability: "Device/IP/Interfaces/Interface[Alias='IP_USB_MODEM']/Status",
+                    imei: "Device/Cellular/Dongles/Dongle[@uid='1']/Imei",
+                    mainWanStatus: "Device/IP/Interfaces/Interface[Alias='IP_DATA']/Status",
+                    rsrq: "",
+                    rscp: "",
+                    rsrp: "",
+                    rssi: "",
+                    sinr: "",
+                    bandInfo: "",
+                    snr: "",
+                    uiBandWidth: "",
+                    diBandWidth: "",
+                    scc1bandInfo: "",
+                    scc1BandWidth: "",
+                    mptcpEnable: "",
+                    mptcpValue: "",
+                    failoverEnable: "",
+                    failoverValue: "",
+                    apn: 'Device/Cellular/AccessPoints/AccessPoint[@uid="1"]/APN',
+                    plmn: "Device/Cellular/Interfaces/Interface[@uid='1']/ConnectionInfo/Plmn",
+                    cellidentity: "Device/Cellular/Interfaces/Interface[@uid='1']/ConnectionInfo/CellIdentity",
+                    interfaceType: "Device/Managers/NetworkData/InterfaceType",
+                    mobileOperator: "Device/Cellular/Interfaces/Interface[@uid='1']/NetworkInUse",
+                    imsi: "Device/Cellular//Interfaces/Interface[@uid='1']/USIM/IMSI",
+                    msisdn: "Device/Cellular//Interfaces/Interface[@uid='1']/USIM/MSISDN"
+                },
+                advancedConfig: {
+                    timeBeforeSwitch3g: 'Device/Services/WANBackup/Interfaces/Interface[Alias="WANBACKUP_0"]/ConnectionUp'
+                },
+                networkSettings: {
+                    preferredAccessTechnology: "Device/Cellular/Interfaces/Interface[@uid='1']/PreferredAccessTechnology",
+                    bandRequested: "Device/Cellular/Interfaces/Interface[@uid='1']/BandRequested"
+                }
+            },
+            cellularSave: {
+                apnEnableDifferent: 'Device/Cellular/AccessPoints/AccessPoint[Alias!="#alias#"]/Enable',
+                apnGenericField: 'Device/Cellular/AccessPoints/AccessPoint[Alias="#alias#"]/#field#'
+            }
+        },
+        mapT: {
+            bRelayIpv6Prefix: "Device/MAP/Domains/Domain[Alias='DOMAIN-MAPT']/BRIPv6Prefix",
+            ipv6PrefixRule: "Device/MAP/Domains/Domain[Alias='DOMAIN-MAPT']/Rules/Rule[Alias='MAPT-BMR']/IPv6Prefix",
+            ipv4PrefixRule: "Device/MAP/Domains/Domain[Alias='DOMAIN-MAPT']/Rules/Rule[Alias='MAPT-BMR']/IPv4Prefix",
+            psidOffset: "Device/MAP/Domains/Domain[Alias='DOMAIN-MAPT']/PSIDOffset",
+            psidLength: "Device/MAP/Domains/Domain[Alias='DOMAIN-MAPT']/PSIDLength",
+            psid: "Device/MAP/Domains/Domain[Alias='DOMAIN-MAPT']/PSID",
+            sharedIPv4Address: "Device/MAP/Domains/Domain[Alias='DOMAIN-MAPT']/SharedIPv4Address"
+        },
+        vlan: {
+            vlanTerminations: "Device/Ethernet/VLANTerminations",
+            removeItem: 'Device/Ethernet/VLANTerminations/VLANTermination[@uid="#"]',
+            update: {
+                Enable: 'Device/Ethernet/VLANTerminations/VLANTermination[@uid="#"]/Enable',
+                Alias: 'Device/Ethernet/VLANTerminations/VLANTermination[@uid="#"]/Alias',
+                VLANID: "Device/Ethernet/VLANTerminations/VLANTermination[new_index]/VLANID",
+                IngressPriorityMappings: 'Device/Ethernet/VLANTerminations/VLANTermination[@uid="#"]/IngressPriorityMappings',
+                EgressPriorityMappings: 'Device/Ethernet/VLANTerminations/VLANTermination[@uid="#"]/EgressPriorityMappings'
+            }
+        },
+        connectionServices: {
+            list: "Device/Managers/Network/ConnectionServices",
+            interfaceType: "Device/Managers/Network/InterfaceType",
+            remove: 'Device/Managers/Network/ConnectionServices/ConnectionService[@uid="#"]',
+            update: {
+                Alias: 'Device/Managers/Network/ConnectionServices/ConnectionService[@uid="#"]/Alias',
+                ConnectionMode: 'Device/Managers/Network/ConnectionServices/ConnectionService[@uid="#"]/ConnectionMode',
+                EnableVLAN: 'Device/Managers/Network/ConnectionServices/ConnectionService[@uid="#"]/EnableVLAN',
+                ConnectionType: 'Device/Managers/Network/ConnectionServices/ConnectionService[@uid="#"]/ConnectionType',
+                VLANID: 'Device/Managers/Network/ConnectionServices/ConnectionService[@uid="#"]/VLANID',
+                IfcName: 'Device/Managers/Network/ConnectionServices/ConnectionService[@uid="#"]/IfcName',
+                IPAddress: 'Device/Managers/Network/ConnectionServices/ConnectionService[@uid="#"]/IPAddress',
+                Status: 'Device/Managers/Network/ConnectionServices/ConnectionService[@uid="#"]/Status',
+                DefaultGateway: 'Device/Managers/Network/ConnectionServices/ConnectionService[@uid="#"]/DefaultGateway'
+            },
+            ptmInternet: {
+                VLANID: "Device/Ethernet/VLANTerminations/VLANTermination[Alias='VLAN_DATA']/VLANID",
+                Username: "Device/PPP/Interfaces/Interface[Alias='PPP_DATA']/Username",
+                Password: "Device/PPP/Interfaces/Interface[Alias='PPP_DATA']/Password",
+                CurrentMRUSize: "Device/PPP/Interfaces/Interface[Alias='PPP_DATA']/CurrentMRUSize",
+                IPAddress: "Device/PPP/Interface/Interface[Alias='PPP_DATA']/IPCP/LocalIPAddress",
+                Status: "Device/PPP/Interface/Interface[Alias='PPP_DATA']/Status"
+            },
+            ptmTV: {
+                VLANID: "Device/Ethernet/VLANTerminations/VLANTermination[Alias='VLAN_IGMP']/VLANID",
+                Status: "Device/Ethernet/VLANTerminations/VLANTermination[Alias='VLAN_IGMP']/Status"
+            },
+            ethInternet: {
+                IPAddress: "Device/PPP/Interface/Interface[Alias='PPP_DATA']/IPCP/LocalIPAddress",
+                Status: "Device/PPP/Interface/Interface[Alias='PPP_DATA']/Status",
+                VLANID: "Device/Ethernet/VLANTerminations/VLANTermination[Alias='VLAN_DATA']/VLANID",
+                Username: "Device/PPP/Interfaces/Interface[Alias='PPP_DATA']/Username",
+                Password: "Device/PPP/Interfaces/Interface[Alias='PPP_DATA']/Password",
+                CurrentMRUSize: "Device/PPP/Interfaces/Interface[Alias='PPP_DATA']/CurrentMRUSize"
+            },
+            ethTV: {
+                Status: "Device/Ethernet/VLANTerminations/VLANTermination[Alias='VLAN_IGMP']/Status"
+            },
+            atmInternet: {
+                VPIVCI: "Device/ATM/Links/Link[@Alias='ATM_DATA']/DestinationAddress",
+                Encapsulation: "Device/ATM/Links/Link[Alias='ATM_DATA']/Encapsulation",
+                ATMQoSClass: "Device/ATM/Links/Link[Alias='ATM_DATA']/QoS/QoSClass",
+                PeakCellRate: "Device/ATM/Links/Link[Alias='ATM_DATA']/QoS/PeakCellRate",
+                MaximumBurstSize: "Device/ATM/Links/Link[Alias='ATM_DATA']/QoS/MaximumBurstSize",
+                SustainableCellRate: "Device/ATM/Links/Link[Alias='ATM_DATA']/QoS/SustainableCellRate",
+                Username: "Device/PPP/Interfaces/Interface[Alias='PPP_DATA']/Username",
+                Password: "Device/PPP/Interfaces/Interface[Alias='PPP_DATA']/Password",
+                CurrentMRUSize: "Device/PPP/Interfaces/Interface[Alias='PPP_DATA']/CurrentMRUSize",
+                IPAddress: "Device/PPP/Interface/Interface[Alias='PPP_DATA']/IPCP/LocalIPAddress",
+                Status: "Device/PPP/Interface/Interface[Alias='PPP_DATA']/Status"
+            },
+            atmTV: {
+                VPIVCI: "Device/ATM/Links/Link[Alias='ATM_IPTV']/DestinationAddress",
+                Encapsulation: "Device/ATM/Links/Link[Alias='ATM_IPTV']/Encapsulation",
+                ATMQoSClass: "Device/ATM/Links/Link[Alias='ATM_IPTV']/QoS/QoSClass",
+                PeakCellRate: "Device/ATM/Links/Link[Alias='ATM_IPTV']/QoS/PeakCellRate",
+                MaximumBurstSize: "Device/ATM/Links/Link[Alias='ATM_IPTV']/QoS/MaximumBurstSize",
+                SustainableCellRate: "Device/ATM/Links/Link[Alias='ATM_IPTV']/QoS/SustainableCellRate",
+                Status: "Device/PPP/Interface/Interface[Alias='PPP_DATA']/Status"
+            }
+        }
+    },
+    broadband: {
+        ipv4Status: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/Status',
+        uptime: 'Device/Ethernet/Interfaces/Interface[Role="WAN"]/LastChange',
+        ipv6Status: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv6Addresses/IPv6Address[Alias="DHCPV6_2"]/Status',
+        dataTransferedSent: "TBD",
+        dataTransferedReceived: "TBD",
+        ipv4Address: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/IPAddress',
+        ipv6Address: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv6Addresses/IPv6Address[Alias="DHCPV6_2"]/IPAddress',
+        primaryDns: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="STATIC_1"]/DNSServer',
+        secondaryDns: 'Device/DNS/Relay/Forwardings/Forwarding[Alias="STATIC_2"]/DNSServer',
+        ipv6AddressServer: "TBD",
+        pvcInfo: "TBD",
+        type: "TBD",
+        ppp: {
+            username: 'Device/PPP/Interfaces/Interface[Alias="PPP_DATA"]/Username',
+            password: 'Device/PPP/Interfaces/Interface[Alias="PPP_DATA"]/Password',
+            mode: "TBD"
+        }
+    },
+    ethernet: {
+        port1: {
+            status: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Status',
+            connectionSpeed: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/MaxBitRate',
+            duplexMode: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Diagnostics/CurrentDuplexMode',
+            packetsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/PacketsReceived',
+            bytesreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/BytesReceived',
+            errorsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/ErrorsReceived',
+            discardpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/DiscardPacketsReceived',
+            packetssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/PacketsSent',
+            bytessent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/BytesSent',
+            errorssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/ErrorsSent',
+            discardpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/DiscardPacketsSent',
+            unicastpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/UnicastPacketsSent',
+            unicastpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/UnicastPacketsReceived',
+            multicastpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/MulticastPacketsSent',
+            multicastpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/MulticastPacketsReceived',
+            broadcastpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/BroadcastPacketsSent',
+            broadcastpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/BroadcastPacketsReceived',
+            currentBitRate: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Diagnostics/CurrentBitRate'
+        },
+        port2: {
+            status: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Status',
+            connectionSpeed: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/MaxBitRate',
+            duplexMode: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Diagnostics/CurrentDuplexMode',
+            packetsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/PacketsReceived',
+            bytesreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/BytesReceived',
+            errorsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/ErrorsReceived',
+            discardpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/DiscardPacketsReceived',
+            packetssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/PacketsSent',
+            bytessent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/BytesSent',
+            errorssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/ErrorsSent',
+            discardpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/DiscardPacketsSent',
+            unicastpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/UnicastPacketsSent',
+            unicastpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/UnicastPacketsReceived',
+            multicastpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/MulticastPacketsSent',
+            multicastpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/MulticastPacketsReceived',
+            broadcastpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/BroadcastPacketsSent',
+            broadcastpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/BroadcastPacketsReceived',
+            currentBitRate: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Diagnostics/CurrentBitRate'
+        },
+        port3: {
+            status: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Status',
+            connectionSpeed: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/MaxBitRate',
+            duplexMode: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Diagnostics/CurrentDuplexMode',
+            packetsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/PacketsReceived',
+            bytesreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/BytesReceived',
+            errorsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/ErrorsReceived',
+            discardpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/DiscardPacketsReceived',
+            packetssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/PacketsSent',
+            bytessent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/BytesSent',
+            errorssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/ErrorsSent',
+            discardpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/DiscardPacketsSent',
+            unicastpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/UnicastPacketsSent',
+            unicastpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/UnicastPacketsReceived',
+            multicastpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/MulticastPacketsSent',
+            multicastpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/MulticastPacketsReceived',
+            broadcastpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/BroadcastPacketsSent',
+            broadcastpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/BroadcastPacketsReceived',
+            currentBitRate: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Diagnostics/CurrentBitRate'
+        },
+        port4: {
+            status: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Status',
+            connectionSpeed: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/MaxBitRate',
+            duplexMode: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Diagnostics/CurrentDuplexMode',
+            packetsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/PacketsReceived',
+            bytesreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/BytesReceived',
+            errorsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/ErrorsReceived',
+            discardpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/DiscardPacketsReceived',
+            packetssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/PacketsSent',
+            bytessent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/BytesSent',
+            errorssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/ErrorsSent',
+            discardpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/DiscardPacketsSent',
+            unicastpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/UnicastPacketsSent',
+            unicastpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/UnicastPacketsReceived',
+            multicastpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/MulticastPacketsSent',
+            multicastpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/MulticastPacketsReceived',
+            broadcastpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/BroadcastPacketsSent',
+            broadcastpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/BroadcastPacketsReceived',
+            currentBitRate: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Diagnostics/CurrentBitRate'
+        }
+    },
+    ethernetDevice: {
+        devicesList: 'Device/Hosts/Hosts/Host[@uid="#"]',
+        localDomain: "Device/DNS/Relay/LocalDomains"
+    },
+    dhcpLeases: {
+        dhcpLeasesList: 'Device/Hosts/Hosts/Host[AddressSource="DHCP"]'
+    },
+    stats: {
+        connectivity: {
+            addressingType: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/AddressingType'
+        },
+        sfp: {
+            stats: "Device/SFP/Interfaces/Interface/Stats",
+            status: "Device/SFP/Interfaces/Interface/Status",
+            sfpStatus: 'Device/SFP/Interfaces/Interface[Alias="SFP0"]/Status',
+            sfpCurrentSpeed: 'Device/SFP/Interfaces/Interface[Alias="SFP0"]/CurrentSpeed'
+        },
+        ptm: "Device/PTM/Links",
+        atm: "Device/ATM/Links",
+        ppp: "Device/PPP/Interfaces",
+        lan: {
+            eth1: {
+                packetsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/PacketsReceived',
+                bytesreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/BytesReceived',
+                errorsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/ErrorsReceived',
+                discardpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/DiscardPacketsReceived',
+                packetssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/PacketsSent',
+                bytessent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/BytesSent',
+                errorssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/ErrorsSent',
+                discardpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Stats/DiscardPacketsSent',
+                status: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Status'
+            },
+            eth2: {
+                packetsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/PacketsReceived',
+                bytesreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/BytesReceived',
+                errorsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/ErrorsReceived',
+                discardpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/DiscardPacketsReceived',
+                packetssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/PacketsSent',
+                bytessent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/BytesSent',
+                errorssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/ErrorsSent',
+                discardpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Stats/DiscardPacketsSent',
+                status: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Status'
+            },
+            eth3: {
+                packetsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/PacketsReceived',
+                bytesreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/BytesReceived',
+                errorsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/ErrorsReceived',
+                discardpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/DiscardPacketsReceived',
+                packetssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/PacketsSent',
+                bytessent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/BytesSent',
+                errorssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/ErrorsSent',
+                discardpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Stats/DiscardPacketsSent',
+                status: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Status'
+            },
+            eth4: {
+                packetsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/PacketsReceived',
+                bytesreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/BytesReceived',
+                errorsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/ErrorsReceived',
+                discardpacketsreceived: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/DiscardPacketsReceived',
+                packetssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/PacketsSent',
+                bytessent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/BytesSent',
+                errorssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/ErrorsSent',
+                discardpacketssent: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Stats/DiscardPacketsSent',
+                status: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Status'
+            },
+            wl0: {
+                packetsreceived: 'Device/WiFi/SSIDs/SSID[Alias="WL_PRIV"]/Stats/PacketsReceived',
+                bytesreceived: 'Device/WiFi/SSIDs/SSID[Alias="WL_PRIV"]/Stats/BytesReceived',
+                errorsreceived: 'Device/WiFi/SSIDs/SSID[Alias="WL_PRIV"]/Stats/ErrorsReceived',
+                discardpacketsreceived: 'Device/WiFi/SSIDs/SSID[Alias="WL_PRIV"]/Stats/DiscardPacketsReceived',
+                packetssent: 'Device/WiFi/SSIDs/SSID[Alias="WL_PRIV"]/Stats/PacketsSent',
+                bytessent: 'Device/WiFi/SSIDs/SSID[Alias="WL_PRIV"]/Stats/BytesSent',
+                errorssent: 'Device/WiFi/SSIDs/SSID[Alias="WL_PRIV"]/Stats/ErrorsSent',
+                discardpacketssent: 'Device/WiFi/SSIDs/SSID[Alias="WL_PRIV"]/Stats/DiscardPacketsSent',
+                status: 'Device/WiFi/SSIDs/SSID[Alias="WL_PRIV"]/Status'
+            },
+            wifi0: {
+                packetsreceived: 'Device/WiFi/SSIDs/SSID[Alias="WL_VIDEO_5G"]/Stats/PacketsReceived',
+                bytesreceived: 'Device/WiFi/SSIDs/SSID[Alias="WL_VIDEO_5G"]/Stats/BytesReceived',
+                errorsreceived: 'Device/WiFi/SSIDs/SSID[Alias="WL_VIDEO_5G"]/Stats/ErrorsReceived',
+                discardpacketsreceived: 'Device/WiFi/SSIDs/SSID[Alias="WL_VIDEO_5G"]/Stats/DiscardPacketsReceived',
+                packetssent: 'Device/WiFi/SSIDs/SSID[Alias="WL_VIDEO_5G"]/Stats/PacketsSent',
+                bytessent: 'Device/WiFi/SSIDs/SSID[Alias="WL_VIDEO_5G"]/Stats/BytesSent',
+                errorssent: 'Device/WiFi/SSIDs/SSID[Alias="WL_VIDEO_5G"]/Stats/ErrorsSent',
+                discardpacketssent: 'Device/WiFi/SSIDs/SSID[Alias="WL_VIDEO_5G"]/Stats/DiscardPacketsSent',
+                status: 'Device/WiFi/SSIDs/SSID[Alias="WL_VIDEO_5G"]/Status'
+            }
+        },
+        wan: {
+            conexionStatus: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/Status',
+            conexionIpv6Status: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv6Addresses/IPv6Address[IPAddressStatus="PREFERRED" and Origin="DHCPV6"]/Status',
+            backupUSBStatus: 'Device/IP/Interfaces/Interface[Alias="IP_USB_MODEM"]/Status',
+            backupWanStatus: 'Device/IP/Interfaces/Interface[Alias="IP_BACKUP"]/Status',
+            wanStatus: 'Device/Ethernet/Interfaces/Interface[Role="WAN"]/Status',
+            packetsreceived: 'Device/PPP/Interfaces/Interface[@uid="1"]/Stats/PacketsReceived',
+            packetssent: 'Device/PPP/Interfaces/Interface[@uid="1"]/Stats/PacketsSent',
+            connectionTime: 'Device/Ethernet/Interfaces/Interface[Role="WAN"]/LastChange',
+            ethernetBitRate: 'Device/Ethernet/Interfaces/Interface[Role="WAN"]/Diagnostics/CurrentBitRate',
+            stats: "Device/IP/Interfaces",
+            dslStatus: 'Device/DSL/Lines/Line[Enable="true"]/Status',
+            startSpeed: {
+                rpc: "Device/Iperf3",
+                start: "Device/Iperf3/Start",
+                stop: "Device/Iperf3/Stop",
+                iperfCmdLine: "Device/Iperf3/IperfCmdLine",
+                client: "Device/Iperf3/Client",
+                ip: "Device/Iperf3/IP",
+                port: "Device/Iperf3/Port",
+                duration: "Device/Iperf3/Duration",
+                status: "Device/Iperf3/Status",
+                reportingFormat: "Device/Iperf3/reportingFormat",
+                dsMaxBR: "Device/Iperf3/DSMaxBR",
+                usMaxBR: "Device/Iperf3/USMaxBR"
+            }
+        },
+        xdsl: {
+            erroredSeconds: "Device/DSL/Lines/Line[Alias='DSL0']/Stats/Total/ErroredSecs",
+            severelyErroredSecs: "Device/DSL/Lines/Line[Alias='DSL0']/Stats/Total/SeverelyErroredSecs",
+            reSynchronisations: "Device/DSL/Lines/Line[Alias='DSL0']/Stats/Total/Retries",
+            standard: 'Device/DSL/Lines/Line[Alias="DSL0"]/StandardUsed',
+            linkEncapsulation: 'Device/DSL/Channels/Channel[LowerLayers="Device/DSL/Lines/Line[DSL0]"]/LinkEncapsulationUsed',
+            status: 'Device/DSL/Lines/Line[Alias="DSL0"]/Status',
+            linkStatus: 'Device/DSL/Lines/Line[Alias="DSL0"]/LinkStatus',
+            lineEncoding: 'Device/DSL/Lines/Line[Alias="DSL0"]/LineEncoding',
+            dslDownstream: 'Device/DSL/Channels/Channel[@uid="1"]/DownstreamCurrRate',
+            dslUpstream: 'Device/DSL/Channels/Channel[@uid="1"]/UpstreamCurrRate',
+            connectionTimeDsl: 'Device/DSL/Lines/Line[@uid="1"]/LastChange',
+            numeric: {
+                lossOfFraming: 'Device/DSL/Channels/Channel[@uid="1"]/Stats/Showtime/LossOfFraming',
+                XTURFECErrors: 'Device/DSL/Channels/Channel[@uid="1"]/Stats/Showtime/XTURFECErrors',
+                XTUCFECErrors: 'Device/DSL/Channels/Channel[@uid="1"]/Stats/Showtime/XTUCFECErrors',
+                XTURCRCErrors: 'Device/DSL/Channels/Channel[@uid="1"]/Stats/Showtime/XTURCRCErrors',
+                XTUCCRCErrors: 'Device/DSL/Channels/Channel[@uid="1"]/Stats/Showtime/XTUCCRCErrors',
+                packetsReceived: 'Device/DSL/Lines/Line[Alias="DSL0"]/Stats/PacketsReceived',
+                packetsSent: 'Device/DSL/Lines/Line[Alias="DSL0"]/Stats/PacketsSent',
+                bytesReceived: 'Device/DSL/Lines/Line[Alias="DSL0"]/Stats/BytesReceived',
+                bytesSent: 'Device/DSL/Lines/Line[Alias="DSL0"]/Stats/BytesSent',
+                actualRateDown: 'Device/DSL/Channels/Channel[@uid="1"]/DownstreamCurrRate',
+                actualRateUp: 'Device/DSL/Channels/Channel[@uid="1"]/UpstreamCurrRate',
+                actualRateDown2: 'Device/DSL/Channels/Channel[@uid="2"]/DownstreamCurrRate',
+                actualRateUp2: 'Device/DSL/Channels/Channel[@uid="2"]/UpstreamCurrRate'
+            }
+        }
+    },
+    voice: {
+        answeringMachine: {
+            lineLink: "Device/Services/VoiceServices/VoiceService[@uid='1']/CallControl/Mailboxs/Mailbox[#]",
+            mailbox: "Device/Services/VoiceServices/VoiceService[@uid=1]/CallControl/Mailboxs",
+            oneMailbox: 'Device/Services/VoiceServices/VoiceService[@uid=1]/CallControl/Mailboxs/Mailbox[@uid="#uid#"]',
+            messages: "Device/Services/VoiceServices/VoiceService[@uid=1]/Messages",
+            oneMessage: 'Device/Services/VoiceServices/VoiceService[@uid=1]/Messages/Message[@uid="#uid#"]',
+            updateMailbox: {
+                Alias: 'Device/Services/VoiceServices/VoiceService[@uid=1]/CallControl/Mailboxs/Mailbox[@uid="#"]/Alias',
+                Enable: 'Device/Services/VoiceServices/VoiceService[@uid=1]/CallControl/Mailboxs/Mailbox[@uid="#"]/Enable',
+                MaxMessageTime: 'Device/Services/VoiceServices/VoiceService[@uid=1]/CallControl/Mailboxs/Mailbox[@uid="#"]/MaxMessageTime',
+                Mode: 'Device/Services/VoiceServices/VoiceService[@uid=1]/CallControl/Mailboxs/Mailbox[@uid="#"]/Mode',
+                SimpleUnconditionalGreeting: 'Device/Services/VoiceServices/VoiceService[@uid=1]/CallControl/Mailboxs/Mailbox[@uid="#"]/SimpleGreetings/UnconditionalGreeting',
+                SimpleOnBusyGreeting: 'Device/Services/VoiceServices/VoiceService[@uid=1]/CallControl/Mailboxs/Mailbox[@uid="#"]/SimpleGreetings/OnBusyGreeting',
+                SimpleNoAnswerGreeting: 'Device/Services/VoiceServices/VoiceService[@uid=1]/CallControl/Mailboxs/Mailbox[@uid="#"]/SimpleGreetings/OnNoAnswerGreeting',
+                RecordingUnconditionalGreeting: 'Device/Services/VoiceServices/VoiceService[@uid=1]/CallControl/Mailboxs/Mailbox[@uid="#"]/RecordingGreetings/UnconditionalGreeting',
+                RecordingOnBusyGreeting: 'Device/Services/VoiceServices/VoiceService[@uid=1]/CallControl/Mailboxs/Mailbox[@uid="#"]/RecordingGreetings/OnBusyGreeting',
+                RecordingNoAnswerGreeting: 'Device/Services/VoiceServices/VoiceService[@uid=1]/CallControl/Mailboxs/Mailbox[@uid="#"]/RecordingGreetings/OnNoAnswerGreeting',
+                EMailAddress: "Device/Services/VoiceServices/VoiceService[@uid='1']/CallControl/Mailboxs/Mailbox[@uid='#']/EMailAddress"
+            },
+            mailServer: {
+                Enable: "Device/Services/SendMail/Enable",
+                Server: "Device/Services/SendMail/Server",
+                Port: "Device/Services/SendMail/Port",
+                Encryption: "Device/Services/SendMail/Encryption",
+                Protocol: "Device/Services/SendMail/Protocol",
+                Login: "Device/Services/SendMail/Login",
+                Password: "Device/Services/SendMail/Password"
+            }
+        },
+        sip: {
+            general: "Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles",
+            callControlLines: "Device/Services/VoiceServices/VoiceService[@uid='1']/CallControl/Lines",
+            voiceStatus: {
+                dhcp: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceStatus/TelephonyDhcp",
+                security: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceStatus/TelephonySecurity",
+                tftp: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceStatus/TelephonyTftp",
+                callServerReg: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceStatus/TelephonyCallServerReg",
+                regComplete: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceStatus/TelephonyRegComplete"
+            },
+            phyInterfaces: "Device/Services/VoiceServices/VoiceService[@uid=1]/PhyInterfaces",
+            endPoints: {
+                Description: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[@uid="#idEndPoint#"]/Description',
+                ForceDTMFInband: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[@uid="#idEndPoint#"]/ForceDTMFInband',
+                FlashhookEnable: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[@uid="#idEndPoint#"]/FlashhookEnable',
+                CIDSigProtocol: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[@uid="#idEndPoint#"]/X_SAGEMCOM_FXS/CIDSigProtocol'
+            },
+            profile: {
+                enable: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Enable',
+                type: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/SignalingProtocol',
+                localSelection: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Region',
+                voipDialpan: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/DigitMap',
+                sipProxyPort: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/SIP/ProxyServerPort',
+                sipRegisterPort: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/SIP/RegistrarServerPort',
+                sipUserAgentAddress: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/SIP/UserAgentDomain',
+                sipUserAgentPort: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/SIP/UserAgentPort',
+                sipOutboundAddress: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/SIP/OutboundProxy',
+                sipOutboundPort: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/SIP/OutboundProxyPort',
+                sipOutboundInternalAddress: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/SIP/OutboundProxyInternal',
+                enableT38: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/FaxT38/Enable',
+                enableV18: "",
+                registrationExpireTimeout: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/SIP/RegisterExpires',
+                dscpSIP: "",
+                dscpRTP: "",
+                dtmfRelay: "",
+                hookFlashRelay: "",
+                sipTrasportProtocol: "",
+                cidSignalProtocol: "",
+                enableSipTagMatching: "",
+                musicServer: "",
+                musicServerPort: "",
+                enableSip: ""
+            },
+            line: {
+                enable: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/Enable',
+                authName: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/SIP/AuthUserName',
+                directoryNumber: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/DirectoryNumber',
+                authPassword: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/SIP/AuthPassword',
+                preferredPeriod: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/Codec/Lists/List[@uid="#codec#"]/PreferredPacketisationPeriod',
+                preferredCodecs: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/Codec/Lists/List[@uid="#codec#"]/Codec',
+                priority: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/Codec/Lists/List[@uid="#codec#"]/Priority',
+                enableCodec: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/Codec/Lists/List[@uid="#codec#"]/Enable',
+                callWaiting: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/CallWaitingEnable',
+                mwi: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/MWIEnable',
+                uri: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/SIP/URI',
+                VoiceMail: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/VoiceMail',
+                DTMF: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/DTMFMethod',
+                callBarring: "",
+                callBarringPin: "",
+                callBarringDigitMap: "",
+                warmLine: "",
+                warmLineNumber: "",
+                anonymousCallBlocking: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/AnonymousCallBlockEnable',
+                anonymousCalling: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/AnonymousCalEnable',
+                dnd: 'Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/DoNotDisturbEnable',
+                CallerIDEnable: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/CallerIDEnable',
+                CallerIDNameEnable: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/CallerIDNameEnable',
+                CallerIDName: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/CallerIDName',
+                ConferenceCallingStatus: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/ConferenceCallingStatus',
+                ConferenceCallingSessionCount: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/ConferenceCallingSessionCount',
+                CallWaitingEnable: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/CallWaitingEnable',
+                CallWaitingStatus: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/CallWaitingStatus',
+                CallParkingEnable: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/CallParkingEnable',
+                CallParkingTimeout: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/CallParkingTimeout',
+                AnonymousCallBlockEnable: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/AnonymousCallBlockEnable',
+                AnonymousCalEnable: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/AnonymousCalEnable',
+                DoNotDisturbEnable: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/DoNotDisturbEnable',
+                OutgoingCallEnable: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/OutgoingCallEnable',
+                MessageWaiting: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/MessageWaiting'
+            },
+            callFowarding: {
+                callForwardUncondicionalEnable: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/CallForwardUnconditionalEnable',
+                callForwardUncondicionalNumber: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/CallForwardUnconditionalNumber',
+                callForwardOnBusyEnable: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/CallForwardOnBusyEnable',
+                callForwardOnBusyNumber: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/CallForwardOnBusyNumber',
+                callForwardOnNoAnswerEnable: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/CallForwardOnNoAnswerEnable',
+                callForwardOnNoAnswerNumber: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/CallForwardOnNoAnswerNumber',
+                callForwardOnNoAnswerRingCount: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="#profile#"]/Lines/Line[@uid="#line#"]/CallingFeatures/CallForwardOnNoAnswerRingCount'
+            },
+            simple: {
+                callerIdDateTime: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface/X_SAGEMCOM_FXS/CallerIdDateTimeEnable',
+                callerIdDateTime1st: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[@uid="1"]/X_SAGEMCOM_FXS/CallerIdDateTimeEnable',
+                callerIdDateTime2nd: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[@uid="2"]/X_SAGEMCOM_FXS/CallerIdDateTimeEnable'
+            }
+        },
+        sipBasic: {
+            transmitCodec: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line[@uid='1']/Codec/TransmitCodec"
+        },
+        extraCodecPktPeriod: {
+            line1: {
+                codec1: "Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid=1]/Lines/Line[Name='Line1']/Codec/Lists/List[@uid=1]/PreferredPacketisationPeriod",
+                codec2: "Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid=1]/Lines/Line[Name='Line1']/Codec/Lists/List[@uid=2]/PreferredPacketisationPeriod",
+                codec3: "Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid=1]/Lines/Line[Name='Line1']/Codec/Lists/List[@uid=3]/PreferredPacketisationPeriod"
+            },
+            line2: {
+                codec1: "Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid=1]/Lines/Line[Name='Line2']/Codec/Lists/List[@uid=1]/PreferredPacketisationPeriod",
+                codec2: "Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid=1]/Lines/Line[Name='Line2']/Codec/Lists/List[@uid=2]/PreferredPacketisationPeriod",
+                codec3: "Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid=1]/Lines/Line[Name='Line2']/Codec/Lists/List[@uid=3]/PreferredPacketisationPeriod"
+            }
+        },
+        callBlocking: {
+            digitMapsAll: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/DigitMaps',
+            digitMapsDelete: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/DigitMaps/DigitMap[@uid="#"]',
+            digitMapsEnable: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/DigitMaps/DigitMap[@uid="#"]/Enable',
+            digitMapsType: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/DigitMaps/DigitMap[@uid="#"]/Type',
+            digitMapsRule: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/DigitMaps/DigitMap[@uid="#"]/DigitMap',
+            anonymousCallBlock: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/Lines/Line/CallingFeatures/AnonymousCallBlockEnable',
+            doNotDisturb: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/Lines/Line/CallingFeatures/DoNotDisturbEnable'
+        },
+        phoneHotline: {
+            callWaitingEnable: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line[@uid='#line#']/CallingFeatures/CallWaitingEnable",
+            hotLineWarmLineURI: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line[@uid='#line#']/CallingFeatures/HotLineWarmLineURI",
+            hotLineEnable: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line[@uid='#line#']/CallingFeatures/HotLineEnable"
+        },
+        phoneMatrix: {
+            lines: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/Lines',
+            phyInterfaces: "Device/Services/VoiceServices/VoiceService[@uid=1]/PhyInterfaces",
+            linePhyReferenceList: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile/Lines/Line[@uid="#"]/PhyReferenceList',
+            save: {
+                interfacesOutGoingLine: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[@uid="#"]/OutGoingLine',
+                outGoingValue: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line[@uid='#']"
+            }
+        },
+        hotmail: {
+            callingFeatures: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line[@uid='1']/CallingFeatures",
+            warmLineEnable: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line[@uid='1']/CallingFeatures/WarmLineEnable",
+            hotLineWarmLineURI: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line[@uid='1']/CallingFeatures/HotLineWarmLineURI",
+            warmLineTimeout: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line[@uid='1']/CallingFeatures/WarmLineTimeout"
+        },
+        sipGlobal: {
+            enable: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/Enable',
+            sipProxyServer: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/SIP/ProxyServer',
+            sipUserAgentDomain: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/SIP/UserAgentDomain',
+            sipOutboundProxy: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/SIP/OutboundProxy',
+            sipServerRegister: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/SIP/RegistrarServer",
+            line1Enable: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/Lines/Line[@uid="1"]/Enable',
+            line1DirectoryNumber: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/Lines/Line[@uid="1"]/DirectoryNumber',
+            line1AuthName: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/Lines/Line[@uid="1"]/SIP/AuthUserName',
+            line1AuthPassword: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/Lines/Line[@uid="1"]/SIP/AuthPassword',
+            line1Uri: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/Lines/Line[@uid="1"]/SIP/URI',
+            line2Enable: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/Lines/Line[@uid="2"]/Enable',
+            line2DirectoryNumber: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/Lines/Line[@uid="2"]/DirectoryNumber',
+            line2AuthName: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/Lines/Line[@uid="2"]/SIP/AuthUserName',
+            line2AuthPassword: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/Lines/Line[@uid="2"]/SIP/AuthPassword',
+            line2Uri: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid="1"]/Lines/Line[@uid="2"]/SIP/URI'
+        }
+    },
+    gateway: {
+        connection: {
+            status: {
+                localipnetwork: {
+                    ipv4address: "Device/IP/Interfaces/Interface[Alias='IP_BR_LAN']/IPv4Addresses/IPv4Address[Alias='IP_BR_LAN_ADDRESS']/IPAddress",
+                    subnetmask: "Device/IP/Interfaces/Interface[Alias='IP_BR_LAN']/IPv4Addresses/IPv4Address[Alias='IP_BR_LAN_ADDRESS']/SubnetMask",
+                    dhcpv4server: "Device/DHCPv4/Server/Enable",
+                    dhcpv4leasetime: "Device/DHCPv4/Server/Pools/Pool[Alias='DEFAULT_POOL']/LeaseTime",
+                    linklocalgatewayipv6: 'Device/IP/Interfaces/Interface[Alias="IP_BR_LAN"]/IPv6Addresses/IPv6Address[Alias="LINK_LOCAL"]/IPAddress',
+                    globalGatewayIpv6: 'Device/IP/Interfaces/Interface[Alias="IP_BR_LAN"]/IPv6Addresses/IPv6Address[IPAddressStatus="PREFERRED" and Origin="DHCPV6"]/IPAddress',
+                    delegatedprefix: 'Device/IP/Interfaces/Interface[Alias="IP_BR_LAN"]/IPv6Prefixes/IPv6Prefix[Alias="LINK_LOCAL"]/Prefix',
+                    dhcpipv6leasetime: "TBD",
+                    ipv6dns: "TBD",
+                    serverStatus: "Device/DHCPv6/Server/Enable",
+                    noofclientsconnected: null,
+                    dhcpBeginningAddress: "Device/DHCPv4/Server/Pools/Pool[Alias='DEFAULT_POOL']/MinAddress",
+                    dhcpEndingAddress: "Device/DHCPv4/Server/Pools/Pool[Alias='DEFAULT_POOL']/MaxAddress"
+                }
+            }
+        }
+    },
+    advanced: {
+        localUsers: {
+            usersList: "Device/Services/StorageServices/StorageService[@uid='1']/UserAccounts"
+        },
+        deviceDiscovery: {
+            uPnP: "Device/UPnP/Device/UPnPIGD",
+            advertisementPeriod: "Device/UPnP/Settings/UPnPIGD/AdvertisementInterval",
+            zeroConfig: "Device/UPnP/Device/Enable",
+            qoSForUPnP: "Device/UPnP/Device/UPnPQoSDevice"
+        },
+        mediaSharing: {
+            dlna: {
+                settings: "Device/UPnP/Device/UPnPMediaServer"
+            }
+        },
+        dynamicDns: {
+            clientList: "Device/Services/DynamicDNS/Clients",
+            serviceProviderBase: "Device/Services/DynamicDNS/Services"
+        },
+        userSession: "Device/UserAccounts/Users/User[Login='#login#']/CurrentSessions/UserSession[@SessionId='#session#']",
+        userRole: "Device/UserAccounts/Users/User[Login='#']/Role",
+        remoteManagement: {
+            userSessionTimeout: "Device/UserInterface/Httpd/SessionTimeout",
+            ipv4Address: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/IPAddress',
+            ipv6Address: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv6Addresses/IPv6Address[Alias="DHCPV6_2"]/IPAddress',
+            voipAddress: 'Device/IP/Interfaces/Interface[Alias="IP_VOIP_MNGT"]/IPv4Addresses/IPv4Address[Alias="IP_VOIP_MNGT_ADDRESS"]/IPAddress',
+            httpEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/Enabled',
+            httpsEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/Enabled',
+            telnetEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/Enabled',
+            sshEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/Enabled',
+            telnetWan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/WANRestriction',
+            sshWan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/WANRestriction',
+            httpLan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/LANRestriction',
+            httpsLan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/LANRestriction',
+            httpWan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/WANRestriction',
+            httpsWan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/WANRestriction',
+            telnetLan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/LANRestriction',
+            sshLan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/LANRestriction',
+            httpWifi: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/WiFiRestriction',
+            httpsWifi: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/WiFiRestriction',
+            httpsVoip: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/MNGRestriction',
+            telnetWifi: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/WiFiRestriction',
+            sshWifi: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/WiFiRestriction',
+            httpPort: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/Port',
+            httpsPort: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/Port',
+            telnetPort: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/Port',
+            sshPort: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/Port',
+            remoteHostsHttp: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/HostRestrictions',
+            remoteHostsHttps: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/HostRestrictions',
+            remoteHostsTelnet: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/HostRestrictions',
+            remoteHostsSsh: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/HostRestrictions',
+            remoteHostsEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess/HostRestrictions/HostRestriction/Enable',
+            users: {
+            uid: "Device/UserAccounts/Users/User/@uid",
+            enable: "Device/UserAccounts/Users/User/Enable",
+            firstName: "Device/UserAccounts/Users/User/FirstName",
+            lastName: "Device/UserAccounts/Users/User/LastName",
+            login: "Device/UserAccounts/Users/User/Login",
+            password: "Device/UserAccounts/Users/User/Password",
+            clearTextPassword: "Device/UserAccounts/Users/User/ClearTextPassword",
+            userSessionTimeout: "Device/UserInterface/Httpd/SessionTimeout",
+            ipv4Address: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/IPAddress',
+            ipv6Address: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv6Addresses/IPv6Address[Alias="DHCPV6_2"]/IPAddress',
+            voipAddress: 'Device/IP/Interfaces/Interface[Alias="IP_VOIP_MNGT"]/IPv4Addresses/IPv4Address[Alias="IP_VOIP_MNGT_ADDRESS"]/IPAddress',
+            httpEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/Enabled',
+            httpsEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/Enabled',
+            telnetEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/Enabled',
+            sshEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/Enabled',
+            telnetWan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/WANRestriction',
+            sshWan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/WANRestriction',
+            httpLan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/LANRestriction',
+            httpsLan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/LANRestriction',
+            httpWan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/WANRestriction',
+            httpsWan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/WANRestriction',
+            telnetLan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/LANRestriction',
+            sshLan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/LANRestriction',
+            httpWifi: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/WiFiRestriction',
+            httpsWifi: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/WiFiRestriction',
+            httpsVoip: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/MNGRestriction',
+            telnetWifi: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/WiFiRestriction',
+            sshWifi: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/WiFiRestriction',
+            httpPort: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/Port',
+            httpsPort: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/Port',
+            telnetPort: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/Port',
+            sshPort: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/Port',
+            remoteHostsHttp: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/HostRestrictions',
+            remoteHostsHttps: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/HostRestrictions',
+            remoteHostsTelnet: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/HostRestrictions',
+            remoteHostsSsh: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/HostRestrictions',
+            remoteHostsEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess/HostRestrictions/HostRestriction/Enable'
+            },
+            usersAdd: "Device/UserAccounts/Users",
+            usersDelete: 'Device/UserAccounts/Users/User[@uid="#"]',
+            usersUpdate: {
+                enable: 'Device/UserAccounts/Users/User[@uid="#"]/Enable',
+                firstName: 'Device/UserAccounts/Users/User[@uid="#"]/FirstName',
+                lastName: 'Device/UserAccounts/Users/User[@uid="#"]/LastName',
+                login: 'Device/UserAccounts/Users/User[@uid="#"]/Login',
+                password: 'Device/UserAccounts/Users/User[@uid="#"]/Password',
+                clearTextPassword: 'Device/UserAccounts/Users/User[@uid="#"]/ClearTextPassword'
+            },
+            ipv4Address: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/IPAddress',
+            ipv6Address: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv6Addresses/IPv6Address[Alias="DHCPV6_2"]/IPAddress',
+            voipAddress: 'Device/IP/Interfaces/Interface[Alias="IP_VOIP_MNGT"]/IPv4Addresses/IPv4Address[Alias="IP_VOIP_MNGT_ADDRESS"]/IPAddress',
+            httpEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/Enabled',
+            httpsEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/Enabled',
+            telnetEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/Enabled',
+            sshEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/Enabled',
+            telnetWan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/WANRestriction',
+            sshWan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/WANRestriction',
+            httpLan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/LANRestriction',
+            httpsLan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/LANRestriction',
+            httpWan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/WANRestriction',
+            httpsWan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/WANRestriction',
+            telnetLan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/LANRestriction',
+            sshLan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/LANRestriction',
+            httpWifi: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/WiFiRestriction',
+            httpsWifi: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/WiFiRestriction',
+            httpsVoip: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/MNGRestriction',
+            telnetWifi: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/WiFiRestriction',
+            sshWifi: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/WiFiRestriction',
+            httpPort: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/Port',
+            httpsPort: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/Port',
+            telnetPort: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/Port',
+            sshPort: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/Port',
+            remoteHostsHttp: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/HostRestrictions',
+            remoteHostsHttps: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/HostRestrictions',
+            remoteHostsTelnet: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/HostRestrictions',
+            remoteHostsSsh: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/HostRestrictions',
+            remoteHostsEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess/HostRestrictions/HostRestriction/Enable',
+            allUsers: {
+                httpEnable: "Device/Services/RemoteAccess/HTTPEnable",
+                httpsEnable: "Device/Services/RemoteAccess/HTTPSEnable",
+                trustedIPs: "Device/Services/RemoteAccess/TrustedDomains",
+              userSessionTimeout: "Device/UserInterface/Httpd/SessionTimeout",
+            ipv4Address: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/IPAddress',
+            ipv6Address: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv6Addresses/IPv6Address[Alias="DHCPV6_2"]/IPAddress',
+            voipAddress: 'Device/IP/Interfaces/Interface[Alias="IP_VOIP_MNGT"]/IPv4Addresses/IPv4Address[Alias="IP_VOIP_MNGT_ADDRESS"]/IPAddress',
+            httpEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/Enabled',
+            httpsEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/Enabled',
+            telnetEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/Enabled',
+            sshEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/Enabled',
+            telnetWan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/WANRestriction',
+            sshWan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/WANRestriction',
+            httpLan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/LANRestriction',
+            httpsLan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/LANRestriction',
+            httpWan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/WANRestriction',
+            httpsWan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/WANRestriction',
+            telnetLan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/LANRestriction',
+            sshLan: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/LANRestriction',
+            httpWifi: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/WiFiRestriction',
+            httpsWifi: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/WiFiRestriction',
+            httpsVoip: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/MNGRestriction',
+            telnetWifi: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/WiFiRestriction',
+            sshWifi: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/WiFiRestriction',
+            httpPort: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/Port',
+            httpsPort: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/Port',
+            telnetPort: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/Port',
+            sshPort: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/Port',
+            remoteHostsHttp: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTP"]/HostRestrictions',
+            remoteHostsHttps: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="HTTPS"]/HostRestrictions',
+            remoteHostsTelnet: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="TELNET"]/HostRestrictions',
+            remoteHostsSsh: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess[@Service="SSH"]/HostRestrictions',
+            remoteHostsEnable: 'Device/UserAccounts/Users/User[Login="#"]/RemoteAccesses/RemoteAccess/HostRestrictions/HostRestriction/Enable',
+            userPassword: 'Device/UserAccounts/Users/User[Login="#user#"]/Password',
+            clearTextPassword: 'Device/UserAccounts/Users/User[Login="#user#"]/ClearTextPassword',
+            httpsEnable: 'Device/UserAccounts/Users/User[Login="#user#"]/RemoteAccesses/RemoteAccess[@Service="#service#"]/Enabled',
+            httpsPort: 'Device/UserAccounts/Users/User[Login="#user#"]/RemoteAccesses/RemoteAccess[@Service="#service#"]/Port',
+            ipv4Address: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/IPAddress',
+            expirationEnable: 'Device/UserAccounts/Users/User[Login="#user#"]/RemoteAccesses/RemoteAccess[@Service="#service#"]/ExpirationEnable',
+            expirationTime: 'Device/UserAccounts/Users/User[Login="#user#"]/RemoteAccesses/RemoteAccess[@Service="#service#"]/ExpirationTime'
+                
+            },
+            remoteAccessSimpleData: {
+                userPassword: 'Device/UserAccounts/Users/User[Login="#user#"]/Password',
+                clearTextPassword: 'Device/UserAccounts/Users/User[Login="#user#"]/ClearTextPassword',
+                httpsEnable: 'Device/UserAccounts/Users/User[Login="#user#"]/RemoteAccesses/RemoteAccess[@Service="#service#"]/Enabled',
+                httpsPort: 'Device/UserAccounts/Users/User[Login="#user#"]/RemoteAccesses/RemoteAccess[@Service="#service#"]/Port',
+                ipv4Address: 'Device/IP/Interfaces/Interface[Alias="IP_DATA"]/IPv4Addresses/IPv4Address[Alias="IP_DATA_ADDRESS"]/IPAddress',
+                expirationEnable: 'Device/UserAccounts/Users/User[Login="#user#"]/RemoteAccesses/RemoteAccess[@Service="#service#"]/ExpirationEnable',
+                expirationTime: 'Device/UserAccounts/Users/User[Login="#user#"]/RemoteAccesses/RemoteAccess[@Service="#service#"]/ExpirationTime'
+            }
+        }
+    },
+    runlevel: "Device/Managers/NetworkData/RunLevel",
+    management: {
+        tr69InternalDataPort: "Device/ManagementServer/TR69InternalData/Settings/Port",
+        mobileLinks: {
+            google: "Device/UserInterface/GooglePlayLink",
+            apple: "Device/UserInterface/AppStoreLink"
+        },
+        language: "Device/UserInterface/CurrentLanguage",
+        country: "Device/DeviceInfo/Country",
+        accountSettings: {
+            uid: 'Device/UserAccounts/Users/User[Login="#"]/@uid',
+            connectionType: 'Device/UserAccounts/Users/User[Login="#"]/CurrentSessions/UserSession[@SessionId=$]/ConnectionType',
+            currentSessionIp: 'Device/UserAccounts/Users/User[Login="#"]/CurrentSessions/UserSession[@SessionId=$]/RemoteAddress',
+            SessionTimeout: "Device/UserInterface/Httpd/SessionTimeout",
+            SessionTimeoutMSO: "Device/Managers/Network/ServiceHttpTimeout"
+        },
+        twonky: {
+            language: "Device/UPnP/Settings/UPnPMediaServer/Language",
+            AllName: "Device/UPnP/Settings/UPnPMediaServer/AllName",
+            MusicNode1: "Device/UPnP/Settings/UPnPMediaServer/MusicNodes/MusicNode[@uid='1']/Attributes",
+            MusicNode2: "Device/UPnP/Settings/UPnPMediaServer/MusicNodes/MusicNode[@uid='2']/Attributes",
+            MusicNode3: "Device/UPnP/Settings/UPnPMediaServer/MusicNodes/MusicNode[@uid='3']/Attributes",
+            MusicNode4: "Device/UPnP/Settings/UPnPMediaServer/MusicNodes/MusicNode[@uid='4']/Attributes",
+            MusicNode5: "Device/UPnP/Settings/UPnPMediaServer/MusicNodes/MusicNode[@uid='5']/Attributes",
+            AllTracks: "Device/UPnP/Settings/UPnPMediaServer/AllTracks",
+            AllRadio: "Device/UPnP/Settings/UPnPMediaServer/AllRadio",
+            PlaylistLastPlayed: "Device/UPnP/Settings/UPnPMediaServer/PlaylistLastPlayed",
+            PlaylistMostPlayed: "Device/UPnP/Settings/UPnPMediaServer/PlaylistMostPlayed",
+            Playlists: "Device/UPnP/Settings/UPnPMediaServer/Playlists",
+            InternetRadio: "Device/UPnP/Settings/UPnPMediaServer/InternetRadio",
+            RootMusic: "Device/UPnP/Settings/UPnPMediaServer/RootMusic",
+            PictureNode1: "Device/UPnP/Settings/UPnPMediaServer/PictureNodes/PictureNode[@uid='1']/Attributes",
+            PictureNode2: "Device/UPnP/Settings/UPnPMediaServer/PictureNodes/PictureNode[@uid='2']/Attributes",
+            PictureNode3: "Device/UPnP/Settings/UPnPMediaServer/PictureNodes/PictureNode[@uid='3']/Attributes",
+            AllPictures: "Device/UPnP/Settings/UPnPMediaServer/AllPictures",
+            RootPicture: "Device/UPnP/Settings/UPnPMediaServer/RootPicture",
+            TagsPicture: "Device/UPnP/Settings/UPnPMediaServer/TagsPicture",
+            VideoNode1: "Device/UPnP/Settings/UPnPMediaServer/VideoNodes/VideoNode[@uid='1']/Attributes",
+            VideoNode2: "Device/UPnP/Settings/UPnPMediaServer/VideoNodes/VideoNode[@uid='2']/Attributes",
+            VideoNode3: "Device/UPnP/Settings/UPnPMediaServer/VideoNodes/VideoNode[@uid='3']/Attributes",
+            AllVideos: "Device/UPnP/Settings/UPnPMediaServer/AllVideos",
+            RootVideo: "Device/UPnP/Settings/UPnPMediaServer/RootVideo"
+        }
+    },
+    mymedia: {
+        name: "Device/UPnP/Settings/UPnPMediaServer/FriendlyName",
+        agregation: "Device/UPnP/Settings/UPnPMediaServer/Aggregation",
+        upnpMediaServerPort: "Device/UPnP/Settings/UPnPMediaServer/UPnPMediaServerPort",
+        dlna: "Device/UPnP/Device/UPnPMediaServer",
+        samba: {
+            enable: 'Device/Services/StorageServices/StorageService[@uid="1"]/NetworkServer/SMBEnable',
+            host: "Device/DNS/Client/HostName",
+            localDomains: "Device/DNS/Client/LocalDomains",
+            ip: 'Device/IP/Interfaces/Interface[Alias="IP_BR_LAN"]/IPv4Addresses/IPv4Address[Alias="IP_BR_LAN_ADDRESS"]/IPAddress',
+            share: "Device/Services/StorageServices/StorageService[@uid='1']/LogicalVolumes/LogicalVolume[@uid='#']/Enable"
+        },
+        logicalVolumes: 'Device/Services/StorageServices/StorageService[@uid="1"]/LogicalVolumes/LogicalVolume[Status="ONLINE"]'
+    },
+    myCloud: {
+        accountCloud: "Device/Services/CloudStorage/DropBox/Accounts",
+        dropboxCloudUid: "Device/Services/CloudStorage/DropBox/Accounts/*",
+        rootCloud: "Device/Services/CloudStorage",
+        authUri: "Device/Services/CloudStorage/DropBox/AuthorizationUri"
+    },
+    checkFeaturesAvailable: {
+        homePhoneFlat: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/Contacts/Contact/HomePhoneNumber',
+        mobilePhoneFlat: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/Contacts/Contact/MobilePhoneNumber',
+        workPhoneFlat: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/Contacts/Contact/WorkPhoneNumber',
+        myMedia: "Device/UPnP/Settings/UPnPMediaServer/UPnPMediaServerPort",
+        myCloud: "Device/Services/CloudStorage/DropBox/AuthorizationUri",
+        phonebook: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/Contacts',
+        phonebookNew: "Device/Contacts/Contacts",
+        sip: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/VoiceProfiles/VoiceProfile[@uid=1]/Enable',
+        telephoneMatrix: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface/OutGoingLine',
+        wifi5g: 'Device/WiFi/Radios/Radio[Alias="RADIO5G"]/Enable',
+        usb: "Device/USB/Enable",
+        voicePorts: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/Lines/Line[@uid='1']/Enable",
+        qos: "Device/QoS/DefaultDSCPMark",
+        bridgeMode: "Device/Managers/NetworkData/BridgedMode",
+        parentalControlOlfeo: "Device/Services/ParentalControl/Categories/ServiceOlfeo/Enable",
+        parentalControlPrivate: "Device/WebAccesses/WebRestriction",
+        lanIpv4TvPool: "Device/DHCPv4/Server/Pools/Pool[Alias='DEFAULT_POOL']/SubnetMask",
+        monitoring: "Device/Managers/BandwidthMonitoring/Enable",
+        tr69: "Device/ManagementServer/PeriodicInformInterval",
+        route: 'Device/Routing/Routers/Router[@uid="1"]/IPv4Forwardings',
+        globalWanMode: "Device/Managers/NetworkData/GlobalWanMode",
+        dect: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[PhyInterfaceType="DECT_FP"]',
+        wifiGuest24: 'Device/WiFi/AccessPoints/AccessPoint[Alias="GUEST1"]/Status',
+        wifiGuest50: 'Device/WiFi/AccessPoints/AccessPoint[Alias="GUEST3"]/Status',
+        callSettingsAdvanced: "Device/Services/VoiceServices/VoiceService[@uid='1']/VoiceProfiles/VoiceProfile[@uid='1']/SIP",
+        led: "Device/Managers/Led/FrontLedPowerSaving",
+        operatorlog: "Device/DeviceInfo/VendorLogFiles/VendorLogFile[@uid='1']",
+        gpon: "Device/Optical/G988/EquipmentManagement/OnuG/SerialNumber",
+        autodimming: "Device/Managers/Led/LedPowerSaving",
+        hardwareVersion: "Device/DeviceInfo/HardwareVersion",
+        wanBackupUpTime: "Device/Services/WANBackup/Interfaces/Interface[Alias='WANBACKUP_0']/ConnectionUp",
+        wifi24Schedule: 'Device/Services/Schedulers/Schedulers/Scheduler[Alias="wifi_24"]/Enabled',
+        wifi5Schedule: 'Device/Services/Schedulers/Schedulers/Scheduler[Alias="wifi_5"]/Enabled',
+        dectSchedule: 'Device/Services/Schedulers/Schedulers/Scheduler[Alias="dect"]/Enabled',
+        networkMode: "Device/Managers/Network/Mode",
+        provisioningMode: "Device/Managers/Network/WanProvisioningMode",
+        mapEnable: "Device/MAP/Enable",
+        wifiTV: "Device/WiFi/AccessPoints/AccessPoint[Alias='Sunrise_TV']",
+        dyndns: 'Device/Services/DynamicDNS/Clients/Client[@uid="1"]/Enable',
+        mctcp: "Device/Services/Mptcp/ShowMPTCPPage",
+        ntp: "Device/Time/Enable",
+        ntpStatus: "Device/Time/Status"
+    },
+    Device: {
+        NAT: {
+            PortMappings: {
+                DMZ: {
+                    Enable: 'Device/NAT/PortMappings/PortMapping[Service="DMZ"]/Enable',
+                    InternalClient: 'Device/NAT/PortMappings/PortMapping[Service="DMZ"]/InternalClient',
+                    insert: "Device/NAT/PortMappings",
+                    remove: 'Device/NAT/PortMappings/PortMapping[Service="DMZ"]'
+                }
+            }
+        },
+        Managers: {
+            NetworkData: {
+                EnableMirroring: "Device/Managers/NetworkData/EnableMirroring"
+            }
+        }
+    },
+    forbiddenIps: {
+        ips: {
+            upnpHost: 'Device/UPnP/Discovery/Devices/Device[@uid="1"]/Host',
+            dataModels: "Device/DeviceInfo/SupportedDataModels/SupportedDataModel/URL",
+            openWifiInterface: 'Device/DHCPv4/Server/Pools/Pool[Alias="GUEST_POOL"]/IPInterface',
+            openWifiMinAddress: 'Device/DHCPv4/Server/Pools/Pool[Alias="GUEST_POOL"]/MinAddress',
+            openWifiMaxAddress: 'Device/DHCPv4/Server/Pools/Pool[Alias="GUEST_POOL"]/MaxAddress',
+            openWifiSubnetMask: 'Device/DHCPv4/Server/Pools/Pool[Alias="GUEST_POOL"]/SubnetMask',
+            openWifiIpInterface: 'Device/IP/Interfaces/Interface[Alias="IP_BR_GUEST"]/IPv4Addresses/IPv4Address[Alias="IP_BR_GUEST_ADDRESS"]/IPAddress',
+            openWifiIpSubnet: 'Device/IP/Interfaces/Interface[Alias="IP_BR_GUEST"]/IPv4Addresses/IPv4Address[Alias="IP_BR_GUEST_ADDRESS"]/SubnetMask',
+            pppDslDataLocalIp: 'Device/PPP/Interfaces/Interface[Alias="PPP_DATA"]/IPCP/LocalIPAddress',
+            pppDslDataRemoteIp: 'Device/PPP/Interfaces/Interface[Alias="PPP_DATA"]/IPCP/RemoteIPAddress',
+            pppFtthDataLocalIp: 'Device/PPP/Interfaces/Interface[Alias="PPP_FTTH_DATA"]/IPCP/LocalIPAddress',
+            pppFtthDataRemoteIp: 'Device/PPP/Interfaces/Interface[Alias="PPP_FTTH_DATA"]/IPCP/RemoteIPAddress',
+            quantennaBootIpLocal: "Device/WiFi/Quantenna/BootIPLocal",
+            quantennaBootIPRemote: "Device/WiFi/Quantenna/BootIPRemote",
+            quantennaMngtIPLocal: "Device/WiFi/Quantenna/MngtIPLocal",
+            quantennaMngtIPRemote: "Device/WiFi/Quantenna/MngtIPRemote"
+        },
+        validations: {
+            pppDslStatus: 'Device/PPP/Interfaces/Interface[Alias="PPP_DATA"]/IPCP/Status',
+            pppFtthStatus: 'Device/PPP/Interfaces/Interface[Alias="PPP_FTTH_DATA"]/IPCP/Status'
+        }
+    },
+    dect: {
+        phyInterfaceTests: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[@uid="#"]/Tests/TestState',
+        basic: {
+            dock: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[PhyInterfaceType="DECT_FP"]',
+            devices: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[PhyInterfaceType="DECT_PP"]'
+        },
+        capabilities: {
+            standard: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[@uid="1"]/X_SAGEMCOM_DECT_FP/Standard'
+        },
+        rpc: {
+            pairing: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[PhyInterfaceType="DECT_FP"]/X_SAGEMCOM_DECT_FP',
+            test: 'Device/Services/VoiceServices/VoiceService/PhyInterfaces/PhyInterface[Alias="DECTFP"]/X_SAGEMCOM_DECT_FP',
+            unPair: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[@uid="#"]/X_SAGEMCOM_DECT_PP'
+        },
+        handset: {
+            device: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[@uid="#"]',
+            save: {
+                Description: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[@uid="#"]/Description',
+                IPUI: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[@uid="#"]/X_SAGEMCOM_DECT_PP/InternationalPortableUserIdentity',
+                SubscriptionTime: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[@uid="#"]/X_SAGEMCOM_DECT_PP/SubscriptionTime',
+                HandsetType: 'Device/Services/VoiceServices/VoiceService[@uid="1"]/PhyInterfaces/PhyInterface[@uid="#"]/X_SAGEMCOM_DECT_PP/HandsetType'
+            }
+        }
+    },
+    healthCheck: {
+        interfaceType: "Device/Managers/NetworkData/InterfaceType",
+        port1: {
+            status: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Status',
+            diagnostics: {
+                cableStatus: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Diagnostics/CableStatus',
+                cableLength: 'Device/Ethernet/Interfaces/Interface[Alias="PHY1"]/Diagnostics/CableLength'
+            }
+        },
+        port2: {
+            status: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Status',
+            diagnostics: {
+                cableStatus: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Diagnostics/CableStatus',
+                cableLength: 'Device/Ethernet/Interfaces/Interface[Alias="PHY2"]/Diagnostics/CableLength'
+            }
+        },
+        port3: {
+            status: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Status',
+            diagnostics: {
+                cableStatus: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Diagnostics/CableStatus',
+                cableLength: 'Device/Ethernet/Interfaces/Interface[Alias="PHY3"]/Diagnostics/CableLength'
+            }
+        },
+        port4: {
+            status: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Status',
+            diagnostics: {
+                cableStatus: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Diagnostics/CableStatus',
+                cableLength: 'Device/Ethernet/Interfaces/Interface[Alias="PHY4"]/Diagnostics/CableLength'
+            }
+        },
+        portwan: {
+            status: 'Device/Ethernet/Interfaces/Interface[Alias="PHY6_WAN"]/Status',
+            diagnostics: {
+                cableStatus: 'Device/Ethernet/Interfaces/Interface[Alias="PHY6_WAN"]/Diagnostics/CableStatus',
+                cableLength: 'Device/Ethernet/Interfaces/Interface[Alias="PHY6_WAN"]/Diagnostics/CableLength'
+            }
+        }
+    },
+    leds: {
+        ledPowerSaving: "Device/Managers/Led/LedPowerSaving",
+        ledPowerSavingMode: "Device/Managers/Led/LedPowerSavingMode"
+    },
+    gpon: {
+        SerialNumber: "Device/Optical/G988/EquipmentManagement/OnuG/SerialNumber",
+        GponState: "Device/Optical/G988/GponState",
+        TransmitOpticalLevel: 'Device/Optical/Interfaces/Interface[@uid="1"]/TransmitOpticalLevel',
+        OpticalSignalLevel: 'Device/Optical/Interfaces/Interface[@uid="1"]/OpticalSignalLevel',
+        Temperature: 'Device/Optical/Interfaces/Interface[@uid="1"]/Temperature',
+        Voltage: 'Device/Optical/Interfaces/Interface[@uid="1"]/Voltage',
+        LogicalPassword: "Device/Optical/G988/EquipmentManagement/OnuG/LogicalPassword",
+        EncryptedLogicalPassword: "Device/Optical/G988/EquipmentManagement/OnuG/EncryptedLogicalPassword",
+        BIASCurrent: 'Device/Optical/Interfaces/Interface[@uid="1"]/BIASCurrent'
+    },
+    availability: {
+        enable: "Device/WiFi/Availability/Enable",
+        sunday: {
+            from: "Device/WiFi/Availability/SundayFrom",
+            to: "Device/WiFi/Availability/SundayTo"
+        },
+        monday: {
+            from: "Device/WiFi/Availability/MondayFrom",
+            to: "Device/WiFi/Availability/MondayTo"
+        },
+        tuesday: {
+            from: "Device/WiFi/Availability/TuesdayFrom",
+            to: "Device/WiFi/Availability/TuesdayTo"
+        },
+        wednesday: {
+            from: "Device/WiFi/Availability/WednesdayFrom",
+            to: "Device/WiFi/Availability/WednesdayTo"
+        },
+        thursday: {
+            from: "Device/WiFi/Availability/ThursdayFrom",
+            to: "Device/WiFi/Availability/ThursdayTo"
+        },
+        friday: {
+            from: "Device/WiFi/Availability/FridayFrom",
+            to: "Device/WiFi/Availability/FridayTo"
+        },
+        saturday: {
+            from: "Device/WiFi/Availability/SaturdayFrom",
+            to: "Device/WiFi/Availability/SaturdayTo"
+        }
+    },
+    scheduling: {
+        main: "Device/Services/Schedulers/Schedulers",
+        enable: 'Device/Services/Schedulers/Schedulers/Scheduler[Alias="#alias#"]/Enabled',
+        insert: 'Device/Services/Schedulers/Schedulers/Scheduler[Alias="#alias#"]/TimeSlots',
+        remove: 'Device/Services/Schedulers/Schedulers/Scheduler[Alias="#alias#"]/TimeSlots/*'
+    },
+    trafficStats: {
+        rpc: "Device"
+    },
+    technicalLogFast: {
+        dataRateDown: "Device/FAST/Lines/Line/TestParams/DownstreamCurrRate",
+        dataRateUp: "Device/FAST/Lines/Line/TestParams/UpstreamCurrRate",
+        dataSent: 'Device/FAST/Lines/Line[@uid="1"]/Stats/BytesSent',
+        dataReceived: 'Device/FAST/Lines/Line[@uid="1"]/Stats/BytesReceived'
+    },
+    rpc: {
+        voiceService: "Device/Services/VoiceServices/VoiceService[@uid='1']",
+        user: "Device/UserAccounts/Users/User[Login='#']",
+        logicalVolume: "Device/Services/StorageServices/StorageService[@uid='1']/LogicalVolumes/LogicalVolume[@uid='#']",
+        logId: "Device/DeviceInfo/VendorLogFiles/VendorLogFile[@uid='#']",
+        logAlias: "Device/DeviceInfo/VendorLogFiles/VendorLogFile[Alias='#']",
+        upnpLog: "Device/UPnP",
+        accessPoint: "Device/WiFi/AccessPoints/AccessPoint[Alias='#']",
+        usbPort: "Device/USB/Ports/Port[SysfsId='#']",
+        pppInterface: "Device/PPP/Interfaces/Interface[Alias='PPP_DATA']"
+    },
+    XORCryptKey: "Device/EncryptionKey",
+    splashScreen: "Device/UserInterface/RedirectionReason"
+};
