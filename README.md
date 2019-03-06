@@ -18,6 +18,49 @@
 
 - Big thanks to [kevdagoat](https://github.com/kevdagoat) who got me on the right track.
 
+### Before you start reading you must know what userID is and wich userID to set, userID is the ID of a user, users are added by id numbers and not nicknames or usernames, so for set a setting for your user then you can use uid OR anything else that will match your UserAccount, for example instead of @uid='1' you can use Login="Administrator" or you can useLastName='Administrator", aslong as it can identify you as your current userlogin it will work, this is the trick they are using since the few wikis/how-to about sagemcom onlinefor all models saying use UID, but they might have used something else and that's the reason why you probably will get null as answer, you must list the settings as IT was addedby the developers, you can find how things has been added in scrpts.js file, search for push and you will find everything they have pushed above the push commands. So now you of course want to use wich ID your user got, to list settings as they find settings for set permissions is the command below, it will list everything about your client:
+
+ 
+     $.xmo.client 
+
+     user: "Administrator"
+     _eventCount: 0
+     _eventId: 1
+     _eventRequest: null
+     _events:
+     __proto__: Object
+     _ha1: "0f0b7a4c7b201194632f0878de193de6"
+     _hashEncoderPass: "f1b635d7ddfaef4fadd5004484cf6d65"
+     _nonce: "1558292282"
+
+
+### Many times they just need user name for set the permissions and the way they find these settings is by:
+
+    $.xmo.client.user
+
+    "Administrator"
+
+### To get the UID wich is mostly used (use the value when you set settings for @uid='1'
+
+    $.xmo.client._eventId
+    1
+
+### This is a smart way to do it, but not smart enough. Since they using this method, we also can do it of course and because of this we will find that 5 users are added but with hidden nicks, use your brain to find these nicks, noone knows more then they developers so you must guess. But since there is 5 passwords still added after the firmware upgrade when they have fixed many vulnerabilities (3.43.2 is like a cheddar cheese, 3.43.3 things has been much more protected - upgrade was released in 6th February 2019, you never got any info about this it just upgraded itself during the night and there is nothing in GUI that will give you a hint that the firmware upgrade was done) .. Please see the above pictures how they tried to hide they users. The usually command to list users is by $.xmo.getValuesTree("Device/UserAccounts") but this has been removed in last version, but when we use $.xmo.getValuesTree("Device/UserAccounts/*/*)" - We gonna find our users specs, but we just will find 1 user and that is the user we are using, but see this expose just on this wiki (2019-03-06)  - They werent smart enough:  
+
+![Screenshot](https://nr1.nu/admin-login.png)
+
+### Sagem devs, the passwords was a mistake to forgot to hide (All users that have no clue how to find the user Logins, guess, guess and again guess the nicks thats the only way) and don't be lazy, you really want them to spy on your router wich is the last point to the big world wide net wich means ALL devies go through this last point (gosh, dangerous!)
+
+![Screenshot](https://nr1.nu/justpasswordforgotten.png)
+
+### ![Screenshot]
+
+### You are not alone on your network even if you settings list 0 users after the security update foro ALL isps worldwide that using SagemCom as router provider, they still can be found - Big Brother Watching!
+
+![Screenshot](https://nr1.nu/youarenotalone-sagemcom.gif)
+
+####
+
 #### Find hidden settings in latest firmware (3.42.3)
 
 ![Screenshot](misc/hidden-settings.gif)
@@ -49,7 +92,7 @@
 
 ### For list every feature that has been disable from default:
 
-   $.config.showedpages
+     $.config.showedpages
 
      BoBStatus: {enable: false}
      CPULoadField: {enable: false}
