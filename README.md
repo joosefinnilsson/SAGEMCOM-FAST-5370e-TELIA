@@ -29,7 +29,36 @@
     $.xmo.getValuesTree("*/*/*/*/*")
     $.xmo.getValuesTree("*/*/*/*/*/*")
     $.xmo.getValuesTree("*/*/*/*/*/*/*")
-and so on.. 
+    and so on.. 
+
+### For list more things like attributes wich above command wont list, use getCapability instead:
+
+    $.xmo.getCapability("*")
+    $.xmo.getCapability("*/*")
+    $.xmo.getCapability("*/*/*")
+    and so on..
+
+### For list all configurations where you can list allowedUsers, blockedUsers and other configurations:
+
+
+    $.config
+    $.config.allowedUsers
+    $.config.modules
+    $.config.reinitializeWithFactory
+    and so on..
+
+### For list every feature that has been disable from default:
+
+   $.config.showedpages
+
+     BoBStatus: {enable: false}
+     CPULoadField: {enable: false}
+     DHCPv6Server: {enable: false}
+     DLNA: {enable: true}
+     DTMFTransmissionMode: {enable: false}
+     GUIupgrade: {enable: false}
+     IAPDEnable: {enable: false}
+     MTU: {enable: false}
 
 #### Below is a preview for how it will look when you have successfully hacked the router.
 
