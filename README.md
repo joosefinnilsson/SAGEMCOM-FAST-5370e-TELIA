@@ -108,11 +108,13 @@ Alright, after few weeks with this "most powerful router" from Telia i finally m
 
 
 ###### Storageservices GET INFO
+
     $.xmo.getValuesTree("Device/Services/StorageServices/StorageService[@uid='1']/Capabilities/SFTPCapable");
     $.xmo.getValuesTree("Device/Services/StorageServices/StorageService[@uid='1']/Capabilities/FTPCapable");
     $.xmo.getValuesTree("Device/Services/StorageServices/StorageService[@uid='1']/Capabilities/HTTPWritable");
 
 ###### Storageservices SET INFO
+
     $.xmo.setValuesTree("true", "Device/Services/StorageServices/StorageService[@uid='1']/Capabilities/SFTPCapable");
     $.xmo.setValuesTree("true", "Device/Services/StorageServices/StorageService[@uid='1']/Capabilities/FTPCapable");
     $.xmo.setValuesTree("true", "Device/Services/StorageServices/StorageService[@uid='1']/Capabilities/HTTPWritable");
@@ -126,13 +128,16 @@ Alright, after few weeks with this "most powerful router" from Telia i finally m
 
 
 ###### Print IPV4 Addresses:
-     $.xmo.getValuesTree("Device/IP/Interfaces/Interface[Alias=\"IP_DATA\"]/IPv4Addresses/IPv4Address[Alias=\"IP_DATA_ADDRESS\"]/IPAddress");
+
+      $.xmo.getValuesTree("Device/IP/Interfaces/Interface[Alias=\"IP_DATA\"]/IPv4Addresses/IPv4Address[Alias=\"IP_DATA_ADDRESS\"]/IPAddress");
      
 ###### Print IPV6 Addresses:
-     $.xmo.getValuesTree("Device/IP/Interfaces/Interface[@uid='1']/IPv6Addresses/IPv6Address[@uid='1']/IPAddress");
+
+      $.xmo.getValuesTree("Device/IP/Interfaces/Interface[@uid='1']/IPv6Addresses/IPv6Address[@uid='1']/IPAddress");
 
 ###### Enable Telnet
-$.xmo.setValuesTree("ACCESS_ENABLE_ALL", "Device/UserAccounts/Users/User[@uid='1']/RemoteAccesses/RemoteAccess[@uid='4']/LANRestriction");
+
+      $.xmo.setValuesTree("ACCESS_ENABLE_ALL", "Device/UserAccounts/Users/User[@uid='1']/RemoteAccesses/RemoteAccess[@uid='4']/LANRestriction");
 
 ###### Enable SSH
 
@@ -617,7 +622,7 @@ $.xmo.getValuesTree("Device/Managers/NetworkLan/GuestAccessControlEnable");
      lxc-start -n teliaLxc -F
 
 
-##### LXC - Any support distro below (will add a howto soon): 
+###### LXC - Any support distro below (will add a howto soon): 
 
     /usr/share/lxs/userns.conf
     /usr/share/lxs/ubuntu-cloud.userns.conf
@@ -980,6 +985,54 @@ $.xmo.getValuesTree("Device/Managers/NetworkLan/GuestAccessControlEnable");
     limittranscodingperclient=0
     disablepmscaling=0
     ........
+
+##### Get info about all settings via xpaths:
+
+     $.xmo.getValuesTree($.xpaths.Device)
+     $.xmo.getValuesTree($.xpaths.XORCryptKey)
+     $.xmo.getValuesTree($.xpaths.accessControl)
+     $.xmo.getValuesTree($.xpaths.adminAdvanced)
+     $.xmo.getValuesTree($.xpaths.advanced) # HOW TO CHANGE NULL TO 1 ?
+     $.xmo.getValuesTree($.xpaths.availability)
+     $.xmo.getValuesTree($.xpaths.broadband)
+     $.xmo.getValuesTree($.xpaths.ipv6Status)
+     $.xmo.getValuesTree($.xpaths.cableModem)
+     $.xmo.getValuesTree($.xpaths.checkFeaturesAvailable)
+     $.xmo.getValuesTree($.xpaths.myMedia)
+     $.xmo.getValuesTree($.xpaths.dect)
+     $.xmo.getValuesTree($.xpaths.dhcpLeases)
+     $.xmo.getValuesTree($.xpaths.ethernet)
+     $.xmo.getValuesTree($.xpaths.ethernetDevice)
+     $.xmo.getValuesTree($.xpaths.firstConnection)
+     $.xmo.getValuesTree($.xpaths.forbiddenIps)
+     $.xmo.getValuesTree($.xpaths.gateway)
+     $.xmo.getValuesTree($.xpaths.gpon)
+     $.xmo.getValuesTree($.xpaths.greTunnel)
+     $.xmo.getValuesTree($.xpaths.healthCheck)
+     $.xmo.getValuesTree($.xpaths.internetConnectivity)
+     $.xmo.getValuesTree($.xpaths.leds)
+     $.xmo.getValuesTree($.xpaths.main)
+     $.xmo.getValuesTree($.xpaths.management)
+     $.xmo.getValuesTree($.xpaths.accountSettings)
+     $.xmo.getValuesTree($.xpaths.myCloud)
+     $.xmo.getValuesTree($.xpaths.mySagemcomBox)
+     $.xmo.getValuesTree($.xpaths.mymedia)
+     $.xmo.getValuesTree($.xpaths.neighborAps)
+     $.xmo.getValuesTree($.xpaths.rpc)
+     $.xmo.getValuesTree($.xpaths.runlevel)
+     $.xmo.getValuesTree($.xpaths.scheduling)
+     $.xmo.getValuesTree($.xpaths.singleLine)
+     $.xmo.getValuesTree($.xpaths.splashScreen)
+     $.xmo.getValuesTree($.xpaths.ssidCreation)
+     $.xmo.getValuesTree($.xpaths.stats)
+     $.xmo.getValuesTree($.xpaths.technicalLogFast)
+     $.xmo.getValuesTree($.xpaths.trafficStats)
+     $.xmo.getValuesTree($.xpaths.voice)
+     $.xmo.getValuesTree($.xpaths.wan)
+     $.xmo.getValuesTree($.xpaths.wifi)
+     $.xmo.getValuesTree($.xpaths.wifiBandSteering)
+     $.xmo.getValuesTree($.xpaths.wifiRestoreDefault)
+     $.xmo.getValuesTree($.xpaths.wizard)
 
 ##### Some other intresting links without any required login you can visit (there is tons of settings to enable to get a really powerful router. This you must figured out yourself since it's to much work to fix a wiki for this atm, I maybe fixing later - have fun! :)):
 
