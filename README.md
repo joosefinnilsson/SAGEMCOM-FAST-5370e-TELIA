@@ -45,19 +45,17 @@
     $.xmo.client._eventId
     1
 
-### This is a smart way to do it, but not smart enough. Since they using this method, we also can do it of course and because of this we will find that 5 users are added but with hidden nicks, use your brain to find these nicks, noone knows more then they developers so you must guess. But since there is 5 passwords still added after the firmware upgrade when they have fixed many vulnerabilities (3.43.2 is like a cheddar cheese, 3.43.3 things has been much more protected - upgrade was released in 6th February 2019, you never got any info about this it just upgraded itself during the night and there is nothing in GUI that will give you a hint that the firmware upgrade was done) .. Please see the above pictures how they tried to hide they users. The usually command to list users is by $.xmo.getValuesTree("Device/UserAccounts") but this has been removed in last version, but when we use $.xmo.getValuesTree("Device/UserAccounts/*/*)" - We gonna find our users specs, but we just will find 1 user and that is the user we are using, but see this expose just on this wiki (2019-03-06)  - They werent smart enough:  
+### This is a smart way to do it, but not smart enough. Since they using this method, we also can do it of course and because of this we will find that 5 users are added but with hidden nicks, use your brain to find these nicks, noone knows more then they developers so you must guess. But since there is 5 passwords still added after the firmware upgrade when they have fixed many vulnerabilities (3.43.2 is like a cheddar cheese, 3.43.3 things has been much more protected - upgrade was released in 6th February 2019, you never got any info about this it just upgraded itself during the night and there is nothing in GUI that will give you a hint that the firmware upgrade was done) .. Please see the above pictures how they tried to hide they users. The usually command to list users is by $.xmo.getValuesTree("Device/UserAccounts") but this has been removed in last version, but when we use $.xmo.getValuesTree("Device/UserAccounts/*/*)" - We gonna find our users specs, but we just will find 1 user and that is the user we are using, but see this expose just on this wiki (2019-03-06)  - They werent smart enough - See video two steps below for get a better knowledge and overview
 
 ![Screenshot](https://nr1.nu/admin-login.png)
 
-### Sagem devs, the passwords was a mistake to forgot to hide (All users that have no clue how to find the user Logins, guess, guess and again guess the nicks thats the only way) and don't be lazy, you really want them to spy on your router wich is the last point to the big world wide net wich means ALL devies go through this last point (gosh, dangerous!)
+### Sagem devs, the passwords was a mistake to not hide passwords (All users that have no clue how to find the user Logins, guess, guess and again guess the nicks thats the only way) and don't be lazy, you really want them to spy on your router wich is the last point to the big world wide net wich means ALL devies go through this last point (gosh, dangerous!)
 
 ![Screenshot](https://nr1.nu/justpasswordforgotten.png)
 
-### ![Screenshot]
+### You are not alone on your network even if you settings list 0 users after the security update foro ALL isps worldwide that using SagemCom as router provider, they still can be found - Big Brother Watching! See video below for a better overview.
 
-### You are not alone on your network even if you settings list 0 users after the security update foro ALL isps worldwide that using SagemCom as router provider, they still can be found - Big Brother Watching!
-
-![Screenshot](https://nr1.nu/youarenotalone-sagemcom.gif)
+![Screenshot](https://nr1.nu/misc/youarenotalone-sagemcom.gif)
 
 ####
 
