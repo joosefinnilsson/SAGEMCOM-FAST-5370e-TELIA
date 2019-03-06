@@ -18,6 +18,19 @@
 
 - Big thanks to [kevdagoat](https://github.com/kevdagoat) who got me on the right track.
 
+#### Find hidden settings in latest firmware (3.42.3)
+
+![Screenshot](misc/hidden-settings.gif)
+
+    $.xmo.getValuesTree("*")
+    $.xmo.getValuesTree("*/*")
+    $.xmo.getValuesTree("*/*/*")
+    $.xmo.getValuesTree("*/*/*/*")
+    $.xmo.getValuesTree("*/*/*/*/*")
+    $.xmo.getValuesTree("*/*/*/*/*/*")
+    $.xmo.getValuesTree("*/*/*/*/*/*/*")
+and so on.. 
+
 #### Below is a preview for how it will look when you have successfully hacked the router.
 
 ![Screenshot](https://nr1.nu/sagem/telia-telnet.gif)
