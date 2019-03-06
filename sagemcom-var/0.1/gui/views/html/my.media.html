@@ -1,0 +1,64 @@
+<div class="row">
+	<div id="header-page">
+		<div class="columns">
+			<h3 translate="mobileMultimedia">MULTIMEDIA</h3>
+		</div>
+	</div>
+</div>
+
+<div messagebox></div>
+
+<div>
+	<div class="row">
+		<div class="column small-12">
+			<div class="dlna-drop">
+				<!-- dlna -->
+				<div class="row collapse">
+
+					<div class="columns center-1">
+						<div class="dlna-switch">
+							<span class="sprite header-box-icon dlna position"></span>
+							<div class="text_align" translate="mmDLNA">
+								DLNA
+							</div>
+							<div class="onoffswitch position" id="dlnaEnable">
+								<input ng-model="fields.dlna" ng-change="enableDLNA()" class="onoffswitch-checkbox" id="enable-dlna" name="enable-dlna" type="checkbox" />
+								<label class="onoffswitch-label" for="enable-dlna"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row collapse">
+					<div class="columns center-2" id="media-shared">
+						<a data-reveal-id="areyousure-modal" data-reveal id="areyousurelink" href="javascript:void(0)"> <div class="img_media"></div>
+						<div class="btn_shared_content">
+							<div class="title-shared-content" translate="mmShared">
+								Shared Content
+							</div>
+						</div> </a>
+					</div>
+				</div>
+
+				<!-- Modal for are you sure message -->
+				<div id="areyousure-modal" class="reveal-modal tiny" data-reveal>
+					<a class="close-reveal-modal close-modal" data-close-reveal>&#215;</a>
+					<p translate="redirectToANonMobile">
+						You will be redirected to a site not designed for mobile.
+					</p>
+					<div class="row">
+						<div class="right column small-12">
+							<button class="button tiny radius cancel" type="button" translate="cancel" onclick="$('#areyousure-modal a.close-reveal-modal').trigger('click');" data-close-reveal></button>
+							<a href="{{sharedContent}}/#video"><button class="button tiny radius" type="button" translate="continue"></button></a>
+						</div>
+					</div>
+				</div>
+
+			</div><!-- /dlna -->
+
+		</div>
+	</div>
+</div>
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = true;
+	$(document).foundation(); 
+</script>

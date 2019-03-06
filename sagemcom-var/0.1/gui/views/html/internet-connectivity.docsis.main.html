@@ -1,0 +1,18 @@
+<div class="content active ng-hide" ng-show="true" id="docis-main">
+	<a class="shs" href="javascript:void(0)" translate="showSubSection">Show Subsections</a>
+	<dl id="docsisTab" class="tabs sub-tabs" ng-class="changeToVertical ? 'vertical' : ''" data-tab="" tab-click="">
+		
+		
+		
+		<dd check-feature-state="docsisConfiguration">
+			<a href="javascript:void(0)" click-loading="" ui-sref="user.internetConnectivity.docsis.configuration" translate="configuration">Configuration</a>
+		</dd>
+		<dd check-feature-state="docsisConnection">
+			<a href="javascript:void(0)" click-loading="" ui-sref="user.internetConnectivity.docsis.connection" translate="connection">Connection</a>
+		</dd>
+	</dl>
+	<div class="tabs-content docsis-content">
+		<div class="content" ui-view=""></div>
+	</div>
+</div>
+<script>$(document).foundation();</script>

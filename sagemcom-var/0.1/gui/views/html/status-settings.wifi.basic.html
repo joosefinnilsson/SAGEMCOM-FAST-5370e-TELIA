@@ -1,0 +1,148 @@
+<div class="content active" id="basic" data-tab-content>
+	<div messagebox></div>
+	<form name="wifiForm" autocomplete="off">
+		<div class="row">
+			<div class="columns small-12">
+				<h5>Basic</h5>
+				<div class="row">
+					<div class="columns small-6 medium-4">
+						<label class="inline" for="enable-wifi" translate="enable{{radioType}}Wireless">Enable Wireless</label>
+					</div>
+
+					<div class="columns small-6 medium-4 end">
+						<div class="onoffswitch" id="wifiGeneralTip1">
+							<input class="onoffswitch-checkbox" id="enable-wifi" type="checkbox" ng-model="wifiEnable" name="enable-wifi" />
+							<label class="onoffswitch-label" for="enable-wifi">
+								<div class="onoffswitch-inner"></div>
+								<div class="onoffswitch-switch"></div>
+							</label>
+						</div>
+					</div>
+				</div>
+				<!-- .row -->
+
+				<div class="row">
+					<div class="columns small-12 medium-4">
+						<label class="inline">SSID</label>
+					</div>
+
+					<div class="columns small-12 medium-8 btnQrCodeImage end">
+						<input type="text" name="ssid" ng-model="ssid" validate-ssid required maxlength="20">
+						<button class="btnQrCode" data-reveal-id="qr-modal24" ng-show="stringQr"><img src="images/ico-qrcode.svg" />
+						</button>
+						<small class="error" ng-if="wifiForm.ssid.$invalid && (wifiForm.ssid.$dirty || submitted || wifiForm.$dirty)" translate="invalidSSID">Invalid SSID</small>
+					</div>
+
+					<div id="qr-modal24" class="reveal-modal qr tiny" data-reveal>
+						<a class="close-reveal-modal close-modal">&#215;</a>
+						<qr type-number="0" size="200" image="true" text="stringQr"></qr>
+					</div>
+				</div>
+				<div class="row">
+					<div class="columns small-6 medium-4">
+						<label class="inline" for="enable-wifi" translate="visible">Visible</label>
+					</div>
+
+					<div class="columns small-6 medium-4 end">
+						<div class="onoffswitch switch-enable">
+							<input class="onoffswitch-checkbox" id="broadcast-wifi" name="enable-wifi" type="checkbox" ng-model="broadcastEnable" />
+							<label class="onoffswitch-label" for="broadcast-wifi">
+								<div class="onoffswitch-inner"></div>
+								<div class="onoffswitch-switch"></div>
+							</label>
+						</div>
+					</div>
+				</div>
+				<!-- .row -->
+
+				<div class="row">
+					<div class="columns small-12 medium-4">
+						<label class="inline" translate="channelSelection">Channel Selection</label>
+					</div>
+
+					<div class="columns small-12 medium-7 end">
+						<select ng-model="channel" id="wifiGeneralTip4" ng-options="item for item in selectChannel">
+							<option value="">AUTO</option>
+						</select>
+					</div>
+				</div>
+
+				<hr />
+				<div class="row">
+					<div class="columns small-12">
+						<h5 translate="security">Security</h5>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<div class="columns medium-4 small-12">
+						<label class="inline" translate="security">Security</label>
+					</div>
+
+					<div class="columns small-12 medium-6 end">
+						<select ng-model="securityMode" id="wifiGeneralTip5">
+							<option value="WPA_WPA2_PERSONAL">WPA2/WPA Personal</option>
+							<option value="WPA2_PERSONAL">WPA2 Personal</option>
+							<option value="WPA_PERSONAL">WPA Personal</option>
+							<option value="WPA_WPA2_ENTERPRISE">WPA2/WPA Enterprise</option>
+							<option value="WPA2_ENTERPRISE">WPA2 Enterprise</option>
+							<option value="WPA_ENTERPRISE">WPA Enterprise</option>
+							<option value="WEP_64">WEP-64</option>
+							<option value="WEP_128">WEP-128</option>
+							<option value="NONE">OPEN</option>
+						</select>
+					</div>
+				</div>
+				
+				<div class="row" ng-show="securityMode != 'NONE'">
+					<div class="columns small-12 medium-4">
+						<label class="inline" translate="passphrase">Passphrase</label>
+					</div>
+					<div class="columns small-12 medium-6">
+						<input type="{{showPassword ? 'text' : 'password'}}" ng-model="password" name="password" validate-wifi-password data-security-mode="securityMode" />
+						<small class="error" ng-if="wifiForm.password.$error.invalidPassword && (wifiForm.password.$dirty || submitted || wifiForm.$dirty)" translate="invalidPassword">Invalid Password</small>
+					</div>
+					<div ng-hide="wifiForm.password.$invalid" class="columns small-12 medium-1 end strengthDiv" password-strength passwd="password"></div>
+				</div>
+				
+				<div class="row" ng-show="securityMode != 'NONE'">
+					<div class="columns small-12">
+						<input type="checkbox" ng-click="togglePassword()">
+						<label class="inline" translate="showPassword">Show password</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="right">
+						<button class="button tiny radius" translate="cancel" type="button" click-loading ui-sref="user.home"></button>
+						<button class="button tiny radius" translate="apply" type="button" ng-disabled="!wifiForm.$valid && (wifiForm.radiusPort.$dirty || wifiForm.radiusIp.$dirty)" data-reveal-id="apply-changes-modal" data-reveal></button>
+					</div>
+
+					<!-- Model for reset -->
+					<div id="apply-changes-modal" class="reveal-modal tiny" data-reveal>
+						<a class="close-reveal-modal close-modal" data-close-reveal>&#215;</a>
+
+						<h5 class="modal-title" translate="wifiModalTitle">Wi-fi Settings</h5>
+
+						<p translate="wifiModalDescription">
+							Changing any values in this page may cause a loss of connectivity for Wifi users.
+						</p>
+
+						<div class="right">
+							<button class="button tiny radius" type="button" translate="cancel" onclick="$('#apply-changes-modal').foundation('reveal', 'close')" data-close-reveal></button>
+							<button class="button tiny radius" type="button" translate="continue" onclick="$('#apply-changes-modal').foundation('reveal', 'close')" ng-click="save()"></button>
+						</div>
+					</div>
+				</div>
+				<!--.row-->
+
+			</div>
+			<!-- .small-centered .small-11 .columns -->
+		</div>
+	</form>
+</div>
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = true;
+	$(document).foundation();
+</script>

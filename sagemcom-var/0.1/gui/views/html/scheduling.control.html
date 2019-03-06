@@ -1,0 +1,243 @@
+<div class="content active" ng-show="true" id="scheduling-control">
+<div class="ng-hide" ng-show="isSonne">
+    <div bread-crumbs override-breadcrumb="wifi.wifiScheduling.wifiScheduling{{radioName === '2.4GHz' ? '2' : '5'}}"></div>
+</div>
+<h4 class="maintitle" ng-bind="title | translate" ></h4>
+<form name="schedulingForm" check-unsaved >
+<div class="row">
+    <div class="columns large-3 medium-4 small-8">
+        <label class="inline" for="scheduleEnable" translate="enable">Enable</label>
+    </div>
+    <div class="columns large-3 medium-3 small-4 end">
+        <div class="onoffswitch" id="wifiGeneralTip1">
+            <input class="onoffswitch-checkbox noValidate" id="scheduleEnable" type="checkbox" ng-change="enableDisable()" ng-model="scheduling.Enable" name="scheduling-enable" ng-disabled="!canBeSaved()">
+            <label class="onoffswitch-label" for="scheduleEnable">
+                <div class="onoffswitch-inner"></div>
+                <div class="onoffswitch-switch"></div>
+            </label>
+        </div>
+    </div>
+</div>
+<div class="row">
+   <div class="columns medium-12">
+       <div class="column medium-6">
+           <label>
+               <span translate="scheduleTip" class="ng-scope">Click and drag on schedule bars below to select desired time.</span>
+           </label>
+       </div>
+       <div class="column medium-6">
+           <p class="notes" ng-show="isWifi" >
+               <b translate="note">Note:</b>
+               <span translate="scheduleNote"></span>
+           </p>
+       </div>
+   </div>
+    <div class="columns medium-12">
+        <div class="columns medium-2 small-3 pad-top">
+            <p>
+                <strong translate="acPcWeekTimeSlots" class="ng-scope">Week Time Slots</strong>
+            </p>
+        </div>
+        <div class="columns medium-6 small-9 pad-top">
+            <div class="row">
+                <div class="columns small-4">
+                    <p>
+                        <i class="time-slot allowed"></i>&nbsp;<span translate="acPcAllowed" class="ng-scope">Allowed</span>
+                    </p>
+                </div>
+
+                <div class="columns small-4 end">
+                    <p>
+                        <i class="time-slot denied"></i>&nbsp;<span translate="acPcDenied" class="ng-scope">Denied</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="columns medium-4 small-12 text-center"></div>
+    </div>
+</div>
+<div class="row week-time-slots" ng-class="{ 'overlayed' : !canBeSaved()}">
+    <div class="overlay-disable" ng-if="!canBeSaved()"></div>
+    <div class="columns small-12">
+        <table class="t-a-d" id="scheduleTable">
+            <tr>
+                <th>0h</th>
+                <th width="13%">4h</th>
+                <th width="13%">8h</th>
+                <th width="13%">12h</th>
+                <th width="13%">16h</th>
+                <th width="13%">20h</th>
+                <th width="13%">24h</th>
+                <th width="15%"></th>
+            </tr>
+            <tr>
+                <th translate="acPcSunday">Sunday</th>
+                <td colspan="6">
+                    <div class="time-inputs">
+                        <label title="{{$index+1}}" for="Sunday{{$index+1}}" ng-repeat="leIndex in timeSlotsHours">
+                            <input name="Sunday{{$index+1}}" id="Sunday{{$index+1}}" type="checkbox" ng-model="timeSlotsGrid.SUNDAY[leIndex]" ng-change="leValue = timeSlotsGrid.SUNDAY[leIndex]" />
+                            <i aria-hidden="true" ></i>
+                        </label>
+                    </div></td>
+                <td>
+                    <button ng-click="changeStatus(false, 'SUNDAY')" class="button mini radius btn-allow" type="button" value="ON" translate="on">
+                        Allow
+                    </button>
+                    <button ng-click="changeStatus(true, 'SUNDAY')" class="button mini radius btn-deny" type="button" value="OFF" translate="off">
+                        Deny
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <th translate="acPcMonday">Monday</th>
+                <td colspan="6">
+                    <div class="time-inputs">
+                        <label title="{{$index+1}}" for="Monday{{$index+1}}" ng-repeat="leIndex in timeSlotsHours">
+                            <input name="Monday{{$index+1}}" id="Monday{{$index+1}}" name="Monday{{$index+1}}" type="checkbox" ng-model="timeSlotsGrid.MONDAY[leIndex]" ng-change="leValue = timeSlotsGrid.MONDAY[leIndex]"  />
+                            <i aria-hidden="true" ></i>
+                        </label>
+                    </div></td>
+                <td>
+                    <button ng-click="changeStatus(false, 'MONDAY')" class="button mini radius btn-allow" type="button" value="ON" translate="on">
+                        Allow
+                    </button>
+                    <button ng-click="changeStatus(true, 'MONDAY')" class="button mini radius btn-deny" type="button" value="OFF" translate="off">
+                        Deny
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <th translate="acPcTuesday">Tuesday</th>
+                <td colspan="6">
+                    <div class="time-inputs">
+                        <label title="{{$index+1}}" for="Tuesday{{$index+1}}" ng-repeat="leIndex in timeSlotsHours">
+                            <input name="Tuesday{{$index+1}}" id="Tuesday{{$index+1}}" type="checkbox" ng-model="timeSlotsGrid.TUESDAY[leIndex]" ng-change="leValue = timeSlotsGrid.TUESDAY[leIndex]"  />
+                            <i aria-hidden="true" ></i>
+                        </label>
+                    </div></td>
+                <td>
+                    <button ng-click="changeStatus(false, 'TUESDAY')" class="button mini radius btn-allow" type="button" value="ON" translate="on">
+                        Allow
+                    </button>
+                    <button ng-click="changeStatus(true, 'TUESDAY')" class="button mini radius btn-deny" type="button" value="OFF" translate="off">
+                        Deny
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <th translate="acPcWednesday">Wednesday</th>
+                <td colspan="6">
+                    <div class="time-inputs">
+                        <label title="{{$index+1}}" for="Wednesday{{$index+1}}" ng-repeat="leIndex in timeSlotsHours">
+                            <input name="Wednesday{{$index+1}}" id="Wednesday{{$index+1}}" type="checkbox" ng-model="timeSlotsGrid.WEDNESDAY[leIndex]" ng-change="leValue = timeSlotsGrid.WEDNESDAY[leIndex]"  />
+                            <i aria-hidden="true" ></i>
+                        </label>
+                    </div></td>
+                <td>
+                    <button ng-click="changeStatus(false, 'WEDNESDAY')" class="button mini radius btn-allow" type="button" value="ON" translate="on">
+                        Allow
+                    </button>
+                    <button ng-click="changeStatus(true, 'WEDNESDAY')" class="button mini radius btn-deny" type="button" value="OFF" translate="off">
+                        Deny
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <th translate="acPcThursday">Thursday</th>
+                <td colspan="6">
+                    <div class="time-inputs">
+                        <label title="{{$index+1}}" for="Thursday{{$index+1}}" ng-repeat="leIndex in timeSlotsHours">
+                            <input name="Thursday{{$index+1}}" id="Thursday{{$index+1}}" type="checkbox" ng-model="timeSlotsGrid.THURSDAY[leIndex]" ng-change="leValue = timeSlotsGrid.THURSDAY[leIndex]"  />
+                            <i aria-hidden="true" ></i>
+                        </label>
+                    </div></td>
+                <td>
+                    <button ng-click="changeStatus(false, 'THURSDAY')" class="button mini radius btn-allow" type="button" value="ON" translate="on">
+                        Allow
+                    </button>
+                    <button ng-click="changeStatus(true, 'THURSDAY')" class="button mini radius btn-deny" type="button" value="OFF" translate="off">
+                        Deny
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <th translate="acPcFriday">Friday</th>
+                <td colspan="6">
+                    <div class="time-inputs">
+                        <label title="{{$index+1}}" for="Friday{{$index+1}}" ng-repeat="leIndex in timeSlotsHours">
+                            <input name="Friday{{$index+1}}" id="Friday{{$index+1}}" type="checkbox" ng-model="timeSlotsGrid.FRIDAY[leIndex]" ng-change="leValue = timeSlotsGrid.FRIDAY[leIndex]"  />
+                            <i aria-hidden="true" ></i>
+                        </label>
+                    </div></td>
+                <td>
+                    <button ng-click="changeStatus(false, 'FRIDAY')" class="button mini radius btn-allow" type="button" value="ON" translate="on">
+                        Allow
+                    </button>
+                    <button ng-click="changeStatus(true, 'FRIDAY')" class="button mini radius btn-deny" type="button" value="OFF" translate="off">
+                        Deny
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <th translate="acPcSaturday">Saturday</th>
+                <td colspan="6">
+                    <div class="time-inputs">
+                        <label title="{{$index+1}}" for="Saturday{{$index+1}}" ng-repeat="leIndex in timeSlotsHours">
+                            <input name="Saturday{{$index+1}}" id="Saturday{{$index+1}}" type="checkbox" ng-model="timeSlotsGrid.SATURDAY[leIndex]" ng-change="leValue = timeSlotsGrid.SATURDAY[leIndex]" />
+                            <i aria-hidden="true" ></i>
+                        </label>
+                    </div></td>
+                <td>
+                    <button ng-click="changeStatus(false, 'SATURDAY')" class="button mini radius btn-allow" type="button" value="ON" translate="on">
+                        Allow
+                    </button>
+                    <button ng-click="changeStatus(true, 'SATURDAY')" class="button mini radius btn-deny" type="button" value="OFF" translate="off">
+                        Deny
+                    </button>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</div >
+<br/>
+<div class="row">
+    <div class="right">
+        <button id="acPcTip7" class="button tiny radius btn-cancel" click-loading ui-sref="user.home" translate="cancel" value="Cancel" ng-disabled="!canBeSaved()">
+            Cancel
+        </button>
+        <button id="acPcTip8" class="button tiny radius" type="submit" translate="apply" value="Apply" ng-click="save()" ng-disabled="!canBeSaved()">
+            Apply
+        </button>
+    </div>
+</div>
+<!--for trigger event-->
+<input type="hidden" class="dummy">
+</form>
+</div>
+<!-- help button -->
+<ul id="tlyPageGuide">
+    <li ng-bind="scheduleEnableTip | translate" data-tourtarget="#scheduleEnable"></li>
+    <li ng-bind="scheduleTableTip | translate" data-tourtarget="#scheduleTable"></li>
+    <li translate="cancelTip" data-tourtarget="#acPcTip7"></li>
+    <li translate="applyTip" data-tourtarget="#acPcTip8"></li>
+    <li translate="tabTip" data-tourtarget="#wifiTab">
+</ul>
+
+<script>
+    $(function() {
+        function changeAngularObj(obj, value) {
+            angular.element(obj).controller('ngModel').$setViewValue(value);
+            angular.element(obj).controller('ngModel').$render();
+            angular.element(obj).scope().$digest();
+        }
+
+        setTimeout(function() {
+            $('.time-inputs input').dragCheck({
+                callback : function(obj, state) {
+                    changeAngularObj($(obj), state);
+                }
+            });
+        }, 2000);
+    });
+</script>

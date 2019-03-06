@@ -1,0 +1,40 @@
+<div wait-loading></div>
+<div class="content ng-hide" ng-show="!loading" id="dhcpLease">
+	<h4 class="maintitle" id="maintitle" translate="dhcpLeases">DHCP Leases</h4>
+	<div class="row">
+		<div class="columns small-12">
+			<table id="leases-table" class="table-form text-center responsive-table">
+				<thead>
+					<tr>
+						<th align="center" translate="hostName"><b>Host Name</b></th>
+						<th align="center" translate="MACAddress"><b>MAC Address</b></th>
+						<th align="center" translate="IPAddress"><b>IP Address</b></th>
+						<th align="center" translate="expiresIn"><b>Expires In</b></th>
+						<th align="center" translate="active" ng-show="showInactiveDevices"><b>Active</b></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="lease in listLeases" ng-hide="empty">
+						<td data-title="Host Name"><div ng-bind="lease.hostname" class="breakRule">&nbsp;</div></td>
+						<td data-title="MAC Address" ng-bind="lease.mac">&nbsp;</td>
+						<td data-title="IP Address" ng-bind="lease.ip">&nbsp;</td>
+						<td data-title="Expires In" ng-bind="lease.lease">&nbsp;</td>
+						<td ng-show="showInactiveDevices" data-title="Status" ng-bind="(lease.active ? 'yes' : 'no') | translate">&nbsp;</td>
+					</tr>
+					<tr ng-if="listLeases.length == 0">
+						<td colspan="4" translate="noConnectedDevices" class="listEmpty">
+							There are no connected devices
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+<!-- help button -->
+<ul id="tlyPageGuide" class="dhcpLeases" ng-if="!dhcpLeasesInDHCP">
+  <li translate="dhcpLeasesTip2" data-tourtarget="#leases-table">
+  </li>
+</ul>

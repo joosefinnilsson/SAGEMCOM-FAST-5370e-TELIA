@@ -1,0 +1,419 @@
+<div class="content">
+	<div wait-loading=""></div>
+
+	<div class="content w100 ng-hide" ng-show="!loading" id="firewall">
+		<h4 class="maintitle">Firewall</h4>
+		
+
+		<form class="add-port" name="formCustomRule" id="formCustomRule" autocomplete="off" check-unsaved="">
+
+		<div class="row" ng-if="!readOnlyFirewall">
+
+			<div class="columns medium-1 small-3" ng-hide="loadedFromDevice">
+				<label class="inline" translate="level">Level</label>
+			</div>
+
+			<div class="columns medium-6 small-9" id="firewallTip1" ng-hide="loadedFromDevice">
+				<dl class="tabs firewall-tabs" data-tab="">
+					<dd class="level-selector" ng-class="fields.level === 'LOW' ? 'active' : ''">
+						<a translate="low" ng-model="fields.nRule.Level" ng-click="setLevel('LOW')">Low</a>
+					</dd>
+					<dd class="level-selector" ng-class="fields.level ==='MEDIUM' ? 'active' : ''">
+						<a ng-model="fields.nRule.Level" translate="medium" ng-click="setLevel('MEDIUM')">Medium</a>
+					</dd>
+					<dd class="level-selector" ng-class="fields.level === 'HIGH' ? 'active' : ''">
+						<a ng-model="fields.nRule.Level" translate="high" ng-click="setLevel('HIGH')">High</a>
+					</dd>
+					<dd class="level-selector" ng-class="fields.level === 'CUSTOM' ? 'active' : ''">
+						<a ng-model="fields.nRule.Level" translate="custom" ng-click="setLevel('CUSTOM')">Custom</a>
+					</dd>
+				</dl>
+				<div class="div-overlay" ng-if="$root.showMessage !== undefined"></div>
+			</div>
+
+			<div class="columns medium-3 small-6">
+				
+			</div>
+		</div>
+
+		<div class="row" ng-if="readOnlyFirewall">
+			<div class="columns medium-1 small-3" ng-hide="loadedFromDevice">
+				<label class="inline" translate="level">Level</label>
+			</div>
+			<div class="columns medium-6 small-9 end" id="firewallTip1" ng-hide="loadedFromDevice">
+				<input type="text" ng-model="fields.level" disabled>
+			</div>
+		</div>
+
+		
+		<div check-feature-state="FirewallButtons" class="right" ng-if="!readOnlyFirewall">
+			<button id="dmzTip4" class="button tiny radius btn-cancel" translate="cancel" value="Cancel" ng-click="cancelSave()">
+				Cancel
+			</button>
+			<button id="dmzTip3" class="button tiny radius" translate="apply" ng-click="save()" ng-disabled="defaultLevel === fields.level && defaultRespondToPing === fields.respondToPing">
+				Apply
+			</button>
+		</div>
+		<div class="row">
+			<div class="columns small-12 content-firewall">
+				<div class="tabs-content" ng-switch="" on="fields.level">
+					<div class="content" id="low" ng-show="!firewallLowRule" ng-switch-when="LOW">
+						<div class="row">
+							<div class="columns medium-7 large-centered">
+								<table class="table-level">
+									<tr>
+										<th>LAN -> WAN</th>
+										<td translate="allowAll">Allow all</td>
+									</tr>
+									<tr>
+										<th>WAN -> LAN</th>
+										<td ng-if="!isDtagXdsl" translate="allowAll">Allow all</td>
+										<td ng-if="isDtagXdsl" translate="dropAllExcept">Drop all, except some needed services like voip/tr69</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+
+					<div class="content" id="medium" ng-show="!firewallMediumRule" ng-switch-when="MEDIUM">
+						<div class="row">
+							<div class="columns medium-7 large-centered">
+								<table class="table-level">
+									<tr>
+										<th>LAN -> WAN</th>
+										<td translate="allowAll">Allow all</td>
+									</tr>
+									<tr>
+										<th>WAN -> LAN</th>
+										<td ng-if="!mediumRules.length"><span translate="blockAll">Block all</span></td>
+										<td ng-if="mediumRules.length"><span translate="blockAsPerBelow">Block as per below:</span>
+										<ul>
+											<li class="inside-list" ng-repeat="rule in mediumRules" ng-bind="rule.Service"></li>
+										</ul></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+
+					<div class="content" id="high" ng-show="!firewallHighRule" ng-switch-when="HIGH">
+						<div class="row">
+							<div class="columns medium-7 large-centered">
+								<table class="table-level">
+									<tr>
+										<th>LAN -> WAN</th>
+										<td><span translate="allowAllBelow">Allow all unrelated:</span>
+										<br>
+										<ul>
+											<li class="inside-list" ng-repeat="rule in highRules" ng-bind="rule.Service"></li>
+										</ul></td>
+									</tr>
+									<tr>
+										<th>WAN -> LAN</th>
+										<td translate="blockAll">Block All</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+
+					<div class="content active ng-hide" id="custom" ng-cloak="" ng-show="fields.level === 'CUSTOM' || (fields.level === 'MEDIUM' && !!firewallMediumRule) || (fields.level === 'HIGH' && !!firewallHighRule) || (fields.level === 'LOW' && !!firewallLowRule)">
+
+            <!-- Tab options to change the IP field to accept IPv4 or IPv6 -->
+            <div class="row" ng-if="ipv6Firewall">
+              <div class="columns medium-6 small-9">
+                <dl class="tabs firewall-tabs" data-tab="">
+                  <dd class="level-selector" ng-class="fields.nRule.IPVersion === 4 ? 'active' : ''">
+                    <a ng-model="fields.nRule.IPVersion" ng-click="setIPVersion(4)">IPv4</a>
+                  </dd>
+                  <dd class="level-selector" ng-class="fields.nRule.IPVersion === 6 ? 'active' : ''">
+                    <a ng-model="fields.nRule.IPVersion" ng-click="setIPVersion(6)">IPv6</a>
+                  </dd>
+                </dl>
+                <div class="div-overlay" ng-if="$root.showMessage !== undefined"></div>
+              </div>
+            </div>
+
+						<div class="row">
+							<div class="columns large-10 large-centered small-12">
+
+									<div hidden>
+										<input id="level" name="level" type="text" ng-model="fields.level">
+									</div>
+
+									<div class="row" ng-if="!readOnlyFirewall">
+										<div class="columns small-12" ng-show="!fields.nRule.Service || fields.nRule.Service === 'NONE'">
+											<div class="row">
+												<div class="columns medium-3 small-4">
+													<label translate="sCustomName" class="inline">Custom Name</label>
+												</div>
+
+												<div class="columns medium-9 small-8">
+													<input id="customDescription" name="description" type="text" ng-model="fields.nRule.Description" clear-validation-on-focus="true">
+													<small class="error" ng-show="formCustomRule.description.$invalid" translate="fieldRequired"> </small>
+												</div>
+											</div>
+										</div>
+										<div class="columns medium-6">
+											<div class="row">
+												<div class="columns medium-5">
+													<label class="inline" translate="serviceName">Service</label>
+												</div>
+
+												<div class="columns medium-7">
+													<select id="fw-service" ng-options="service.name as service.name for (key, service) in fields.listServices" ng-model="fields.nRule.Service" ng-change="changeService()">
+														<option value="" translate="other">Other</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="columns medium-5">
+													<label class="inline" translate="localIp">Local IP</label>
+												</div>
+
+												<div class="columns medium-7">
+                          <input ng-if="!ipv6Firewall || (!!ipv6Firewall && fields.nRule.IPVersion === 4)" id="firewallTip4" placeholder="ex. {{bestPlaceholder}}" type="text" ng-model="fields.nRule.SourceIP" name="sourceIp" ng-disabled="loadedFromDevice" clear-validation-on-focus="true">
+                          <input ng-if="!!ipv6Firewall && fields.nRule.IPVersion === 6" id="firewallTip4" placeholder="ex. 2a08::1" type="text" ng-model="fields.nRule.SourceIP" name="sourceIp" ng-disabled="loadedFromDevice" clear-validation-on-focus="true" validate-ipv6="">
+													<small class="error" ng-show="formCustomRule.sourceIp.$invalid" translate="invalidIpAddress"> </small>
+												</div>
+											</div>
+
+											<div class="row">
+
+												<div class="columns medium-5">
+													<label class="inline" translate="localPort">Local Port</label>
+												</div>
+
+												<div class="columns medium-7">
+													<input id="fw-ip" maxlength="11" type="text" ng-model="fields.nRule.SourcePort" ng-disabled="fields.nRule.Service && fields.nRule.Service != 'NONE' && ruleWithPort" name="sourcePort" clear-validation-on-focus="true">
+													<small class="error" ng-show="formCustomRule.sourcePort.$invalid" translate="invalidPort"> </small>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="columns medium-5">
+													<label class="inline" translate="action">Action</label>
+												</div>
+
+												<div class="columns medium-7">
+													<select id="firewallTip8" ng-model="fields.nRule.Target">
+														<option translate="rejectFromLocal" value="disallow-local">Reject From Local</option>
+														<option translate="rejectFromRemote" value="disallow-remote">Reject From Remote</option>
+														<option translate="rejectBoth" value="disallow-both">Reject in Both Way</option>
+														<option translate="acceptFromLocal" value="allow-local">Accept From Local</option>
+														<option translate="acceptFromRemote" value="allow-remote">Accept From Remote</option>
+														<option translate="acceptBoth" value="allow-both">Accept in Both Way</option>
+													</select>
+												</div>
+											</div>
+										</div>
+
+										<div class="columns medium-6">
+											<div class="row">
+												<div class="columns medium-5">
+													<label class="inline" translate="protocol">Protocol</label>
+												</div>
+
+												<div class="columns medium-7">
+													<select ng-if="!protocolListStatic" id="fw-protocol" ng-options="leProtocol.name as leProtocol.name for (key, leProtocol) in fields.protocolList" ng-model="fields.nRule.Protocol" ng-disabled="fields.nRule.Service && ruleWithPort"></select>
+													<select ng-if="protocolListStatic" id="fw-protocol" ng-model="fields.nRule.Protocol" ng-disabled="fields.nRule.Service && ruleWithPort">
+														<option ng-repeat="(key, value) in fields.protocolList" value="{{value}}">{{key}}</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="columns medium-5">
+													<label class="inline" translate="remoteIp">Remote IP</label>
+												</div>
+
+												<div class="columns medium-7">
+                          <input ng-if="!ipv6Firewall || (!!ipv6Firewall && fields.nRule.IPVersion === 4)" id="firewallTip6" placeholder="ex. 200.45.1.123" type="text" ng-model="fields.nRule.DestIP" name="destIp" clear-validation-on-focus="true">
+                          <input ng-if="!!ipv6Firewall && fields.nRule.IPVersion === 6" id="firewallTip6" placeholder="ex. 2a08::1" type="text" ng-model="fields.nRule.DestIP" name="destIp" clear-validation-on-focus="true" validate-ipv6="">
+													<small class="error" ng-show="formCustomRule.destIp.$invalid" translate="invalidIpAddress"> </small>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="columns medium-5">
+													<label class="inline" translate="remotePort">Remote Port</label>
+												</div>
+
+												<div class="columns medium-7">
+													<input id="fw-ep" maxlength="11" type="text" ng-model="fields.nRule.DestPort" ng-disabled="fields.nRule.Service && fields.nRule.Service != 'NONE' && ruleWithPort" name="destPort" clear-validation-on-focus="true">
+                          <small class="error" ng-show="formCustomRule.destPort.$invalid && formCustomRule.destPort.$error.destPort" translate="invalidPort"> </small>
+                          <small class="error" ng-show="formCustomRule.destPort.$invalid && formCustomRule.destPort.$error.blacklistPort" translate="invalidPortNumber"> </small>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="columns medium-5">
+													&nbsp;
+												</div>
+												<div class="columns medium-4 end">
+													<img ng-src="images/{{fields.nRule.Target}}.png">
+												</div>
+											</div>
+
+										</div>
+									</div>
+
+								<div class="row" ng-if="!readOnlyFirewall">
+									<div class="right">
+										<button id="firewallTip9" class="button tiny radius btn-cancel" type="button" ng-show="!toEditRule && !hasDragged && !hasRuleModified" translate="clear" ng-click="clearForm()">
+											&nbsp;
+										</button>
+										<button id="firewallTip15" class="button tiny radius btn-cancel" type="button" ng-show="toEditRule && !hasDragged && !hasRuleModified" translate="cancel" ng-click="cancel()">
+											&nbsp;
+										</button>
+										<button id="firewallTip10" class="button tiny radius" type="submit" ng-show="!toEditRule && !hasDragged && !hasRuleModified" translate="add" ng-click="addRule()">
+											&nbsp;
+										</button>
+										<button id="firewallTip16" class="button tiny radius" type="submit" ng-show="toEditRule && !hasDragged && !hasRuleModified" translate="update" ng-click="updateRule()">
+											&nbsp;
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row" ng-if="!readOnlyFirewall">
+							<div class="columns small-12">
+								<div class="left">
+									<button ng-show="hasDragged || hasRuleModified" id="firewallTip18" translate="apply" class="button tiny radius ng-scope" type="button" ng-click="saveOrder()">Apply</button>
+									<button ng-show="hasDragged || hasRuleModified" id="firewallTip19" translate="cancel" class="button tiny radius ng-scope" type="button" ng-click="populateCustom()">Cancel</button>
+									<div id="firewallTip20" ng-show="!hasDragged && !hasRuleModified" class="row">
+										<div class="alert-box warning radius" data-alert="">
+										    <i class="fa fa-info-circle fa-center center"></i>
+										    <span translate="firewallClickDragOrder">Click and drag the rules to change the order</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="columns small-12">
+								<div>
+									<table class="table-form table-form-full no-margin responsive-table firewall-table" id="customRulesFirewall">
+										<thead>
+											<tr>
+												<th width="11%" translate="enable">Enable</th>
+												<th width="13%" translate="service">Service</th>
+												<th width="9%" translate="protocol">Protocol</th>
+												<th width="13%" translate="localIp">Local IP</th>
+												<th width="9%" translate="localPort">Local Port</th>
+												<th width="9%" translate="action">Action</th>
+												<th width="14%" translate="remoteIp">Remote IP</th>
+												<th width="9%" translate="remotePort">Remote Port</th>
+												<th width="13%" translate="options" ng-if="!readOnlyFirewall">Options</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+								<div data-drop="true" ng-model="fields.rules" jqyoui-droppable="{index: {{$index}}, onDrop:'dropCallback(rule, $index)', onOver:'overCallback()', onOut: 'outCallback()'}" ng-repeat="rule in fields.rules | filter:{toBeDeleted:'!true'}" ng-init="hideUnrelated = (!fields.deviceIpAddress || rule.SourceIP === fields.deviceIpAddress)">
+									<table class="table-form table-form-full no-margin responsive-table firewall-table" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="fields.rules" jqyoui-draggable="{index: {{$index}},animate:false, insertInline: true}">
+										<tbody>
+											<tr>
+												<td width="11%" data-title="{{ 'enable' | translate }}" id="firewallTip12">
+												<div ng-show="rule.Interface === 'LAN' || rule.Interface === 'DATA'" class="onoffswitch" ng-class="{'onoffswitch-disabled': !hideUnrelated || hasDragged}">
+													<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="port-firewall-0{{$index}}" ng-change="registerEditedRule(rule)" ng-model="rule.Enable" ng-disabled="!hideUnrelated || hasDragged || readOnlyFirewall">
+													<label class="onoffswitch-label" for="port-firewall-0{{$index}}"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+												</div>
+												</td>
+												<td width="13%" data-title="{{ 'service' | translate }}" ng-if="rule.Interface === 'LAN' || rule.Interface === 'DATA'">{{!rule.Service || rule.Service === 'NONE' ? rule.Description : rule.Service }}</td>
+												<td width="13%" data-title="{{ 'service' | translate }}" ng-if="rule.Interface !== 'LAN' && rule.Interface !== 'DATA'">{{rule.Interface}}</td>
+												<td width="9%" data-title="{{ 'protocol' | translate }}" ng-if="!protocolListStatic"> {{rule.Protocol}} </td>
+												<td width="9%" data-title="{{ 'protocol' | translate }}" ng-if="protocolListStatic"> {{getProtocolLabelByNum(rule.Protocol, protocolListStatic)}} </td>
+												<td width="13%" data-title="{{ 'localIp' | translate }}" class="breakall">{{rule.SourceIP}}</td>
+												<td width="9%" data-title="{{ 'localPort' | translate }}"> {{rule.SourcePort}} </td>
+												<td width="9%" data-title="{{ 'action' | translate }}"><img ng-src="images/{{rule.Target}}.png"></td>
+												<td width="14%" data-title="{{ 'remoteIp' | translate }}" class="breakall">{{rule.DestIP}}</td>
+												<td width="9%" data-title="{{ 'remotePort' | translate }}">{{rule.DestPort}}</td>
+												<td width="13%" data-title="{{ 'options' | translate }}" ng-if="!readOnlyFirewall">
+												<div ng-show="hideUnrelated && (rule.Interface === 'LAN' || rule.Interface === 'DATA')">
+													<input ng-if="!hasDragged && !hasRuleModified" class="icon-edit" title="Edit" type="button" value="Edit" ng-click="editRule(rule)" id="firewallTip14">
+													<input ng-if="!hasDragged && !hasRuleModified" class="icon-delete" data-reveal-id="confirm-remove-modal" data-reveal="" title="Delete" type="button" value="Delete" ng-click="deleteRule(rule)" id="firewallTip13">
+													<input ng-if="hasDragged || hasRuleModified" class="icon-edit bt-disabled" title="Edit" type="button" value="Edit" id="firewallTip14">
+													<input ng-if="hasDragged || hasRuleModified" class="icon-delete bt-disabled" title="Delete" type="button" value="Delete" ng-click="deleteRule(rule)" id="firewallTip13">
+													<input ng-if="$index != 0" class="order-up" title="Order up" type="button" value="Order up" ng-click="orderUp(rule)">
+													<input ng-if="$index != fields.rules.length" class="order-down" title="Order down" type="button" value="Order down" ng-click="orderDown(rule)">
+												</div>
+												<div ng-show="!hideUnrelated || (rule.Interface !== 'LAN' && rule.Interface !== 'DATA')">&nbsp;
+												</div></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+
+						<!-- Modal for remove -->
+						<div id="confirm-remove-modal" class="reveal-modal tiny" data-reveal="">
+							<a class="close-reveal-modal close-modal" data-close-reveal="">
+								<span class="btn-close">&#215;</span>
+								<span class="show-word btn-close close" translate="close">Close</span>
+							</a>
+
+							<h5 class="modal-title" translate="confirmRemoveTitle">Do you really want to remove this rule?</h5>
+
+							<p translate="confirmRemoveTip">
+								The rule will be removed permanently.
+							</p>
+
+							<div class="right">
+								<button class="button tiny radius" type="button" translate="no" ng-click="cancelRemove()" onclick="$('#confirm-remove-modal a.close-reveal-modal').trigger('click');"></button>
+								<button class="button tiny radius" type="button" translate="yes" ng-click="confirmRemove()" onclick="$('#confirm-remove-modal a.close-reveal-modal').trigger('click');"></button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form></div>
+	
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+  <li translate="responseToPingTip" data-tourtarget="#enable-respondToPing">
+  </li>
+  <li translate="firewallTip1" data-tourtarget="#firewallTip1">
+  </li>
+  <li translate="firewallTip99" data-tourtarget="#customDescription">
+  </li>
+  <li translate="firewallTip2" data-tourtarget="#fw-service">
+  </li>
+  <li translate="firewallTip3" data-tourtarget="#fw-protocol">
+  </li>
+  <li translate="firewallTip4" data-tourtarget="#firewallTip4">
+  </li>
+   <li translate="firewallTip5" data-tourtarget="#fw-ip">
+  </li>
+   <li translate="firewallTip6" data-tourtarget="#firewallTip6">
+  </li>
+  <li translate="firewallTip6" data-tourtarget="#firewallTip6">
+  </li>
+  <li translate="firewallTip7" data-tourtarget="#fw-ep">
+  </li>
+  <li translate="firewallTip8" data-tourtarget="#firewallTip8">
+  </li>
+   <li translate="firewallTip11" data-tourtarget="#firewallTip11">
+  </li>
+   <li translate="firewallTip12" data-tourtarget="#firewallTip12">
+  </li>
+   <li translate="firewallTip12" data-tourtarget="#firewallTip12">
+  </li>
+   <li translate="firewallTip13" data-tourtarget="#firewallTip13">
+  </li>
+   <li translate="firewallTip14" data-tourtarget="#firewallTip14">
+  </li>
+  <li translate="firewallTip17" data-tourtarget="#firewallTip17">
+  </li>
+</ul>
+
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = false;
+	$(document).foundation();
+</script>

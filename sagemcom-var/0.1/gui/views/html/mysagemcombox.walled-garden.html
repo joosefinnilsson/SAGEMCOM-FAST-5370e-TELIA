@@ -1,0 +1,33 @@
+<div class="content" ng-show="true" id="walled-garden">
+	<form id="walledGardenForm" name="walledGardenForm" ng-submit="save()" check-unsaved>
+		<h4 class="maintitle">Walled Garden</h4>
+
+		<div class="row">
+			<div class="columns medium-3 small-4">
+				<label class="inline" for="enableWalledGarden" translate="enable">Enable</label>
+			</div>
+
+			<div class="columns medium-2 small-8 end">
+				<div ng-class="walledGardenEnable == null ? 'bt-disabled' : ''" class="onoffswitch">
+					<input ng-disabled="walledGardenEnable == null" ng-model="walledGardenEnable" class="onoffswitch-checkbox" id="enableWalledGarden" name="onoffswitch" type="checkbox"/>
+					<label class="onoffswitch-label" for="enableWalledGarden"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+				</div>
+			</div>
+		</div>
+
+		<div class="right">
+			<button type="button" class="button tiny radius ng-scope" translate="cancel" click-loading ui-sref="user.home" id="cancelTip" ></button>
+			<button id="applyTip" class="button tiny radius ng-scope" translate="apply" type="submit">Apply</button>
+		</div>
+	</form>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+  <li translate="walledGarden1" data-tourtarget="#enableWalledGarden">
+  </li>
+  <li translate="cancelTip" data-tourtarget="#cancelTip">
+  </li>
+  <li translate="applyTip" data-tourtarget="#applyTip">
+  </li>
+</ul>

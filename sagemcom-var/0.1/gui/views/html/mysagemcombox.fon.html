@@ -1,0 +1,40 @@
+<div class="content">
+	<div wait-loading></div>
+	<div class="content" id="fon" ng-show="!loading">
+		<h4 translate="globalInfo">Global Information</h4>
+		<div class="row">
+			<div class="columns large-2 medium-2 small-4">
+				<label class="inline" translate="sFonStatus">FON Status</label>
+			</div>
+			<div class="columns large-3 medium-2 small-8 end">
+				<label class="inline" ng-bind="fonStatus ? fonStatus  : 'notAvailable' | translate">&nbsp;</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="columns large-2 medium-2 small-4">
+				<label class="inline" translate="sFonExtStatus">FON Extended Status</label>
+			</div>
+			<div class="columns large-3 medium-2 small-8 end">
+				<label class="inline" ng-bind="fonExtStatus ? fonExtStatus : 'notAvailable' | translate">&nbsp;</label>
+			</div>
+		</div>
+		<hr />
+		<h4 translate="wifiStatus">Wi-Fi Status</h4>
+		<div class="row">
+			<div class="columns large-12">
+				<table class="table">
+					<tr>
+						<th translate="SSID">SSID</th>
+						<th translate="SSIDStatus">SSID Status</th>
+						<th translate="sNnbrConnectedUsers">Number of Connected Users</th>
+					</tr>
+					<tr ng-repeat="ssid in ssidsList">
+						<td ng-bind="ssid.ssidName"></td>
+						<td ng-bind="ssid.ssidStatus"></td>
+						<td ng-bind="ssid.nbrConnectedUsers"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

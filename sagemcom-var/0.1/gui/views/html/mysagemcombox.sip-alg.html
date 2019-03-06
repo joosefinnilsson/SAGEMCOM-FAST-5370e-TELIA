@@ -1,0 +1,25 @@
+<div class="content" id="led">
+  <h4 translate="sip_alg">SIP ALG</h4>
+  <div class="row">
+    <div class="columns medium-3 small-4">
+      <label class="inline" for="sipAlgEnable" translate="enable">Enable</label>
+    </div>
+    <div class="columns medium-2 small-8 end">
+      <div class="onoffswitch">
+        <input ng-model="sipAlgEnable" class="onoffswitch-checkbox" id="sipAlgEnable" name="onoffswitch" type="checkbox" />
+        <label class="onoffswitch-label" for="sipAlgEnable">
+          <div class="onoffswitch-inner"></div>
+          <div class="onoffswitch-switch"></div>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="right" ng-show="!onChangeSave">
+    <button class="button tiny radius btn-cancel" type="button" translate="cancel" click-loading ui-sref="{{previousMainPage}}">
+      Cancel
+    </button>
+    <button class="button tiny radius" type="submit" translate="apply" ng-click="save()">
+      Apply
+    </button>
+  </div>
+</div>

@@ -1,0 +1,1 @@
+jQuery.extend({random:function(a){return Math.floor(a*(Math.random()%1))},randomBetween:function(b,a){return b+jQuery.random(a-b+1)}});

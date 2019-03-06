@@ -1,0 +1,160 @@
+<div class="content">
+	<div wait-loading></div>
+	<div class="content ng-hide" ng-show="!loading">
+		<form name="dectDockBasicForm" autocomplete="off" novalidate>
+			<div class="row">
+				<div class="columns small-6 medium-3 large-3">
+					<label class="inline" translate="dectEnable">Enable DECT</label>
+				</div>
+				<div class="columns small-6 medium-3 large-3 end">
+					<div class="onoffswitch" id="enableDect">
+						<input class="onoffswitch-checkbox" id="enable-dect" type="checkbox" name="enable-dect" ng-model="info.Enable" />
+						<label class="onoffswitch-label" for="enable-dect"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+					</div>
+				</div>
+				<div class="columns medium-2 small-4">
+					<a class="button tiny radius expand" ng-click="update()" translate="refresh">Refresh</a>
+				</div>
+			</div>
+			<div class="row ng-hide" ng-show="info.Enable">
+				<div class="columns small-6 medium-3 large-3">
+					<label class="inline" translate="powerMode">Power mode</label>
+				</div>
+				<div class="columns small-6 medium-3 large-3 end">
+					<select id="powerModes" ng-model="info.PowerMode">
+						<option value="{{powerMode.value}}" ng-repeat="powerMode in powerModes" ng-bind="powerMode.label | translate" ng-selected="info.PowerMode == powerMode.value"></option>
+					</select>
+				</div>
+			</div>
+
+			<div class="row ng-hide" ng-show="info.Enable">
+				<div class="columns small-4 medium-3 large-3">
+					<label class="inline" translate="statusStats">Status</label>
+				</div>
+				<div class="columns small-8 medium-3 large-3 end">
+					<label ng-bind="info.Status | lowercase | translate" ng-class="statusClass" id="dockStatus" class="inline">&nbsp;</label>
+				</div>
+			</div>
+			<div class="row ng-hide" ng-show="info.Enable">
+				<div class="columns small-12">
+					<label class="inline" ng-switch on="info.CurrentNbPP"><span ng-bind="info.CurrentNbPP"></span>&nbsp;<span ng-switch-when="1" translate="dectQtySingular">handset is connected on a maximum of</span> <span ng-switch-default translate="dectQtyPlural">handsets are connected on a maximum of</span> <span ng-bind="info.MaxSupportedPP">&nbsp;</span> </label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="right">
+					<button class="button tiny radius btn-cancel" translate="cancel" type="button" click-loading ui-sref="user.home"></button>
+					<button class="button tiny radius" translate="apply" ng-click="save()"></button>
+				</div>
+			</div>
+
+			<div id="main-content" class="ng-hide" ng-show="info.Enable && info.CurrentNbPP < info.MaxSupportedPP">
+				<div class="row">
+					<div class="columns small-12">
+						<h4 translate="pairing">Pairing</h4>
+					</div>
+					<div class="columns small-12">
+						<label for="pinCode" translate="pinCode" class="ng-scope">Pin Code:</label>
+					</div>
+					<div class="columns small-6 medium-4 large-4 dectInputBottom">
+						<input type="text" ng-model="info.PIN" id="pinCode" name="pinCode" validate-pin="pin" maxlength="4"/>
+						<small class="error" ng-show="dectDockBasicForm.pinCode.$invalid && dectDockBasicForm.pinCode.$dirty" translate="dectPinError">PIN Code must be a number between 0000 and 9999</small>
+					</div>
+					<div class="columns small-6 medium-3">
+						<button class="button tiny radius btn-only-child-blue" ng-click="applyPin()" id="applyPin" translate="dectApplyPin">
+							Apply Pin
+						</button>
+					</div>
+					<div class="columns small-6 medium-3 end">
+						<button class="button tiny radius btn-only-child-blue" ng-click="startPairing()" id="startPairing" translate="dectStartPairing">
+							Start pairing
+						</button>
+						<button class="ng-hide" id="startPairingModal" data-reveal-id="pleasewait-modal"></button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="columns small-12">
+						<label class="inline" translate="dectPinSave"></label>
+					</div>
+				</div>
+			</div>
+			<br/>
+			<div id="main-content" class="ng-hide" ng-show="info.Enable">
+				<div class="row">
+					<div class="columns small-12">
+						<h4 translate="dectLocate">Paging</h4>
+					</div>
+					<div class="columns small-12 medium-7 large-4">
+						<select ng-model="info.pagingDevice" id="pagingSelect" ng-options="item.uid as item.description for item in info.selectDevices">
+							<option value="" translate="acPcAllDevices">All</option>
+						</select>
+					</div>
+					<div class="columns small-12 medium-3 large-2">
+						<button class="button tiny radius" type="button" ng-click="test()" id="pagingButton" ng-class="info.selectDevices.length > 0 ? '' : 'secondary'" ng-disabled="info.selectDevices.length === 0" translate="dectLocate">
+							Paging
+						</button>
+					</div>
+					<div class="columns small-12 medium-2 large-2 end">
+						<img id="loading" ng-show="loadingTest ? true : false" src="images/loading2.gif">
+					</div>
+				</div>
+				<div class="row">
+					<div class="columns small-12">
+						<label class="inline" translate="dectLocateDescription">Use Paging to locate your handsets. They will ring several seconds.</label>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<!-- Model for please wait message -->
+		<div id="pleasewait-modal" class="reveal-modal tiny" data-reveal>
+			<a style="display:none" class="close-reveal-modal">&#215;</a>
+
+			<h5 class="modal-title" translate="dectDock">DECT Dock</h5>
+
+			<p translate="dectPairingProgress">
+				Pairing is in progress. Press 'OK' in your handset
+			</p>
+
+			<div ng-if="!logoWaiting" class="t-center">
+				<img src="images/loading.gif" border="0" />
+			</div>
+			<div ng-if="logoWaiting" class="t-center">
+                <div class="logo-waiting">
+                 <p translate="pleaseWaitLoading"> Please wait... </p>
+                </div>
+            </div>
+		</div>
+	</div>
+</div>
+
+<!-- help -->
+<ul id="tlyPageGuide">
+	<li translate="dectTip1" data-tourtarget="#enableDect">
+		&nbsp;
+	</li>
+	<li translate="dectTip2" data-tourtarget="#dockStatus">
+		&nbsp;
+	</li>
+	<li translate="dectTip3" data-tourtarget="#pinCode">
+		&nbsp;
+	</li>
+	<li translate="dectTip4" data-tourtarget="#startPairing">
+		&nbsp;
+	</li>
+	<li translate="dectTip5" data-tourtarget="#pagingSelect">
+		&nbsp;
+	</li>
+	<li translate="dectTip6" data-tourtarget="#pagingButton">
+		&nbsp;
+	</li>
+	<li translate="dectTabTip" data-tourtarget="#dectTab">
+		&nbsp;
+	</li>
+</ul>
+<script>
+	$('#pinCode').mask('0000');
+	Foundation.libs.reveal.settings.close_on_background_click = false;
+	Foundation.libs.reveal.settings.close_on_esc = false;
+	$(document).foundation(); 
+</script>

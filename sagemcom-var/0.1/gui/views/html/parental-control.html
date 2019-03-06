@@ -1,0 +1,264 @@
+<div ng-class="(deviceId && hasParentalOlfeo) ? 'content active owl-carousel zoomContainer' : 'content zoomContainer'" id="parental-control" >
+<div ng-class="(deviceId) ? 'item' : ''" ng-show="deviceId" check-feature-state="parentalControlOlfeo">
+	<div messagebox></div>
+	<h4 class="maintitle" translate="parentalControl">Parental Control</h4>
+	<div class="row">
+		<div class="columns medium-2 ">
+			<label class="inline">Profile</label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns medium-3 end">
+			<select ng-model="profile">
+				<option value="{{item}}" translate="{{item}}" ng-selected="profile == item" ng-repeat="item in profiles"></option>
+			</select>
+		</div>
+	</div>
+	<br />
+	<div class="row" ng-show="selectedDevices.length >= 1">
+		<div class="right">
+			<button id="acPcTip7" class="button tiny radius" click-loading ui-sref="user.home" translate="cancel" value="Cancel" >
+				Cancel
+			</button>
+			<button id="acPcTip8" class="button tiny radius" type="submit" translate="apply" value="Apply" ng-click="save()" >
+				Apply
+			</button>
+		</div>
+	</div>
+</div>
+<div ng-class="(deviceId) ? 'item' : ''">
+	<div messagebox></div>
+	<h4 class="maintitle" translate="acPcInternetAcessControlPlanning">Internet Access Control Planning</h4>
+	<form name="parentalForm">
+		<div class="row" ng-if="!deviceId && connectedDevices.length <= 1">
+			<div class="columns medium-6" translate="noConnectedDevices">
+				No devices connected
+			</div>
+		</div>
+		<div class="row" ng-if="deviceId && connectedDevices.length < 1">
+			<div class="columns medium-6" translate="noConnectedDevices">
+				No devices connected
+			</div>
+		</div>
+
+		<div class="row select-host ng-hide" ng-show="connectedDevices.length > 1">
+			<div class="columns medium-2">
+				<label class="inline" for="" translate="acPcSelect"> Select </label>
+			</div>
+
+			<div class="columns medium-4 end">
+				<select multiple size="4" ng-model="selectedDevices" name="selectDevices" ng-options="device.hostname for device in connectedDevices" ng-change="changeTimeSlots()" id="acPcTip1">
+					<option value="" translate="acPcAllDevices">All devices</option>
+				</select>
+			</div>
+		</div>
+
+		<hr ng-show="selectedDevices"/>
+
+		<div class="row ng-hide" ng-show="selectedDevices">
+			<div class="columns medium-2 small-3 pad-top">
+				<p>
+					<strong translate="acPcWeekTimeSlots"> Week Time Slots </strong>
+				</p>
+			</div>
+
+			<div class="columns medium-6 small-9 pad-top">
+				<div class="row">
+
+					<div class="columns small-4">
+						<p>
+							<i class="time-slot allowed"></i>&nbsp;<span translate="acPcAllowed">Allowed</span>
+						</p>
+					</div>
+
+					<div class="columns small-4">
+						<p>
+							<i class="time-slot denied"></i>&nbsp;<span translate="acPcDenied">Denied</span>
+						</p>
+					</div>
+					<div class="columns small-4 end">
+						<p>
+							<i class="time-slot mixed"></i>&nbsp;<span translate="acPcMixed">Mixed</span>
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="columns medium-4 small-12 text-center">
+				<div class="row">
+					<div class="columns small-6">
+						<button ng-click="changeStatus('red', 'all')" class="button tiny radius expand btn-deny-all" type="button" value="Deny All" translate="acPcDenyAll" id="acPcTip2" >
+							Deny All
+						</button>
+					</div>
+
+					<div class="columns small-6">
+						<button ng-click="changeStatus('green', 'all')" class="button tiny radius expand btn-allow-all" type="button" value="Allow All" translate="allowAll" id="acPcTip3" >
+							Allow All
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row week-time-slots" ng-show="selectedDevices" id="calendarRows">
+			<div class="columns small-12">
+				<table class="t-a-d" id="acPcTip4">
+					<tr class="hide-on-portrait">
+						<th>0h</th>
+						<th width="13%">4h</th>
+						<th width="13%">8h</th>
+						<th width="13%">12h</th>
+						<th width="13%">16h</th>
+						<th width="13%">20h</th>
+						<th width="13%">24h</th>
+						<th width="15%"></th>
+					</tr>
+					<tr>
+						<th translate="acPcSunday">Sunday</th>
+						<td colspan="6" class="toZoom">
+						<div class="time-inputs">
+							<label title="{{$index+1}}" for="Sunday{{$index+1}}" ng-repeat="leIndex in timeSlotsHours" class="hide-on-portrait singleHour">
+								<input id="Sunday{{$index+1}}" type="checkbox" ng-model="timeSlotsGrid.SUNDAY[leIndex]" ng-checked="(leValue === 'red') ? true : false" ng-change="leValue = timeSlotsGrid.SUNDAY[leIndex]" ng-true-value="red" ng-false-value="green" />
+								<i aria-hidden="true" ng-style="(timeSlotsGrid.SUNDAY[leIndex] === 'orange') ? {'background-color':'orange'} : {}"></i></label>
+						</div></td>
+						<td>
+						<button ng-click="changeStatus('red', 'SUNDAY')" class="button mini radius btn-deny" type="button" value="Deny" translate="deny" >
+							Deny
+						</button>
+						<button ng-click="changeStatus('green', 'SUNDAY')" class="button mini radius btn-allow" type="button" value="Allow" translate="allow" >
+							Allow
+						</button></td>
+					</tr>
+					<tr>
+						<th translate="acPcMonday">Monday</th>
+						<td colspan="6" class="toZoom">
+						<div class="time-inputs">
+							<label title="{{$index+1}}" for="Monday{{$index+1}}" ng-repeat="leIndex in timeSlotsHours" class="hide-on-portrait singleHour">
+								<input id="Monday{{$index+1}}" name="Monday{{$index+1}}" type="checkbox" ng-model="timeSlotsGrid.MONDAY[leIndex]" ng-checked="(leValue === 'red') ? true : false" ng-change="leValue = timeSlotsGrid.MONDAY[leIndex]" ng-true-value="red" ng-false-value="green" />
+								<i aria-hidden="true" ng-style="(timeSlotsGrid.MONDAY[leIndex] === 'orange') ? {'background-color':'orange'} : {}"></i></label>
+						</div></td>
+						<td>
+						<button ng-click="changeStatus('red', 'MONDAY')" class="button mini radius btn-deny" type="button" value="Deny" translate="deny" >
+							Deny
+						</button>
+						<button ng-click="changeStatus('green', 'MONDAY')" class="button mini radius btn-allow" type="button" value="Allow" translate="allow" >
+							Allow
+						</button></td>
+					</tr>
+					<tr>
+						<th translate="acPcTuesday">Tuesday</th>
+						<td colspan="6" class="toZoom">
+						<div class="time-inputs">
+							<label title="{{$index+1}}" for="Tuesday{{$index+1}}" ng-repeat="leIndex in timeSlotsHours" class="hide-on-portrait singleHour">
+								<input id="Tuesday{{$index+1}}" type="checkbox" ng-model="timeSlotsGrid.TUESDAY[leIndex]" ng-checked="(leValue === 'red') ? true : false" ng-change="leValue = timeSlotsGrid.TUESDAY[leIndex]" ng-true-value="red" ng-false-value="green" />
+								<i aria-hidden="true" ng-style="(timeSlotsGrid.TUESDAY[leIndex] === 'orange') ? {'background-color':'orange'} : {}"></i></label>
+						</div></td>
+						<td>
+						<button ng-click="changeStatus('red', 'TUESDAY')" class="button mini radius btn-deny" type="button" value="Deny" translate="deny" >
+							Deny
+						</button>
+						<button ng-click="changeStatus('green', 'TUESDAY')" class="button mini radius btn-allow" type="button" value="Allow" translate="allow" >
+							Allow
+						</button></td>
+					</tr>
+					<tr>
+						<th translate="acPcWednesday">Wednesday</th>
+						<td colspan="6" class="toZoom">
+						<div class="time-inputs">
+							<label title="{{$index+1}}" for="Wednesday{{$index+1}}" ng-repeat="leIndex in timeSlotsHours" class="hide-on-portrait singleHour">
+								<input id="Wednesday{{$index+1}}" type="checkbox" ng-model="timeSlotsGrid.WEDNESDAY[leIndex]" ng-checked="(leValue === 'red') ? true : false" ng-change="leValue = timeSlotsGrid.WEDNESDAY[leIndex]" ng-true-value="red" ng-false-value="green" />
+								<i aria-hidden="true" ng-style="(timeSlotsGrid.WEDNESDAY[leIndex] === 'orange') ? {'background-color':'orange'} : {}"></i></label>
+						</div></td>
+						<td>
+						<button ng-click="changeStatus('red', 'WEDNESDAY')" class="button mini radius btn-deny" type="button" value="Deny" translate="deny" >
+							Deny
+						</button>
+						<button ng-click="changeStatus('green', 'WEDNESDAY')" class="button mini radius btn-allow" type="button" value="Allow" translate="allow" >
+							Allow
+						</button></td>
+					</tr>
+					<tr>
+						<th translate="acPcThursday">Thursday</th>
+						<td colspan="6" class="toZoom">
+						<div class="time-inputs">
+							<label title="{{$index+1}}" for="Thursday{{$index+1}}" ng-repeat="leIndex in timeSlotsHours" class="hide-on-portrait singleHour">
+								<input id="Thursday{{$index+1}}" type="checkbox" ng-model="timeSlotsGrid.THURSDAY[leIndex]" ng-checked="(leValue === 'red') ? true : false" ng-change="leValue = timeSlotsGrid.THURSDAY[leIndex]" ng-true-value="red" ng-false-value="green" />
+								<i aria-hidden="true" ng-style="(timeSlotsGrid.THURSDAY[leIndex] === 'orange') ? {'background-color':'orange'} : {}"></i></label>
+						</div></td>
+						<td>
+						<button ng-click="changeStatus('red', 'THURSDAY')" class="button mini radius btn-deny" type="button" value="Deny" translate="deny" >
+							Deny
+						</button>
+						<button ng-click="changeStatus('green', 'THURSDAY')" class="button mini radius btn-allow" type="button" value="Allow" translate="allow" >
+							Allow
+						</button></td>
+					</tr>
+					<tr>
+						<th translate="acPcFriday">Friday</th>
+						<td colspan="6" class="toZoom">
+						<div class="time-inputs">
+							<label title="{{$index+1}}" for="Friday{{$index+1}}" ng-repeat="leIndex in timeSlotsHours" class="hide-on-portrait singleHour">
+								<input id="Friday{{$index+1}}" type="checkbox" ng-model="timeSlotsGrid.FRIDAY[leIndex]" ng-checked="(leValue === 'red') ? true : false" ng-change="leValue = timeSlotsGrid.FRIDAY[leIndex]" ng-true-value="red" ng-false-value="green" />
+								<i aria-hidden="true" ng-style="(timeSlotsGrid.FRIDAY[leIndex] === 'orange') ? {'background-color':'orange'} : {}"></i></label>
+						</div></td>
+						<td>
+						<button ng-click="changeStatus('red', 'FRIDAY')" class="button mini radius btn-deny" type="button" value="Deny" translate="deny" >
+							Deny
+						</button>
+						<button ng-click="changeStatus('green', 'FRIDAY')" class="button mini radius btn-allow" type="button" value="Allow" translate="allow" >
+							Allow
+						</button></td>
+					</tr>
+					<tr>
+						<th translate="acPcSaturday">Saturday</th>
+						<td colspan="6" class="toZoom">
+						<div class="time-inputs">
+							<label title="{{$index+1}}" for="Saturday{{$index+1}}" ng-repeat="leIndex in timeSlotsHours" class="hide-on-portrait singleHour">
+								<input id="Saturday{{$index+1}}" type="checkbox" ng-model="timeSlotsGrid.SATURDAY[leIndex]" ng-checked="(leValue === 'red') ? true : false" ng-change="leValue = timeSlotsGrid.SATURDAY[leIndex]" ng-true-value="red" ng-false-value="green" />
+								<i aria-hidden="true" ng-style="(timeSlotsGrid.SATURDAY[leIndex] === 'orange') ? {'background-color':'orange'} : {}"></i></label>
+						</div></td>
+						<td>
+						<button ng-click="changeStatus('red', 'SATURDAY')" class="button mini radius btn-deny" type="button" value="Deny" translate="deny" >
+							Deny
+						</button>
+						<button ng-click="changeStatus('green', 'SATURDAY')" class="button mini radius btn-allow" type="button" value="Allow" translate="allow" >
+							Allow
+						</button></td>
+					</tr>
+
+				</table>
+			</div>
+		</div><br />
+		<div class="row" ng-show="selectedDevices.length >= 1">
+			<div class="right">
+				<button id="acPcTip7" class="button tiny radius" click-loading ui-sref="user.home" translate="cancel" value="Cancel" >
+					Cancel
+				</button>
+				<button id="acPcTip8" class="button tiny radius" type="submit" translate="apply" value="Apply" ng-click="save()" >
+					Apply
+				</button>
+			</div>
+		</div>
+	</form>
+</div>
+</div>
+<script ng-if="selectedAllFlag">
+	var timeout1;
+	$("#calendarRows").off("createOwl").on("createOwl", function() {
+		timeout1 = setTimeout(function() {
+			if (angular.element($('#Sunday1')).scope().deviceId) {
+				$('.bottom').hide();
+				$("#parental-control").owlCarousel({
+					margin: 10,
+					items: 1
+				});
+			}
+		}, 500);
+	});
+</script>
+<script>
+	$("#calendarRows").off("destroyEvents").on("destroyEvents", function() {
+		clearTimeout(timeout1);
+	});
+</script>

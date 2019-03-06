@@ -1,0 +1,65 @@
+<div wait-loading></div>
+<div class="content active ng-hide" ng-show="!loading" id="parental-control">
+	<div class="row">
+		<div class="columns small-12">
+			<h4 class="maintitle" translate="privateUrlFiltering">Web Site Filter</h4>
+			<div class="row">
+				<div class="alert-box warning radius medium-10 small-12" data-alert>
+				    <i class="fa fa-info-circle fa-center center"></i>
+				    <span translate="privateUrlFilteringNote">&nbsp;</span>
+				</div>
+			</div>
+			<form name="parentalForm" check-unsaved>
+				<a class="button tiny radius" ng-click="add()" translate="acPcAddress" id="acPcTip5" >Add Address</a>
+				<table class="table-form responsive-table" id="acPcTip6">
+					<thead>
+						<tr>
+							<th width="17%" translate="acPcEnable">Enable</th>
+							<th translate="acPcInternetLink">Internet Link</th>
+							<th width="16%" translate="acPcOptions">Options</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="rule in rulelist|filter:{isDeleted : '!true'}" ng-form="webSiteFilterForm" ng-if="rulelist.length > 0">
+							<td data-title="Enable">
+							<div class="large-12 text-centered">
+								<div class="onoffswitch">
+									<input ng-model="rule.Enable" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="nav-filter{{$index}}">
+									<label class="onoffswitch-label" for="nav-filter{{$index}}"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+								</div>
+							</div></td>
+							<td data-title="Internet Link">
+							<input required validate-url ignore-protocol="true" ng-model="rule.WebPage" list-rule-index="{{$index}}" name="website" type="text"  />
+							<div ng-show="(webSiteFilterForm.website.$dirty)">
+								<small ng-show="webSiteFilterForm.website.$error.required" class="error" translate="fieldRequired">This field cannot be blank.</small>
+								<small ng-show="webSiteFilterForm.website.$error.url" class="error" translate="invalidAddress">Invalid Address</small>
+							</div></td>
+							<td data-title="Options">
+							<input class="icon-delete" type="button" value="Deletar" ng-click="remove(rule)" />
+							</td>
+						</tr>
+						<tr ng-if="rulelist.length === 0">
+							<td colspan="3" translate="noURLFiltering">There are no url filtering rules</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+		<div class="right">
+			<button id="acPcTip7" class="button tiny radius btn-cancel" click-loading ui-sref="user.home" translate="cancel" value="Cancel" >
+				Cancel
+			</button>
+			<button id="acPcTip8" class="button tiny radius" type="submit" translate="apply" value="Apply" ng-click="save()" >
+				Apply
+			</button>
+		</div>
+	</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+  <li translate="acPcTip5" data-tourtarget="#acPcTip5">
+  </li>
+  <li translate="acPcTip6" data-tourtarget="#acPcTip6">
+  </li>
+</ul>

@@ -1,0 +1,113 @@
+<div class="content">
+<div wait-loading></div>
+<div class="content w100 ng-hide" ng-show="!loading" id="remote-access">
+	<div class="alert-box info" data-alert="" ng-show="!isRemoteAccessEnabled">
+        Remote assistance is currently disabled.<br><br>
+        By clicking on the 'Apply' button with the 'Enabled' checkbox enabled your gateway will be accessible from your broadband connection. After 30 minutes of inactivity, or on reboot, remote assistance will be automatically disabled.<br><br>
+        Please provide the following parameters to your ISP:
+	</div>
+
+    <div class="alert-box info" data-alert="" ng-show="isRemoteAccessEnabled">
+        Remote assistance is currently disabled.<br><br>
+        Click 'Apply' button with the 'Enabled' checkbox disabled to disable remote assistance on your gateway
+    </div>
+
+    <form name="formRemoteAccess" autocomplete="off" ng-submit="save()" check-unsaved>
+
+    <div class="row">
+        <div class="column medium-3 small-12">
+            <label for="remotewebaccess-enable" class="inline">Enabled</label>
+        </div>
+        <div class="column medium-4 small-12 end">
+            <div class="onoffswitch">
+                <input type="checkbox" name="onoffswitch" checked="" ng-model="httpsEnable" id="remotewebaccess-enable" class="onoffswitch-checkbox">
+                <label for="remotewebaccess-enable" class="onoffswitch-label">
+                    <div class="onoffswitch-inner"></div>
+                    <div class="onoffswitch-switch"></div>
+                </label>
+            </div>
+        </div>
+    </div>
+    <fieldset data-target="remotewebaccess-enable" class="fieldset">
+        <div class="row">
+            <div class="columns medium-3 small-4">
+                <label class="inline">Mode</label>
+            </div>
+            <div class="column medium-3 small-12 end">
+                <label  ng-show="!httpsEnable" class="inline" ng-bind="(isTemporary === 'true')? 'Temporary' : 'Permanent'"></label>
+                <div ng-show="httpsEnable">
+                    <select type="checkbox" name="onoffswitch" ng-model="isTemporary">
+                        <option value="true">Temporary</option>
+                        <option value="false">Permanent</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="columns medium-3 small-4">
+                <label class="inline">URL</label>
+            </div>
+            <div class="column medium-4 small-12 end">
+                <label class="inline" ng-bind="httpsUrl">&nbsp;</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="columns medium-3 small-4">
+                <label class="inline">Username</label>
+            </div>
+            <div class="column medium-4 small-12 end">
+                <label class="inline" ng-bind="(user === 'local_admin') ? 'admin' : user">&nbsp;</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="columns medium-3 small-4">
+                <label class="inline">Use Random Password</label>
+            </div>
+            <div class="column medium-4 small-12 end">
+                <label class="inline">Yes</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="columns medium-3 small-4">
+                <label class="inline">Password</label>
+            </div>
+            <div class="column medium-4 small-12 end">
+                <label class="inline" ng-bind="autoGenPasswd"></label>
+            </div>
+        </div>
+    </fieldset>
+	<div class="right">
+      <button id="cancelTip" class="button tiny radius btn-cancel" click-loading ui-sref="user.home" translate="cancel"></button>
+      <button id="applyTip" class="button tiny radius" type="submit" ng-hide="update" translate="apply" ></button>
+    </div>
+	</form>
+    <!-- Model for please wait message -->
+    <a data-reveal-id="pleasewait-modal" data-reveal id="linkPopup" href="javascript:void(0)" class="ng-hide"></a>
+    <div id="pleasewait-modal" class="reveal-modal tiny" data-reveal>
+        <a class="close-reveal-modal ng-hide">&#215;</a>
+
+        <h5 class="modal-title" translate="restart">Restart</h5>
+
+        <p translate="responseDescription">Please wait for Gateway response...</p>
+
+        <div ng-if="!logoWaiting" class="t-center">
+            <img src="images/loading.gif" border="0" />
+        </div>
+        <div ng-if="logoWaiting" class="t-center">
+                <div class="logo-waiting">
+                 <p translate="pleaseWaitLoading"> Please wait... </p>
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = false;
+	$(document).foundation();
+</script>
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li translate="applyTip" data-tourtarget="#applyButton"></li>
+	<li translate="cancelTip" data-tourtarget="#cancelButton"></li>
+	<li translate="tabTip" data-tourtarget="#accessControlTab"></li>
+</ul>

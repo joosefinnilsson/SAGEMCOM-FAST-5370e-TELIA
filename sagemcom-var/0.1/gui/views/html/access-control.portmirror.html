@@ -1,0 +1,29 @@
+<div class="content">
+	<div wait-loading></div>
+	<div class="content w100 ng-hide" ng-show="!loading" id="portmirror">
+		<h4 class="maintitle" translate="portMirror">Port mirroring</h4>
+		<form id="portmirrorForm" name="portmirrorForm" ng-submit="save()" autocomplete="off" check-unsaved>
+			<div class="row collapse">
+				<div class="columns medium-2 small-3">
+					<label class="inline" translate="enable">Enable</label>
+				</div>
+
+				<div class="columns medium-2 small-9 end">
+					<div id="dmzTip1" class="onoffswitch">
+						<input class="onoffswitch-checkbox" id="enable-portmirror" name="enable-portmirror" type="checkbox" ng-model="fields.status"/>
+						<label class="onoffswitch-label" for="enable-dmz"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+					</div>
+				</div>
+			</div>
+
+			<div class="right">
+				<button id="dmzTip4" class="button tiny radius btn-cancel" translate="cancel" value="Cancel" click-loading ui-sref="user.home">
+					Cancel
+				</button>
+				<button id="dmzTip3" class="button tiny radius" type="submit" translate="apply" ng-disabled="fields.disableApply">
+					Apply
+				</button>
+			</div>
+		</form>
+	</div>
+</div>

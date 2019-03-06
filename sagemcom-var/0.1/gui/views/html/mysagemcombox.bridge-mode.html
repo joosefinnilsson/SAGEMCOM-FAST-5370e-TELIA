@@ -1,0 +1,40 @@
+<div class="content" ng-show="true" id="bridge-sbox">
+	<form id="bridgeForm" name="bridgeForm" ng-submit="beforeSave()" check-unsaved>
+		<h4 class="maintitle" translate="bridgeMode">Bridge Mode</h4>
+
+		<div class="row">
+			<div class="columns medium-3 small-4">
+				<label class="inline" for="enable-bridgeMode"translate="enableBridgeMode">Enable</label>
+			</div>
+
+			<div class="columns medium-2 small-8 end">
+				<div ng-class="bridgeEnable == null ? 'bt-disabled' : ''" class="onoffswitch">
+					<input ng-disabled="bridgeEnable == null" ng-model="bridgeEnable" class="onoffswitch-checkbox" id="enable-bridgeMode" name="onoffswitch" type="checkbox"/>
+					<label class="onoffswitch-label" for="enable-bridgeMode"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+				</div>
+			</div>
+    </div>
+
+		<div class="row">
+			<p ng-if="!showModalConfirm" class="columns medium-12 small-12 justified" translate="bridgeModeConfirmMsg">LAN port 4 will be bridged.</p>
+			<p class="columns medium-12 small-12 justified" translate="bridgeModeEnableTip">Please refresh the page after enabling or disabling Bridge Mode.</p>
+		</div>
+
+		<div class="right">
+			<button type="button" class="button tiny radius ng-scope" translate="cancel" click-loading ui-sref="user.home" id="cancelTip" ></button>
+			<button id="applyTip" class="button tiny radius ng-scope" translate="apply" type="submit">Apply</button>
+		</div>
+	</form>
+</div>
+
+<div id="confirm-bridge-mode" class="reveal-modal tiny" data-reveal>
+    <a class="close-reveal-modal close-modal">&#215;</a>
+    <h5 class="modal-title" translate="applyChanges">&nbsp;</h5>
+    <p translate="bridgeModeConfirmMsg">
+        &nbsp;
+    </p>
+    <div class="right">
+        <button class="button tiny radius" type="button" translate="no" ng-click="closeModalConfirm()"></button>
+        <button class="button tiny radius" type="button" translate="yes" type="button" ng-click="save()"></button>
+    </div>
+</div>

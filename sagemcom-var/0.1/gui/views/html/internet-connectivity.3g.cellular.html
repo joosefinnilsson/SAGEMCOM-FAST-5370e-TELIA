@@ -1,0 +1,318 @@
+<form name="backup3g" ng-submit="save()" check-unsaved="">
+	<h4 class="maintitle" translate="g3BackupTitlePage">3G/LTE Backup</h4>
+  <div>
+  	<label ng-if="!isBackupAvailable()">
+	    <i class="fa fa-exclamation-triangle fa-2x" style="color: orangered;"></i>
+	    <span translate="backupNotAvailable">&nbsp;</span>
+	    <br>
+  	</label>
+  	<br>
+  </div>
+	
+
+	<div id="container3G" class="ng-hide" ng-show="basicConfig.enable && isBackupAvailable()">
+		<div class="row" check-feature-state="statusBackup3gLTE">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="sStatus">Status</label>
+			</div>
+			<div class="columns medium-4 small-8 end" id="labelStatus">
+				<label class="inline color-on" ng-if="(statusInfo.state === 'connected' || statusInfo.state === 'UP') && !config3g" translate="connected">&nbsp;</label>
+				<label class="inline color-off" ng-if="!statusInfo.state && !config3g" translate="standBy">&nbsp;</label>
+				<label class="inline color-off" ng-if="!!statusInfo.state && statusInfo.state !== 'connected' && statusInfo.state !== 'UP' && !config3g" ng-bind="statusInfo.state">&nbsp;</label>
+				<label class="inline color-off" ng-if="!!config3g" ng-bind="statusInfo.interfaceType">&nbsp;</label>
+			</div>
+		</div>
+
+		
+
+
+		
+
+		<div class="row" check-feature-state="mobTechStatusBackup3gLTE">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="3gMobTechStatus">Mobile Technology Status</label>
+			</div>
+			<div class="columns medium-4 small-8 end" id="labelMobTechStatus">
+				<label class="inline" ng-bind="statusInfo.mobTechStatus ? statusInfo.mobTechStatus : 'notAvailable' | translate">&nbsp;</label>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="3gDongleManufacturer">Dongle Manufacturer</label>
+			</div>
+			<div class="columns medium-4 small-8 end" id="labelDongleManufacturer">
+				<label class="inline" ng-bind="statusInfo.manufacturer ? statusInfo.manufacturer : 'notAvailable' | translate">&nbsp;</label>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="3gDongleModel">Dongle Model</label>
+			</div>
+			<div class="columns medium-4 small-8 end" id="labelDongleModel">
+				<label class="inline" ng-bind="statusInfo.model ? statusInfo.model : 'notAvailable' | translate">&nbsp;</label>
+			</div>
+		</div>
+
+		<div class="row" check-feature-state="dongleVersionBackup3g">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="3gDongleVersion">Dongle Version</label>
+			</div>
+			<div class="columns medium-4 small-8 end" id="labelDongleVersion">
+				<label class="inline" ng-bind="statusInfo.modemVersion ? statusInfo.modemVersion : 'notAvailable' | translate">&nbsp;</label>
+			</div>
+		</div>
+
+		
+
+		
+
+		
+
+		
+
+		<div class="row" ng-show="selectedApn.Alias === 'Other'">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="apnName">APN Name</label>
+			</div>
+			<div class="columns medium-4 small-12 end" id="apnLabel">
+				<input type="text" ng-model="selectedApn.APN" ng-required="">
+				<div ng-show="(backup3g.apnName.$dirty)">
+					<small ng-show="backup3g.apnName.$error.required" class="error" translate="fieldRequired">This field cannot be blank.</small>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" ng-show="selectedApn.Username != null" check-feature-state="lte3gBackupApnParams">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="login">Login</label>
+			</div>
+
+			<div class="columns medium-4 small-12 end" id="loginLabel">
+				<input type="text" value="" ng-model="selectedApn.Username">
+			</div>
+		</div>
+
+		<div class="row" ng-show="selectedApn.Password != null" check-feature-state="lte3gBackupApnParams">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="password">Password</label>
+			</div>
+
+			<div class="columns medium-4 small-12 end" id="password">
+				<input type="text" value="" ng-model="selectedApn.Password">
+			</div>
+		</div>
+
+		<div class="row" ng-show="selectedApn.Proxy != null" check-feature-state="lte3gBackupApnProxyParams">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="3gProxy">Proxy</label>
+			</div>
+
+			<div class="columns medium-4 small-12 end" id="proxy">
+				<input type="text" value="" ng-model="selectedApn.Proxy">
+			</div>
+		</div>
+
+		
+
+		<div class="row" ng-show="statusInfo.internetAvailability != null">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="3gInternetAvailability">Internet Availability</label>
+			</div>
+
+			<div class="columns medium-4 small-12 end" id="internetAvailability">
+				<label class="inline" ng-bind="statusInfo.internetAvailability ? (statusInfo.internetAvailability | lowercase | translate) : ('notAvailable' | translate)">&nbsp;</label>
+			</div>
+		</div>
+
+		<div class="row" check-feature-state="dongleVersionBackup3g">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="rsrqLte">RSRQ</label>
+			</div>
+			<div class="columns medium-4 small-8 end" id="labelRsrq">
+        <label class="inline" ng-bind="statusInfo.rsrq | translate">&nbsp;{{statusInfo.rsrq}}</label>
+			</div>
+		</div>
+
+		<div class="row" check-feature-state="dongleVersionBackup3g">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="rsrpLte">RSRP</label>
+			</div>
+			<div class="columns medium-4 small-8 end" id="labelRsrp">
+        <label class="inline" ng-bind="statusInfo.rsrp | translate">&nbsp;{{statusInfo.rsrp}}</label>
+			</div>
+		</div>
+
+		<div class="row" check-feature-state="dongleVersionBackup3g">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="rssiLte">RSSI</label>
+			</div>
+			<div class="columns medium-4 small-8 end" id="labelRssi">
+        <label class="inline" ng-bind="statusInfo.rssi | translate">&nbsp;{{statusInfo.rssi}}</label>
+			</div>
+		</div>
+
+		<div class="row" check-feature-state="dongleVersionBackup3g">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="snrLte">SNR</label>
+			</div>
+			<div class="columns medium-4 small-8 end" id="labelSnr">
+        <label class="inline" ng-bind="statusInfo.snr | translate">&nbsp;{{statusInfo.snr}}</label>
+			</div>
+		</div>
+
+		<div class="row" check-feature-state="dongleVersionBackup3g">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="bandInfoLte">Band Info</label>
+			</div>
+			<div class="columns medium-4 small-8 end" id="labelBandInfo">
+				<label class="inline" ng-bind="statusInfo.bandInfo | translate">&nbsp;{{statusInfo.bandInfo}}</label>
+			</div>
+		</div>
+
+		<div class="row" check-feature-state="cellidentityBackup3g">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="cellidentity">Cell Identity</label>
+			</div>
+			<div class="columns medium-4 small-8 end" id="cellidentity">
+				<label class="inline" ng-bind="statusInfo.cellidentity ? statusInfo.cellidentity : 'notAvailable' | translate">&nbsp;</label>
+			</div>
+		</div>
+
+		<div class="row" check-feature-state="plmnBackup3g">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="plmn">PLMN</label>
+			</div>
+			<div class="columns medium-4 small-8 end" id="plmn">
+				<label class="inline" ng-bind="statusInfo.plmn | translate">&nbsp;</label>
+			</div>
+		</div>
+
+		
+
+		
+
+		
+
+		<div check-feature-state="dongleVersionBackup3g">
+		<hr ng-show="statusInfo.mptcpEnable != null">
+		<h4 class="maintitle" translate="mptcpApnLte" check-feature-state="dongleVersionBackup3g" ng-show="statusInfo.mptcpEnable != null">MPTCP APN</h4>
+		<div class="row" check-feature-state="mptcpAPNstatus" ng-show="statusInfo.mptcpEnable != null">
+			<div class="columns medium-3 small-4">
+				<label class="inline" for="enable-mptcpApnLte" translate="sStatus">Status</label>
+			</div>
+
+			<div class="columns medium-2 small-8 end">
+				<div class="onoffswitch" ng-if="!!disableFeature">
+					<label class="inline" ng-if="!!config3g" ng-bind="statusInfo.state ? statusInfo.state : 'notAvailable' | translate">&nbsp;</label>
+				</div>
+				<div class="onoffswitch" ng-class="{'onoffswitch-disabled': statusInfo.failoverEnable}" ng-if="!disableFeature">
+					<input ng-model="statusInfo.mptcpEnable" class="onoffswitch-checkbox" id="enable-mptcpApnLte" name="onoffswitch" type="checkbox">
+					<label class="onoffswitch-label" for="enable-mptcpApnLte"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+				</div>
+			</div>
+		</div>
+		<div class="row" check-feature-state="dongleVersionBackup3g" ng-show="statusInfo.failoverEnable != null">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="ApnLte">APN</label>
+			</div>
+
+			<div class="columns medium-4 small-12 end" id="pinCode">
+				<input type="text" name="mptcpField" ng-disabled="statusInfo.failoverEnable || !!disableFeature || readOnly" id="mptcpField" ng-model="statusInfo.mptcpValue" allow-empty="true">
+			</div>
+		</div>
+    <div class="alert-box warning large radius medium-11 small-12" data-alert="">
+			<i class="fa fa-info-circle fa-center"></i>
+			<div style="margin-left:40px;">
+				<span translate="helpTextCurrentAPN"></span>
+			</div>
+		</div>
+		<hr check-feature-state="dongleVersionBackup3g" ng-show="statusInfo.failoverEnable != null">
+		<h4 class="maintitle" translate="failoverpnLte" check-feature-state="dongleVersionBackup3g" ng-show="statusInfo.failoverEnable != null">FAILOVER APN</h4>
+		<div class="row" check-feature-state="dongleVersionBackup3g" ng-show="statusInfo.failoverEnable != null">
+			<div class="columns medium-3 small-4">
+				<label class="inline" for="enable-3g" translate="failoverMode">Enable</label>
+			</div>
+
+			<div class="columns medium-2 small-8 end">
+				<div class="onoffswitch" ng-class="{'onoffswitch-disabled': statusInfo.mptcpEnable && !disableFeature}">
+					<input ng-disabled="readOnly" ng-model="statusInfo.failoverEnable" class="onoffswitch-checkbox" id="enable-3g" name="onoffswitch" type="checkbox">
+					<label class="onoffswitch-label" for="enable-3g"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+				</div>
+			</div>
+    </div>
+    <div class="alert-box warning large radius medium-11 small-12" data-alert="">
+			<i class="fa fa-info-circle fa-center"></i>
+			<div style="margin-left:40px;">
+				<span translate="helpTextFailoverAPN"></span>
+			</div>
+		</div>
+		<div class="row" check-feature-state="dongleVersionBackup3g" ng-show="statusInfo.failoverEnable != null">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="failoverApn">APN</label>
+			</div>
+
+			<div class="columns medium-4 small-12 end" id="pinCode">
+				<input type="text" name="failoverField" id="failoverField" ng-disabled="(statusInfo.mptcpEnable && !disableFeature) || readOnly" ng-model="statusInfo.failoverValue" allow-empty="true">
+			</div>
+		</div>
+		</div>
+
+		
+
+		<hr check-feature-state="networkSettings">
+		<h4 class="maintitle" translate="networkSettings" check-feature-state="networkSettings">Network Settings</h4>
+		<div class="row" check-feature-state="networkSettings">
+			<div class="columns medium-3 small-4">
+				<label class="inline" for="preferredModeName" translate="preferredMode">Preferred mode:</label>
+			</div>
+
+			<div class="columns medium-3 small-8 end">
+				<select name="preferredModeName" ng-model="networkSettings.preferredMode" id="preferredModeName" ng-disabled="readOnly">
+					<option value="{{item}}" ng-bind="item | translate" ng-selected="networkSettings.preferredMode == item" ng-repeat="item in preferredModes"></option>
+				</select>
+			</div>
+		</div>
+	</div>
+  <div class="alert-box warning large radius medium-11 small-12" data-alert="">
+    <i class="fa fa-info-circle fa-center"></i>
+    <div style="margin-left:40px;">
+      <span translate="coverage4g"></span>
+    </div>
+  </div>
+	<div ng-if="isBackupAvailable()" class="right">
+		<button class="button tiny radius btn-cancel" type="button" translate="cancel" id="cancelTip" click-loading="" ui-sref="user.home">
+			Cancel
+		</button>
+		<button class="button tiny radius" type="submit" translate="apply" id="applyTip">
+			Apply
+		</button>
+	</div>
+</form>
+
+<ul id="tlyPageGuide">
+	<li translate="3gTip1" data-tourtarget="#enable-3g"></li>
+	<li translate="3gTip2" data-tourtarget="#labelStatus"></li>
+	<li translate="3gTip2" data-tourtarget="#labelMTStatus"></li>
+	<li translate="3gTip5" data-tourtarget="#labelSignalLevel"></li>
+	<li translate="3gTip14" data-tourtarget="#labelMobTechStatus"></li>
+	<li translate="3gTip4" data-tourtarget="#labelDongleManufacturer"></li>
+	<li translate="3gTip17" data-tourtarget="labelDongleModel"></li>
+	<li translate="3gTip19" data-tourtarget="labelDongleVersion"></li>
+	<li translate="3gTip6" data-tourtarget="#pinCode"></li>
+	<li translate="internetConnectivityWanTip13" data-tourtarget="#authProtocol"></li>
+	<li translate="3gTip7" data-tourtarget="#apn"></li>
+	<li translate="internetConnectivityWanTip10" data-tourtarget="#loginLabel"></li>
+	<li translate="internetConnectivityWanTip11" data-tourtarget="#password"></li>
+	<li translate="3gTip18" data-tourtarget="#proxy"></li>
+	<li translate="3gTip13" data-tourtarget="#pukCode"></li>
+	<li translate="3gTip15" data-tourtarget="#ipServer"></li>
+	<li translate="3gTip16" data-tourtarget="#internetAvailability"></li>
+	<li translate="3gTip20" data-tourtarget="#labelRsrq"></li>
+	<li translate="3gTip21" data-tourtarget="#labelRsrp"></li>
+	<li translate="3gTip22" data-tourtarget="#labelRssi"></li>
+	<li translate="3gTip23" data-tourtarget="#labelSnr"></li>
+	<li translate="3gTip24" data-tourtarget="#labelBandInfo"></li>
+
+</ul>

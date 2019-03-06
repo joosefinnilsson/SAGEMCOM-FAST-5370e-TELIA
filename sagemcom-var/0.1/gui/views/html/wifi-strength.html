@@ -1,0 +1,102 @@
+<div class="content columns small-12">
+
+	<div class="columns medium-8 small-12 header-top">
+		<h4><span style="text-transform: uppercase">WIFI</span></h4>
+	</div>
+
+	<div class="row">
+		<div class="columns small-12">
+			<div class="panel panel-white">
+				<h5 class="h-wifi" translate="wifiStrength">WIFI Strength</h5>
+				<div class="frequency">
+					<ul id="bar">
+						&nbsp;<li class="freq-1"></li>
+						&nbsp;<li class="freq-2"></li>
+						&nbsp;<li class="freq-3"></li>
+						&nbsp;<li class="freq-4"></li>
+						&nbsp;<li class="freq-5"></li>
+						&nbsp;<li class="freq-6"></li>
+						&nbsp;<li class="freq-7"></li>
+						&nbsp;<li class="freq-8"></li>
+						&nbsp;<li class="freq-9"></li>
+						&nbsp;<li class="freq-10"></li>
+					</ul>
+				</div>
+				<hr>
+				<div translate="poor" class="low text-left">
+					POOR
+				</div>
+				<div translate="ok" class="low text-center">
+					OK
+				</div>
+				<div translate="great" class="low text-right">
+					GREAT
+				</div>
+
+			</div>
+		</div>
+	</div><!-- .row -->
+	<div class="row">
+		<div class="columns small-12">
+			<div class="panel panel-white-msg">
+				<p id="great" translate="msgGreat" style="display: none">
+					Your coverage here is great.
+				</p>
+				<p id="ok" translate="msgOk" style="display: none">
+					The Signal in this location is OK, though it would be better if you placed an extender nearby or moved your gateway closer.
+				</p>
+				<p id="poor" translate="msgPoor" style="display: none">
+					The Signal in this location is poor, You might be able to improve the signal here if you placed an extender nearby or moved your gateway closer.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="columns medium-8 small-12 header-top">
+		<h4><span style="text-transform: uppercase" translate="changeChannelTitle">WIFI CHANNEL</span></h4>
+	</div>
+	<div class="row">
+		<div class="column">
+			<p class="text-center" translate="changeChannelMsg1">Optimize channel selection for this device</p>
+			<label>
+				<i class="fa fa-exclamation-triangle" style="color: orangered;"></i>
+				<span translate="changeChannelMsg2">All connected devices might suffer a loss of signal quality</span>
+			</label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns small-12 text-center">
+			<button ng-click="changeChannel()" translate="firstStart" class="button tiny radius">Start</button>
+		</div>
+	</div>
+	<div ng-show="channel" class="row text-center">
+		<span translate="changeChannelMsg3Part1">Configuration changed to channel</span>&nbsp;<span ng-bind="channel"></span>&nbsp;<span translate="changeChannelMsg3Part2">for better Wifi performance with this device. You will be disconnected from the WiFi network temporarily.</span>
+	</div>
+</div>
+
+<script>
+
+	$(document).ready(function() {
+		var scan = function() {
+			var signal = SboxInterface.getWifiStrength();
+			for (var i = 0; i < $('#bar li').length; i++) {
+				if (i < signal) {
+					$('#bar li:eq(' + i + ')').css('opacity', 1);
+				} else {
+					$('#bar li:eq(' + i + ')').css('opacity', 0);
+				}
+			}
+			$('.panel-white-msg p').hide();
+			if (signal > 7) {
+				$("#great").show();
+			} else if (3 < signal && signal <= 7) {
+				$("#ok").show();
+			} else if (signal <= 3) {
+				$("#poor").show();
+			}
+
+		};
+		scan();
+		setInterval(scan, 3000);
+	}); 
+</script>

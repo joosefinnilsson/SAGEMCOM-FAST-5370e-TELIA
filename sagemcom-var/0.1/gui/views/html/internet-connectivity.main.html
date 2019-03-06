@@ -1,0 +1,61 @@
+<div class="columns large-12 medium-12 small-12 ng-hide" ng-show="true">
+	<div class="row">
+		<div id="header-page">
+			<div class="columns custom-menu-title-size medium-6">
+				<h3 translate="internetConnectivity">Internet Connectivity</h3>
+			</div>
+
+			<div class="columns custom-menu-itens-size-pages medium-6 text-right header-controls">
+				<span ng-if="reverseHeaderControls">
+					<a id="homebtn" title="Home" class="icons-bg border-gray" click-loading="" ui-sref="user.home"> <img src="images/icon-home.png" alt="Home Icon"> </a>
+					
+					<div internet-connectivity=""></div>
+				</span>
+				<span ng-if="!reverseHeaderControls">
+					<div internet-connectivity=""></div>
+					<extended-menu ng-if="extendedMenus"></extended-menu>
+					
+					<a ng-if="!extendedMenus" id="homebtn" title="Home" class="icons-bg border-gray" click-loading="" ui-sref="user.home"> <img src="images/icon-home.png" alt="Home Icon"> </a>
+				</span>
+			</div>
+
+		</div>
+	</div>
+	<div messagebox=""></div>
+	<div id="main-content">
+		<a class="shs" href="javascript:void(0)" translate="showSection">Show Sections</a>
+		<dl id="internetConnectiviyTab" class="tabs" ng-class="changeToVertical ? 'vertical' : ''" data-tab="" tab-click="">
+			<dd style="display:none;" check-feature-state="internetConnectivityWanBasic">
+				<a href="javascript:void(0)" click-loading="" ui-sref="user.internetConnectivity.basic" translate="basic_wan_status">Basic</a>
+			</dd>
+			
+			
+			<dd style="display:none;" check-feature-state="internetConnectivityVoipMngt">
+				<a href="javascript:void(0)" click-loading="" ui-sref="user.internetConnectivity.voipMngtInfo" translate="voipMngtTab">Voice & management Interface</a>
+			</dd>
+			<dd style="display:none;" check-feature-state="internetConnectivityVLAN">
+				<a href="javascript:void(0)" click-loading="" ui-sref="user.internetConnectivity.vlan" translate="vlanConfiguration">VLAN Configuration</a>
+			</dd>
+			
+			
+			
+			
+			
+			
+			
+			
+			<dd style="display:none;" check-feature-state="ploamPassword">
+				<a href="javascript:void(0)" click-loading="" ui-sref="user.ploampassword">PLOAM Password</a>
+			</dd>
+			<dd style="display:none;" check-feature-state="GRETunnel">
+				<a href="javascript:void(0)" click-loading="" ui-sref="user.internetConnectivity.greTunnel">GRE Tunnel</a>
+			</dd>
+			
+			
+		</dl>
+
+		<div class="tabs-content internet-connectivity" data-tab-content="" ui-view="">
+
+		</div>
+	</div>
+</div>

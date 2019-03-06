@@ -1,0 +1,79 @@
+<div class="content active" id="maintenance-resets">
+	<h4 translate="resets">Resets</h4>
+	<!-- Buttons -->
+	<div class="row">
+		<div class="columns large-3 medium-6 small-6">
+			<label class="inline" translate="restartGateway">Restart Gateway</label>
+		</div>
+		<div class="columns large-3 medium-6 small-6 end">
+			<button type="button" class="button tiny radius" data-reveal-id="restart-modal" data-reveal translate="restart" id="restartGatewayTip" ></button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns large-3 medium-6 small-6">
+			<label class="inline" translate="factorySettings">Factory Settings</label>
+		</div>
+
+		<div class="columns large-3 medium-6 small-6 end">
+			<button class="button tiny radius" type="button" data-reveal-id="reset-modal" data-reveal translate="reset" id="resetGatewayTip" ></button>
+		</div>
+	</div>
+	<!-- Model for restart -->
+	
+	<!-- Model for restart -->
+	<div id="restart-modal" class="reveal-modal tiny" data-reveal>
+        <a class="close-reveal-modal close-modal" data-close-reveal>&#215;</a>
+
+        <h5 class="modal-title" translate="restart">Restart</h5>
+
+        <p translate="restartDescription">
+			Are you sure you want to Reset the Gateway?
+		</p>
+
+        <div class="right">
+            <button class="button tiny radius" type="button" translate="cancel" onclick="$('#restart-modal a.close-reveal-modal').trigger('click');" data-close-reveal></button>
+			<button class="button tiny radius" type="button" translate="yes" data-reveal-id="pleasewait-modal" data-reveal ng-click="reboot()"></button>
+        </div>
+    </div>
+	
+	<!-- Model for reset -->
+	<div id="reset-modal" class="reveal-modal tiny" data-reveal>
+        <a class="close-reveal-modal close-modal" data-close-reveal>&#215;</a>
+
+        <h5 class="modal-title" translate="factorySettingsReset">Factory Settings Reset</h5>
+
+        <p translate="factorySettingsResetDescription">This will erase and reset your gateway settings to the factory default settings.</p>
+
+        <div class="right">
+            <button class="button tiny radius" type="button" translate="cancel" onclick="$('#reset-modal a.close-reveal-modal').trigger('click');" data-close-reveal></button>
+			<button class="button tiny radius" type="button" translate="yes" data-reveal-id="pleasewait-modal" data-reveal ng-click="reinitialize()"></button>
+        </div>
+    </div>
+	
+	<!-- Model for please wait message -->
+	<div id="pleasewait-modal" class="reveal-modal tiny" data-reveal>
+        <h5 class="modal-title" translate="reset">Reset</h5>
+
+        <p translate="resetDescription">Please, wait while the Gateway is rebooting...</p>
+
+        <div class="t-center">
+			<img src="images/loading.gif" border="0" />
+		</div>
+    </div>
+</div>
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = true;
+	$(document).foundation();
+</script>
+
+<!-- help button -->
+<ol class="joyride-list" data-joyride data-options="next_button:false;">
+  <li data-id="restartGatewayTip">
+    <p translate="restartGatewayTip"></p>
+    <a class="small button joyride-next-tip" translate="next"></a>
+  </li>
+  <li data-id="resetGatewayTip">
+    <p translate="resetGatewayTip"></p>
+    <a class="small button joyride-next-tip" translate="finish"></a>
+  </li>
+</ol>

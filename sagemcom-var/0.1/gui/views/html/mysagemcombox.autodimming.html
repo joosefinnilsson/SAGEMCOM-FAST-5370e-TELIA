@@ -1,0 +1,45 @@
+<div class="content">
+	<div wait-loading></div>
+	<div class="content ng-hide" ng-show="!loading" id="">
+		<h4 translate="autodimming">Auto-dimming</h4>
+		<form id="autoDimmingForm" name="autoDimmingForm" ng-submit="save()" autocomplete="off" novalidate check-unsaved>
+			<div class="row">
+				<div class="columns medium-2 small-4">
+					<label class="inline"translate="mode">Mode</label>
+				</div>
+				<div class="columns medium-3 small-8 end">
+					<select id="ledMode" ng-model="mode">
+						<option value="Autodimming" translate="autodimming">Auto-dimming</option>
+						<option value="Manual" translate="manual">Manual</option>
+					</select>
+				</div>
+			</div>
+			<div class="row" ng-show="mode === 'Manual'">
+				<div class="columns medium-2 small-4">
+					<label class="inline" translate="brightness">Brightness</label>
+				</div>
+				<div class="columns medium-3 small-8 end">
+					<select id="ledBrightness" ng-model="brightness">
+						<option value="Off" translate="off">Off</option>
+						<option value="Dimming" translate="dimming">Dimming</option>
+						<option value="100%">100%</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="right">
+					<button type="button" class="button tiny radius" translate="cancel" click-loading ui-sref="user.home" id="cancelTip" ></button>
+					<button type="submit" class="button tiny radius" translate="apply" id="applyTip"></button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+  	<li translate="ledMode" data-tourtarget="#ledMode"></li>
+  	<li translate="ledBrightness" data-tourtarget="#ledBrightness"></li>
+	<li translate="cancelTip" data-tourtarget="#cancelTip"></li>
+    <li translate="applyTip" data-tourtarget="#applyTip"></li>
+</ul>

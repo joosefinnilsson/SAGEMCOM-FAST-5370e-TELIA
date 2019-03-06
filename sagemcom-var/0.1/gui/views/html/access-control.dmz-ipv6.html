@@ -1,0 +1,58 @@
+<div class="content">
+	<div wait-loading></div>
+	<div class="content w100 ng-hide" ng-show="!loading" id="dmz">
+		<h4 class="maintitle" translate="dmzIPv6">IPv6 DMZ</h4>
+		<div class="row">
+			<div class="alert-box warning radius medium-8 small-8" data-alert>
+			    <i class="fa fa-info-circle fa-center center"></i>
+			    <span translate="dmzIPv6Tip">Activate DMZ on a device to make it reachable from Internet.</span>
+			</div>
+		</div>
+		<form id="dmzIPv6Form" name="dmzIPv6Form" ng-submit="save()" autocomplete="off" check-unsaved>
+			<div class="row collapse">
+				<div class="columns medium-2 small-3">
+					<label class="inline" translate="enable">Enable</label>
+				</div>
+
+				<div class="columns medium-2 small-9 end">
+					<div id="dmzTip1" class="onoffswitch">
+						<input class="onoffswitch-checkbox" id="enable-dmz" name="enable-dmz" type="checkbox" ng-model="fields.Enable"/>
+						<label class="onoffswitch-label" for="enable-dmz"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+					</div>
+				</div>
+			</div>
+
+			<div class="row collapse ng-hide" ng-show="fields.Enable">
+				<div class="columns medium-2 small-3">
+					<label class="inline" translate="localHost">Local Host</label>
+				</div>
+
+				<div class="columns medium-3 small-5 end" ng-show="fields.Enable">
+					<input id="dmz-input" validate-ipv6 type="text" name="dmzInput" ng-model="fields.LocalHost" />
+					<div ng-if="dmzIPv6Form.dmzInput.$invalid && (dmzIPv6Form.dmzInput.$dirty || submitted)">
+						<small class="error" translate="invalidIpAddress">Invalid IP Address</small>
+					</div>
+				</div>
+			</div>
+
+			<div class="right">
+				<button id="dmzTip4" class="button tiny radius btn-cancel" translate="cancel" value="Cancel" click-loading ui-sref="user.home">
+					Cancel
+				</button>
+				<button id="dmzTip3" class="button tiny radius" type="submit" translate="apply" ng-disabled="fields.disableApply">
+					Apply
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+  <li translate="dmzTip1" data-tourtarget="#dmzTip1">
+  </li>
+  <li translate="dmzTip2" data-tourtarget="#dmz-input">
+  </li>
+  <li translate="dmzTip2" data-tourtarget="#dmzTip2">
+  </li>
+</ul>

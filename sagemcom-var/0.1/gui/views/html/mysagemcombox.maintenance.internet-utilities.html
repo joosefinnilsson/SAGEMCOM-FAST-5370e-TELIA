@@ -1,0 +1,266 @@
+<div wait-loading=""></div>
+<div class="content active ng-hide no-padding" ng-show="!loading" id="maintenance-internetutilities">
+	<div><div bread-crumbs=""></div></div>
+	<form name="formInternetUtilities" autocomplete="off" novalidate="">
+		<h4 translate="internetUtilities" ng-hide="tool">Internet Utilities</h4>
+		<h4 ng-show="tool" ng-bind="tool" id="tool"></h4>
+		<div class="row" ng-hide="tool">
+			<div class="columns large-3 medium-5 small-5 full-width">
+				<label class="inline" translate="utility">Utility</label>
+			</div>
+
+			<div class="columns large-4 medium-4 small-7 end full-width">
+				<select id="iu-select" ng-model="selectedOption" ng-change="clear()">
+					<option value="" translate="select">Select</option>
+					<option value="Ping" check-feature-state="ping">Ping</option>
+					<option value="Traceroute" check-feature-state="traceroute">Traceroute</option>
+					
+					
+				</select>
+			</div>
+		</div>
+
+		<div class="row" ng-if="selectedOption === 'DNS Query' || selectedOption === 'Ping' || selectedOption === 'Traceroute'">
+			<div class="columns large-3 medium-5 small-5 full-width">
+				<label class="inline" translate="destination">Destination</label>
+			</div>
+
+			<div class="columns large-4 medium-4 small-7 end full-width">
+				<input id="destionationDiv" type="text" name="inputDestination" ng-model="field.destination" ng-change="beforeSave()" ng-required="selectedOption !== 'tr69'" placeholder="{{selectedOption === 'DNS Query' ? 'www.sagemcom.com' : ''}}">
+				<small class="error" ng-show="formInternetUtilities.$invalid && formInternetUtilities.inputDestination.$invalid && formInternetUtilities.inputDestination.$error.invalidDestination" translate="fieldRequired"></small>
+			</div>
+		</div>
+		
+		
+
+		<div class="row" ng-if="selectedOption === 'Ping'">
+			<div class="columns large-3 medium-5 small-5 full-width">
+				<label class="inline" translate="numberOfPings">Number of Pings</label>
+			</div>
+			<div class="columns large-4 medium-4 small-7 end full-width">
+				<input id="pingDiv" type="number" name="pingCount" ng-model="field.count" min="1" max="10" ng-required="selectedOption === 'Ping'">
+				<small class="error" ng-show="formInternetUtilities.pingCount.$invalid && (formInternetUtilities.pingCount.$dirty || submitted)" translate="outOfRangePing"></small>
+			</div>
+		</div>
+
+		<div class="row" ng-if="selectedOption === 'Traceroute'">
+			<div class="columns large-3 medium-5 small-5 full-width">
+				<label class="inline" translate="maxNumberOfHops">Max. Number of Hops</label>
+			</div>
+
+			<div class="columns large-4 medium-4 small-7 end full-width">
+				<input id="tracerouteDiv" type="number" name="maxHops" ng-model="field.hops" min="1" max="30" ng-required="selectedOption === 'Traceroute'">
+				<small class="error" ng-show="formInternetUtilities.$invalid && formInternetUtilities.maxHops.$invalid && formInternetUtilities.maxHops.$dirty" translate="outOfRangeTraceroute"></small>
+			</div>
+		</div>
+	</form>
+	<form name="formTR69" autocomplete="off" ng-if="selectedOption === 'tr69'" check-unsaved="" novalidate="">
+		<!-- TR69 -->
+		<div class="row" id="tr69Url">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="tr69Url">URL</label>
+			</div>
+
+			<div class="columns medium-4 small-8 end">
+				<input type="text" name="trUrl" ng-model="tr69.url" min="1" max="30" ng-disabled="readOnly" ng-required="selectedOption == 'tr69'" ng-change="urlInvalid= false">
+				<small class="error" ng-show="guiError.urlInvalid" translate="trUrlError"></small>
+				<small class="error" ng-show="!guiError.urlInvalid && formTR69.trUrl.$error.required" translate="fieldRequired"></small>
+			</div>
+		</div>
+		<div class="row" id="tr69UserName">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="tr69UserName">User Name</label>
+			</div>
+
+			<div class="columns medium-4 small-8 end">
+				<input type="text" name="trUserName" ng-model="tr69.username" ng-disabled="readOnly" min="1" max="30" ng-required="selectedOption == 'tr69'">
+				<small class="error" ng-if="!readOnly" ng-show="formTR69.trUserName.$error.required" translate="fieldRequired"></small>
+			</div>
+		</div>
+		<div class="row" id="tr69Password">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="tr69Password">PassWord</label>
+			</div>
+
+			<div class="columns medium-4 small-8 end">
+				<input type="password" pass-reveal="{{revealOnFocus.tr69}}" ng-disabled="readOnly" name="trPassword" ng-model="tr69.password" min="1" max="30" ng-required="selectedOption == 'tr69'">
+				<small class="error" ng-show="formTR69.trPassword.$error.required" translate="fieldRequired"></small>
+			</div>
+		</div>
+		<div class="row" id="tr69PeriodicTime">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="tr69PeriodicTime">Inform Periodic time</label>
+			</div>
+
+			<div class="columns medium-4 small-8 end">
+				<input type="number" name="tr69PeriodicTime" ng-disabled="readOnly" ng-model="tr69.informInterval" ng-required="selectedOption == 'tr69'">
+				<small class="error" ng-show="formTR69.tr69PeriodicTime.$error.required" translate="fieldRequired"></small>
+			</div>
+		</div>
+		<div class="row" id="tr69PeriodicStatus">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="tr69PeriodicStatus">Inform Periodic Enable/Disabled</label>
+			</div>
+
+			<div class="columns medium-4 small-8 end">
+				<div class="onoffswitch">
+					<input class="onoffswitch-checkbox" ng-disabled="readOnly" id="tr69PeriodicStatus" name="tr69PeriodicStatus" type="checkbox" ng-model="tr69.informEnable">
+					<label class="onoffswitch-label" for="tr69PeriodicStatus"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row" ng-show="allowSelectProtocol()">
+			<div class="columns large-3 medium-5 small-5 full-width">
+				<label class="inline" translate="protocol">Protocol</label>
+			</div>
+
+			<div class="columns large-4 medium-4 small-7 end full-width">
+				<select id="selectProtocol" ng-model="selectedProtocol">
+					<option value="IPV4" selected>IPv4</option>
+					<option value="IPV6">IPv6</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="right pullTop">
+			<button class="button tiny radius" type="submit" translate="save" id="utilitiesTestStart" ng-click="saveTR69()">
+				save
+			</button>
+		</div>
+	</form>
+	<div class="right pullTop" ng-if="selectedOption !== 'tr69'">
+		<button class="button tiny radius" type="submit" translate="test" id="utilitiesTestStart" ng-show="selectedOption" ng-click="test()">
+			Test
+		</button>
+	</div>
+</div>
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = false;
+	$(document).foundation();
+	$('#tool').on('refreshTab', function(){
+		if($(this).text()) {
+			$('#maintenanceTab dd').removeClass('active');
+			$('#maintenanceTab dd a[href$="'+encodeURIComponent($(this).text())+'"]').parent().addClass('active');
+		}
+	});
+	setTimeout(function(){
+		$('#tool').trigger('refreshTab');
+	}, 1000);
+</script>
+
+<div id="ping-modal" class="reveal-modal tiny" data-reveal="" ng-class="{loadingResults: !pingInfo}">
+	<p ng-hide="pingInfo" translate="testsRunning">
+		Please wait while tests are being executed...
+	</p>
+	<div ng-if="!logoWaiting" class="t-center" ng-hide="pingInfo">
+		<img src="images/loading.gif" border="0">
+	</div>
+	
+	<div ng-if="logoWaiting" class="t-center" ng-hide="pingInfo">
+	  <div class="logo-waiting">
+	   <p translate="pleaseWaitLoading"> Please wait... </p>
+	  </div>
+	</div>
+
+    <a class="close-reveal-modal close-modal" data-close-reveal="" ng-show="pingInfo">
+    	<span class="btn-close">&#215;</span>
+		<span class="show-word btn-close close" translate="close">Close</span>
+    </a>
+
+    <h5 class="modal-title" translate="pingResults" ng-show="pingInfo">Ping results</h5>
+
+    <ul ng-show="pingInfo">
+        <li>
+            <strong translate="packetsSent">Packets sent: </strong>{{pingInfo.PacketsTransmitted}}/{{field.count}}
+        </li>
+        <li>
+            <strong translate="packetsReceived">Packets received: </strong>{{pingInfo.PacketsReceived}}/{{field.count}}
+        </li>
+        <li>
+            <strong translate="perCentLoss">Loss of frames: </strong>{{pingInfo.PerCentLoss}}%
+        </li>
+        <li>
+            <strong translate="pingMin">Round Trip - Minimum: </strong>{{pingInfo.RoundTripMin}}ms
+        </li>
+        <li>
+            <strong translate="pingMax">Round Trip - Maximum: </strong>{{pingInfo.RoundTripMax}}ms
+        </li>
+        <li>
+            <strong translate="pingAverage">Round Trip - Average: </strong>{{pingInfo.RoundTripAvg}}ms
+        </li>
+    </ul>
+</div>
+
+<div id="tracert-modal" class="reveal-modal small" data-reveal="" ng-class="{loadingResults: !tracertInfo}">
+	<p ng-hide="tracertInfo" translate="testsRunning">
+		Please wait while tests are being executed...
+	</p>
+	<div ng-if="!logoWaiting" class="t-center" ng-hide="tracertInfo">
+		<img src="images/loading.gif" border="0">
+	</div>
+
+	<div ng-if="logoWaiting" class="t-center" ng-hide="tracertInfo">
+        <div class="logo-waiting">
+         <p translate="pleaseWaitLoading"> Please wait... </p>
+        </div>
+    </div>
+
+    <a class="close-reveal-modal close-modal" data-close-reveal="" ng-show="tracertInfo">
+    	<span class="btn-close">&#215;</span>
+		<span class="show-word btn-close close" translate="close">Close</span>
+    </a>
+
+    <h5 class="modal-title" ng-show="tracertInfo">Traceroute results</h5>
+
+    <ul ng-show="tracertInfo">
+        <div class="maintenance-result" ng-bind-html="tracertInfo"></div>
+    </ul>
+</div>
+
+<div id="dnsquery-modal" class="reveal-modal tiny" data-reveal="" ng-class="{loadingResults: !dnsqueryInfo}">
+	<p ng-hide="dnsqueryInfo" translate="testsRunning">
+		Please wait while tests are being executed...
+	</p>
+	<div ng-if="!logoWaiting" class="t-center" ng-hide="dnsqueryInfo">
+		<img src="images/loading.gif" border="0">
+	</div>
+
+	<div ng-if="logoWaiting" class="t-center" ng-hide="dnsqueryInfo">
+         <div class="logo-waiting">
+          <p translate="pleaseWaitLoading"> Please wait... </p>
+         </div>
+    </div>
+
+    <a class="close-reveal-modal close-modal" data-close-reveal="" ng-show="dnsqueryInfo">
+    	<span class="btn-close">&#215;</span>
+		<span class="show-word btn-close close" translate="close">Close</span>
+    </a>
+
+    <h5 class="modal-title" translate="dnsqueryResults" ng-show="dnsqueryInfo">DNS Qeury results</h5>
+
+    <strong translate="statusDNSQuery" ng-show="dnsqueryInfo && !dnsqueryInfo.Address">Can't resolve destination: Name or service not known</strong>
+    <ul ng-show="dnsqueryInfo.Address">
+        <li>
+            <strong translate="statusSemicolon">Status:</strong>&nbsp;{{dnsqueryInfo.Status}}
+        </li>
+        <li>
+            <strong translate="addressDNSQuery">Address: </strong>{{dnsqueryInfo.Address}}
+        </li>
+    </ul>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+  <li translate="utilitiesSelect" data-tourtarget="#iu-select">
+  </li>
+  <li translate="utilitiesDestination" data-tourtarget="#destionationDiv">
+  </li>
+  <li translate="utilitiesNumberOfPings" data-tourtarget="#pingDiv">
+  </li>
+    <li translate="utilitiesNumberOfHops" data-tourtarget="#tracerouteDiv">
+  </li>
+    <li translate="utilitiesTestStart" data-tourtarget="#utilitiesTestStart">
+  </li>
+</ul>

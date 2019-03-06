@@ -1,0 +1,26 @@
+<div class="columns large-12 medium-12 small-12 ng-hide" ng-show="true">
+	<div class="row">
+		<div id="header-page">
+			<div class="columns medium-6">
+				<h3 translate="internetConnectivity">Internet Connectivity</h3>
+			</div>
+
+			<span ng-if="reverseHeaderControls">
+				<a id="homebtn" title="Home" class="icons-bg border-gray" click-loading ui-sref="user.home"> <img src="images/icon-home.png" alt="Home Icon"> </a>
+				<div internet-connectivity></div>
+			</span>
+			<span ng-if="!reverseHeaderControls">
+				<div internet-connectivity></div>
+				<extended-menu ng-if="extendedMenus"></extended-menu>
+				<a id="homebtn" ng-if="!extendedMenus" title="Home" class="icons-bg border-gray" click-loading ui-sref="user.home"> <img src="images/icon-home.png" alt="Home Icon"> </a>
+			</span>
+				
+		</div>
+	</div>
+	<div messagebox></div>
+	<div id="main-content">
+		<div ui-view class="content">
+		</div>
+	</div>
+</div>
+

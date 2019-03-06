@@ -1,0 +1,260 @@
+<div class="content">
+	<div wait-loading=""></div>
+	<div class="content ng-hide" ng-show="!loading">
+		<form name="dhcpForm" id="dhcpForm" autocomplete="off" method="post" check-unsaved="">
+			<h4 id="dhcpTip1">LAN / DHCP</h4>
+			<div class="row">
+				<div class="columns large-3 ">
+					<label class="inline" translate="gatewayHostname">Gateway Hostname</label>
+				</div>
+				<div class="columns large-4 end">
+					<p id="hostnameTip">
+						<label class="inline hide-feature" ng-if="!hostNameUpdate" ng-bind="gatewayHostname"></label>
+						
+						<input type="text" ng-if="hostNameUpdate" ng-model="gatewayHostname" name="gatewayHostname">
+					</p>
+				</div>
+			</div>
+			<div class="row" ng-show="ipv4DefaultGwInput === 'mixed' || ipv4DefaultGwInput === 'select'">
+				<div class="columns large-3">
+					<label class="inline" translate="networkRange">Network Range</label>
+				</div>
+				<div class="columns large-4 end">
+					<select ng-model="gatewayNetwork" ng-options="range as range.label for range in predefinedIpRange" id="dhcpTipGwIpSelect" ng-change="updateRangeTip()"></select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns large-3">
+					<label class="inline" translate="gatewayIP">Gateway IP</label>
+				</div>
+				<div class="columns large-4 end">
+					<input type="text" validate-ip="ip" forbidden-ip="" validate-gateway-ip="" network-range="gatewayNetwork" ng-model="gatewayIp" name="gatewayIp" id="dhcpTip3" ng-blur="updateMasks()">
+					<small class="error" ng-if="dhcpForm.gatewayIp.$invalid && !dhcpForm.gatewayIp.$error.forbiddenIp && (dhcpForm.gatewayIp.$dirty || submitted)" translate="invalidIpAddress">Invalid IP Address</small>
+					<small class="error" ng-if="dhcpForm.gatewayIp.$error.forbiddenIp && (dhcpForm.gatewayIp.$dirty || submitted)" translate="forbiddenIpAddress">Forbidden IP Address</small>
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns large-3">
+					<label class="inline" translate="subnetMask">Subnet Mask</label>
+				</div>
+				<div class="columns large-4 end">
+					<input type="text" validate-ip="subnetmask" ng-model="subnetMask" name="subnetMask" id="subnetMask">
+					<small class="error" ng-if="dhcpForm.subnetMask.$invalid && (dhcpForm.subnetMask.$dirty || submitted)" translate="invalidIpAddress">Invalid IP Address</small>
+				</div>
+			</div>
+			<div class="row hide">
+				<div class="columns small-12">
+					<input id="second-ip-check" name="second-ip-radio" type="checkbox" ng-model="secondIpCheck">
+					<label for="second-ip-check">Configure a second IP Address and Subnet Mask for LAN interface</label>
+				</div>
+			</div>
+			<div id="lan4-second-ip" ng-if="secondIpCheck">
+				<div class="row">
+					<div class="columns medium-3 small-4">
+						<label class="inline">Gateway IP</label>
+					</div>
+					<div class="columns large-4 medium-3 small-8 end">
+						<input type="text" name="secondGwIp">
+					</div>
+				</div>
+				<div class="row">
+					<div class="columns medium-3 small-4">
+						<label class="inline">Subnet Mask</label>
+					</div>
+					<div class="columns large-4 medium-3 small-8 end">
+						<input type="text" name="secondSubnetMask">
+					</div>
+				</div>
+			</div>
+			<hr>
+			<h5 ng-if="!isDtagXdsl">DHCP</h5>
+			<h5 ng-if="isDtagXdsl">DHCPv4</h5>
+			<div class="row" ng-if="alertPoolDhcp">
+				<div class="alert-box warning medium radius" data-alert="">
+					<i class="fa fa-info-circle fa-center"></i>
+					<span translate="poolDhcpAlert"></span>
+				</div>
+			</div>
+			<div class="row" check-feature-state="dhcpEnable">
+				<div class="columns large-3">
+					<label class="inline" for="myonoffswitch" translate="enableDHCP">Enable</label>
+				</div>
+				<div class="columns large-2 end">
+					<div class="onoffswitch" id="dhcpTip2">
+						<input class="onoffswitch-checkbox" id="dhcp-enable" name="onoffswitch1" type="checkbox" ng-model="dhcpEnable">
+						<label class="onoffswitch-label" for="dhcp-enable"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+					</div>
+				</div>
+			</div>
+			<div id="dhcp-content" ng-show="dhcpEnable">
+				<div id="dhcpTip5">
+					<div class="row">
+						<div class="columns large-3">
+							<label class="inline" translate="ipv4PoolStart">IPv4 Pool Start</label>
+						</div>
+						<div class="columns large-3 end">
+							<input type="text" forbidden-ip="" range="start" validate-lan-ip="" ng-model="ipv4PoolStart" name="ipv4PoolStart" id="ipv4PoolStart">
+							<small class="error" ng-if="dhcpForm.ipv4PoolStart.$invalid && !dhcpForm.ipv4PoolStart.$error.forbiddenIp && (dhcpForm.ipv4PoolStart.$dirty || submitted)" translate="invalidIpAddress">Invalid IP Address</small>
+							<small class="error" ng-if="dhcpForm.ipv4PoolStart.$error.forbiddenIp && (dhcpForm.ipv4PoolStart.$dirty || submitted)" translate="forbiddenIpAddress">Forbidden IP Address</small>
+						</div>
+						<div ng-show="ipv4TvPoolEnable">
+							
+							
+						</div>
+					</div>
+					<div class="row">
+						<div class="columns large-3">
+							<label class="inline" translate="ipv4PoolEnd">IPv4 Pool End</label>
+						</div>
+						<div class="columns large-3 end">
+							<input type="text" forbidden-ip="" range="end" validate-lan-ip="" validate-dhcp-tv-ip="" start-ip="{{ipv4PoolStart}}" ng-model="ipv4PoolEnd" id="ipv4PoolEnd" name="ipv4PoolEnd">
+							<small class="error" ng-if="dhcpForm.ipv4PoolEnd.$invalid && !dhcpForm.ipv4PoolEnd.$error.forbiddenIp && (dhcpForm.ipv4PoolEnd.$dirty || submitted)" translate="invalidIpAddress">Invalid IP Address</small>
+							<small class="error" ng-if="dhcpForm.ipv4PoolEnd.$error.forbiddenIp && (dhcpForm.ipv4PoolEnd.$dirty || submitted)" translate="forbiddenIpAddress">Forbidden IP Address</small>
+						</div>
+						<div ng-show="ipv4TvPoolEnable">
+							
+							
+						</div>
+					</div>
+					
+				</div>
+				<div class="row" check-feature-state="ipLeaseTime">
+					<div class="columns large-3">
+						<label class="inline"> <span translate="ipv4LeaseTime">IPv4 Lease Time</span> </label>
+					</div>
+					<div class="columns large-3 dhcpLeaseTxt end">
+						<select ng-model="ipv4Lease" name="ipv4Lease" required id="dhcpTip7" ng-show="ipv4LeaseInput == 'select' || ipv4LeaseInput == 'mixed'">
+							<option ng-show="ipv4LeaseInput === 'mixed'" value="other">Other</option>
+							<option ng-repeat="config in ipv4SelectConfig" translate="{{config.text}}" value="{{config.value}}" ng-selected="config.value == ipv4Lease"></option>
+						</select>
+						<input type="number" ng-model="ipv4LeaseTxt" name="ipv4LeaseTxt" required min="{{ipv4MinLease}}" id="dhcpTip7b" ng-show="ipv4LeaseInput === 'text' || (ipv4LeaseInput === 'mixed' && ipv4Lease === 'other')">
+						<small class="error" ng-if="(ipv4LeaseInput == 'text' || (ipv4LeaseInput == 'mixed' && ipv4Lease == 'other')) && dhcpForm.ipv4LeaseTxt.$invalid && (dhcpForm.ipv4LeaseTxt.$dirty || submitted)" translate="invalidLeaseTime">Invalid lease time</small>
+					</div>
+				</div>
+				<div class="row" check-feature-state="restoreDhcp">
+					<div class="columns large-3">
+						<label class="inline" translate="restoreDefaultConfiguration">&nbsp;</label>
+					</div>
+					<div class="columns large-3 end">
+						<button class="button tiny radius btn-only-child-blue" type="button" id="dhcpTip8" data-reveal-id="restore-modal" translate="restore"></button>
+					</div>
+				</div>
+
+				<!-- NAT Section-->
+				
+				<!-- End NAT Section -->
+
+				<hr check-feature-state="ipReservation">
+				<div check-feature-state="ipReservation" ng-include="'views/partials/ipReservation.html'"></div>
+
+				
+				
+
+				
+				
+			</div>
+			<div class="row">
+				<div class="right end">
+					<button type="button" class="button tiny radius btn-cancel" translate="cancel" click-loading="" ui-sref="user.home" id="dhcpTip12"></button>
+          <button type="button" class="button tiny radius" translate="apply" ng-click="beforeSave()" id="dhcpTip14"></button>
+          <div id="guest-conflict-modal" class="reveal-modal tiny" data-reveal="">
+            <a class="close-reveal-modal close-modal">
+              <span class="btn-close">&#215;</span>
+              <span class="show-word btn-close close" translate="close">Close</span>
+            </a>
+            <h5 class="modal-title" translate="hcIPConflictFound">&nbsp;</h5>
+            <p translate="guestWiFiRangeConflict">
+              &nbsp;
+            </p>
+          </div>
+					<!-- Modal for restart -->
+					<div id="apply-changes-modal" class="reveal-modal tiny" data-reveal="">
+						<a class="close-reveal-modal close-modal">
+							<span class="btn-close">&#215;</span>
+							<span class="show-word btn-close close" translate="close">Close</span>
+						</a>
+						<h5 class="modal-title" translate="applyChanges">&nbsp;</h5>
+						<p translate="applyGatewayChangesDescription">
+							&nbsp;
+						</p>
+						<div class="right">
+							<button class="button tiny radius btn-cancel" type="button" translate="no" id="idNo" onclick="$('#apply-changes-modal a.close-reveal-modal').trigger('click');"></button>
+							<button class="button tiny radius" type="button" translate="yes" id="idYes" ng-click="save()" onclick="$('#apply-changes-modal a.close-reveal-modal').trigger('click');"></button>
+						</div>
+					</div>
+					<div id="changes-in-gateway-ip-modal" class="reveal-modal tiny" data-reveal="">
+						<a class="close-reveal-modal close-modal ng-hide">
+							<span class="btn-close">&#215;</span>
+							<span class="show-word btn-close close" translate="close">Close</span>
+						</a>
+						<h5 class="modal-title" translate="changesApplied">&nbsp;</h5>
+						<p translate="reconnectInstructionsDHCP">
+							&nbsp;
+						</p>
+						<p ng-show="!showReconnectInstructionsLink" translate="reconnectInstructionsRenewDHCP"></p>
+						<p ng-show="showReconnectInstructionsLink" translate="reconnectInstructionsLinkDHCP"></p>
+						<a ng-show="showReconnectInstructionsLink" href="http://{{gatewayIp}}">{{gatewayIp}}</a>
+					</div>
+					<div id="restore-modal" class="reveal-modal tiny" data-reveal="">
+						<a class="close-reveal-modal close-modal">
+							<span class="btn-close">&#215;</span>
+							<span class="show-word btn-close close" translate="close">Close</span>
+						</a>
+						<h5 class="modal-title" translate="restoreDHCP">&nbsp;</h5>
+						<p translate="questionRestoreDHCP">
+							&nbsp;
+						</p>
+						<div class="right">
+							<button class="button tiny radius btn-cancel" type="button" translate="no" id="idNo" onclick="$('#apply-changes-modal a.close-reveal-modal').trigger('click');"></button>
+							<button class="button tiny radius" type="button" translate="yes" id="idYes" ng-click="restore()" onclick="$('#apply-changes-modal a.close-reveal-modal').trigger('click');"></button>
+						</div>
+					</div>
+				</div>
+				<button class="ng-hide" type="button" id="showModalChangesInGatewayIp" data-reveal-id="changes-in-gateway-ip-modal" translate="restore"></button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!-- help -->
+<ul id="tlyPageGuide">
+	<li translate="hostnameTip" data-tourtarget="#hostnameTip"></li>
+	<li translate="dhcpTip3" data-tourtarget="#dhcpTip3"></li>
+	<li translate="dhcpTip4" data-tourtarget="#subnetMask"></li>
+	<li translate="dhcpTip2" data-tourtarget="#dhcpTip2"></li>
+	<li translate="dhcpTip5" data-tourtarget="#ipv4PoolStart"></li>
+	<li translate="dhcpTip5" data-tourtarget="#ipv4PoolEnd"></li>
+	<li translate="dhcpTip7" data-tourtarget="#dhcpTip7"></li>
+	<li translate="dhcpTip7" data-tourtarget="#dhcpTip7b"></li>
+	<li translate="dhcpTip8" data-tourtarget="#dhcpTip8"></li>
+	<li translate="dhcpTip9" data-tourtarget="#dhcpTip9"></li>
+	<li translate="dhcpTip10" data-tourtarget="#dhcpTip10"></li>
+	<li ng-if="dhcpIPv6InDHCP" translate="lanIpv6DhcpAddressTip" data-tourtarget="#dhcpIPv6PdAddress"></li>
+	<li ng-if="dhcpIPv6InDHCP" translate="lanIpv6LinkLocalTip" data-tourtarget="#lanIpv6LinkLocal"></li>
+	<li ng-if="dhcpIPv6InDHCP" translate="lanIpv6EnableAutoIpv6Tip" data-tourtarget="#enableAutoIpv6"></li>
+	<li ng-if="dhcpLeasesInDHCP" translate="dhcpLeasesTip2" data-tourtarget="#leases-table"></li>
+</ul>
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = false;
+	$(document).foundation();
+	$('#ipv4PoolEnd').blur(function(){
+		angular.element($('#ipv4PoolStart')).scope().dhcpForm.ipv4PoolStart.$setViewValue($('#ipv4PoolStart').val());
+	});
+	$('#ipv4TvPoolEnd').blur(function(){
+		angular.element($('#ipv4TvPoolStart')).scope().dhcpForm.ipv4TvPoolStart.$setViewValue($('#ipv4TvPoolStart').val());
+	});
+	$('#dhcpForm').off('refreshMasks').on('refreshMasks', function(e, list) {
+		var availableTags = list;
+		$("#subnetMask").autocomplete({
+			source : availableTags,
+			minLength : 4,
+			select : function(event, ui) {
+				setTimeout(function() {
+					$("#subnetMask").change();
+				}, 1000);
+			}
+		});
+	});
+	$('#dhcpIPv6InDHCP #tlyPageGuide').remove();
+	$('#dhcpLeasesInDHCP #tlyPageGuide').remove();
+</script>

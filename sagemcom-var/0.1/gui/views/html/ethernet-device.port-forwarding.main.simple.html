@@ -1,0 +1,15 @@
+<div class="content active ng-hide" id="port-forwarding" ng-show="true">
+	<a class="shs" href="javascript:void(0)" translate="showSubSection">Show Subsections</a>
+	<dl id="portForwardingTab" class="tabs sub-tabs" ng-class="changeToVertical ? 'vertical' : ''" data-tab tab-click>
+		<dd class="active">
+			<a href="javascript:void(0)" click-loading ui-sref="user.simple.ethernetDevice.portForwarding.addRule({uid : uid })" translate="pfAddRule">Add Rule</a>
+		</dd>
+		<dd check-feature-state="gamesAndApps">
+			<a href="javascript:void(0)" click-loading ui-sref="user.simple.ethernetDevice.portForwarding.gamesApp({uid : uid })" translate="pfGamesApps">Games & Applications</a>
+		</dd>
+	</dl>
+	<div class="tabs-content">
+		<div class="content" ui-view></div>
+	</div>
+</div>
+<script>$(document).foundation();</script>

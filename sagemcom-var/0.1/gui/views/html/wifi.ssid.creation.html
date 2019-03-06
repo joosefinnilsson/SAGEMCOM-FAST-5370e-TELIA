@@ -1,0 +1,80 @@
+<div class="content">
+	<div wait-loading></div>
+	<div class="content w100 ng-hide" ng-show="!loading" id="ssid-creation">
+		<h4 class="maintitle" translate="ssidCreationTitle">SSID Creation</h4>
+		<div class="row">
+			<div class="alert-box warning radius medium-8 small-8" data-alert>
+			    <i class="fa fa-info-circle fa-center center"></i>
+			    <span translate="ssidCreationSubtitle">Create a new Wifi SSIDs.</span>
+			</div>
+		</div>
+		<form id="ssidForm" name="ssidForm" ng-submit="save()" autocomplete="off">
+			<div class="row collapse">
+				<div class="columns medium-2 small-3">
+					<label translate="wifiEnvironmentSSID" class="inline">SSID</label>
+				</div>
+
+				<div class="columns medium-2 small-9 end">
+					<input id="ssid" type="text" value="" name="ssid" ng-model="form.ssid" required maxlength="32"/>
+					<div ng-if="ssidForm.ssid.$invalid && submitted">
+						<small class="error" translate="ssidCreationError">Invalid SSID</small>
+					</div>
+				</div>
+			</div>
+			<div class="right">
+				<button id="dmzTip4" class="button tiny radius btn-cancel" translate="cancel" value="Cancel" click-loading ui-sref="user.home">
+					Cancel
+				</button>
+				<button id="dmzTip3" class="button tiny radius" type="submit" translate="apply">
+					Apply
+				</button>
+			</div>
+
+			<table class="table-form table-form-full responsive-table" id="table">
+				<thead>
+					<tr >
+						<th width="13%" translate="enable">&nbsp;</th>
+						<th width="74%" translate="wifiEnvironmentSSID">SSID</th>
+						<th width="13%" translate="options">&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in data" ng-if="data.length > 0">
+						<td data-title="Enable">
+							<div class="onoffswitch" id="enable" ng-class="{'onoffswitch-disabled': update}">
+								<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="tigger-0{{$index}}" ng-model="item.Enable" ng-change="switchEnable(item)" ng-disabled="update">
+								<label class="onoffswitch-label" for="tigger-0{{$index}}">
+									<div class="onoffswitch-inner"></div>
+									<div class="onoffswitch-switch"></div>
+								</label>
+							</div>
+						</td>
+						<td data-title="SSID" ng-bind="item.SSID">&nbsp;</td>
+						<td data-title="Options">
+							<input class="icon-delete" data-reveal-id="confirm-remove-modal" data-reveal type="button" value="Delete" ng-click="prepareRemove(item)" id="remove" />
+							<input class="icon-edit" type="button" value="Edit" ng-click="edit(item)" onclick="$('#ssid').focus()" id="edit"/>
+						</td>
+					</tr>
+					<tr ng-if="data.length === 0">
+						<td colspan="9" translate="ssidCreationEmpty">There are no SSIDs</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
+</div>
+
+<div id="confirm-remove-modal" class="reveal-modal tiny" data-reveal>
+	<a class="close-reveal-modal close-modal">
+		<span class="btn-close">&#215;</span>
+		<span class="show-word btn-close close" translate="close">Close</span>
+	</a>
+	<h5 class="modal-title" translate="confirmRemoveTitle">&nbsp;</h5>
+	<p translate="confirmRemoveTip">
+		&nbsp;
+	</p>
+	<div class="right">
+		<button class="button tiny radius btn-cancel" type="button" translate="no" onclick="$('#confirm-remove-modal').foundation('reveal', 'close');"></button>
+		<button class="button tiny radius" type="button" translate="yes" type="button" ng-click="remove()" onclick="$('#confirm-remove-modal').foundation('reveal', 'close');"></button>
+	</div>
+</div>

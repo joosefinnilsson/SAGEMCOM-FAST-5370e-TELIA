@@ -1,0 +1,101 @@
+<div wait-loading></div>
+<div class="content active ng-hide" ng-show="!loading" id="maintenance-resets">
+	<h4 translate="resets">Resets</h4>
+	<!-- Buttons -->
+	<div class="row">
+		<div class="columns large-3 medium-4 small-4">
+			<label class="inline" translate="restartGateway">Restart Gateway</label>
+		</div>
+		<div class="columns large-3 medium-8 small-8 end">
+			<button type="button" class="button tiny radius" data-reveal-id="restart-modal" data-reveal translate="restart" id="restartGatewayTip" ></button>
+		</div>
+	</div>
+	<div class="row columns">
+		<div class="alert-box warning radius" data-alert>
+		    <i class="fa fa-info-circle fa-center center"></i>
+		    <span translate="rebootExplained">&nbsp;</span>
+		</div>
+	</div>
+	<hr/>
+	<div class="row">
+		<div class="columns large-3 medium-4 small-4">
+			<label class="inline" translate="factorySettings">Factory Settings</label>
+		</div>
+
+		<div class="columns large-3 medium-1 small-8 end">
+			<button class="button tiny radius" type="button" data-reveal-id="reset-modal" data-reveal translate="reset" id="resetGatewayTip" ></button>
+		</div>
+	</div>
+	<div class="row columns">
+		<div class="alert-box warning radius" data-alert>
+		    <i class="fa fa-info-circle fa-center center"></i>
+		    <span translate="resetExplained">&nbsp;</span>
+		</div>
+	</div>
+	<!-- Model for restart -->
+	
+	<!-- Model for restart -->
+	<div id="restart-modal" class="reveal-modal tiny" data-reveal>
+        <a class="close-reveal-modal close-modal" data-close-reveal>
+        	<span class="btn-close">&#215;</span>
+			<span class="show-word btn-close close" translate="close">Close</span>
+        </a>
+
+        <h5 class="modal-title" translate="restart">Restart</h5>
+
+        <p translate="restartDescription">
+			Are you sure you want to Reset the Gateway?
+		</p>
+
+        <div class="right">
+            <button class="button tiny radius btn-cancel" type="button" translate="cancel" onclick="$('#restart-modal a.close-reveal-modal').trigger('click');" data-close-reveal></button>
+			<button class="button tiny radius" type="button" translate="yes" data-reveal-id="pleasewait-modal" data-reveal ng-click="reboot()"></button>
+        </div>
+    </div>
+	
+	<!-- Model for reset -->
+	<div id="reset-modal" class="reveal-modal tiny" data-reveal>
+        <a class="close-reveal-modal close-modal" data-close-reveal>
+        	<span class="btn-close">&#215;</span>
+			<span class="show-word btn-close close" translate="close">Close</span>
+        </a>
+
+        <h5 class="modal-title" translate="factorySettingsReset">Factory Settings Reset</h5>
+
+        <p translate="factorySettingsResetDescription">This will erase and reset your gateway settings to the factory default settings.</p>
+
+        <div class="right">
+            <button class="button tiny radius btn-cancel" type="button" translate="cancel" onclick="$('#reset-modal a.close-reveal-modal').trigger('click');" data-close-reveal></button>
+			<button class="button tiny radius" type="button" translate="yes" data-reveal-id="pleasewait-modal" data-reveal ng-click="reinitialize()"></button>
+        </div>
+    </div>
+	
+	<!-- Model for please wait message -->
+	<div id="pleasewait-modal" class="reveal-modal tiny" data-reveal>
+        <h5 class="modal-title" translate="{{popupTitle}}"></h5>
+
+        <p translate="resetDescription">Please, wait while the Gateway is rebooting...</p>
+
+        <div ng-if="!logoWaiting" class="t-center">
+			<img src="images/loading.gif" border="0" />
+		</div>
+
+		<div ng-if="logoWaiting" class="t-center">
+	        <div class="logo-waiting">
+	         <p translate="pleaseWaitLoading"> Please wait... </p>
+	        </div>
+	    </div>
+    </div>
+</div>
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = false;
+	$(document).foundation();
+</script>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+  <li translate="restartGatewayTip" data-tourtarget="#restartGatewayTip">
+  </li>
+  <li translate="resetGatewayTip" data-tourtarget="#resetGatewayTip">
+  </li>
+</ul>

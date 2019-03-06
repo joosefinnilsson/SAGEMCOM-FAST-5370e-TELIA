@@ -1,0 +1,30 @@
+<div id="header-page" class="row">
+	<div class="columns medium-8 small-12 header-top">
+		<h4><span translate="welcome" style="text-transform: uppercase">WELCOME TO SAGEMCOM</span>&nbsp;<span ng-bind="gwName"> F@ST 5345</span></h4>
+	</div>
+
+	<div class="columns medium-4 small-12 text-right">
+		<div id="refresh-btn" class="btn-refresh" ng-click="refresh()">
+			<span translate="clickToRefresh">Click to refresh</span>
+			<img id="refresh" src="images/refresh.png">
+			<div id="refresh2"></div>
+		</div>
+	</div>
+</div>
+
+<div id="qr-modal24" class="reveal-modal qr tiny" data-reveal>
+	<a class="close-reveal-modal close-modal" data-close-reveal>&#215;</a>
+	<qr ng-if="verifyWifi24 && wifi24Status.qrString" type-number="0" size="200" image="true" text="wifi24Status.qrString"></qr>
+</div>
+<div id="qr-modal5" class="reveal-modal qr tiny" data-reveal>
+	<a class="close-reveal-modal close-modal" data-close-reveal>&#215;</a>
+	<qr ng-if="verifyWifi5 && wifi24Status.qrString" type-number="0" size="200" image="true" text="wifi5Status.qrString"></qr>
+</div>
+
+<div class="tablet-res" ng-include="'views-mobile/networkmap-app-tablet.html'"></div>
+<div class="phone-res" ng-include="'views-mobile/networkmap-app-phone.html'"></div>
+
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = true;
+	$(document).foundation(); 
+</script>

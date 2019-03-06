@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="svg2" sodipodi:docname="btn_arrow.svg" inkscape:version="0.48.4 r9939" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="45px"
+	 viewBox="375 277.5 50 45" enable-background="new 375 277.5 50 45" xml:space="preserve">
+<sodipodi:namedview  id="base" inkscape:pageshadow="2" inkscape:window-width="867" inkscape:window-height="918" inkscape:pageopacity="0.0" inkscape:window-x="2748" inkscape:document-units="px" inkscape:current-layer="layer1" inkscape:window-y="23" inkscape:window-maximized="0" bordercolor="#666666" showgrid="false" borderopacity="1.0" inkscape:zoom="3.6182654" pagecolor="#ffffff" inkscape:cx="31.909318" inkscape:cy="14.504549">
+	</sodipodi:namedview>
+<g>
+	<path id="rect2985" sodipodi:nodetypes="sscsssscsccssccs" inkscape:connector-curvature="0" fill="#455560" d="M414.775,277.74
+		c-0.793,0.167-1.474,1.008-1.474,2.519v3.022h-13.264c-1.247,0-2.154,1.511-2.154,3.19v28.042c0,1.847,1.021,3.19,2.154,3.19
+		h13.264v2.686c0,2.352,2.154,3.19,3.287,0.337l7.37-16.12c0,0,1.02-1.847,1.02-4.366v-0.672c0-1.847-1.474-4.366-1.474-4.366
+		l-6.348-15.112C416.362,278.075,415.456,277.572,414.775,277.74z"/>
+	<path id="rect2985_1_" sodipodi:nodetypes="sscsssscsccssccs" inkscape:connector-curvature="0" fill="#455560" d="
+		M383.237,280.115l-6.348,15.112c0,0-1.474,2.519-1.474,4.366v0.671c0,2.519,1.021,4.365,1.021,4.365l7.368,16.12
+		c1.134,2.687,3.174,2.015,3.288-0.335v-2.688h13.264c1.247,0,2.154-1.511,2.154-3.19v-28.041c0-1.847-1.021-3.191-2.154-3.191
+		h-13.264v-3.022c0-1.511-0.681-2.351-1.473-2.518C384.937,277.429,384.031,277.932,383.237,280.115z"/>
+</g>
+</svg>

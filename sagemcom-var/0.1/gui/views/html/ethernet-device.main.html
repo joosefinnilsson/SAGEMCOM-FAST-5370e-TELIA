@@ -1,0 +1,43 @@
+<div class="columns medium-12 ng-hide" ng-show="true">
+	<div class="row">
+		<div id="header-page">
+			<div class="columns medium-6 custom-menu-title-size">
+				<h3 ng-bind="name"></h3>
+			</div>
+			<div class="columns medium-6 custom-menu-itens-size-pages text-right header-controls">
+				<span ng-if="reverseHeaderControls">
+					<a id="homebtn" title="Home" class="icons-bg border-gray" click-loading="" ui-sref="user.home"> <img src="images/icon-home.png" alt="Home Icon"> </a>
+					
+					<div internet-connectivity=""></div>
+				</span>
+				<span ng-if="!reverseHeaderControls">
+					<div internet-connectivity=""></div>
+					<extended-menu ng-if="extendedMenus"></extended-menu>
+					
+					<a ng-if="!extendedMenus" id="homebtn" title="Home" class="icons-bg border-gray" click-loading="" ui-sref="user.home"> <img src="images/icon-home.png" alt="Home Icon"> </a>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div messagebox=""></div>
+	<div id="main-content">
+		<a class="shs" href="javascript:void(0)" translate="showSection">Show Sections</a>
+		<dl id="ethernetDeviceTab" class="tabs" data-tab="">
+			<dd class="active">
+				<a click-loading="" ui-sref="user.ethernetDevice.deviceInfo({layer: layer,  uid : uid })" translate="deviceinfo">Device Information</a>
+			</dd>
+			<dd ng-if="customFirewall" style="display:none;" check-feature-state="firewallDevice">
+				<a click-loading="" ui-sref="user.ethernetDevice.firewall({layer: layer,  uid : uid })" translate="firewall">Firewall</a>
+			</dd>
+			
+			<dd style="display: none" check-feature-state="portForwardingDevice">
+				<a click-loading="" ui-sref="user.ethernetDevice.portForwarding({layer: layer, uid : uid })" translate="portForwarding">Port Forwarding</a>
+			</dd>
+			
+		</dl>
+		<div class="tabs-content" ui-view="">
+			&nbsp;
+		</div>
+	</div>
+</div>
+<script>$(document).foundation();</script>

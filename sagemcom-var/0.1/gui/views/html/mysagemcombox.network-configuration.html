@@ -1,0 +1,48 @@
+<div class="content">
+	<div wait-loading></div>
+	<div class="content ng-hide" ng-show="!loading">
+		<form name="networkConfigForm" id="networkConfigForm" autocomplete="off" method="post" check-unsaved>
+			<h4>ADSL</h4>
+			<div id="networkConfigTip1">
+				<div class="row" ng-repeat="atm in data.atmLinks">
+					<div class="columns large-3 ">
+						<label class="inline" ng-bind="atm.Alias"></label>
+					</div>
+					<div class="columns large-4 end">
+						<input type="text" ng-model="atm.DestinationAddress" name="destinationAddress">
+						<small class="error" ng-if="atm.invalid && submitted" translate="invalidAddress"></small>
+					</div>
+				</div>
+			</div>
+			<hr />
+			<h4>VDSL</h4>
+			<div id="networkConfigTip2">
+				<div class="row" ng-repeat="ethernet in data.ethernetLinks">
+					<div class="columns large-3 ">
+						<label class="inline" ng-bind="ethernet.Alias"></label>
+					</div>
+					<div class="columns large-4 end">
+						<input type="text" ng-model="ethernet.VLANID" name="vlanid" required>
+						<small class="error" ng-if="ethernet.invalid && submitted" translate="invalidVlanId"></small>
+					</div>
+				</div>
+			</div>	
+			<div class="row">
+				<div class="right end">
+					<button type="button" class="button tiny radius btn-cancel" translate="cancel" click-loading ui-sref="user.home"></button>
+					<button type="button" class="button tiny radius" translate="apply" ng-click="save()"></button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!-- help -->
+<ul id="tlyPageGuide">
+	<li translate="networkConfigTip1" data-tourtarget="#networkConfigTip1"></li>
+	<li translate="networkConfigTip2" data-tourtarget="#networkConfigTip2"></li>
+</ul>
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = false;
+	$(document).foundation();
+</script>

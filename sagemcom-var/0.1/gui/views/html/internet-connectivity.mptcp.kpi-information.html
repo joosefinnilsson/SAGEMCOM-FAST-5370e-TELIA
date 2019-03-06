@@ -1,0 +1,35 @@
+<div class="content" id="kpiInfo">
+	<h4 translate="mptcpKpiInformation">KPI information</h4>
+	<div class="row">
+		<div class="columns large-4 medium-2 small-4">
+			<label class="inline" translate="establishedSessionCount">Established session count</label>
+		</div>
+		<div class="columns large-3 medium-2 small-8 end">
+			<label class="inline" ng-bind="data.establishedSessionCount ? data.establishedSessionCount : '-'"></label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns large-4 medium-2 small-4">
+			<label class="inline" translate="additionalSubflowCount">Additional subflow count</label>
+		</div>
+		<div class="columns large-3 medium-2 small-8 end">
+			<label class="inline" ng-bind="data.additionalSubflowCount ? data.additionalSubflowCount : '-'"></label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns large-4 medium-2 small-4">
+			<label class="inline" translate="sessionAdditionalSubflow">Session with additional subflow</label>
+		</div>
+		<div class="columns large-3 medium-2 small-8 end">
+			<label class="inline" ng-bind="data.sessionAdditionalSubflow ? data.sessionAdditionalSubflow : '-'"></label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns large-4 medium-2 small-4">
+			<label class="inline" translate="closedSessionCount">Closed session count</label>
+		</div>
+		<div class="columns large-3 medium-2 small-8 end">
+			<label class="inline" ng-bind="data.closedSessionCount ? data.closedSessionCount : '-'"></label>
+		</div>
+	</div>
+</div>

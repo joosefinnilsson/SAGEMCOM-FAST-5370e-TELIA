@@ -1,0 +1,275 @@
+<div class="content">
+<div wait-loading=""></div>
+<div class="content w100 active" ng-show="!loading" id="wifi24">
+	<form name="wifiForm" novalidate="" autocomplete="off" check-unsaved="">
+		<fieldset class="fieldset">
+			<h4 class="maintitle" translate="wifiRadio">Wi-Fi Radio</h4>
+			<div class="row">
+				<div class="columns medium-2 small-12">
+					<label class="inline" for="wifi24-radio-enable" translate="wifiRadio">Wi-Fi Radio</label>
+				</div>
+				<div class="columns medium-4 small-12 end">
+					<div class="onoffswitch" id="wifiGeneralTip1">
+						<input class="onoffswitch-checkbox noValidate" id="enable-wifi" type="checkbox" ng-change="saveStatus()" ng-model="wifiEnable" name="enable-wifi">
+						<label class="onoffswitch-label" for="enable-wifi"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns large-2 medium-2 small-12">
+					<label class="inline" translate="sStatus">Status</label>
+				</div>
+				<div id="wifiGeneralTip12" class="wifiStatus columns large-2 medium-2 small-12" ng-switch="" on="wifiStatus">
+					<span class="color-on" translate="up" ng-switch-when="true">UP</span>
+					<span class="color-off" translate="down" ng-switch-when="false">Down</span>
+				</div>
+			</div>
+		</fieldset>
+		<div id="hide" ng-show="showForm || wifiEnable">
+			<hr>
+			<fieldset class="fieldset">
+				<h4 class="maintitle" translate="wifiEnvironmentWifiChannel">Wi-Fi Channel</h4>
+				<div class="row">
+					<div class="columns medium-2 small-12">
+						<label class="inline" translate="MACAddress">MAC Address</label>
+					</div>
+					<div class="columns medium-4 small-12 end">
+						<label id="wifiSimpleTip1" class="inline" ng-bind="macAddress"></label>
+					</div>
+				</div>
+				<div class="row" check-feature-state="wifiSpeedInfo">
+					<div class="columns medium-2 small-12">
+						<label class="inline" translate="speed">Speed</label>
+					</div>
+					<div class="columns medium-4 small-12 end">
+						<label id="wifiSimpleTip2" class="inline"><span ng-bind="link"></span>Mbit/s</label>
+					</div>
+				</div>
+				<div class="row" ng-hide="isGuest">
+					<div class="columns medium-2 small-12">
+						<label class="inline" for="wifi24-channel" translate="wifiEnvironmentChannel">Channel</label>
+					</div>
+					<div class="columns medium-4 small-12 end">
+						<select ng-model="channel" id="wifiGeneralTip4" ng-options="item for item in selectChannel" name="channel">
+							<option value="">AUTO</option>
+						</select>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="columns medium-2 small-12">
+						<label class="inline" translate="currentChannel">Current Channel</label>
+					</div>
+					<div class="columns medium-4 small-12 end">
+						<label id="wifiSimpleTip4" class="inline" ng-bind="currentChannel"></label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="columns medium-2 small-12">
+						<label class="inline" for="wifi24-channel-width" translate="channelWidth">Channel Width</label>
+					</div>
+					<div class="columns medium-4 small-12 end" ng-hide="isGuest">
+						<select id="bandwidth" ng-model="channelBandwidth" name="channelBandwidth" ng-options="chBdwidth.value as chBdwidth.label for chBdwidth in supportedChannelBandwidth | orderBy: 'order'">
+						</select>
+					</div>
+					<div class="columns medium-4 small-12 end" ng-show="isGuest">
+						<label class="inline" ng-bind="channelBandwidth"></label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="columns medium-2 small-12">
+						<label class="inline" translate="transmitPower">Transmit Power</label>
+					</div>
+					<div class="columns medium-4 small-12 end" ng-hide="isGuest">
+						<select id="wifi24advancedTip5" ng-model="transmitPower" name="transmitPower">
+							<option value="100">100%</option>
+							<option value="90">90%</option>
+							<option value="80">80%</option>
+							<option value="70">70%</option>
+							<option value="60">60%</option>
+							<option value="50">50%</option>
+							<option value="40">40%</option>
+							<option value="30">30%</option>
+							<option value="20">20%</option>
+							<option value="10">10%</option>
+						</select>
+					</div>
+					<div class="columns medium-4 small-12 end" ng-show="isGuest">
+						<label class="inline"><span ng-bind="transmitPower"></span>%</label>
+					</div>
+				</div>
+			</fieldset>
+			<hr>
+			<fieldset class="fieldset">
+				<h4 class="maintitle" translate="wifiNetwork">Wi-Fi Network</h4>
+				<div class="row">
+					<div class="columns medium-2 small-12">
+						<label class="inline" for="wifi24-radio-enable">Enabled</label>
+					</div>
+					<div class="columns medium-4 small-12 end">
+						<div class="onoffswitch">
+							<input class="onoffswitch-checkbox noValidate" type="checkbox" ng-model="broadcastEnable" name="enable-wifi">
+							<label class="onoffswitch-label" for="enable-wifi"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+						</div>
+					</div>
+				</div>
+				<fieldset class="fieldset" data-target="wifi24-network-enable">
+					<div class="row">
+						<div class="columns medium-2 small-12">
+							<label class="inline" for="wifi24-network-name" translate="networkName">Network Name</label>
+						</div>
+						<div class="columns medium-4 small-12 end">
+							<input id="wifiGeneralTip2" type="text" name="ssid" ng-model="ssid" required maxlength="32" validate-ssid="">
+							<small class="error" ng-if="wifiForm.ssid.$invalid && (wifiForm.ssid.$dirty || submitted || wifiForm.$dirty)" translate="invalidSSID">Invalid SSID</small>
+						</div>
+					</div>
+					<div class="row">
+						<div class="columns medium-2 small-12">
+							<label class="inline" for="wifi24-security-mode" translate="securityMode">Security Mode</label>
+						</div>
+						<div class="columns medium-4 small-12 end" ng-show="selectSecurityMode.length">
+							<select ng-model="securityMode" id="wifiGeneralTip5" ng-options="item.value as item.label for item in selectSecurityMode" name="securityMode"></select>
+						</div>
+					</div>
+					<div class="js-wifi24-security-none" ng-show="securityMode == 'NONE'">
+						<div data-alert="" class="alert-box alert" translate="securityModeWarning">
+							Security for this wireless network is disabled, anybody can connect or listen to it
+						</div>
+					</div>
+					<div class="js-wifi24-security-wep" ng-show="securityMode == 'WEP_64' || securityMode == 'WEP_128'">
+						<div class="row">
+							<div class="column medium-2 small-12">
+								<label class="inline" for="wifi24-wep-key" translate="wepKey">WEP Key</label>
+							</div>
+							<div id="wifiGeneralTip" class="column medium-4 small-12 end">
+								<input id="wifi24-wep-key" type="text" ng-model="password" name="password" validate-wifi-password="" data-security-mode="securityMode">
+								<small class="error" ng-if="wifiForm.password.$error.invalidPassword && (wifiForm.password.$dirty || submitted || wifiForm.$dirty)" translate="invalidPassword">Invalid Password</small>
+							</div>
+							<div class="columns small-12 medium-6 end">
+								<p translate="passwordTip2" ng-if="securityMode == 'WEP_64'">
+									&nbsp;
+								</p>
+								<p translate="passwordTip3" ng-if="securityMode == 'WEP_128'">
+									&nbsp;
+								</p>
+							</div>
+						</div>
+						<div data-alert="" class="alert-box warning" translate="wpsWarning">
+							WPS is automatically disabled if you choose WEP or WPA-only security or disable broadcast of the SSID
+						</div>
+					</div>
+					<div class="row" ng-show="securityMode == 'WPA_PERSONAL' || securityMode == 'WPA2_ENTERPRISE' || securityMode == 'WPA2_PERSONAL' || securityMode == 'WPA_WPA2_ENTERPRISE' || securityMode == 'WPA_WPA2_PERSONAL'">
+						<div class="column medium-2 small-12">
+							<label class="inline" for="wifi24-network-key" translate="networkKey">Network Key</label>
+						</div>
+						<div class="column medium-4 small-12">
+							<input id="wifiGeneralTip6" type="text" ng-model="password" name="password" validate-wifi-password="" data-security-mode="securityMode">
+							<small class="error" ng-if="wifiForm.password.$error.invalidPassword && (wifiForm.password.$dirty || submitted || wifiForm.$dirty)" translate="invalidPassword">Invalid Password</small>
+						</div>
+						<div class="columns small-12 medium-6 end">
+							<p translate="passwordTip4" ng-if="securityMode == 'WPA_ENTERPRISE'">
+								&nbsp;
+							</p>
+							<p translate="passwordTip5" ng-if="securityMode == 'WPA2_ENTERPRISE' || securityMode == 'WPA2_PERSONAL' || securityMode == 'WPA_WPA2_ENTERPRISE' || securityMode == 'WPA_WPA2_PERSONAL'">
+								&nbsp;
+							</p>
+							<p translate="passwordTip6" ng-if="securityMode == 'WPA_PERSONAL'">
+								&nbsp;
+							</p>
+						</div>
+					</div>
+				</fieldset>
+			</fieldset>
+			<fieldset class="fieldset js-wifi24-wps" ng-show="securityMode == 'WPA_PERSONAL' || securityMode == 'WPA2_ENTERPRISE' || securityMode == 'WPA2_PERSONAL' || securityMode == 'WPA_WPA2_ENTERPRISE' || securityMode == 'WPA_WPA2_PERSONAL'">
+				<div class="row">
+					<div class="column medium-2 small-12">
+						<label class="inline" for="wifi24-wps-enable" translate="wps">WPS</label>
+					</div>
+					<div class="column medium-4 small-12 end">
+						<div class="onoffswitch" id="wpsTip1" ng-show="!waitEnable">
+							<input class="onoffswitch-checkbox" id="enable-wps" name="onoffswitch" type="checkbox" ng-model="enableWps" ng-click="enableDisableWPS(true)">
+							<label class="onoffswitch-label" for="enable-wps"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+						</div>
+						<div>
+							<img class="wpsClass1" ng-show="waitEnable" src="images/loading2.gif">
+						</div>
+					</div>
+				</div>
+				<fieldset class="fieldset" data-target="wifi24-wps-enable" ng-show="enableWps">
+					<div class="row" ng-show="hasPin">
+						<div class="column medium-2 small-12">
+							<label class="inline" translate="wpsApPinCode">WPS AP PIN Code</label>
+						</div>
+						<div class="column medium-5 small-12 end">
+							<p id="pin-code" class="text-left">
+								<img id="loading" ng-show="loadingPin" src="images/loading2.gif">
+								<b class="color-on" ng-bind="pinCode">&nbsp;</b>
+								<button id="wifiSimpleTip5" class="button tiny radius" value="Generate New PIN Number" ng-click="generatePinCodeWPS()" translate="wpsGenerate">
+									Generate New PIN Number
+								</button>
+							</p>
+						</div>
+					</div>
+					<div class="row" ng-show="hasPin">
+						<div class="column medium-2 small-12">
+							<label for="wifi24-wps-device-pin-code" translate="wpsDevicePinCode">WPS Device PIN Code</label>
+						</div>
+						<div class="column medium-4 small-12">
+							<input id="wifiSimpleTip6" type="text" ng-model="enrolleePin" ng-hide="loadingEnrollee">
+							<img id="loadingEnrollee" ng-show="loadingEnrollee" src="images/loading2.gif">
+						</div>
+						<div class="column medium-3 small-12 end">
+							<button id="wifiSimpleTip7" class="button tiny radius" ng-click="setEnrolleePin()" ng-hide="loadingEnrollee" translate="setPinCode">
+								Set PIN code
+							</button>
+						</div>
+					</div>
+					<div class="row" ng-show="hasPushButton">
+						<div class="column medium-2 small-12">
+							<label class="inline" translate="connectUsingWps">Connect using WPS</label>
+						</div>
+						<div class="column medium-4 small-12 end">
+							<button id="wifiSimpleTip8" class="button tiny radius" ng-click="startPhysicalWPS()" ng-hide="loadingWps" translate="firstStart">
+								Start
+							</button>
+							<div class="loading-wps-simple">
+								<img id="loadingWps" ng-show="loadingWps" src="images/loading2.gif">
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</fieldset>
+		</div>
+		<div class="right">
+			<input id="wifiGeneralTip8" class="button tiny radius" type="button" ng-click="populate()" value="Cancel">
+			<input id="wifiGeneralTip9" class="button tiny radius" type="submit" ng-click="save()" value="Apply">
+		</div>
+	</form>
+</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<!-- Wifi radio -->
+	<li translate="wifiGeneralTip1" data-tourtarget="#wifiGeneralTip1"></li>
+	<li translate="wifiGeneralTip12" data-tourtarget="#wifiGeneralTip12"></li>
+	<!-- Wifi channel -->
+	<li translate="wifiSimpleTip1" data-tourtarget="#wifiSimpleTip1"></li>
+	<li translate="wifiSimpleTip2" data-tourtarget="#wifiSimpleTip2"></li>
+	<li translate="wifiGeneralTip4" data-tourtarget="#wifiGeneralTip4"></li>
+	<li translate="wifiSimpleTip3" data-tourtarget="#wifiSimpleTip3"></li>
+	<li translate="wifiSimpleTip4" data-tourtarget="#wifiSimpleTip4"></li>
+	<li translate="wifi24advancedTip3" data-tourtarget="#bandwidth"></li>
+	<!-- Wifi network -->
+	<li translate="wifiGeneralTip2" data-tourtarget="#wifiGeneralTip2"></li>
+	<li translate="wifiGeneralTip5" data-tourtarget="#wifiGeneralTip5"></li>
+	<li translate="wifiGeneralTip6" data-tourtarget="#wifiGeneralTip6"></li>
+	<li translate="wpsTip1" data-tourtarget="#wpsTip1"></li>
+	<li translate="wifiSimpleTip5" data-tourtarget="#wifiSimpleTip5"></li>
+	<li translate="wifiSimpleTip6" data-tourtarget="#wifiSimpleTip6"></li>
+	<li translate="wifiSimpleTip7" data-tourtarget="#wifiSimpleTip7"></li>
+	<li translate="wifiSimpleTip8" data-tourtarget="#wifiSimpleTip8"></li>
+	<!-- buttons -->
+	<li translate="cancelTip" data-tourtarget="#wifiGeneralTip8"></li>
+	<li translate="applyTip" data-tourtarget="#wifiGeneralTip9"></li>
+</ul>

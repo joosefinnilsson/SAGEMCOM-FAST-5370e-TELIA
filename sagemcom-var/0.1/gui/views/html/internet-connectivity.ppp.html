@@ -1,0 +1,54 @@
+<div class="content w100 active ng-hide" ng-show="true" id="xdsl">
+	<h4 class="maintitle">WAN</h4>
+	<form id="internetConnectivity" name="internetConnectivity" autocomplete="off" ng-submit="save()" novalidate="true">
+		<div class="row">
+			<div class="columns large-3 ">
+				<label class="inline" translate="username">Username:</label>
+			</div>
+
+			<div class="columns large-4 end">
+				<input type="text" name="username" ng-model="user.username" id="wanTip1" required/>
+				<small class="error" ng-if="internetConnectivity.username.$invalid && (internetConnectivity.username.$dirty || submitted)" translate="invalidUsername"> </small>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="columns large-3 ">
+				<label class="inline" translate="password">Password:</label>
+			</div>
+
+			<div class="columns large-4 end">
+				<input type="text" ng-model="user.password" id="wanTip2"/>
+			</div>
+		</div>
+
+		<div class="right">
+			<button id="wanTip3" class="button tiny radius btn-cancel" translate="cancel" type="button" click-loading ui-sref="user.home">
+				Cancel
+			</button>
+			<button id="wanTip4" class="button tiny radius" translate="apply" type="submit">
+				Apply
+			</button>
+		</div>
+	</form>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide"><li translate="wanTip1" data-tourtarget="#wanTip1">
+		
+		
+	</li><li translate="wanTip2" data-tourtarget="#wanTip2">
+		
+		
+	</li><li translate="applyTip" data-tourtarget="#wanTip4">
+		
+		
+	</li><li translate="cancelTip" data-tourtarget="#wanTip3">
+		
+		
+	</li><li translate="tabTip" data-tourtarget="#internetConnectiviyTab">
+		
+			You can navigate using these tabs to change aditional configurations about the device.
+		
+		
+	</li></ul>

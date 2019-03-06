@@ -1,0 +1,66 @@
+<div class="content">
+	<div wait-loading></div>
+	<div class="content ng-hide" ng-show="!loading" id="call-log">
+		<form name="greTunnelForm" id="greTunnelForm" novalidate ng-submit="save()" autocomplete="off" check-unsaved>
+			<div wait-loading></div>
+			<h6 translate="voiceService">GRE Tunnel</h6>
+			<hr/>
+			<div class="row">
+				<div class="columns large-3 medium-4 small-6">
+					<label class="inline" for="enableGRETunnel" translate="enable">Enable</label>
+				</div>
+				<div class="columns large-3 medium-3 small-6 end">
+					<div class="onoffswitch">
+						<input class="onoffswitch-checkbox noValidate" id="enableGRETunnel" type="checkbox" ng-model="greTunnel.enable" name="enableGRETunnel" />
+						<label class="onoffswitch-label" for="enableGRETunnel">
+							<div class="onoffswitch-inner"></div>
+							<div class="onoffswitch-switch"></div>
+						</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="columns large-3 medium-4 small-6">
+					<label class="inline" for="server" translate="GREServer">GRE Server</label>
+				</div>
+				<div class="columns large-4 medium-4 small-6 end">
+					<input class="inline" id="server" type="text" name="server" ng-model="greTunnel.server"></input>
+					<small class="error" ng-if="greTunnelForm.server.$invalid && greTunnelForm.server.$dirty" translate="invalidAddress"> </small>
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns large-3 medium-4 small-6">
+					<label class="inline" for="serverBkp" translate="GREServerBkp">GRE Backup Server</label>
+				</div>
+				<div class="columns large-4 medium-4 small-6 end">
+					<input class="inline" id="serverBkp" type="text" name="serverBkp" ng-model="greTunnel.serverBkp"></input>
+					<small class="error" ng-if="greTunnelForm.serverBkp.$invalid && greTunnelForm.serverBkp.$dirty" translate="invalidAddress"> </small>
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns large-3 medium-4 small-6">
+					<label class="inline" for="vlanId" translate="vlan8021Mark">VLAN ID</label>
+				</div>
+				<div class="columns large-4 medium-4 small-6 end">
+					<input class="inline" id="vlanId" type="text" name="vlanId" ng-model="greTunnel.vlanId"></input>
+					<small class="error" ng-if="greTunnelForm.vlanId.$invalid && greTunnelForm.vlanId.$dirty" translate="invalidAddress"> </small>
+				</div>
+			</div>
+	
+			
+			<div class="row padding-top">
+				<div class="right columns medium-4 small-12 text-right">
+					<button id="" class="button tiny radius btn-cancel" type="button" click-loading ui-sref="user.home" translate="cancel"></button>
+					<button id="" class="button tiny radius" type="submit" translate="apply" ng-show="greTunnelForm.$invalid" disabled></button>
+					<button id="" class="button tiny radius" type="submit" ng-show="greTunnelForm.$valid" translate="apply"></button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+<script>
+	$(document).foundation();
+</script>

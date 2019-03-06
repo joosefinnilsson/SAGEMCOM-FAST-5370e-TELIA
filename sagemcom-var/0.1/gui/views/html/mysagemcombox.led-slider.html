@@ -1,0 +1,24 @@
+<div class="content" id="led">
+	<h4 translate="lightControl">Light control</h4>
+	<div class="row">
+		<div class="columns large-2 medium-2 small-4">
+			<label class="inline" translate="hubLight">Hub light</label>
+		</div>
+		<div class="columns large-6 medium-6 small-8 end">
+			<rzslider class="led" rz-slider-model="slider.value" rz-slider-floor="slider.options.floor" rz-slider-ceil="slider.options.ceil"></rzslider>
+		</div>
+	</div>
+	<div class="right" ng-show="!onChangeSave">
+		<button class="button tiny radius btn-cancel" type="button" translate="cancel" click-loading ui-sref="{{previousMainPage}}">
+			Cancel
+		</button>
+		<button class="button tiny radius" type="submit" translate="apply" ng-click="save()">
+			Apply
+		</button>
+	</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li translate="ledTip1" data-tourtarget="#ledTip1"></li>
+</ul>

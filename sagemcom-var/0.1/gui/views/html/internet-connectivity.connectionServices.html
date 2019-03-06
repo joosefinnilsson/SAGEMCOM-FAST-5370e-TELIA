@@ -1,0 +1,209 @@
+<div class="content ng-hide" ng-show="true" id="connection-services">
+	<form name="connectionServicesForm" autocomplete="off">
+		<h4 class="maintitle" translate="connectionServices">Connection Services</h4>
+		<!-- Connection services list -->
+		<div class="large-12 columns" ng-if="!!displayList">
+			<table class="table-form table-form-full responsive-table">
+				<thead>
+					<tr>
+						<th width="8%" translate="serviceMode">Service Mode</th>
+						<th width="10%" translate="serviceType">Service Type</th>
+						<th translate="connectionType">Connection Type</th>
+						<th translate="vlanVpiVci">VLAN/VPI VCI</th>
+						<th translate="interface">Interface</th>
+						<th translate="IPAddress">IP Address</th>
+						<th width="16%" translate="sStatus">Status</th>
+						<th width="10%" translate="defaultGateway">Default Gateway</th>
+						<th translate="actions">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in servicesList">
+						<td ng-bind="item.ConnectionMode"></td>
+                        <td ng-bind="item.Service"></td>
+                        <td ng-bind="item.ConnectionType"></td>
+						<td ng-bind="item.VLANID"></td>
+						<td ng-bind="item.IfcName"></td>
+						<td ng-bind="item.IPAddress"></td>
+						<td ng-bind="item.Status"></td>
+						<td ng-bind="item.DefaultGateway"></td>
+						<td>
+                            <input class="icon-edit" type="button" value="Edit" ng-click="edit(item)">
+                            <input class="icon-delete" type="button" value="Remove" ng-click="remove(item)" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- Connection services form - NEW -->
+		<div class="large-12 columns" ng-if="!displayList">
+			<p translate="configureConnectionServices" class="ng-scope"></p>
+			<div class="row">
+				<div class="columns medium-3 small-4">
+					<label class="inline" translate="serviceMode">Service Mode</label>
+				</div>
+				<div class="columns medium-4 small-8 end">
+					<select id="serviceMode" ng-model="service.ConnectionMode" ng-change="updateFields()">
+						<option value="{{item}}" ng-bind="item" ng-selected="service.ConnectionMode == item" ng-repeat="item in serviceModeOptions"></option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns medium-3 small-4">
+					<label class="inline" translate="serviceType">Service Type</label>
+				</div>
+				<div class="columns medium-4 small-8 end">
+					<select id="serviceType" ng-model="service.Service" ng-change="updateFields()">
+						<option value="{{item}}" ng-bind="item" ng-selected="service.Service == item" ng-repeat="item in serviceTypeOptions"></option>
+					</select>
+				</div>
+			</div>
+
+			<div class="row" ng-if="service.ConnectionMode === 'ATM'">
+				<div class="columns medium-3 small-4">
+					<label class="inline" translate="createVPIVCI">Create/select VPI/VCI</label>
+				</div>
+				<div class="columns medium-4 small-8 end">
+					<label class="inline" ng-bind="service.VPIVCI"></label>
+				</div>
+			</div>
+
+			<div class="row" ng-if="service.ConnectionMode === 'ATM'">
+				<div class="columns medium-3 small-4">
+					<label class="inline" translate="encapsulation">Encapsulation</label>
+				</div>
+				<div class="columns medium-4 small-8 end">
+					<label class="inline" ng-bind="service.Encapsulation"></label>
+				</div>
+			</div>
+
+			<div class="row" ng-if="service.ConnectionMode === 'ATM'">
+				<div class="columns medium-3 small-4">
+					<label class="inline" translate="atmQosClass">ATM QoS Class</label>
+				</div>
+				<div class="columns medium-4 small-8 end">
+					<label class="inline" ng-bind="service.ATMQoSClass"></label>
+				</div>
+			</div>
+
+			<div class="row" ng-if="service.ConnectionMode === 'ATM'">
+				<div class="columns medium-3 small-4">
+					<label class="inline" translate="peakCellRateCS">Peak Cell Rate</label>
+				</div>
+				<div class="columns medium-4 small-8 end">
+					<label class="inline" ng-bind="service.PeakCellRate"></label>
+				</div>
+			</div>
+
+			<div class="row" ng-if="service.ConnectionMode === 'ATM'">
+				<div class="columns medium-3 small-4">
+					<label class="inline" translate="maximumBurstSizeCS">Maximum Burst Size</label>
+				</div>
+				<div class="columns medium-4 small-8 end">
+					<label class="inline" ng-bind="service.MaximumBurstSize"></label>
+				</div>
+			</div>
+
+			<div class="row" ng-if="service.ConnectionMode === 'ATM'">
+				<div class="columns medium-3 small-4">
+					<label class="inline" translate="sustainableCellRateCS">Sustainable Cell Rate</label>
+				</div>
+				<div class="columns medium-4 small-8 end">
+					<label class="inline" ng-bind="service.SustainableCellRate"></label>
+				</div>
+			</div>
+
+			<div class="row" ng-if="!displayEdit || (!!displayEdit && service.ConnectionMode !== 'ATM')">
+				<div class="columns medium-3 small-4">
+					<label class="inline" translate="enableVLAN">Enable VLAN</label>
+				</div>
+				<div class="columns medium-4 small-8 end">
+					<div class="onoffswitch">
+						<input class="onoffswitch-checkbox" id="enableVLAN" name="enableVLAN" type="checkbox" ng-model="service.EnableVLAN" />
+						<label class="onoffswitch-label" for="enableVLAN">
+							<div class="onoffswitch-inner"></div>
+							<div class="onoffswitch-switch"></div>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="row" ng-if="service.ConnectionMode !== 'ATM'">
+				<div class="columns medium-3 small-4">
+					<label class="inline" translate="enterVLAN">Enter VLAN</label>
+				</div>
+				<div class="columns medium-4 small-8 end">
+					<input id="enterVLAN" type="text" ng-model="service.VLANID" name="enterVLAN"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns medium-3 small-4">
+					<label class="inline" translate="connectionType">Connection Type</label>
+				</div>
+				<div class="columns medium-4 small-8 end">
+					<select id="connectionType" ng-model="service.ConnectionType">
+						<option value="{{item}}" ng-bind="item" ng-selected="service.ConnectionType == item" ng-repeat="item in connectionTypeOptions"></option>
+					</select>
+				</div>
+			</div>
+			<div class="row" ng-if="service.Service == 'Internet'">
+				<div class="columns medium-3 small-4">
+					<label class="inline" translate="username">Username</label>
+				</div>
+				<div class="columns medium-4 small-8 end">
+					<input id="username" type="text" ng-model="service.Username" name="username"/>
+				</div>
+			</div>
+			<div class="row" ng-if="service.Service == 'Internet'">
+				<div class="columns medium-3 small-4">
+					<label class="inline" translate="password">Password</label>
+				</div>
+				<div class="columns medium-4 small-8 end">
+					<input id="password" type="password" ng-model="service.Password" name="password"/>
+				</div>
+			</div>
+			<div class="row" ng-if="service.Service == 'Internet'">
+				<div class="columns medium-3 small-4">
+					<label class="inline" translate="MTUSize">MTU Size</label>
+				</div>
+				<div class="columns medium-4 small-8 end">
+					<input id="mtuSize" type="text" ng-model="service.MTUSize" name="mtuSize"/>
+				</div>
+			</div>
+			<div class="row" ng-if="service.Service == 'Internet'">
+				<div class="columns medium-3 small-4">
+					<label class="inline" translate="defaultGateway">Default Gateway</label>
+				</div>
+				<div class="columns medium-4 small-8 end">
+					<div class="onoffswitch">
+						<input class="onoffswitch-checkbox" id="defaultGateway" name="defaultGateway" type="checkbox" ng-model="service.DefaultGateway" />
+						<label class="onoffswitch-label" for="defaultGateway">
+							<div class="onoffswitch-inner"></div>
+							<div class="onoffswitch-switch"></div>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="row" ng-if="service.Service == 'TV'">
+				<div class="columns medium-3 small-4">
+					<label class="inline" translate="bridges">Bridges</label>
+				</div>
+				<div class="columns medium-4 small-8 end">
+					<label class="inline" ng-bind="service.bridge"></label>
+				</div>
+			</div>
+		</div>
+		<div class="large-12 columns" ng-if="!!displayList">
+			<div class="right">
+				<button type="button" class="button tiny radius" ng-click="add()" translate="btnAddConnectionService"></button>
+			</div>
+		</div>
+		<div class="large-12 columns" ng-if="!displayList">
+			<div class="right">
+				<button type="button" class="button tiny radius btn-cancel" ng-click="cancel()"  value="Cancel" id="cancelTip" translate="cancel"></button>
+				<button type="button" class="button tiny radius" ng-click="save(!displayEdit)" value="Apply" id="applyTip" translate="apply"></button>
+			</div>
+		</div>
+	</form>
+</div>
+
+<script>$(document).foundation();</script>

@@ -1,0 +1,27 @@
+<div class="row">
+	<br>
+	<div class="large-12 columns">
+		<h3 translate="mobileQr">QR Code</h3>
+	</div>
+</div>
+<div class="row">
+	<div class="small-12 columns">
+		<p translate="qrcodeTextMobile" ng-show="selectRadios.length">
+			Select the Wireless Connection to generate QR Code
+		</p>
+		<p translate="qrcodeTextMobileDont" ng-show="!selectRadios.length">
+		</p>
+	</div>
+	<div class="columns small-12" ng-show="selectRadios.length">
+		<select id="select-profile" ng-model="selectedRadio" name="selectedRadio" ng-options="radio.name for radio in selectRadios">
+			<option value="2" translate="selectWireless2G4">Wireless 2.4 GHz</option>
+			<option value="1" translate="selectWireless5G">Wireless 5 GHz</option>
+		</select>
+	</div>
+</div>
+<div class="row">
+	<div class="small-12 columns text-center">
+		<qr type-number="0" size="240"  image="true" text="selectedRadio.qr" ng-if="(selectedRadio.qr)?true:false"></qr>
+	</div>
+</div>
+<div class="row">&nbsp;</div>

@@ -1,0 +1,194 @@
+<style>
+	#generalModemRouterTabs,
+	#basicModemRouterTabs {
+	    display: none;
+	}
+</style>
+<div class="content">
+<div wait-loading=""></div>
+<div class="content ng-hide" ng-show="!loading">
+<fieldset ng-disabled="readOnly" ng-class="readOnly ? 'read-only' : ''">
+	<form name="ethernetDeviceForm" autocomplete="off" check-unsaved="">
+		<div class="content w100 active" id="device-information">
+			<h4 class="maintitle" translate="deviceinfo">Device Information</h4>
+
+			<div class="row">
+				<div class="columns large-12 medium-12 small-12">
+					<div class="row">
+						<div class="columns medium-2 small-4">
+							<label class="inline" translate="friendlyName">Friendly Name</label>
+						</div>
+
+						<div class="columns medium-4 small-8 end">
+							<input id="ethernetDeviceTip2" type="text" ng-model="friendlyName" maxlength="32">
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="columns medium-2 small-3">
+							<label class="inline" translate="icon">Icon</label>
+						</div>
+
+						<div class="columns medium-4 small-6">
+							<select id="ethernetDeviceTip3" ng-model="userDeviceType">
+								<option ng-repeat="leType in deviceTypes" ng-bind="leType.type | translate" ng-selected="leType.type === userDeviceType" value="{{leType.type}}"></option>
+							</select>
+						</div>
+
+						<div class="columns medium-2 small-3 end">
+							<div class="sprite selected-icon icon-device {{userDeviceType | deviceIcon}}"></div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="columns large-2 medium-2 small-4">
+							<label class="inline" translate="location">Location</label>
+						</div>
+						<div class="columns large-4 medium-4 small-8 end">
+							<input id="ethernetDeviceTip4" type="text" value="" ng-model="location" maxlength="100">
+						</div>
+					</div>
+
+					<div class="row ng-hide" ng-hide="staticDNS">
+						<div class="columns medium-2 small-4">
+							<label translate="hostName">Hostname</label>
+						</div>
+
+						<div class="columns medium-4 small-8 end">
+							<p id="deviceHostnameTip" ng-bind="hostName" ng-if="hostName">
+							</p>
+							<p id="deviceHostnameTip" translate="notAvailable" ng-if="!hostName">
+							</p>
+						</div>
+					</div>
+
+					<div class="row deviceStaticDNSRow ng-hide" ng-show="staticDNS">
+						<div class="columns medium-2 small-12">
+							<label translate="hostName" class="inline">Hostname</label>
+						</div>
+
+						<div class="columns medium-4 small-8" ng-show="!hostnameRO">
+							<input id="ethernetDeviceTip7" type="text" ng-model="hostName" name="hostName" maxlength="64">
+						</div>
+
+						<div class="columns medium-4 small-8" ng-show="hostnameRO">
+							<label id="ethernetDeviceTip7" type="text" ng-bind="hostName" name="hostName" class="inline" maxlength="64" ng-if="hostName"></label>
+							<label id="ethernetDeviceTip7" translate="notAvailable" class="inline" ng-if="!hostName"></label>
+						</div>
+
+						<div class="columns medium-3 small-4 end">
+							<label class="inline">.{{localDomain}}</label>
+						</div>
+					</div>
+
+					<div id="ethernetDeviceTip1">
+						
+
+						<div class="row" ng-if="signalRate">
+							<div class="columns medium-2 small-4">
+								<label translate="signalRate">Signal rate</label>
+							</div>
+
+							<div class="columns medium-2 small-4 end">
+								<p id="signalRateTip">
+									</p><p ng-bind="signalRate + ' Mbps'" class="left">
+									</p>
+									<div class="wifiStrength" ng-class="'power' + parsedSignalStrength"></div>
+								<p></p>
+							</div>
+						</div>
+
+						<div class="row" ng-if="TxPhyRate">
+							<div class="columns medium-2 small-5">
+								<label translate="txRate">Tx rate</label>
+							</div>
+
+							<div class="columns medium-2 small-4 end">
+								<p id="txRateTip" ng-bind="TxPhyRate + ' Mbps'" class="left"></p>
+							</div>
+						</div>
+
+						<div class="row" ng-if="RxPhyRate">
+							<div class="columns medium-2 small-4">
+								<label translate="rxRate">Rx rate</label>
+							</div>
+
+							<div class="columns medium-2 small-4 end">
+								<p id="rxRateTip" ng-bind="RxPhyRate + ' Mbps'" class="left"></p>
+							</div>
+						</div>
+
+						<div class="row device-info-row">
+							<div class="columns medium-2 small-4 ipaddress-label">
+								<label translate="IPAddress">IP Address</label>
+							</div>
+
+							<div class="columns medium-4 small-5 ipaddress-value">
+								<p id="deviceIPAddressTip">
+									<span class="ipaddresses" ng-bind="ipAddress" ng-show="ipAddress"></span>
+									<span class="ipaddresses" ng-bind="ipv6Address" ng-show="ipv6Address"></span>
+								</p>
+								<div ng-show="invalidReserve">
+									<small class="error" translate="reserveInConflict">Reserve in conflict</small>
+								</div>
+							</div>
+							<div class="columns medium-2 small-4 end reserve-ip-button" check-feature-state="ipReservation">
+								<button id="reserveIPTip" ng-if="!button" class="button tiny radius" translate="reserveIP" ng-click="reserveIp()">Reserve IP</button>
+								<button id="cancelReserveIPTip" ng-if="button" class="button tiny radius" translate="cancelReserveIP" ng-click="reserveIp()">Remove static IP</button>
+							</div>
+						</div>
+
+						<div class="row device-info-row">
+							<div class="columns medium-2 small-4 mac-address-label">
+								<label translate="MACAddress">MAC Address</label>
+							</div>
+
+							<div class="columns medium-4 small-8 end mac-address-value">
+								<p id="deviceMacAddressTip">
+									{{macAddress}}&nbsp;
+								</p>
+							</div>
+						</div>
+
+						<div class="row device-info-row">
+							<div class="columns medium-2 small-4 manufacturer-label">
+								<label translate="sManufacturer">Manufacturer</label>
+							</div>
+
+							<div class="columns medium-4 small-8 end manufacturer-value">
+								<p id="deviceManufacturerTip">
+									{{manufacturer}}&nbsp;
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="right">
+				<button id="cancelButton" class="button tiny radius btn-cancel" click-loading="" ui-sref="{{previousMainPage}}" translate="cancel"></button>
+				<button id="applyButton" class="button tiny radius" ng-click="save()" translate="apply"></button>
+			</div>
+		</div>
+	</form>
+</fieldset>
+</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li translate="ethernetDeviceTip2" data-tourtarget="#ethernetDeviceTip2"></li>
+	<li translate="ethernetDeviceTip3" data-tourtarget="#ethernetDeviceTip3"></li>
+	<li translate="ethernetDeviceTip4" data-tourtarget="#ethernetDeviceTip4"></li>
+	<li translate="deviceHostnameTip" data-tourtarget="#deviceHostnameTip"></li>
+	<li translate="txRateTip" data-tourtarget="#txRateTip"></li>
+	<li translate="rxRateTip" data-tourtarget="#rxRateTip"></li>
+	<li translate="ethernetDeviceTip7" data-tourtarget="#ethernetDeviceTip7"></li>
+	<li translate="signalStrengthTip" data-tourtarget="#signalStrengthTip"></li>
+	<li translate="signalRateTip" data-tourtarget="#signalRateTip"></li>
+	<li translate="deviceIPAddressTip" data-tourtarget="#deviceIPAddressTip"></li>
+	<li translate="reserveIPTip" data-tourtarget="#reserveIPTip"></li>
+	<li translate="cancelReserveIPTip" data-tourtarget="#cancelReserveIPTip"></li>
+	<li translate="deviceMacAddressTip" data-tourtarget="#deviceMacAddressTip"></li>
+	<li translate="deviceManufacturerTip" data-tourtarget="#deviceManufacturerTip"></li>
+</ul>

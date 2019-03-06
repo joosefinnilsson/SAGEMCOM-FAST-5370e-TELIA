@@ -1,0 +1,50 @@
+<div wait-loading></div>
+<div class="content ng-hide" ng-show="!loading" id="dhcpLease">
+    <h4 class="title-md" translate="myNetwork">My Network</h4>
+    <p>All users connected to this device are listed below.</p>
+    <div class="row">
+        <div class="columns medium-12">
+            <table id="leases-table" class="table-form text-center responsive-table">
+                <thead>
+                    <tr>
+                        <th align="center" translate="hostName"><b>Host Name</b></th>
+                        <th align="center" translate="MACAddress"><b>MAC Address</b></th>
+                        <th align="center" translate="ipv4Address"><b>IPv4 Address</b></th>
+                        <th align="center" translate="ipv6Address"><b>IPv6 Address</b></th>
+                        <th align="center" translate="interface"><b>Interface</b></th>
+                        <th align="center" translate="linkSpeedTable"><b>Link Speed</b></th>
+                        <th align="center"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="device in deviceList" ng-hide="device.InterfaceType !== 'Ethernet' && device.InterfaceType !== 'WiFi'">
+                        <td data-title="Host Name"><div ng-bind="device.hostname" class="breakRule">&nbsp;</div></td>
+                        <td data-title="MAC Address" ng-bind="device.PhysAddress">&nbsp;</td>
+                        <td data-title="IPv4 Address" ng-bind="device.ipAddress" class="max118 breakall">&nbsp;</td>
+                        <td data-title="IPv6 Address" ng-bind="device.ipv6Address" class="max140 breakall">&nbsp;</td>
+                        <td data-title="Interface" ng-bind="device.InterfaceType">&nbsp;</td>
+                        <td data-title="linkSpeedTable" ng-show="device.InterfaceType !== 'WiFi'" ng-bind-template="{{device.speed}} Mbit/s" class="max140">&nbsp;</td>
+                        <td data-title="linkSpeedTable" ng-show="device.InterfaceType === 'WiFi'" class="max140">&nbsp;
+                            <span class="wifiRateSpeed txRate" ng-bind-template="{{device.txRate}} Mbit/s"></span>
+                            <span class="wifiRateSpeed rxRate" ng-bind-template="{{device.rxRate}} Mbit/s"></span>
+                        </td>
+                        <td>
+                            <a check-feature-state="networkMapNewRule" class="ch-button ch-tiny-button button--dark-blue" style="min-width: 105px;" translate="newRule" ng-if="device.InterfaceType === 'Ethernet' || device.InterfaceType === 'WiFi'" ng-click="openDevice(device)"></a>
+                        </td>
+                    </tr>
+                    <tr ng-if="deviceList.length == 0">
+                        <td colspan="5" translate="noConnectedDevices" class="listEmpty">
+                            There are no connected devices
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+    <li translate="dhcpLeasesTip2" data-tourtarget="#leases-table">
+    </li>
+</ul>

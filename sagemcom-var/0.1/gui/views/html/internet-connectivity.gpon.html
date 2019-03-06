@@ -1,0 +1,136 @@
+<div class="content w100 active ng-hide" ng-show="true" id="gponMain">
+	<h4 class="maintitle">GPON</h4>
+	<div class="row" ng-if="!fiberConnected">
+		<div class="columns large-12" style="margin-bottom: 20px">
+			<span class="error" translate="msgFiberDisconnected">message</span>
+		</div>
+	</div>
+
+	<form name="gponForm" autocomplete="off" novalidate="true">
+		<div class="row">
+			<div class="columns large-3 medium-5 small-12">
+				<label class="inline" translate="gponSerialNumber"></label>
+			</div>
+
+			<div class="columns large-4 medium-5 small-12 end">
+				<input type="text" name="SerialNumber" ng-model="a.SerialNumber" id="gponTip1" disabled/>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="columns large-3 medium-5 small-12">
+				<label class="inline" translate="gponState"></label>
+			</div>
+
+			<div class="columns large-4 medium-5 small-12 end">
+				<input type="text" name="SerialNumber" ng-model="a.GponState" id="gponTip2" disabled/>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="columns large-3 medium-5 small-12">
+				<label class="inline" translate="gponTransmitOpticalLevel"></label>
+			</div>
+
+			<div class="columns large-4 medium-5 small-12 end">
+				<input type="text" name="SerialNumber" ng-model="a.TransmitOpticalLevel" id="gponTip3" disabled/>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="columns large-3 medium-5 small-12">
+				<label class="inline" translate="gponOpticalSignalLevel"></label>
+			</div>
+
+			<div class="columns large-4 medium-5 small-12 end">
+				<input type="text" name="SerialNumber" ng-model="a.OpticalSignalLevel" id="gponTip4" disabled/>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="columns large-3 medium-5 small-12">
+				<label class="inline" translate="gponTemperature"></label>
+			</div>
+
+			<div class="columns large-4 medium-5 small-12 end">
+				<input type="text" name="SerialNumber" ng-model="a.Temperature" id="gponTip5" disabled/>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="columns large-3 medium-5 small-12">
+				<label class="inline" translate="gponVoltage"></label>
+			</div>
+
+			<div class="columns large-4 medium-5 small-12 end">
+				<input type="text" name="SerialNumber" ng-model="a.Voltage" id="gponTip6" disabled/>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="columns large-3 medium-5 small-12">
+				<label class="inline" translate="gponBIASCurrent"></label>
+			</div>
+
+			<div class="columns large-4 medium-5 small-12 end">
+				<input type="text" name="SerialNumber" ng-model="a.BIASCurrent" id="gponTip7" disabled/>
+			</div>
+		</div>
+
+		<!-- Bug 3862 - [JIRA](GPSAG-219)GPON connection information - Unused informations: to be deleted
+		<div class="row">
+			<div class="columns large-3 medium-5 small-12">
+				<label class="inline" translate="gponUpstreamFEC"></label>
+			</div>
+
+			<div class="columns large-4 medium-5 small-12 end">
+				<input type="text" name="SerialNumber" ng-model="a.UpstreamFEC" id="gponTip8" disabled/>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="columns large-3 medium-5 small-12">
+				<label class="inline" translate="gponDownstreamFEC"></label>
+			</div>
+
+			<div class="columns large-4 medium-5 small-12 end">
+				<input type="text" name="SerialNumber" ng-model="a.DownstreamFEC" id="gponTip9" disabled/>
+			</div>
+		</div>
+		-->
+	</form>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li translate="gponTip1" data-tourtarget="#gponTip1">
+		&nbsp;
+	</li>
+	<li translate="gponTip2" data-tourtarget="#gponTip2">
+		&nbsp;
+	</li>
+	<li translate="gponTip3" data-tourtarget="#gponTip3">
+		&nbsp;
+	</li>
+	<li translate="gponTip4" data-tourtarget="#gponTip4">
+		&nbsp;
+	</li>
+	<li translate="gponTip5" data-tourtarget="#gponTip5">
+		&nbsp;
+	</li>
+	<li translate="gponTip6" data-tourtarget="#gponTip6">
+		&nbsp;
+	</li>
+	<li translate="gponTip7" data-tourtarget="#gponTip7">
+		&nbsp;
+	</li>
+	<li translate="gponTip8" data-tourtarget="#gponTip8">
+		&nbsp;
+	</li>
+	<li translate="gponTip9" data-tourtarget="#gponTip9">
+		&nbsp;
+	</li>
+	<li translate="tabTip" data-tourtarget="#internetConnectiviyTab">
+		&nbsp;
+	</li>
+</ul>

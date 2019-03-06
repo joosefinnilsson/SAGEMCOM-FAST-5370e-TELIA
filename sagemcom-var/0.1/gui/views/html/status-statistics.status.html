@@ -1,0 +1,272 @@
+<div class="owl-carousel" id="deviceinfo" >
+	<div class="item">
+	<h5 translate="deviceinfo">Device Info</h5>
+	<div class="row">
+		<div class="columns large-12 medium-12 small-12" id="deviceInfoTip1">
+			<table class="table-form table-vert">
+			<tbody>
+				<tr>
+					<th width="40%" translate="serialNumber">Serial Number</th>
+					<td ng-bind="deviceInfo.serialNumber==''?'-':deviceInfo.serialNumber"></td>
+				</tr>
+				<tr>
+					<th translate="hardwareVersion">Hardware Version</th>
+					<td ng-bind="deviceInfo.hardwareVersion==''?'-':deviceInfo.hardwareVersion"></td>
+				</tr>
+				<tr>
+					<th translate="softwareVersion">Software Version</th>
+					<td ng-bind="deviceInfo.softwareVersion==''?'-':deviceInfo.softwareVersion"></td>
+				</tr>
+				<tr>
+					<th translate="guiVersion">GUI Version</th>
+					<td ng-bind="deviceInfo.guiVersion==''?'-':deviceInfo.guiVersion"></td>
+				</tr>
+				<tr>
+					<th translate="wanMACAddress">WAN MAC Address</th>
+					<td ng-bind="deviceInfo.wanMacAddress==''?'-':deviceInfo.wanMacAddress"></td>
+				</tr>
+				<tr>
+					<th translate="uptime">UpTime</th>
+					<td hour-format="{{deviceInfo.upTime}}"></td>
+				</tr>
+				<tr check-feature-state="datapump" ng-if="showedDatapump">
+					<th translate="datapumpVersion">Datapump Version</th>
+					<td ng-bind="deviceInfo.datapumpVersion==''?'-':deviceInfo.datapumpVersion"></td>
+				</tr>
+			</tbody>
+			</table>
+		</div>
+	</div>
+	</div>
+	<div class="item">
+	<h5>Network</h5>
+	<div class="row">
+		<div class="columns large-12 medium-12 small-12" id="deviceInfoTip2">
+			<table class="table-form table-vert">
+			<tbody>
+				<tr>
+					<th width="40%" translate="localIpv4Address">Local IPv4 Address</th>
+					<td ng-bind="deviceInfo.localIpv4==''?'-':deviceInfo.localIpv4"></td>
+				</tr>
+				<tr>
+					<th width="40%" translate="localSubnetMask">Local Subnet Mask</th>
+					<td ng-bind="deviceInfo.localSubnetMask==''?'-':deviceInfo.localSubnetMask"></td>
+				</tr>
+				<tr>
+					<th width="40%" translate="localEthernetMac">Local Ethernet Mac Address</th>
+					<td ng-bind="deviceInfo.localEthernetMac==''?'-':deviceInfo.localEthernetMac"></td>
+				</tr>
+				<tr>
+					<th translate="publicIpv4Address">Public IPv4 Address</th>
+					<td ng-bind="deviceInfo.publicIpv4==''?'-':deviceInfo.publicIpv4"></td>
+				</tr>
+				<tr>
+					<th translate="publicSubnetMask">Public Subnet Mask</th>
+					<td ng-bind="deviceInfo.publicSubnetMask==''?'-':deviceInfo.publicSubnetMask"></td>
+				</tr>
+				<tr>
+					<th translate="defaultGateway">Default Gateway</th>
+					<td ng-bind="deviceInfo.defaultGateway==''?'-':deviceInfo.defaultGateway"></td>
+				</tr>
+				<tr>
+					<th translate="PrimaryDNSServer">Primary DNS Server</th>
+					<td ng-bind="deviceInfo.primaryDns==''?'-':deviceInfo.primaryDns"></td>
+				</tr>
+				<tr>
+					<th translate="secondaryDNSServer">Secondary DNS Server</th>
+					<td ng-bind="deviceInfo.secondaryDns==''?'-':deviceInfo.secondaryDns"></td>
+				</tr>
+
+				<tr>
+					<th translate="linkLocalIpv6">Link Local Gateway Address (IPv6):</th>
+					<td ng-bind="deviceInfo.linkLocalIpv6==''?'-':deviceInfo.linkLocalIpv6"></td>
+				</tr>
+
+				<tr>
+					<th translate="globalGatewayAddressIpv6">Global Gateway Address (IPv6):</th>
+					<td ng-bind="deviceInfo.globalLinkIpv6==''?'-':deviceInfo.globalLinkIpv6"></td>
+				</tr>
+			</tbody>
+			</table>
+		</div>
+	</div>
+	</div>
+	<div class="item">
+	<h5>Wifi</h5>
+	<div class="row">
+		<div class="columns large-12 medium-12 small-12" id="deviceInfoTip3">
+			<table class="table-form table-vert">
+				<tbody>
+					<tr>
+						<th width="40%" translate="ssidWifi24">SSID Wifi 2.4 GHz</th>
+						<td ng-bind="deviceInfo.wifi['wifi24'].ssid==''?'-':deviceInfo.wifi['wifi24'].ssid">&nbsp;</td>
+					</tr>
+					<tr>
+						<th translate="sStatus">Status</th>
+						<td><b ng-class="deviceInfo.wifi['wifi24'].status == 'Enabled' ? 'color-on' : 'color-off'" ng-bind="deviceInfo.wifi['wifi24'].status | lowercase | translate">&nbsp;</b></td>
+					</tr>
+					<tr>
+						<th translate="uptime">Uptime</th>
+						<td hour-format="{{deviceInfo.wifi['wifi24'].uptime}}">&nbsp;</td>
+					</tr>
+					<tr>
+						<th translate="sMacaddres">MAC Address</th>
+						<td ng-bind="deviceInfo.wifi['wifi24'].macAddress">&nbsp;</td>
+					</tr>
+					<tr>
+						<th translate="sMode">Mode</th>
+						<td>802.11 <span ng-bind="deviceInfo.wifi['wifi24'].operatingMode"></span></td>
+					</tr>
+					<tr check-feature-state="bitrate">
+						<th translate="sBitrate">Bitrate</th>
+						<td><span ng-bind="deviceInfo.wifi['wifi24'].maxSpeed"></span> Mbps</td>
+					</tr>
+					<tr>
+						<th translate="sSecurity">Security</th>
+						<td ng-bind="deviceInfo.wifi['wifi24'].securityMode">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<table class="table-form table-vert" ng-if="deviceInfo.wifi['wifi5'].ssid">
+				<tbody>
+					<tr>
+						<th width="40%" translate="ssidWifi24">SSID Wifi 5.0 GHz</th>
+						<td ng-bind="!deviceInfo.wifi['wifi5'].ssid ? '-' : deviceInfo.wifi['wifi5'].ssid">&nbsp;</td>
+					</tr>
+					<tr>
+						<th translate="sStatus">Status</th>
+						<td><b ng-class="deviceInfo.wifi['wifi5'].status == 'Enabled' ? 'color-on' : 'color-off'" ng-bind="deviceInfo.wifi['wifi5'].status | lowercase | translate">&nbsp;</b></td>
+					</tr>
+					<tr>
+						<th translate="uptime">Uptime</th>
+						<td hour-format="{{deviceInfo.wifi['wifi5'].uptime}}">&nbsp;</td>
+					</tr>
+					<tr>
+						<th translate="sMacaddres">MAC Address</th>
+						<td ng-bind="deviceInfo.wifi['wifi5'].macAddress">&nbsp;</td>
+					</tr>
+					<tr>
+						<th translate="sMode">Mode</th>
+						<td>802.11 <span ng-bind="deviceInfo.wifi['wifi5'].operatingMode"></span></td>
+					</tr>
+					<tr check-feature-state="bitrate">
+						<th translate="sBitrate">Bitrate</th>
+						<td><span ng-bind="deviceInfo.wifi['wifi5'].maxSpeed"></span> Mbps</td>
+					</tr>
+					<tr>
+						<th translate="sSecurity">Security</th>
+						<td ng-bind="deviceInfo.wifi['wifi5'].securityMode">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	</div>
+	<div class="item">
+	<h5>Telephone</h5>
+	<div class="row">
+		<div class="columns large-12 medium-12 small-12" id="deviceInfoTip4">
+			<table class="table-form table-vert">
+				<tr>
+					<th width="40%" translate="telephone1">Telephone 1</th>
+					<td ng-bind="deviceInfo.telephone1==''?'-':deviceInfo.telephone1"></td>
+				</tr>
+				<tr>
+					<th width="40%" translate="telephoneStatus">Status</th>
+					<td><b translate="{{deviceInfo.telephone1Status}}" ng-class="deviceInfo.telephone1Status === 'registered' ? 'color-on' : 'color-off'"></b></td>
+				</tr>
+			</table>
+			<table class="table-form table-vert">
+				<tr>
+					<th translate="telephone2"> Telephone 2 </th>
+					<td ng-bind="deviceInfo.telephone2==''?'-':deviceInfo.telephone2"></td>
+				</tr>
+				<tr>
+					<th width="40%" translate="telephoneStatus">Status</th>
+					<td><b translate="{{deviceInfo.telephone2Status}}" ng-class="deviceInfo.telephone2Status === 'registered' ? 'color-on' : 'color-off'"></b></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div ng-switch on="deviceInfo.wanConnectivity">
+		<h5 ng-switch-when="true">DSL</h5>
+		<div class="row" ng-switch-when="true">
+			<div class="columns large-12 medium-12 small-12" id="deviceInfoTip5">
+				<table class="table-form table-vert">
+					<tr>
+						<th translate="DSLStatus">&nbsp;</th>
+						<td><b ng-bind="deviceInfo.dslStatus" ng-class="deviceInfo.dslStatus === 'UP' ? 'color-on' : 'color-off'"></b>&nbsp;-&nbsp;<b ng-bind="deviceInfo.dslStandard"></b></td>
+					</tr>
+					<tr>
+						<th width="40%" translate="DSLDownstream">DSL downstream </th>
+						<td ng-bind="deviceInfo.dslDownstream==''?'-':deviceInfo.dslDownstream + ' Mbit/s'"></td>
+					</tr>
+					<tr>
+						<th translate="DSLUpstream">DSL upstream </th>
+						<td ng-bind="deviceInfo.dslUpstream==''?'-':deviceInfo.dslUpstream + ' Mbit/s'"></td>
+					</tr>
+					<tr>
+						<th translate="connectionTime">Connection Time</th>
+						<td hour-format="{{deviceInfo.connectionTimeDsl}}">&nbsp;</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<h5 ng-switch-when="false">Ethernet WAN</h5>
+		<div class="row" ng-switch-when="false">
+			<div class="columns large-12 medium-12 small-12" id="deviceInfoTipWan">
+				<table class="table-form table-vert">
+					<tbody>
+						<tr>
+							<th> Status </th>
+							<td><b ng-class="deviceInfo.wanStatus ==='Connected' ? 'color-on' : 'color-off'" ng-bind="deviceInfo.wanStatus">&nbsp;</b></td>
+						</tr>
+						<tr>
+							<th width="40%">Connection Time</th>
+							<td hour-format="{{deviceInfo.wanConnectionTime}}">&nbsp;</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+<script>
+$(function() {
+		var carouselOptions = {
+			margin : 10,
+			autoHeight : true,
+			items : 1,
+			singleItem : true
+		};
+
+		var adjustHeights = function() {
+			var letop = $($('.item')[0]).offset().top, leheight;
+			$('.item').css('height', 'auto');
+			for (var x = 0; x < $('.item').length; x++) {
+				leheight = $($('.item')[x]).height();
+				if (letop + leheight < $(window).height() - 60) {
+					$($('.item')[x]).css("height", $(window).height() - letop - $('.owl-controls').height() + "px");
+				}
+			}
+			$('.owl-stage-outer').height('auto');
+		};
+
+		$('#deviceinfo').off('refreshdeviceinfo').on('refreshdeviceinfo', function() {
+			setTimeout(function() {
+				adjustHeights();
+				$("#deviceinfo").trigger('destroy.owl.carousel').owlCarousel(carouselOptions);
+			}, 1000);
+		}).trigger('refreshdeviceinfo');
+
+		var lastHeight = $(window).height();
+		$(window).resize(function() {
+			if (lastHeight !== $(window).height()) {
+				lastHeight = $(window).height();
+				$('#deviceinfo').trigger('refreshdeviceinfo');
+			}
+		});
+	});
+</script>

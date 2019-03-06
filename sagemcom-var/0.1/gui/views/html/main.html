@@ -1,0 +1,748 @@
+<!--Facebook Share-->
+
+
+
+<div id="page-content" class="clearfix ng-hide demo" ng-show="true">
+	<div class="columns small-12">
+		<div class="row">
+			<div id="header-page">
+				<div class="columns medium-8 small-12 header-top">
+					<h3><span translate="welcome">&nbsp;</span>&nbsp;<span ng-bind="gwName" class="hideGwName">&nbsp;</span></h3>
+				</div>
+
+				<div class="columns medium-4 small-12 text-right">
+					<div ng-if="!iconRefresh" id="refresh-btn" class="btn-refresh" ng-click="refresh()">
+						<span translate="clickToRefresh">Click to refresh</span>
+						<img src="images/refresh.png">
+					</div>
+					<div ng-if="iconRefresh" id="refresh-btn" class="btn-refresh" ng-click="refresh()">
+					    <span class="Icon-refresh">s</span>
+			        	<span class="txt" translate="clickToRefresh">Click to refresh</span>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+
+		<div class="row">
+			<div class="columns medium-4 text-center">
+				<a click-loading="" ui-sref="user.mysagemcombox">
+				<div id="my-sagemcom-box" class="box-map">
+					<div class="header-box">
+						<span class="sprite header-box-icon box"></span>
+
+						<h6 ng-if="!dynamicMySagemcomBoxName" translate="mySagemcomBox"></h6>
+						<h6 ng-if="dynamicMySagemcomBoxName" ng-bind="gwName"></h6>
+
+						<span id="my-sagemcom-box-configure" class="sprite header-box-settings" translate="settings">Settings</span>
+					</div>
+
+					<div class="description">
+						<p ng-show="!(isCable && bridgeModeEnable)" translate="confDhcpAndOthers">
+							Configure DHCP, NTP, DynDNS
+						</p>
+						<p ng-show="isCable && bridgeModeEnable" translate="confHomeboxBridgeMode"></p>
+					</div>
+				</div> </a>
+			</div>
+
+			<div class="columns medium-4 text-center" check-feature-state="homeAccessControl">
+				<a click-loading="" ui-sref="user.accessControl">
+				<div id="access-control" class="box-map">
+					<div class="header-box">
+						<span class="sprite header-box-icon shield"></span>
+
+						<h6 translate="accessControl">Access Control</h6>
+
+						<span class="sprite header-box-settings" translate="settings">Settings</span>
+					</div>
+
+					<div class="description">
+						<p ng-show="!(isCable && bridgeModeEnable)" translate="configureParentalControl">
+							Configure Parental control, Firewall.
+						</p>
+						<p ng-show="isCable && bridgeModeEnable" translate="confAccessControlBridgeMode"></p>
+					</div>
+				</div> </a>
+			</div>
+
+			<div class="columns medium-4 text-center" check-feature-state="homeInternetConnectivity">
+				<a click-loading="" ui-sref="user.internetConnectivity">
+				<div id="internet-connectivity" class="box-map">
+					<div class="header-box">
+						<span class="sprite header-box-icon" ng-class="connectivity.status ? 'earth' : 'earth-off'"></span>
+
+						<h6 translate="internetConnectivity">Internet Connectivity</h6>
+
+						<span class="sprite header-box-settings" translate="settings" data-access-level="accessLevels.admin">Settings</span>
+					</div>
+
+					<div class="description clearfix">
+						<div class="columns medium-8 large-6 small-4">
+							<p class="st" ng-switch="" on="connectivity.statusTxt">
+								<strong translate="statusSemicolon">Status:</strong>&nbsp;
+								<span translate="connected" ng-switch-when="on">Connected</span>
+								<span translate="connectedByMobile" ng-switch-when="mobile">Connected by Mobile</span>
+								<span translate="notConnected" ng-switch-when="off">Not Connected</span>
+							</p>
+						</div>
+						<div class="columns medium-8 large-6 small-8" check-feature-state="usDsDisplay">
+							<span ng-if="connectivity.dslStatus && connectivity.isUpDownStream" class="vel-ds text-always-left">
+								<div class="row">
+									<div class="columns large-2 medium-3 small-4 text-right">
+										<i class="sprite icon-vel" aria-hidden="true"></i>
+									</div>
+									<div class="columns large-9 medium-8 small-7 minSpeed">
+										<div class="row">
+											<b>DS:</b>&nbsp;<span ng-bind="connectivity.actualRateDown !== '0.0' ? connectivity.actualRateDown : '--'">&nbsp;</span>&nbsp;<span ng-if="!connectivity.wan">Mbit/s</span>
+										</div>
+										<div class="row">
+											<b>US:</b>&nbsp;<span ng-bind="connectivity.actualRateUp !== '0.0' ? connectivity.actualRateUp : '--'">&nbsp;</span>&nbsp;<span ng-if="!connectivity.wan">Mbit/s</span>
+										</div>
+									</div>
+								</div> 
+							</span>
+							<span ng-if="connectivity.sfpStatus" class="vel-ds text-always-left">
+								<div class="row">
+									<div class="columns large-4 medium-4 small-4 text-right">
+										<i class="sprite icon-vel" aria-hidden="true"></i>
+									</div>
+									<div class="columns large-7 medium-7 small-7 minSpeed">
+										<div class="row">
+											<b>DS:</b>&nbsp;<span ng-bind="connectivity.sfpCurrentSpeed !== '0.0' ? connectivity.sfpCurrentSpeed : '--'">&nbsp;</span>&nbsp;<span ng-if="!connectivity.wan">Mbit/s</span>
+										</div>
+										<div class="row">
+											<b>US:</b>&nbsp;<span ng-bind="connectivity.sfpCurrentSpeed !== '0.0' ? connectivity.sfpCurrentSpeed : '--'">&nbsp;</span>&nbsp;<span ng-if="!connectivity.wan">Mbit/s</span>
+										</div>
+									</div>
+								</div> 
+							</span>
+						</div>
+					</div>
+				</div> 
+				</a>
+			</div>
+		</div>
+
+		<div class="row">
+			<div id="sbox-container" class="ng-hide" ng-show="true">
+
+				
+
+				
+
+				
+
+				
+
+				
+				
+				
+
+			</div>
+		</div>
+
+		<div class="row ng-hide" ng-show="listEthernetDevices !== undefined || listPlc !== undefined">
+			<div class="columns medium-4 large-3 text-center" check-feature-state="homeEthernetDevices">
+				<div id="ethernet-devices" class="box-map device-box">
+					<div class="header-box">
+						<span class="sprite header-box-icon ethernet"></span>
+
+						<h6 translate="ethernet">Ethernet</h6>
+
+						<a ng-if="!enableNewLanPage" class="sprite header-box-settings" click-loading="" ui-sref="user.ethernet" translate="settings">Settings</a>
+						<a ng-if="enableNewLanPage" class="sprite header-box-settings" click-loading="" ui-sref="user.lan" translate="settings">Settings</a>
+					</div>
+
+					<div ng-show="isEmpty(listEthernetDevices)">
+						<p id="description" class="noConnectedDevicesPadding" translate="noConnectedDevices"></p>
+					</div>
+
+					<a class="box-item clearfix" ng-repeat="device in listEthernetDevices" ng-click="openDevice(device)"> <div class="sprite icon-device {{device.userDeviceType | deviceIcon}}"></div>
+						<div class="info-device">
+							<p class="title">
+								<span ng-bind="device.hostname"></span>
+							</p>
+							<p ng-hide="!device.ipAddress">
+								IP:&nbsp;<span ng-bind="device.ipAddress"></span>
+							</p>
+							<p ng-show="showIpv6Address && device.ipv6Address !== ''">
+								IPv6:&nbsp;<span class="break-ipv6" ng-bind="device.ipv6Address"></span>
+							</p>
+							<p>
+								<span ng-bind="device.manufacturer"></span>
+							</p>
+						</div>
+					</a>
+
+					<div ng-repeat="plcDevice in listPlcs">
+						<div class="header-box">
+							<span class="header-box-icon fa fa-plug plc-icon"></span>
+							<h6 class="plc-header" ng-bind-template="{{'PowerLine'|translate}} {{plcDevice.Name}}"></h6>
+							<a class="sprite header-box-settings" ng-click="openPlc(plcDevice)" translate="settings">Settings</a>
+						</div>
+						<div ng-show="isEmpty(plcDevice.hosts)">
+							<p id="description" class="noConnectedDevicesPadding" translate="noConnectedDevices"></p>
+						</div>
+
+						<a class="box-item clearfix" ng-click="openDevice(plcHost)" ng-repeat="plcHost in plcDevice.hosts"> 
+							<div class="sprite icon-device {{plcHost.userDeviceType | deviceIcon}}"></div>
+							<div class="info-device">
+								<p class="title">
+									<span ng-bind="plcHost.hostname"></span>
+								</p>
+								<p ng-if="plcHost.ipAddress !== ''">
+									IP:&nbsp;<span ng-bind="plcHost.ipAddress"></span>
+								</p>
+								<p>
+									<span ng-bind="plcHost.manufacturer"></span>
+								</p>
+							</div> 
+						</a>
+					</div>
+				</div>
+				<div ng-if="usbHome === 'ethernet'" ng-include="'views/partials/usbList.html'" check-feature-state="usb">
+					&nbsp;
+				</div>
+			</div>
+			<!-- WiFi Bandsteering -->
+			<div class="columns medium-8 large-6 text-center left" check-feature-state="homeWiFiMerge" ng-if="wifiMerge && bandSteeringEnable">
+				<div id="wifi-bandsteering" class="box-map device-box clearfix wifi-margin-bottom">
+					<div class="header-box">
+						<span class="sprite header-box-icon " ng-class="wifi24Status.status == 'ON' || wifi5Status.status == 'ON' ? 'wifi' : 'wifi-off'"></span>
+
+						<h6 translate="wifi">Wi-Fi</h6>
+
+						<a class="sprite header-box-settings" translate="settings" click-loading="" ui-sref="user.wifi.basic({radio : '2.4GHz', mode: 'priv'})">Settings</a>
+					</div>
+					<p class="info info-centered">
+						<strong class="wifiSSIDName" translate="ssidName">SSID Name:</strong>&nbsp;<span class="breakWifiSSID" ng-bind="wifi24Status.ssid" ng-attr-title="{{wifi24Status.ssid}}"></span>
+						<br>
+					</p>
+					<!-- column 1 -->
+					<div class="columns medium-6 large-6">
+						<p class="info">
+							<strong class="wifiSSIDName">
+								<span>Radio:</span>&nbsp;
+							</strong>&nbsp;
+							<span class="breakWifiSSID">2.4 GHz</span>
+							<br>
+							<span check-feature-state="wifi24Speed"><strong translate="speedSemicolon">Speed:</strong>&nbsp;<span ng-bind="wifi24Status.actualWifiSpeed"></span>&nbsp;Mbit/s</span>
+						</p>
+	
+						<div ng-show="isEmpty(listWifi24Devices)">
+							<p id="description" class="noConnectedDevicesPadding2" translate="noConnectedDevices"></p>
+						</div>
+	
+						<a class="box-item clearfix" ng-repeat="device in listWifi24Devices" ng-click="openDevice(device)"> <div class="sprite icon-device {{device.userDeviceType | deviceIcon}}"></div>
+							<div class="info-device">
+								<p class="title" ng-class="{ 'title-custom' : isMyrepublic  }">
+									<span ng-bind="device.hostname"></span>&nbsp;
+								</p>
+								<p ng-if="device.ipAddress">
+									IP:&nbsp;<span ng-bind="device.ipAddress"></span>
+								</p>
+								
+								<p>
+									<span translate="signalRate"></span>:&nbsp;<span ng-bind="device.parsedSignalRate"></span>&nbsp;Mbps
+								</p>
+								<p>
+									<span ng-bind="device.manufacturer"></span>
+								</p>
+							</div> 
+						</a>
+					</div>
+					<!-- end of column 1 -->
+					<!-- column 2 -->
+					<div class="columns medium-6 large-6">
+						<p class="info">
+							<strong class="wifiSSIDName">
+								<span>Radio:</span>&nbsp;
+							</strong>&nbsp;
+							<span class="breakWifiSSID">5 GHz</span>
+							<br>
+							<span check-feature-state="wifi5Speed"><strong translate="speedSemicolon">Speed:</strong>&nbsp;<span ng-bind="wifi5Status.actualWifiSpeed"></span>&nbsp;Mbit/s</span>
+						</p>
+	
+						<div ng-show="isEmpty(listWifi5Devices)">
+							<p id="description" class="noConnectedDevicesPadding2" translate="noConnectedDevices"></p>
+						</div>
+	
+						<a class="box-item clearfix" ng-repeat="device in listWifi5Devices" ng-click="openDevice(device)"> <div class="sprite icon-device {{device.userDeviceType | deviceIcon}}"></div>
+							<div class="info-device">
+								<p class="title" ng-class="{ 'title-custom' : isMyrepublic  }">
+									<span ng-bind="device.hostname"></span>&nbsp;
+								</p>
+								<p ng-if="device.ipAddress">
+									IP:&nbsp;<span ng-bind="device.ipAddress"></span>
+								</p>
+								
+								<p>
+									<span translate="signalRate"></span>:&nbsp;<span ng-bind="device.parsedSignalRate"></span>&nbsp;Mbps
+								</p>
+								<p>
+									<span ng-bind="device.manufacturer"></span>
+								</p>
+							</div> 
+						</a>
+					</div>
+					<!-- end of column 2 -->
+					
+				</div>
+				<div class="row">
+					<div class="columns medium-6 large-6 guest-clients2g" check-feature-state="wifiGuest24">
+						<div id="guest-clients2g" class="box-map device-box">
+							<div class="header-box">
+								<span class="sprite header-box-icon" ng-class="wifi24GuestStatus.status == 'ON' ? 'wifi' : 'wifi-off'"></span>
+								<h6><span translate="guestClients">Guest Clients</span>&nbsp;2.4 GHz</h6>
+								<a class="sprite header-box-settings" translate="settings" click-loading="" ui-sref="user.wifi.basic({radio : '2.4GHz', mode: 'guest'})">Settings</a>
+							</div>
+							<p class="info">
+								<strong class="wifiSSIDName" translate="ssidName">SSID Name:</strong>&nbsp;<span class="breakWifiSSID" ng-bind="wifi24GuestStatus.ssid" ng-attr-title="{{wifi24GuestStatus.ssid}}"></span>
+								<br>
+								<a class="qrcode-2 right" data-reveal-id="qr-modal24Guest" data-reveal="" check-feature-state="qrCodes"> <img src="images/barcode-2d.png"> </a>
+							</p>
+							<div ng-show="isEmpty(listWifi24GuestDevices)">
+								<p id="description" class="noConnectedDevicesPadding2" translate="noConnectedDevices"></p>
+							</div>
+							<a class="box-item clearfix" ng-repeat="device in listWifi24GuestDevices" ng-click="openDevice(device)"> <div class="sprite icon-device {{device.userDeviceType | deviceIcon}}"></div>
+							<div class="info-device">
+								<p class="title" ng-class="{ 'title-custom' : isMyrepublic  }">
+									<span ng-bind="device.hostname"></span>&nbsp;
+								</p>
+								<p ng-if="device.ipAddress">
+									IP:&nbsp;<span ng-bind="device.ipAddress"></span>
+								</p>
+								
+								<p>
+									<span translate="signalRate"></span>:&nbsp;<span ng-bind="device.parsedSignalRate"></span>&nbsp;Mbps
+								</p>
+								<p>
+									<span ng-bind="device.manufacturer"></span>
+								</p>
+							</div> </a>
+						</div>
+					</div>
+					<div class="columns medium-6 large-6 guest-clients5g" check-feature-state="wifiGuest50">
+						<div id="guest-clients5g" class="box-map device-box">
+							<div class="header-box">
+								<span class="sprite header-box-icon " ng-class="wifi5GuestStatus.status == 'ON' ? 'wifi' : 'wifi-off'"></span>
+								<h6><span translate="guestClients">Guest Clients</span>&nbsp;5 GHz</h6>
+								<a class="sprite header-box-settings" click-loading="" ui-sref="user.wifi.basic({radio : '5GHz', mode: 'guest'})" translate="settings">Settings</a>
+							</div>
+							<p class="info">
+								<strong class="wifiSSIDName" translate="ssidName">SSID Name:</strong>&nbsp;<span class="breakWifiSSID" ng-bind="wifi5GuestStatus.ssid" ng-attr-title="{{wifi5GuestStatus.ssid}}"></span>
+								<br>
+								<a class="qrcode-2 right" data-reveal-id="qr-modal5Guest" data-reveal="" check-feature-state="qrCodes"> <img src="images/barcode-2d.png"> </a>
+							</p>
+							<div ng-show="isEmpty(listWifi5GuestDevices)">
+								<p id="description" class="noConnectedDevicesPadding2" translate="noConnectedDevices"></p>
+							</div>
+							<a class="box-item clearfix" ng-repeat="device in listWifi5GuestDevices" ng-click="openDevice(device)"> <div class="sprite icon-device {{device.userDeviceType | deviceIcon}}"></div>
+							<div class="info-device">
+								<p class="title" ng-class="{ 'title-custom' : isMyrepublic  }">
+									<span ng-bind="device.hostname"></span>&nbsp;
+								</p>
+								<p ng-if="device.ipAddress">
+									IP:&nbsp;<span ng-bind="device.ipAddress"></span>
+								</p>
+								
+								<p>
+									<span translate="signalRate"></span>:&nbsp;<span ng-bind="device.parsedSignalRate"></span>&nbsp;Mbps
+								</p>
+								<p>
+									<span ng-bind="device.manufacturer"></span>
+								</p>
+							</div> </a>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+
+			<div class="columns medium-4 large-3 text-center" ng-if="!wifiMerge || !bandSteeringEnable" check-feature-state="wifi24g">
+				<div id="wifi-24" class="box-map device-box wifi-margin-bottom" check-feature-state="nowifi">
+					<div class="header-box">
+						<span class="sprite header-box-icon " ng-class="wifi24Status.status == 'ON' ? 'wifi' : 'wifi-off'"></span>
+
+						<h6 translate="wifi2G4">Wi-Fi 2.4GHz</h6>
+
+						<a class="sprite header-box-settings" translate="settings" click-loading="" ui-sref="user.wifi.basic({radio : '2.4GHz', mode: 'priv'})">Settings</a>
+					</div>
+
+					<p class="info">
+						<strong class="wifiSSIDName" translate="ssidName">SSID Name:</strong>&nbsp;<span class="breakWifiSSID" ng-bind="wifi24Status.ssid" ng-attr-title="{{wifi24Status.ssid}}"></span>
+						<br>
+						<span check-feature-state="wifi24Speed"><strong translate="speedSemicolon">Speed:</strong>&nbsp;<span ng-bind="wifi24Status.actualWifiSpeed"></span>&nbsp;Mbit/s</span><a class="qrcode-2 right" data-reveal-id="qr-modal24" data-reveal="" check-feature-state="qrCodes"> <img src="images/barcode-2d.png"> </a>
+					</p>
+
+					<div ng-show="isEmpty(listWifi24Devices)">
+						<p id="description" class="noConnectedDevicesPadding2" translate="noConnectedDevices"></p>
+					</div>
+
+					<a class="box-item clearfix" ng-repeat="device in listWifi24Devices" ng-click="openDevice(device)"> <div class="sprite icon-device {{device.userDeviceType | deviceIcon}}"></div>
+					<div class="info-device">
+						<p class="title" ng-class="{ 'title-custom' : isMyrepublic  }">
+							<span ng-bind="device.hostname"></span>&nbsp;
+						</p>
+						<p ng-if="device.ipAddress">
+							IP:&nbsp;<span ng-bind="device.ipAddress"></span>
+						</p>
+						
+						<p>
+							<span translate="signalRate"></span>:&nbsp;<span ng-bind="device.parsedSignalRate"></span>&nbsp;Mbps
+						</p>
+						<p>
+							<span ng-bind="device.manufacturer"></span>
+						</p>
+					</div> </a>
+
+					<div id="guest-clients" class="device-box" check-feature-state="wifiGuest24">
+						<div class="header-box">
+							<span class="sprite header-box-icon" ng-class="wifi24GuestStatus.status == 'ON' ? 'wifi' : 'wifi-off'"></span>
+							<h6 translate="guestClients"> <span></span> Guest Clients</h6>
+							<a class="sprite header-box-settings" translate="settings" click-loading="" ui-sref="user.wifi.basic({radio : '2.4GHz', mode: 'guest'})">Settings</a>
+						</div>
+						<p class="info">
+							<strong class="wifiSSIDName" translate="ssidName">SSID Name:</strong>&nbsp;<span class="breakWifiSSID" ng-bind="wifi24GuestStatus.ssid" ng-attr-title="{{wifi24GuestStatus.ssid}}"></span>
+							<br>
+							<a class="qrcode-2 right" data-reveal-id="qr-modal24Guest" data-reveal="" check-feature-state="qrCodes"> <img src="images/barcode-2d.png"> </a>
+						</p>
+						<div ng-show="isEmpty(listWifi24GuestDevices)">
+							<p id="description" class="noConnectedDevicesPadding2" translate="noConnectedDevices"></p>
+						</div>
+						<a class="box-item clearfix" ng-repeat="device in listWifi24GuestDevices" ng-click="openDevice(device)"> <div class="sprite icon-device {{device.userDeviceType | deviceIcon}}"></div>
+						<div class="info-device">
+							<p class="title" ng-class="{ 'title-custom' : isMyrepublic  }">
+								<span ng-bind="device.hostname"></span>&nbsp;
+							</p>
+							<p ng-if="device.ipAddress">
+								IP:&nbsp;<span ng-bind="device.ipAddress"></span>
+							</p>
+							
+							<p>
+								<span translate="signalRate"></span>:&nbsp;<span ng-bind="device.parsedSignalRate"></span>&nbsp;Mbps
+							</p>
+							<p>
+								<span ng-bind="device.manufacturer"></span>
+							</p>
+						</div> </a>
+					</div>
+				</div>
+				
+				<div ng-if="usbHome === 'wifi24'" ng-include="'views/partials/usbList.html'" check-feature-state="usb">
+					&nbsp;
+				</div>
+			</div>
+			<div class="columns medium-4 large-3 text-center" ng-show="verifyWifi5" ng-if="hasWiFi5g && (!wifiMerge || !bandSteeringEnable)" check-feature-state="wifi5g">
+				<div id="wifi-5" class="box-map device-box wifi-margin-bottom">
+					<div id="wifiAndGuest">
+						<div class="header-box">
+							<span class="sprite header-box-icon " ng-class="wifi5Status.status == 'ON' ? 'wifi' : 'wifi-off'"></span>
+							<h6 translate="wifi5G">Wi-Fi 5GHz</h6>
+							<a class="sprite header-box-settings" click-loading="" ui-sref="user.wifi.basic({radio : '5GHz', mode: 'priv'})" translate="settings">Settings</a>
+						</div>
+
+						<p class="info">
+							<strong class="wifiSSIDName" translate="ssidName">SSID Name:</strong>&nbsp;<span class="breakWifiSSID" ng-bind="wifi5Status.ssid" ng-attr-title="{{wifi5Status.ssid}}"></span>
+							<br>
+							<!--<strong translate="statusSemicolon">Status:</strong> {{wifi24Status.status}}-->
+							<span check-feature-state="wifi5Speed"><strong translate="speedSemicolon">Speed:</strong>&nbsp;<span ng-bind="wifi5Status.actualWifiSpeed"></span>&nbsp;Mbit/s</span> <a class="qrcode-2 right" data-reveal-id="qr-modal5" data-reveal="" check-feature-state="qrCodes"> <img src="images/barcode-2d.png"> </a>
+						</p>
+
+						<div ng-show="isEmpty(listWifi5Devices)">
+							<p id="description" class="noConnectedDevicesPadding2" translate="noConnectedDevices"></p>
+						</div>
+
+						<a class="box-item clearfix" ng-repeat="device in listWifi5Devices" ng-click="openDevice(device)"> <div class="sprite icon-device {{device.userDeviceType | deviceIcon}}"></div>
+						<div class="info-device">
+							<p class="title" ng-class="{ 'title-custom' : isMyrepublic }">
+								<span ng-bind="device.hostname"></span>&nbsp;
+							</p>
+							<p ng-if="device.ipAddress">
+								IP:&nbsp;<span ng-bind="device.ipAddress"></span>
+							</p>
+							
+							<p>
+								<span translate="signalRate"></span>:&nbsp;<span ng-bind="device.parsedSignalRate"></span>&nbsp;Mbps
+							</p>
+							<p>
+								<span ng-bind="device.manufacturer"></span>
+							</p>
+						</div> </a>
+
+						<div id="guest-clients" class="device-box" check-feature-state="wifiGuest50">
+							<div class="header-box">
+								<span class="sprite header-box-icon " ng-class="wifi5GuestStatus.status == 'ON' ? 'wifi' : 'wifi-off'"></span>
+								<h6 translate="guestClients">Guest Clients</h6>
+								<a class="sprite header-box-settings" click-loading="" ui-sref="user.wifi.basic({radio : '5GHz', mode: 'guest'})" translate="settings">Settings</a>
+							</div>
+							<p class="info">
+								<strong class="wifiSSIDName" translate="ssidName">SSID Name:</strong>&nbsp;<span class="breakWifiSSID" ng-bind="wifi5GuestStatus.ssid" ng-attr-title="{{wifi5GuestStatus.ssid}}"></span>
+								<br>
+								<a class="qrcode-2 right" data-reveal-id="qr-modal5Guest" data-reveal="" check-feature-state="qrCodes"> <img src="images/barcode-2d.png"> </a>
+							</p>
+							<div ng-show="isEmpty(listWifi5GuestDevices)">
+								<p id="description" class="noConnectedDevicesPadding2" translate="noConnectedDevices"></p>
+							</div>
+							<a class="box-item clearfix" ng-repeat="device in listWifi5GuestDevices" ng-click="openDevice(device)"> <div class="sprite icon-device {{device.userDeviceType | deviceIcon}}"></div>
+							<div class="info-device">
+								<p class="title" ng-class="{ 'title-custom' : isMyrepublic  }">
+									<span ng-bind="device.hostname"></span>&nbsp;
+								</p>
+								<p ng-if="device.ipAddress">
+									IP:&nbsp;<span ng-bind="device.ipAddress"></span>
+								</p>
+								
+								<p>
+									<span translate="signalRate"></span>:&nbsp;<span ng-bind="device.parsedSignalRate"></span>&nbsp;Mbps
+								</p>
+								<p>
+									<span ng-bind="device.manufacturer"></span>
+								</p>
+							</div> </a>
+						</div>
+					</div>	
+
+					
+
+				</div>
+
+				
+				<div ng-if="usbHome === 'wifi5'" ng-include="'views/partials/usbList.html'" check-feature-state="usb">
+					&nbsp;
+				</div>
+			</div>
+
+			
+
+			
+
+			
+
+			<div class="columns medium-4 large-3 text-center" ng-class="{ 'left' : isSubProfile }" check-feature-state="usb" ng-if="usbHome === 'voice'">
+				<div ng-include="'views/partials/usbList.html'">
+					&nbsp;
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="myMediaModal" class="t-center reveal-modal tiny" data-reveal="">
+		<a class="close-reveal-modal close-modal" data-close-reveal="">&#215;</a>
+		<h5 class="modal-title" translate="myMedia"></h5>
+		<p class="align-center" ng-if="twonkyReason === 'DLNA'" translate="noDLNAText"></p>
+		<p class="align-center" ng-if="twonkyReason === 'USB'" translate="noMediaText"></p>
+		<button id="closeMyMediaModal" class="button tiny radius" translate="continue"></button>
+	</div>
+	
+	<div id="confirm-change-password" class="reveal-modal tiny" data-reveal="">
+		<a class="close-reveal-modal close-modal">&#215;</a>
+		<h5 class="modal-title" translate="forceChangePasswordtitle">&nbsp;</h5>
+		<p translate="forceChangePassword">
+			&nbsp;
+		</p>
+		<div class="right">
+			<button class="button tiny radius" type="button" translate="no" ng-click="closeModalConfirmChange()"></button>
+			<button class="button tiny radius" type="button" translate="yes" ng-click="goToAdminPassword()"></button>
+		</div>
+	</div>
+
+	<div id="qr-modal24" class="t-center reveal-modal minor section-to-print" data-reveal="" check-feature-state="qrCodes">
+		<a class="close-reveal-modal close-modal" data-close-reveal="">&#215;</a>
+		<a class="qrClick"> <qr ng-if="wifi24Status.qrString" type-number="0" size="200" image="true" text="wifi24Status.qrString"></qr> </a>
+		<small translate="clickToPrint">&nbsp;</small>
+	</div>
+	<div id="qr-modal24Guest" class="t-center reveal-modal minor section-to-print" data-reveal="" check-feature-state="qrCodes">
+		<a class="close-reveal-modal close-modal" data-close-reveal="">&#215;</a>
+		<a class="qrClick"> <qr ng-if="wifi24GuestStatus.qrString" type-number="0" size="200" image="true" text="wifi24GuestStatus.qrString"></qr> </a>
+		<small translate="clickToPrint">&nbsp;</small>
+	</div>
+	<div id="qr-modal5" class="t-center reveal-modal minor" data-reveal="" check-feature-state="qrCodes">
+		<a class="close-reveal-modal close-modal" data-close-reveal="">&#215;</a>
+		<a class="qrClick"> <qr ng-if="verifyWifi5 && wifi5Status.qrString" type-number="0" size="200" image="true" text="wifi5Status.qrString"></qr> </a>
+		<small translate="clickToPrint">&nbsp;</small>
+	</div>
+	<div id="qr-modal5Guest" class="t-center reveal-modal minor" data-reveal="" check-feature-state="qrCodes">
+		<a class="close-reveal-modal close-modal" data-close-reveal="">&#215;</a>
+		<a class="qrClick"> <qr ng-if="verifyWifi5 && wifi5GuestStatus.qrString" type-number="0" size="200" image="true" text="wifi5GuestStatus.qrString"></qr> </a>
+		<small translate="clickToPrint">&nbsp;</small>
+	</div>
+</div>
+
+<!-- help button -->
+<ul class="ng-hide">
+	<li id="mainTip1help" translate="mainTip1" data-tourtarget="#my-sagemcom-box">
+		Here you can find useful information about your Sagemcom Box.
+	</li>
+	<li id="mainTip2help" translate="mainTip2" data-tourtarget="#access-control">
+		Here you can control the access of your sagemcom box and your devices.
+	</li>
+	<li id="mainTip3help" translate="mainTip3" data-tourtarget="#internet-connectivity">
+		Here you can see the current internet connectivity status.
+	</li>
+	<li id="mymediaMainHelp" translate="mymediaMain" data-tourtarget="#my-media">
+		Here you can share multimedia content across your devices connected to the USB port.
+	</li>
+	<li id="mycloudMainHelp" translate="mycloudMain" data-tourtarget="#my-cloud">
+		You can upload your files for cloud storage.
+	</li>
+	<li id="intwoHelpText" translate="intwoHelp" data-tourtarget="#in-two"></li>
+	<li id="phonebookMainHelp" translate="phonebookMain" data-tourtarget="#phonebookTip">
+
+		Here you can see informations about contacts and call logs.
+	</li>
+	<li id="mainTip4help" translate="mainTip4" data-tourtarget="#ethernet-devices">
+		Here you can see the information about the devices connected in your Sagemcom Box.
+	</li>
+	<li id="mainTipBandsteeringHelp" translate="mainTipBandsteering" data-tourtarget="#wifi-bandsteering">
+		Here you can see the information about your wireless networks.
+	</li>
+	<li id="mainTip5help" translate="mainTip5" data-tourtarget="#wifi-24">
+		Here you can see the information about your wireless networks.
+	</li>
+	<li id="mainTip9help" translate="mainTip9" data-tourtarget="#wifiAndGuest">
+		Here you can see the information about your wireless 5Ghz.
+	</li>
+	<li id="mainTip6help" translate="mainTip6" data-tourtarget="#voice-ports">
+		Here you can see the information about your phones.
+	</li>
+	<li id="mainTip10help" translate="mainTip10" data-tourtarget="#usb-devices">
+		Here you can see the information about your USB devices.
+	</li>
+	<li id="mainTip8help" translate="mainTip8" data-tourtarget="#refresh-btn">
+		And click here to show updated data.
+	</li>
+	<li id="mainTipGuestClient2ghelp" translate="mainTipWiFiGuest2g" data-tourtarget="#guest-clients2g">
+		Here you can see the information about your guest wireless 2.4 GHz.
+	</li>
+	<li id="mainTipGuestClient5ghelp" translate="mainTipWiFiGuest5g" data-tourtarget="#guest-clients5g">
+		Here you can see the information about your guest wireless 5 GHz.
+	</li>
+</ul>
+<script>
+	$(document).ready(function() {
+		//second row layout fix
+		$('#sbox-container > div').hide();
+	});
+	
+	Foundation.libs.reveal.settings.close_on_background_click = false;
+	$(document).foundation();
+
+	$('a.mymediabutton').on('click', function() {
+		if ($(this).attr('href') === '#') {
+			$('#myMediaModal').foundation('reveal', 'open');
+		}
+	});
+
+	$('button#closeMyMediaModal').on('click', function() {
+		$('#myMediaModal').foundation('reveal', 'close');
+	});
+
+	function destroyTooltip() {
+		$('#my-sagemcom-box').tooltipster('destroy');
+		$('#access-control').tooltipster('destroy');
+		$('#internet-connectivity').tooltipster('destroy');
+		$('#my-media').tooltipster('destroy');
+		$('#my-cloud').tooltipster('destroy');
+		$('#in-two').tooltipster('destroy');
+		$('#phonebookTip').tooltipster('destroy');
+		$('#ethernet-devices').tooltipster('destroy');
+		$('#wifi-24').tooltipster('destroy');
+		$('#guest-clients2g').tooltipster('destroy');
+		$('#guest-clients5g').tooltipster('destroy');
+		$('#wifi-bandsteering').tooltipster('destroy');
+		$('#wifiAndGuest').tooltipster('destroy');
+		$('#voice-ports').tooltipster('destroy');
+		$('#usb-devices').tooltipster('destroy');
+		$('#refresh-btn').tooltipster('destroy');
+	}
+
+	function createTooltip() {
+		$('#my-sagemcom-box').tooltipster({
+			content : $('#mainTip1help').text()
+		});
+		$('#access-control').tooltipster({
+			content : $('#mainTip2help').text()
+		});
+		$('#internet-connectivity').tooltipster({
+			content : $('#mainTip3help').text()
+		});
+		$('#my-media').tooltipster({
+			content : $('#mymediaMainHelp').text()
+		});
+		$('#my-cloud').tooltipster({
+			content : $('#mycloudMainHelp').text()
+		});
+		$('#in-two').tooltipster({
+			content : $('#intwoHelpText').text()
+		});
+		$('#phonebookTip').tooltipster({
+			content : $('#phonebookMainHelp').text()
+		});
+		$('#ethernet-devices').tooltipster({
+			content : $('#mainTip4help').text()
+		});
+		$('#wifi-24').tooltipster({
+			content : $('#mainTip5help').text()
+		});
+		$('#guest-clients2g').tooltipster({
+			content : $('#mainTipGuestClient2ghelp').text()
+		});
+		$('#guest-clients5g').tooltipster({
+			content : $('#mainTipGuestClient5ghelp').text()
+		});
+		$('#wifi-bandsteering').tooltipster({
+			content : $('#mainTipBandsteeringHelp').text()
+		});
+
+		$('#wifiAndGuest').tooltipster({
+			content : $('#mainTip9help').text()
+		});
+		$('#voice-ports').tooltipster({
+			content : $('#mainTip6help').text()
+		});
+		$('#usb-devices').tooltipster({
+			content : $('#mainTip10help').text()
+		});
+		$('#refresh-btn').tooltipster({
+			content : $('#mainTip8help').text()
+		});
+	}
+
+
+	$('#helpButton').on('click', function() {
+		if ($('#helpButton').css('opacity') === '0.5') {
+			$('#helpButton').css('opacity', '1');
+			createTooltip();
+		} else {
+			$('#helpButton').css('opacity', '0.5');
+			destroyTooltip();
+		}
+	});
+	setTimeout(function() {
+		createTooltip();
+	}, 500);
+	$('.qrClick').click(function() {
+		var t = $(this).find('qr').clone();
+		$(t).addClass('qr');
+		$(t).css('visibility', 'hidden');
+		$('body').append($(t));
+		window.print();
+		$(t).remove();
+	});
+	//updating second row
+	$('#sbox-container > div').off('refreshSecondRow').on('refreshSecondRow', function() {
+		var len = $('#sbox-container > div').length;
+		if(len < 5){
+			$('#sbox-container > div').removeClass('medium-3');
+			var newClass = 'medium-' + (12 / len);
+			$('#sbox-container > div').addClass(newClass).show();
+		} else {
+			$('#sbox-container > div').removeClass('medium-3');
+			$('#sbox-container > div').css('width', Math.round(100/len) +'%').show();
+		}
+	}); 
+</script>

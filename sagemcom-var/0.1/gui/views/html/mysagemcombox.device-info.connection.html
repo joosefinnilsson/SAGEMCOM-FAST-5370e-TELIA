@@ -1,0 +1,105 @@
+<div wait-loading></div>
+<div class="content active no-padding ng-hide" id="cablemodem" aria-hidden="false" ng-show="!loading">
+	<div><div bread-crumbs></div></div>
+	<div class="content" id="cablemodem-connection" aria-hidden="true">
+        <h4 class="maintitle" id="maintitle" translate="connection">Connection</h4>
+		<p class="justified" translate="cableModemPageDescription2">
+			This page displays information on the status of the cable modem's HFC and IP network connectivity.
+		</p>
+
+
+		<table class="table-form table-form-full responsive-table text-center" width="100%" border="0"
+            cellspacing="0" cellpadding="4" style="table-layout: auto;"  id="downstreamsTable">
+			<caption translate="dsBondedChannels">
+				Downstream Bonded Channels
+			</caption>
+
+            <tr class="header-table">
+                <th translate="wifiEnvironmentChannel">Channel</th>
+                <th translate="frequencyHZ">Frequency (Hz)</th>
+                <th translate="powerDBUV">Power (dBµV)</th>
+                <th translate="snrDB">SNR (dB)</th>
+                <th translate="modulation">Modulation</th>
+                <th translate="channelID">Channel ID</th>
+            </tr>
+
+            <tr ng-repeat="data in downstream" ng-if="downstream.length && data.LockStatus">
+                <td ng-bind="$index+1" data-title="{{'wifiEnvironmentChannel' | translate}}">&nbsp;</td>
+                <td ng-bind="data.Frequency" data-title="{{'frequencyHZ' | translate}}">&nbsp;</td>
+                <td ng-bind="data.PowerLevel" data-title="{{'powerDBUV' | translate}}">&nbsp;</td>
+                <td ng-bind="data.SNR" data-title="{{'snrDB' | translate}}">&nbsp;</td>
+                <td ng-bind="data.Modulation || '0QAM'" data-title="{{'modulation' | translate}}">&nbsp;</td>
+                <td ng-bind="data.ChannelID" data-title="{{'channelID' | translate}}">&nbsp;</td>
+            </tr>
+            
+            <tr ng-if="!downstream.length">
+                <td class="mobile no-before pull-text-center" colspan="9" translate="noDownstreamData">No downstream data available.</td>
+            </tr>
+		</table>
+
+		<table class="table-form table-form-full responsive-table text-center" width="100%" border="0"
+            cellspacing="0" cellpadding="4" style="table-layout: auto;" id="upstreamsTable">
+			<caption translate="usBondedChannels">
+				Upstream Bonded Channels
+			</caption>
+
+            <tr class="header-table">
+                <th translate="wifiEnvironmentChannel">Channel</th>
+                <th translate="frequencyHZ">Frequency (Hz)</th>
+                <th translate="powerDBUV">Power (dBµV)</th>
+                <th translate="modulation">Modulation</th>
+                <th translate="symbolRateKSPS">Symbol Rate (ksps)</th>
+                <th translate="channelID">Channel ID</th>
+            </tr>
+
+            <tr ng-repeat="data in upstream" ng-if="upstream.length && data.Modulation != 'ERR'">
+                <td ng-bind="$index+1" data-title="{{'wifiEnvironmentChannel' | translate}}">&nbsp;</td>
+                <td ng-bind="data.Frequency" data-title="{{'frequencyHZ' | translate}}">&nbsp;</td>
+                <td ng-if="powerDigitAfter" ng-bind="((data.PowerLevel + 60)*10 | round) /10" data-title="{{'powerDBUV' | translate}}">&nbsp;</td>
+                <td ng-if="!powerDigitAfter" ng-bind="(data.PowerLevel + 60)| round" data-title="{{'powerDBUV' | translate}}">&nbsp;</td>
+                <td ng-bind="data.Modulation || '0QAM'" data-title="{{'modulation' | translate}}">&nbsp;</td>
+                <td ng-bind="data.SymbolRate" data-title="{{'symbolRateKSPS' | translate}}">&nbsp;</td>
+                <td ng-bind="data.ChannelID" data-title="{{'channelID' | translate}}">&nbsp;</td>
+            </tr>
+			
+            <tr ng-if="!upstream.length">
+                <td class="mobile no-before pull-text-center" colspan="6" translate="noUpstreamData">No upstream data available.</td>
+            </tr>
+		</table>
+
+		<table class="table-form table-form-full responsive-table text-center" width="100%" border="0"
+            cellspacing="0" cellpadding="4" style="table-layout: auto;" id="signalTable">
+			<caption translate="cmSignal">
+				Signal
+			</caption>
+
+            <tr class="header-table">
+                <th translate="channelID">Channel ID</th>
+                <th translate="unerroredCodewords">Unerrored Codewords</th>
+                <th translate="totalCorrectables">Total Correctables</th>
+                <th translate="totalUncorrectables">Total Uncorrectables</th>
+            </tr>
+
+            <tr ng-repeat="data in downstream" ng-if="!downstream.length && data.Frequency != 0">
+                <td ng-bind="data.ChannelID" data-title="{{'channelID' | translate}}">&nbsp;</td>
+                <td ng-bind="data.UnerroredCodewords" data-title="{{'unerroredCodewords' | translate}}">&nbsp;</td>
+                <td ng-bind="data.CorrectableCodewords" data-title="{{'totalCorrectables' | translate}}">&nbsp;</td>
+                <td ng-bind="data.UncorrectableCodewords" data-title="{{'totalUncorrectables' | translate}}">&nbsp;</td>
+            </tr>
+            <tr ng-if="!downstream.length">
+                <td class="mobile no-before pull-text-center" colspan="9" translate="noSignalData">No signal data available.</td>
+            </tr>
+		</table>
+	</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li translate="cableModemDownstreams" data-tourtarget="#downstreamsTable"></li>
+	<li translate="cableModemUpstreams" data-tourtarget="#upstreamsTable"></li>
+	<li translate="cableModemSignal" data-tourtarget="#signalTable"></li>
+</ul>
+<script>
+    Foundation.libs.reveal.settings.close_on_background_click = false;
+    $(document).foundation();
+</script>

@@ -1,0 +1,23 @@
+<div class="clearfix" id="page-content" >
+	<div class="columns small-12 baseSimple">
+		<div class="row ng-hide" ng-show="gwName">
+			<div id="header-page" ng-show="!isTalktalk">
+				<div class="columns medium-9 small-12 header-top welcome">
+					<h3 class="welcome"><span translate="welcome">&nbsp;</span>&nbsp;<span class="hideGwName" ng-bind="gwName">&nbsp;</span></h3>
+				</div>
+
+				<div class="columns medium-3 small-12 text-right">
+					<a href="javascript:void(0)" class="btn-refresh" id="refresh-btn" ng-click="refresh()"><span translate="clickToRefresh">Click to refresh</span>
+					<svg title="Refresh page" class="icon">
+						<use xlink:href="images/sprite.svg?new#icon-refresh"/>
+					</svg> </a>
+				</div>
+			</div>
+		</div>
+
+		<div ng-include="'views/partials/simpleMenu.html'" class="menu-wrapper"></div>
+
+		<div ui-view class="mainSimple"></div>
+
+	</div>
+</div>

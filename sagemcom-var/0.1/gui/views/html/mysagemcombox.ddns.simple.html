@@ -1,0 +1,96 @@
+<div class="content">
+<div wait-loading></div>
+<div class="content ng-hide" ng-show="!loading" id="dynamic-sbox">
+	<form id="ddnsForm" name="ddnsForm" ng-submit="save()" autocomplete="off" novalidate check-unsaved>
+		<input type="text" class="ng-hide" title="">
+		<input type="password" class="ng-hide" title="">
+		<div class="row">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="enable" for="dyndns">Enabled</label>
+			</div>
+			<div class="columns medium-2 small-8 end">
+				<div class="onoffswitch" id="ddnsTip1">
+					<input class="onoffswitch-checkbox" id="dyndns" name="dyndnsEnable" ng-model="ddnsEnable" type="checkbox" />
+					<label class="onoffswitch-label" for="dyndns"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+				</div>
+			</div>
+		</div>
+		<div id="dyndns-content" class="ng-hide" ng-show="ddnsEnable">
+			<div class="row">
+				<div class="columns medium-3 small-4">
+					<label class="inline" for="dyn-provider" translate="serviceName">Service Name</label>
+				</div>
+				<div class="columns medium-4 small-8 end">
+					<select id="dyn-provider" ng-model="selectOption" ng-options="item for item in selectItems" name="dyndnsProvider" ng-required="ddnsEnable" class="noBottom">
+						<option value="" translate="select">Select</option>
+					</select>
+					<small class="error" ng-if="ddnsForm.dyndnsProvider.$invalid && submitted" translate="invalidProvider"></small>
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns medium-3 small-4">
+					<label class="inline" translate="sDomain"  id="ddnsTip4">Domain</label>
+				</div>
+				<div class="columns medium-4 small-8 end">
+					<input name="dyndnsHostname" ng-model="ddnsHostName" ng-required="ddnsEnable" id="ddnsTip5" type="text"/>
+					<small class="error" ng-if="ddnsForm.dyndnsHostname.$invalid && submitted" translate="invalidHostname"></small>
+				</div>
+			</div>
+			<div class="row"  >
+				<div class="columns medium-3 small-4">
+					<label class="inline" translate="username">Username</label>
+				</div>
+				<div class="columns medium-4 small-8 end">
+					<input id="ddnsTip3" name="dyndnsUsername" ng-model="ddnsUserName" ng-required="ddnsEnable" type="text" />
+					<small class="error" ng-if="ddnsForm.dyndnsUsername.$invalid && submitted" translate="invalidUsername"></small>
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns medium-3 small-4">
+					<label class="inline" translate="password">Password</label>
+				</div>
+				<div class="columns medium-4 small-8 end" >
+					<input id="ddnsTip4" type="password" name="dyndnsPassword" ng-model="ddnsPassword" />
+				</div>
+			</div>
+		</div>
+
+		<div class="right">
+			<button type="button" class="button tiny radius btn-cancel" translate="cancel" click-loading ui-sref="user.home" id="cancelTip" ></button>
+			<button type="submit" class="button tiny radius" translate="apply" id="applyTip"></button>
+		</div>
+	</form>
+</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+  <li translate="ddnsTip1" data-tourtarget="#ddnsTip1">
+  </li>
+  <li translate="ddnsTip2" data-tourtarget="#dyn-provider">
+  </li>
+  <li translate="ddnsTip3" data-tourtarget="#ddnsTip3">
+  </li>
+  <li translate="ddnsTip4" data-tourtarget="#ddnsTip4">
+  </li>
+  <li translate="ddnsTip5" data-tourtarget="#ddnsTip5">
+  </li>
+  <li translate="ddnsTip6" data-tourtarget="#ddnsTip6">
+  </li>
+  <li translate="ddnsTip7" data-tourtarget="#ddnsTip7">
+  </li>
+  <li translate="ddnsTip8" data-tourtarget="#ddnsTip8">
+  </li>
+  <li translate="ddnsTip9" data-tourtarget="#ddnsTip9">
+  </li>
+    <li translate="ddnsTip10" data-tourtarget="#ddnsTip10">
+  </li>
+    <li translate="ddnsTip11" data-tourtarget="#ddnsTip11">
+  </li>
+     <li translate="ddnsTip12" data-tourtarget="#ddnsTip12">
+  </li>
+     <li translate="cancelTip" data-tourtarget="#cancelTip">
+  </li>
+     <li translate="applyTip" data-tourtarget="#applyTip">
+  </li>
+</ul>

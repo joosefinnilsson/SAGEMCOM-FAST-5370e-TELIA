@@ -1,0 +1,112 @@
+<div class="content" id="">
+	<div class="row">
+		<div class="columns small-12">
+			<h4 class="maintitle">Guest SSID</h4>
+			<div class="row">
+				<div class="columns medium-3 small-6">
+					<label class="inline" for="enable-guestssid">Enable Guest SSID</label>
+				</div>
+
+				<div class="columns medium-2 small-6 end">
+					<div class="onoffswitch">
+						<input class="onoffswitch-checkbox" id="enable-guestssid" name="enable-guestssid" type="checkbox" />
+
+						<label class="onoffswitch-label" for="enable-guestssid"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+					</div>
+				</div>
+			</div>
+
+			<table class="table-form table-form-full disabled responsive-table">
+				<thead>
+					<tr>
+						<th width="10%">Enable</th>
+						<th>SSID</th>
+						<th>Encryption</th>
+						<th>Password</th>
+						<th>AP Isolation</th>
+						<th>Visibility</th>
+						<th>Allowed Time</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td data-title="Enable">
+						<div class="onoffswitch">
+							<input class="onoffswitch-checkbox" id="enable-guest-ssid-1" name="onoffswitch" type="checkbox" checked />
+
+							<label class="onoffswitch-label" for="enable-guest-ssid-1"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+						</div></td>
+						<td data-title="SSID">
+						<input type="text" value="sbox-guest2.4 " />
+						</td>
+						<td data-title="Encryption">
+						<select>
+							<option>Select</option>
+							<option selected>WPA</option>
+							<option>WEP</option>
+							<option>None</option>
+						</select></td>
+						<td data-title="Password">
+						<input type="password" value="1234567" />
+						</td>
+						<td data-title="AP Isolation">
+						<div class="onoffswitch">
+							<input class="onoffswitch-checkbox" id="enable-ap-isolation-1" name="onoffswitch" type="checkbox" checked />
+
+							<label class="onoffswitch-label" for="enable-ap-isolation-1"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+						</div></td>
+						<td data-title="Visibility">
+						<div class="onoffswitch">
+							<input class="onoffswitch-checkbox" id="enable-visibility-1" name="onoffswitch" type="checkbox" checked />
+
+							<label class="onoffswitch-label" for="enable-visibility-1"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+						</div></td>
+						<td data-title="Allowed Time">
+						
+							<select>
+								<option>Select</option>
+								<option>00:00</option>
+								<option>01:00</option>
+								<option selected>02:00</option>
+								<option>03:00</option>
+								<option>04:00</option>
+								<option>05:00</option>
+								<option>06:00</option>
+								<option>07:00</option>
+								<option>08:00</option>
+								<option>09:00</option>
+								<option>10:00</option>
+								<option>11:00</option>
+								<option>12:00</option>
+							</select>
+						
+							<select>
+								<option>Select</option>
+								<option>00:00</option>
+								<option>01:00</option>
+								<option>02:00</option>
+								<option>03:00</option>
+								<option>04:00</option>
+								<option>05:00</option>
+								<option selected>06:00</option>
+								<option>07:00</option>
+								<option>08:00</option>
+								<option>09:00</option>
+								<option>10:00</option>
+								<option>11:00</option>
+								<option>12:00</option>
+							</select>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div class="row">
+				<div class="right">
+					<button click-loading class="button tiny radius" translate="cancel" type="button" ui-sref="user.home" ></button>
+					<button class="button tiny radius" translate="apply" type="button" ></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

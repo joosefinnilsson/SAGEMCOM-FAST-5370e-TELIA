@@ -1,0 +1,112 @@
+<div wait-loading></div>
+<div class="content ng-hide" ng-show="!loading" id="pf-games-apps">
+	<h4 class="maintitle" translate="pfGamesApps">Games & Applications</h4>
+	<div class="row">
+		<div class="columns large-12 large-centered small-12">
+			<form class="row add-port" name="formGames" autocomplete="off" check-unsaved>
+				<div class="columns medium-7 small-12">
+					<div class="row">
+						<div class="columns medium-5 small-12">
+							<label class="inline" translate="pfGamesOrApp">&nbsp;</label>
+						</div>
+
+						<div class="columns medium-7 small-12">
+							<select name="description" ng-options="key as key for (key, value) in list" ng-model="formGamesFields.Description" id="gaDescription" ng-change="formGames.description.$setValidity('portConflict', true)">
+							</select>
+							<small class="error" ng-if="formGames.description.$error.required" translate="fieldRequired"></small>
+							<small class="error" ng-if="formGames.description.$error.portConflict" translate="portConflict"></small>
+						</div>
+					</div>
+				</div>
+
+				<div class="columns medium-5 small-12">
+					<div class="row">
+						<div class="columns medium-5 small-12">
+							<label class="inline" translate="pfIpAddress">&nbsp;</label>
+						</div>
+
+						<div class="columns medium-7 small-12 end">
+							<input name="internalClient" type="text" clear-validation-on-focus="true" ng-model="formGamesFields.InternalClient" id="gaInternalClient" ng-disabled="loadedFromDevice" />
+							<small class="error" ng-if="formGames.internalClient.$invalid" translate="invalidIpAddress"> </small>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="row">
+				<div class="right">
+					<button class="button tiny radius btn-cancel" ng-hide="formGamesFields.update" translate="clear" ng-click="clearFormGames()" id="gaClear"></button>
+					<button class="button tiny radius" ng-hide="formGamesFields.update" translate="add" ng-click="addGamesRule()" id="gaAdd"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="columns small-12">
+			<table class="table-form text-center responsive-table" id="gaTable">
+				<thead>
+					<tr>
+						<th width="15%" translate="pfEnable">Enable</th>
+						<th translate="pfGameApp">Game / Application</th>
+						<th translate="pfIpAddress">IP Address</th>
+						<th translate="options">Options</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in listRules | filter:{InternalClient: formGamesFields.ipFilter}" ng-if="listRules.length > 0">
+						<td data-title="Enable">
+							<div class="onoffswitch">
+								<input ng-show="onChangeSave" class="onoffswitch-checkbox" id="rule-0{{$index}}" name="rule-0{{$index}}" type="checkbox" ng-change="updateGameRule(item)" ng-model="item.Enable"/>
+								<input ng-show="!onChangeSave" class="onoffswitch-checkbox" id="rule-0{{$index}}" name="rule-0{{$index}}" type="checkbox" ng-model="item.Enable"/>
+								<label class="onoffswitch-label" for="rule-0{{$index}}">
+									<div class="onoffswitch-inner"></div>
+									<div class="onoffswitch-switch"></div>
+								</label>
+							</div>
+						</td>
+						<td data-title="Game/Application" ng-bind="item.Description" class="breakRule">&nbsp;</td>
+						<td data-title="IP Address" ng-bind="item.InternalClient">&nbsp;</td>
+						<td data-title="Options">
+							<input class="icon-delete" title="Delete" type="button" value="Delete" data-reveal-id="confirm-remove-modal" data-reveal ng-click="removeGameRule($index, item.Description)" />
+						</td>
+					</tr>
+					<tr ng-if="listRules.length === 0">
+						<td colspan="4" translate="noPortForwarding">There are no port forwarding rules</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="right" style="text-align:right;" ng-show="!onChangeSave && listRules.length">
+			<button id="cancelButton" class="button tiny radius btn-cancel" type="button" click-loading ui-sref="user.home" translate="cancel"></button>
+			<button id="applyButton" class="button tiny radius" ng-click="save()" translate="apply"></button>
+		</div>
+	</div>
+	<div id="confirm-remove-modal" class="reveal-modal tiny" data-reveal>
+		<a class="close-reveal-modal close-modal">
+			<span class="btn-close">&#215;</span>
+			<span class="show-word btn-close close" translate="close">Close</span>
+		</a>
+		<h5 class="modal-title" translate="confirmRemoveTitle">&nbsp;</h5>
+		<p translate="confirmRemoveTip">&nbsp;</p>
+		<div class="right">
+			<button class="button tiny radius btn-cancel" type="button" translate="no" ng-click="cancelRemoveGameRule()" onclick="$('#confirm-remove-modal a.close-reveal-modal').trigger('click');"></button>
+			<button class="button tiny radius" type="button" translate="yes" type="button" ng-click="confirmRemoveGameRule()" onclick="$('#confirm-remove-modal a.close-reveal-modal').trigger('click');"></button>
+		</div>
+	</div>
+</div>
+
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = false;
+	$(document).foundation();
+</script>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+  <li translate="pfGameAppDescription" data-tourtarget="#gaDescription">
+  </li>
+  <li translate="pfGameAppIpAddress" data-tourtarget="#gaInternalClient">
+  </li>
+   <li translate="pfGameAppTable" data-tourtarget="#gaTable">
+  </li>
+</ul>

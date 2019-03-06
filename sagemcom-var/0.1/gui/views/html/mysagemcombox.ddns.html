@@ -1,0 +1,185 @@
+<div class="content no-padding">
+	<div wait-loading=""></div>
+	<div class="content ng-hide" ng-show="!loading" id="dynamic-sbox">
+		<div><div bread-crumbs=""></div></div>
+		<form id="ddnsForm" name="ddnsForm" ng-submit="save()" autocomplete="off" novalidate="" check-unsaved="">
+			<h4 translate="dynDnsTitle">Dynamic DNS Client</h4>
+			<p class="showInfo justified" translate="dynDnsInfo">&nbsp;</p>
+			<input type="text" class="ng-hide" title="">
+			<input type="password" class="ng-hide" title="">
+			<div class="row">
+				<div class="columns medium-3 small-6">
+					<label class="inline" translate="enableDDns" for="dyndns">Enabled</label>
+				</div>
+				<div class="columns medium-3 small-6 end">
+					<div class="onoffswitch" id="ddnsTip1">
+						<input class="onoffswitch-checkbox" id="dyndns" name="dyndnsEnable" ng-model="ddnsEnable" type="checkbox">
+						<label class="onoffswitch-label" for="dyndns"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+					</div>
+				</div>
+			</div>
+			<div id="dyndns-content" class="ng-hide" ng-show="ddnsEnable">
+				
+
+				<div class="row">
+					<div class="columns medium-3 small-12">
+						<label class="inline" for="dyn-provider" translate="sProvider">Provider</label>
+					</div>
+					<div class="columns medium-6 small-12 end">
+						<select id="dyn-provider" ng-model="selectOption" ng-options="item for item in selectItems" name="dyndnsProvider" ng-required="ddnsEnable" class="noBottom">
+							<option value="" translate="select">Select</option>
+						</select>
+						<small class="error" ng-if="ddnsForm.dyndnsProvider.$invalid && submitted" translate="invalidProvider"></small>
+					</div>
+				</div>
+				<div class="row" ng-show="showIpv4Address">
+					<div class="columns medium-3 small-12">
+						<label class="inline" for="ipAddress" translate="IPAddress">IP Address</label>
+					</div>
+					<div class="columns medium-6 small-12 end">
+						<p id="ipAddress">
+							<label ng-bind="ipv4Address ? ipv4Address : ('notAvailable' | translate)" class="inline">192.168.0.1</label>
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="columns medium-3 small-12">
+						<label class="inline" translate="username">User Name</label>
+					</div>
+					<div class="columns medium-6 small-12 end">
+						<input id="ddnsTip3" name="dyndnsUsername" ng-model="ddnsUserName" ng-required="ddnsEnable" type="text">
+						<small class="error" ng-if="ddnsForm.dyndnsUsername.$invalid && submitted" translate="invalidUsername"></small>
+					</div>
+				</div>
+				<div class="row">
+					<div class="columns medium-3 small-12">
+						<label class="inline" translate="password">Password</label>
+					</div>
+					<div class="columns medium-6 small-12 end">
+						<input id="ddnsTip4" type="password" name="dyndnsPassword" pass-reveal="{{revealOnFocus.dyndnsPass}}" ng-model="ddnsPassword">
+					</div>
+				</div>
+				<div class="row">
+					<div class="columns medium-3 small-12">
+						<label class="inline" translate="hostName" id="ddnsTip4">Host Name</label>
+					</div>
+					<div class="columns medium-6 small-12 end">
+						<input name="dyndnsHostname" ng-model="ddnsHostName" ng-required="ddnsEnable" id="ddnsTip5" type="text">
+						<small class="error" ng-if="ddnsForm.dyndnsHostname.$invalid && submitted" translate="invalidHostname"></small>
+					</div>
+				</div>
+			</div>
+			<div id="custom-server-content" class="ng-hide" ng-show="selectOption === 'Custom' && ddnsEnable">
+				<hr>
+				<h4 translate="dynDnsCustomServer">Custom Server</h4>
+
+				<div class="row">
+					<div class="columns medium-3 small-6">
+						<label class="inline" for="custom-auth" translate="dynDnsBasicAuth">Basic Authentication</label>
+					</div>
+
+					<div class="columns medium-2 small-6 end">
+						<div class="onoffswitch" id="ddnsTip6">
+							<input class="onoffswitch-checkbox" ng-model="ddnsAuthentication" id="custom-auth" name="ddnsAuthentication" type="checkbox">
+
+							<label class="onoffswitch-label" for="custom-auth"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="columns medium-3 small-12">
+						<label class="inline" translate="dynDnsServer">Server</label>
+					</div>
+					<div class="columns medium-6 small-12 end">
+						<input id="ddnsTip7" name="dyndnsServer" ng-model="ddnsServer" type="text">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="columns medium-3 small-12">
+						<label class="inline" translate="port">Port</label>
+					</div>
+
+					<div class="columns medium-6 small-12 end">
+						<input id="ddnsTip8" name="dyndnsPort" ng-model="ddnsPort" maxlength="5" type="text" validate-port="">
+						<small class="error" ng-if="ddnsForm.dyndnsPort.$invalid && ddnsForm.dyndnsPort.$dirty" translate="invalidPort"></small>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="columns medium-3 small-12">
+						<label class="inline" translate="dynDnsRequest">Request</label>
+					</div>
+
+					<div class="columns medium-6 small-12 end">
+						<input id="ddnsTip9" name="dyndnsRequest" ng-model="ddnsRequest" type="text">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="columns medium-3 small-12">
+						<label class="inline" translate="dynDnsUpdateInt">Update Interval</label>
+					</div>
+
+					<div class="columns medium-6 small-12 end">
+						<input id="ddnsTip10" ng-model="ddnsUpdateInterval" type="text">
+					</div>
+				</div>
+				<div class="row">
+					<div class="columns medium-3 small-12">
+						<label class="inline" translate="dynDnsRetryInt">Retry Interval</label>
+					</div>
+
+					<div class="columns medium-6 small-12 end">
+						<input id="ddnsTip11" ng-model="ddnsRetryInterval" type="text">
+					</div>
+				</div>
+				<div class="row">
+					<div class="columns medium-3 small-12">
+						<label class="inline" translate="dynDnsMaxRetry">Max Retries</label>
+					</div>
+
+					<div class="columns medium-6 small-12 end">
+						<input id="ddnsTip12" ng-model="ddnsMaxRetries" type="text">
+					</div>
+				</div>
+
+			</div>
+			<div class="right pullTop">
+				<button type="button" class="button tiny radius btn-cancel" translate="cancel" click-loading="" ui-sref="user.home" id="cancelTip"></button>
+				<button type="submit" class="button tiny radius" translate="apply" id="applyTip"></button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+  <li translate="ddnsTip1" data-tourtarget="#ddnsTip1">
+  </li>
+  <li translate="ddnsStatusTip" data-tourtarget="#ddnsStatusTip">
+  </li>
+  <li translate="ddnsTip2" data-tourtarget="#dyn-provider">
+  </li>
+  <li translate="ddnsTip3" data-tourtarget="#ddnsTip3">
+  </li>
+  <li translate="ddnsTip4" data-tourtarget="#ddnsTip4">
+  </li>
+  <li translate="ddnsTip5" data-tourtarget="#ddnsTip5">
+  </li>
+  <li translate="ddnsTip6" data-tourtarget="#ddnsTip6">
+  </li>
+  <li translate="ddnsTip7" data-tourtarget="#ddnsTip7">
+  </li>
+  <li translate="ddnsTip8" data-tourtarget="#ddnsTip8">
+  </li>
+  <li translate="ddnsTip9" data-tourtarget="#ddnsTip9">
+  </li>
+    <li translate="ddnsTip10" data-tourtarget="#ddnsTip10">
+  </li>
+    <li translate="ddnsTip11" data-tourtarget="#ddnsTip11">
+  </li>
+     <li translate="ddnsTip12" data-tourtarget="#ddnsTip12">
+  </li>
+</ul>

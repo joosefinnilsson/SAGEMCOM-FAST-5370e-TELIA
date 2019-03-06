@@ -1,0 +1,8 @@
+@charset "UTF-8";/*!
+ * Copyright : (C) 2008,2009 SAGEM Communications - URD2
+ *
+ * This CSS file is the property of Sagem Communications
+ * and may not be copied or used without prior written consent.
+ *
+ * vim: set fileencoding=utf-8
+ */html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}:focus{outline:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}.pageLoader{display:block;float:left;margin-top:0;width:39px;height:41px;background-image:url('../img/waiting.gif')}#errorBox{width:450px;margin-left:auto;margin-right:auto;margin-bottom:0}#errorMsg{margin-bottom:0;padding:15px 10px 15px 50px;background-repeat:no-repeat;background-position:10px center;background-image:url('../img/ico_alert.gif')}#errorLabel{margin-bottom:0;padding:15px 10px 15px 50px}

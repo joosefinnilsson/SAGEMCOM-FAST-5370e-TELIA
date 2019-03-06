@@ -1,0 +1,83 @@
+<div wait-loading></div>
+<div class="content active ng-hide" ng-show="!loading" id="dns-server">
+	<h4 translate="staticDnsServer">&nbsp;</h4>
+	<form name="dnsServer" ng-submit="save()" check-unsaved>
+		<div class="row">
+			<div class="columns medium-5 small-5">
+				<label class="inline" for="upnp-igd" translate="enable">Enable</label>
+			</div>
+			<div class="columns medium-7 small-7 end">
+				<div class="onoffswitch" id="idTip1">
+					<input ng-model="enable" id="upnp-igd" name="dnsSwitch" class="onoffswitch-checkbox" type="checkbox" ng-disabled="dnsNotEditable || !editDNS" ng-class="{'disabled-input':dnsNotEditable}"/>
+					<label class="onoffswitch-label" for="upnp-igd">
+						<div class="onoffswitch-inner"></div>
+						<div class="onoffswitch-switch"></div>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div id="idTip2">
+			<div class="row">
+				<div class="columns medium-5 small-4">
+					<label class="inline" translate="PrimaryDNSServer">&nbsp;</label>
+				</div>
+				<div class="columns medium-3 small-8 end">
+					<input validate-ip="{{validate}}" ng-model="primary" type="text" name="primary" ng-disabled="!enable || dnsNotEditable || !editDNS" />
+					<small class="error" ng-if="dnsServer.primary.$invalid && (dnsServer.primary.$dirty || submitted)" translate="invalidIpAddress">Invalid IP Address</small>
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns medium-5 small-4">
+					<label translate="secondaryDNSServer">&nbsp;</label>
+				</div>
+				<div class="columns medium-3 small-8 end">
+					<input validate-ip="not.required" ng-model="secondary" name="secondary" type="text" ng-disabled="!enable || dnsNotEditable || !editDNS"/>
+					<small class="error" ng-if="dnsServer.secondary.$invalid && dnsServer.secondary.$dirty" translate="invalidIpAddress">Invalid IP Address</small>
+				</div>
+			</div>
+		</div>
+		<br/>
+		<div class="row" ng-if="!dnsNotEditable && editDNS">
+			<div class="right">
+				<button class="button tiny radius btn-cancel" type="button" translate="cancel" id="cancelTip" click-loading ui-sref="user.home">
+					Cancel
+				</button>
+				<button type="button" class="button tiny radius ng-hide" ng-show="checkParentalControl()" data-reveal-id="apply-changes-dns-modal" translate="apply" id="applyTip" ></button>
+				<button class="button tiny radius ng-hide" type="submit" ng-show="!checkParentalControl()" translate="apply" id="applyTip"/>
+			</div>
+		</div>
+	</form>
+</div>
+
+<!-- Modal for save -->
+<div id="apply-changes-dns-modal" class="reveal-modal tiny" data-reveal="">
+	<a class="close-reveal-modal close-modal">
+		<span class="btn-close">&#215;</span>
+		<span class="show-word btn-close close" translate="close">Close</span>
+	</a>
+	<h5 class="modal-title" translate="applyChanges">&nbsp;</h5>
+	<p translate="applyDNSChangesDescription">
+		&nbsp;
+	</p>
+	<div class="right">
+		<button class="button tiny radius btn-cancel" type="button" translate="no" id="idNo" onclick="$('#apply-changes-dns-modal a.close-reveal-modal').trigger('click');" ></button>
+		<button class="button tiny radius" type="button" translate="yes" id="idYes" ng-click="save()" onclick="$('#apply-changes-dns-modal a.close-reveal-modal').trigger('click');"></button>
+	</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li translate="dnsTip1" data-tourtarget="#idTip1">
+	</li>
+	<li translate="dnsTip2" data-tourtarget="#idTip2">
+	</li>
+	<li translate="cancelTip" data-tourtarget="#cancelTip">
+	</li>
+	<li translate="applyTip" data-tourtarget="#applyTip">
+	</li>
+</ul>
+
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = false;
+	$(document).foundation();
+</script>

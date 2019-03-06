@@ -1,0 +1,20 @@
+<div class="content w100 ng-hide" ng-show="true" id="mptcp">
+	<dl class="tabs no-responsive sub-tabs" ng-class="changeToVertical ? 'vertical' : ''" data-tab="" id="mptcpTab" tab-click="">
+		<dd class="active">
+			<a href="javascript:void(0)" click-loading="" ui-sref="user.internetConnectivity.mptcp.status" translate="mptcpStatus">MPTCP</a>
+		</dd>
+		<dd>
+			
+		</dd>
+		<dd>
+			<a href="javascript:void(0)" click-loading="" ui-sref="user.internetConnectivity.mptcp.statistics" check-feature-state="mptcpStatistics" translate="mptcpStatistics">Statistics</a>
+		</dd>
+	</dl>
+	<div class="tabs-content" data-tab-content="" ui-view="">
+		&nbsp;
+	</div>
+</div>
+<script>
+	$(document).foundation();
+	Foundation.libs.reveal.settings.close_on_background_click = false;
+</script>

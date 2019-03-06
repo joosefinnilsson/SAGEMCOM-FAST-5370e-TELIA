@@ -1,0 +1,382 @@
+<div wait-loading=""></div>
+<div class="content active ng-hide" ng-show="!loading" id="pf-manually">
+	<h4 class="maintitle" translate="portForwarding">Port Forwarding</h4>
+	<div ng-hide="services">
+		<form class="row add-port" name="UpnpRuleForm" check-unsaved="">
+			<div check-feature-state="portForwardNatButton" class="row" ng-hide="loadedFromDevice">
+				<div class="columns medium-3 small-5">
+					<label class="inline" for="enableNat"><b translate="natEnable">Nat Enable</b>
+					</label>
+				</div>
+				<div class="columns medium-3 small-7 end">
+					<div class="onoffswitch">
+						<input id="enableNat" name="onoffswitch" class="onoffswitch-checkbox" ng-change="saveNat()" type="checkbox" ng-model="natEnable">
+						<label class="onoffswitch-label" for="enableNat">
+							<div class="onoffswitch-inner"></div>
+							<div class="onoffswitch-switch"></div>
+						</label>
+					</div>
+				</div>
+      </div>
+      
+            <div class="row" ng-hide="loadedFromDevice">
+                <div class="columns medium-3 small-5">
+                    <label class="inline" for="upnp-igd"><b translate="enableUPnP">Enable UPnP IGD</b>
+                    </label>
+                </div>
+                <div class="columns medium-3 small-7 end">
+                    <div class="onoffswitch">
+                        <input id="upnp-igd" name="onoffswitch" class="onoffswitch-checkbox" type="checkbox" ng-model="fieldsUpnp.status">
+                        <label class="onoffswitch-label" for="upnp-igd">
+                            <div class="onoffswitch-inner"></div>
+                            <div class="onoffswitch-switch"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-hide="loadedFromDevice">
+                <div class="columns medium-3 small-5">
+                    <label class="inline">
+                        <span translate="advertisementPeriod">Advertisement Period</span>
+                    </label>
+                </div>
+                <div class="columns medium-3 end">
+                    <input id="pfTip14" name="adPeriod" type="text" ng-model="fieldsUpnp.adPeriod" only-numbers="" max-number="1800" min-number="1" maxlength="4">
+                    <small ng-if="UpnpRuleForm.adPeriod.$invalid" class="error" translate="invalidValue">Invalid value</small>
+                </div>
+            </div>
+            <div class="row" ng-hide="loadedFromDevice">
+                <div class="columns medium-3 small-5">
+                    <label class="inline">
+                        <span translate="advertisementTTL">Advertisement TTL</span>
+                    </label>
+                </div>
+                <div class="columns medium-3 end">
+                    <input id="pfTip15" name="adTTL" type="text" ng-model="fieldsUpnp.adTTL" only-numbers="" max-number="255" min-number="1" maxlength="3">
+                    <small ng-if="UpnpRuleForm.adTTL.$invalid" class="error" translate="invalidValue">Invalid value</small>
+                </div>
+            </div>
+            <div class="row columns justified" ng-hide="loadedFromDevice">
+                <div class="alert-box warning large radius medium-11 small-12" data-alert="">
+                    <i class="fa fa-info-circle fa-center"></i>
+                    <div style="margin-left:40px;">
+                        <span translate="upnpExplained">UPNP IGD allows games, peer-to-peer, remote assistance applications or others to automatically create port forwarding rules. This option can create a risk for the security of your network, check list of rules in table below.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="columns large-10 large-centered small-12" ng-hide="loadedFromDevice">
+                <div class="row">
+                    <div class="right">
+                        <button class="button tiny radius btn-only-child-blue" type="submit" translate="apply" ng-click="warnsUpnp()">
+                        &nbsp;
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<input type="hidden" id="upnpConfirm" data-reveal-id="enable-upnp" data-reveal="">
+	<div id="enable-upnp" class="reveal-modal tiny" data-reveal="">
+		<a class="close-reveal-modal close-modal">
+			<span class="btn-close">&#215;</span>
+			<span class="show-word btn-close close" translate="close">Close</span>
+		</a>
+		<h5 class="modal-title" translate="applyChanges">&nbsp;</h5>
+		<p translate="upnpWarningDisabled" ng-if="removeUPNPRules">
+			&nbsp;
+		</p>
+		<p translate="upnpWarning" ng-if="fieldsUpnp.status">
+			&nbsp;
+		</p>
+		<div class="right">
+			<button class="button tiny radius btn-cancel" type="button" translate="no" ng-click="cancelUpnp()" onclick="$('#enable-upnp a.close-reveal-modal').trigger('click');"></button>
+			<button class="button tiny radius" type="button" translate="yes" ng-click="saveUpnp()" onclick="$('#enable-upnp a.close-reveal-modal').trigger('click');"></button>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="large-12 columns">
+			<h5 translate="addRulessManually">&nbsp;</h5>
+			<div class="row">
+				<div class="alert-box warning radius medium-8 small-8" data-alert="">
+				    <i class="fa fa-info-circle fa-center center"></i>
+				    <span translate="dashObservation">Click and drag schedule bars below to select specific time.</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns large-12 large-centered small-12">
+			<form class="row add-port" name="AddRuleForm" check-unsaved="">
+				<div class="row" id="common-service-name" ng-show="!fields.nService">
+					<div class="columns medium-12 small-12">
+						<div class="row">
+							<div class="columns medium-3 small-12">
+								<label class="inline" translate="customServiceName">Custom Service Name</label>
+							</div>
+							<div class="columns medium-9 small-12 end">
+								<input id="pfTip6" type="text" name="serviceName" ng-model="fields.nDescription" clear-validation-on-focus="true">
+								<small ng-if="AddRuleForm.serviceName.$invalid" class="error" translate="fieldRequired">This field cannot be blank.</small>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="columns medium-6 small-12">
+						<div class="row">
+							<div class="columns medium-5 small-12">
+								<label class="inline" translate="service">Service</label>
+							</div>
+							<div class="columns medium-7 small-12">
+								<select id="pt-service" ng-options="service.name as service.name for (key, service) in fields.listServices" ng-model="fields.nService" ng-change="changeService()">
+									<option value="" translate="other">Other</option>
+								</select>
+							</div>
+						</div>
+						<div class="row" ng-show="isRIPv2Enabled">
+							<div class="columns medium-5 small-12">
+								<label class="inline" translate="externalAddress">&nbsp;</label>
+							</div>
+							<div class="columns medium-7 small-12">
+								<input name="externalAddress" type="text" ng-model="fields.nExternalAddress" clear-validation-on-focus="true">
+								<small class="error" ng-if="AddRuleForm.externalAddress.$invalid" translate="invalidIpAddress"> </small>
+							</div>
+						</div>
+						<div class="row">
+							<div class="columns medium-5 small-12">
+								<label class="inline" translate="externalHost">&nbsp;</label>
+							</div>
+							<div class="columns medium-7 small-12">
+								<input id="externalHost" name="externalHost" type="text" ng-disabled="isRIPv2Enabled" ng-model="fields.nRemoteHost" clear-validation-on-focus="true">
+								<small class="error" ng-if="AddRuleForm.externalHost.$invalid" translate="invalidIpAddress"> </small>
+							</div>
+						</div>
+						<div class="row">
+							<div class="columns medium-5 small-12">
+								<label class="inline" translate="internalHost">&nbsp;</label>
+							</div>
+							<div class="columns medium-7 small-12">
+								<input name="internalClient" id="internalHost" type="text" value="" ng-model="fields.nInternalClient" ng-disabled="loadedFromDevice" clear-validation-on-focus="true">
+								<small class="error" ng-if="AddRuleForm.internalClient.$invalid" translate="invalidIpAddress"> </small>
+							</div>
+						</div>
+					</div>
+					<div class="columns medium-6 small-12">
+						<div class="row">
+							<div class="columns medium-5 small-12">
+								<label class="inline" translate="protocol">Protocol</label>
+							</div>
+							<div class="columns medium-7 small-12">
+								<select id="pt-protocol" ng-model="fields.nProtocol" ng-disabled="fields.nService">
+									<option>UDP</option>
+									<option>TCP</option>
+									<option value="BOTH">TCP - UDP</option>
+									<option>ICMP</option>
+									<option>GRE</option>
+									<option>AH</option>
+									<option>ESP</option>
+								</select>
+							</div>
+						</div>
+						<div class="row" ng-if="isRIPv2Enabled">
+							<div class="columns medium-12 small-12">
+								<label class="inline">&nbsp;</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="columns medium-4 small-10">
+								<label class="inline" translate="externalPort"> &nbsp; </label>
+							</div>
+							<div class="columns medium-1 small-2">
+								<i ng-if="fields.portSets" data-reveal-id="port-range-modal" data-reveal="" class="fa fa-question-circle fa-center center portRangesIcon"></i>
+								&nbsp;
+							</div>
+							<div class="columns medium-7 small-12 end">
+								<input id="pt-ep" name="externalPort" maxlength="12" type="text" ng-disabled="fields.nService" ng-model="fields.nExternalPort" clear-validation-on-focus="true">
+								<small class="error" ng-if="AddRuleForm.externalPort.$invalid && (AddRuleForm.externalPort.$error.externalPort || (fields.portSets && checkValidMAPTPortRange && AddRuleForm.externalPort.$error.externalMAPTRangePort))" translate="invalidPort"> </small>
+                <small class="error" ng-if="AddRuleForm.externalPort.$invalid && AddRuleForm.externalPort.$error.portConflict" translate="portConflict"> </small>
+                <small class="error" ng-if="AddRuleForm.externalPort.$invalid && AddRuleForm.externalPort.$error.blacklistPort" translate="invalidPortNumber"> </small>
+							</div>
+						</div>
+						<div class="row">
+							<div class="columns medium-5 small-12">
+								<label class="inline" translate="internalPort"> &nbsp; </label>
+							</div>
+							<div class="columns medium-7 small-12 end">
+								<input id="pt-ip" name="internalPort" maxlength="12" type="text" ng-disabled="fields.nService" ng-model="fields.nInternalPort" clear-validation-on-focus="true">
+								<small class="error" ng-if="AddRuleForm.internalPort.$invalid" translate="invalidPort"> </small>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="row">
+				<div class="right">
+					<button id="pfTip7" class="button tiny radius btn-cancel" type="button" ng-show="!toEditRule" translate="clear" ng-click="clearForm()">
+					&nbsp;
+					</button>
+					<button class="button tiny radius btn-cancel" type="button" ng-show="toEditRule" translate="cancel" ng-click="cancel()">
+					&nbsp;
+					</button>
+					<button class="button tiny radius" type="submit" ng-show="!toEditRule" translate="add" id="pfTip3" ng-click="addRule()">
+					&nbsp;
+					</button>
+					<button class="button tiny radius" type="submit" ng-show="toEditRule" translate="update" id="pfTip4" ng-click="updateRule(toEditRule)">
+					&nbsp;
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns small-12">
+			<table id="pfTip10" class="table-form table-form-full responsive-table" ng-class="{ 'has-ext-addr' : displayExternalAddress && isRIPv2Enabled }">
+				<thead>
+					<tr>
+						<th translate="enable">Enable</th>
+						<th translate="externalAddress" ng-if="displayExternalAddress && isRIPv2Enabled" class="host-w ext-addr">External Address</th>
+						<th translate="service">Service</th>
+						<th translate="protocol" class="rule-port-w">Protocol</th>
+						<th translate="externalHost" class="host-w">External Host</th>
+						<th translate="internalHost" class="host-w">Internal Host</th>
+						<th translate="externalPort" class="rule-port-w">External Port</th>
+						<th translate="internalPort" class="rule-port-w">Internal Port</th>
+						<th translate="options" class="options-w">Options</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="rules in fields.rulesList | filter:{toBeDeleted:'!true', InternalClient: fields.ipFilter}" ng-if="fields.rulesList.length > 0">
+						<td data-title="{{ 'enable' | translate }}">
+							<div class="onoffswitch rule-enable-switch" id="pfTip11" ng-show="rules.edit">
+								<input ng-change="enableDisableRule(rules)" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="port-0{{$index}}" ng-model="rules.Enable">
+								<label class="onoffswitch-label" for="port-0{{$index}}">
+									<div class="onoffswitch-inner"></div>
+									<div class="onoffswitch-switch"></div>
+								</label>
+							</div>
+							<div ng-show="!rules.edit">&nbsp;</div>
+						</td>
+						<td data-title="{{ 'externalAddress' | translate }}" ng-if="displayExternalAddress && isRIPv2Enabled" class="host-w ext-addr"><div ng-attr-title="{{rules.ExternalAddress || '-'}}" ng-bind="rules.ExternalAddress || '-'"></div></td>
+						<td data-title="{{ 'service' | translate }}">
+							<div ng-bind="(rules.Service === 'NONE') ? rules.Description : rules.Service" class="breakRulePro rule-name-w"></div>
+						</td>
+						<td data-title="{{ 'protocol'  | translate }}" ng-bind="(rules.Protocol === 'BOTH') ? 'TCP - UDP' : rules.Protocol"></td>
+						<td data-title="{{ 'externalHost' | translate }}" class="host-w"><div ng-bind="(rules.RemoteHost === '') ? '*' : rules.RemoteHost" ng-attr-title="{{(rules.RemoteHost === '') ? '*' : rules.RemoteHost}}"></div></td>
+						<td data-title="{{ 'internalHost' | translate }}" class="host-w"><div ng-bind="rules.InternalClient" ng-attr-title="{{rules.InternalClient}}"></div></td>
+						<td ng-if="rules.ExternalPort > 0" data-title="{{ 'externalPort'  | translate }}" ng-bind-template="{{rules.ExternalPort}} {{rules.ExternalPortEndRange > 0 ? ' - ' + rules.ExternalPortEndRange : ''}}"></td>
+						<td data-title="{{ 'externalPort' | translate }}" ng-if="rules.ExternalPort === 0">*</td>
+						<td data-title="{{ 'internalPort'  | translate }}" ng-bind-template="{{ (rules.InternalPort > 0) ? getInternalPortEndRange(rules) : '*' }}"></td>
+						<td data-title="{{ 'options'  | translate }}">
+							<input id="pfTip13" class="icon-edit" title="Edit" type="button" value="Edit" ng-model="rules.uid" ng-click="editRule(rules)" ng-if="rules.edit">
+							<input id="pfTip12" class="icon-delete" data-reveal-id="confirm-remove-modal" data-reveal="" title="Delete" type="button" value="Delete" ng-model="rules.uid" ng-click="selectRule(rules)" ng-if="rules.remove">
+							<div ng-show="!rules.edit && !rules.remove">&nbsp;</div>
+						</td>
+					</tr>
+					
+					<tr ng-repeat="rules in fields.gamesList | filter:{InternalClient: fields.ipFilter}" ng-if="fields.gamesList.length > 0">
+						<td data-title="{{ 'enable' | translate }}">
+							<div class="onoffswitch rule-enable-switch onoffswitch-disabled" ng-show="rules.edit">
+								<input disabled type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="port-games-{{$index}}" ng-model="rules.Enable">
+								<label class="onoffswitch-label" for="port-games-{{$index}}">
+									<div class="onoffswitch-inner"></div>
+									<div class="onoffswitch-switch"></div>
+								</label>
+							</div>
+							<div ng-show="!rules.edit">&nbsp;</div>
+						</td>
+						<td data-title="{{ 'externalAddress' | translate }}" ng-if="displayExternalAddress" class="host-w ext-addr"><div ng-bind="rules.ExternalAddress || '-'" ng-attr-title="{{rules.ExternalAddress || '-'}}"></div></td>
+						<td data-title="{{ 'service' | translate }}" ng-bind="rules.Description" class="breakRule"></td>
+						<td data-title="{{ 'protocol' | translate }}" ng-bind="(rules.Protocol === 'BOTH') ? 'TCP - UDP' : rules.Protocol"></td>
+						<td data-title="{{ 'externalHost' | translate }}"><div ng-bind="(rules.RemoteHost === '') ? '*' : rules.RemoteHost" ng-attr-title="{{(rules.RemoteHost === '') ? '*' : rules.RemoteHost}}"></div></td>
+						<td data-title="{{ 'internalHost' | translate }}"><div ng-bind="rules.InternalClient" ng-attr-title="{{rules.InternalClient}}"></div></td>
+						<td data-title="{{ 'externalPort' | translate }}" ng-bind-template="{{rules.ExternalPort}} {{rules.ExternalPortEndRange > 0 ? ' - ' + rules.ExternalPortEndRange : ''}}"></td>
+						<td data-title="{{ 'internalPort' | translate }}" ng-bind-template="{{getInternalPortEndRange(rules)}}"></td>
+						<td data-title="{{ 'options' | translate }}"><div>&nbsp;</div></td>
+					</tr>
+					<tr ng-if="fields.rulesList.length === 0 && fields.upnpList.length === 0 && fields.gamesList.length === 0">
+						<td colspan="{{ (displayExternalAddress && isRIPv2Enabled) ? 9 : 8 }}" translate="noPortForwarding">There are no port forwarding rules</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- Model for restart -->
+		<div id="confirm-remove-modal" class="reveal-modal tiny" data-reveal="">
+			<a class="close-reveal-modal close-modal">
+				<span class="btn-close">&#215;</span>
+				<span class="show-word btn-close close" translate="close">Close</span>
+			</a>
+			<h5 class="modal-title" translate="applyChanges">&nbsp;</h5>
+			<p translate="confirmRemoveTitle">
+				&nbsp;
+			</p>
+			<div class="right">
+				<button class="button tiny radius btn-cancel" type="button" translate="no" ng-click="cancelRemove()" onclick="$('#confirm-remove-modal a.close-reveal-modal').trigger('click');"></button>
+				<button class="button tiny radius" type="button" translate="yes" ng-click="confirmRemove()" onclick="$('#confirm-remove-modal a.close-reveal-modal').trigger('click');"></button>
+			</div>
+		</div>
+		<!-- Model for restart -->
+		<div id="port-range-modal" class="reveal-modal medium" data-reveal="">
+			<a class="close-reveal-modal close-modal">
+				<span class="btn-close">&#215;</span>
+				<span class="show-word btn-close close" translate="close">Close</span>
+			</a>
+			<h5 class="modal-title" translate="listPortRanges">List of all available port ranges</h5>
+			<p translate="textPortRanges">
+				Your gateway is configured to work with mapping of address and port using translation (MAP-T) and your port forwarding rules must respect the avaliable port ranges below.
+			</p>
+			<div class="portSetTableDiv">
+				<table>
+				<tr ng-repeat="portSet in fields.portSets">
+					<td>Port set {{$index}}</td>
+					<td>{{portSet}}</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="right" ng-show="!onChangeSave && (fields.rulesList.length > 0 || fields.upnpList.length > 0 || fields.gamesList.length > 0)">
+		<button class="button tiny radius btn-cancel" type="button" translate="cancel" click-loading="" ui-sref="{{previousMainPage}}">
+			Cancel
+		</button>
+		<button class="button tiny radius" type="submit" translate="apply" ng-click="apply()">
+			Apply
+		</button>
+  </div>
+  <div id="special-port-modal" class="reveal-modal tiny" data-reveal="">
+		<a class="close-reveal-modal close-modal">
+			<span class="btn-close">&#215;</span>
+			<span class="show-word btn-close close" translate="close">Close</span>
+		</a>
+		<h5 class="modal-title" translate="confirmSpecialPortTitlePortForwarding">&nbsp;</h5>
+		<p translate="confirmSpecialPortTip">
+			&nbsp;
+		</p>
+		<div class="right">
+			<button class="button tiny radius btn-cancel" type="button" translate="no" onclick="$('#special-port-modal a.close-reveal-modal').trigger('click');"></button>
+			<button class="button tiny radius" type="submit" ng-show="!toEditRule" translate="add" id="pfTip3" ng-click="addRule(true)">&nbsp;</button>
+			<button class="button tiny radius" type="submit" ng-show="toEditRule" translate="update" id="pfTip4" ng-click="updateRule(toEditRule, true)">&nbsp;</button>
+		</div>
+	</div>
+</div>
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = false;
+	$(document).foundation();
+</script>
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li translate="pfTip9" data-tourtarget="#upnp-igd"></li>
+	<li translate="pfTip14" data-tourtarget="#pfTip14"></li>
+	<li translate="pfTip15" data-tourtarget="#pfTip15"></li>
+	<li translate="pfTip6" data-tourtarget="#pfTip6"></li>
+	<li translate="pfServiceTip" data-tourtarget="#pt-service"></li>
+	<li translate="pfProtocolTip" data-tourtarget="#pt-protocol"></li>
+	<li translate="pfExternalHostTip" data-tourtarget="#externalHost"></li>
+	<li translate="pfExternalPortTip" data-tourtarget="#pt-ep"></li>
+	<li translate="pfInternalHostTip" data-tourtarget="#internalHost"></li>
+	<li translate="pfInternalPortTip" data-tourtarget="#pt-ip"></li>
+	<li translate="pfTip10" data-tourtarget="#pfTip10"></li>
+	<li translate="pfTip11" data-tourtarget="#pfTip11"></li>
+	<li translate="pfTip12" data-tourtarget="#pfTip12"></li>
+	<li translate="pfTip13" data-tourtarget="#pfTip13"></li>
+</ul>

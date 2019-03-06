@@ -1,0 +1,141 @@
+<div class="content active" id="maintenance-internetutilities" >
+	<form name="formInternetUtilities" autocomplete="off" ng-submit="test()" novalidate>
+		<h4 translate="internetUtilities">Internet Utilities</h4>
+		<div class="row" id="utilitiesSelect">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="utility">Utility</label>
+			</div>
+
+			<div class="columns medium-4 small-8 end">
+				<select id="iu-select" ng-model="selectedOption" ng-change="clear()">
+					<option value="">Select</option>
+					<option check-feature-state="ping">Ping</option>
+					<option check-feature-state="traceroute">Traceroute</option>
+					<option check-feature-state="dnsQuery">DNS Query</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="row" id="destionationDiv" ng-show="selectedOption != ''">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="destination">Destination</label>
+			</div>
+
+			<div class="columns medium-4 small-8 end">
+				<input type="text" name="inputDestination" ng-model="destination" required placeholder="{{selectedOption == 'DNS Query'?'www.sagemcom.com':''}}" />
+				<small class="error" ng-if="formInternetUtilities.inputDestination.$error.required && (formInternetUtilities.inputDestination.$dirty || submitted)" translate="invalidDestination"></small>
+			</div>
+		</div>
+
+		<div class="row" id="pingDiv" ng-show="selectedOption == 'Ping'">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="numberOfPings">Number of Pings</label>
+			</div>
+
+			<div class="columns medium-4 small-8 end">
+				<input type="number" name="pingCount" ng-model="count" min="1" max="10" ng-required="selectedOption == 'Ping'"/>
+				<small class="error" ng-if="formInternetUtilities.pingCount.$invalid && formInternetUtilities.pingCount.$dirty" translate="outOfRangePing"></small>
+			</div>
+		</div>
+
+		<div class="row" id="tracerouteDiv" ng-show="selectedOption == 'Traceroute'">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="maxNumberOfHops">Max. Number of Hops</label>
+			</div>
+
+			<div class="columns medium-4 small-8 end">
+				<input type="number" name="maxHops" ng-model="hops"  min="1" max="30" ng-required="selectedOption == 'Traceroute'"/>
+				<small class="error" ng-if="formInternetUtilities.$invalid && formInternetUtilities.maxHops.$invalid && formInternetUtilities.maxHops.$dirty" translate="outOfRangeTraceroute"></small>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="columns medium-7 text-right">
+				<input type="hidden" data-reveal-id="ping-modal" id="showModalPing" data-reveal />
+				<input type="hidden" data-reveal-id="tracert-modal" id="showModalTracert" data-reveal />
+				<input type="hidden" data-reveal-id="dnsquery-modal" id="showModalDNSQuery"data-reveal />
+				<button class="button tiny radius" type="submit" translate="test" id="utilitiesTestStart" ng-show="selectedOption">
+					Test
+				</button>
+			</div>
+		</div>
+		<div id="ping-modal" class="reveal-modal" data-reveal ng-class="{loadingResults: !pingInfo}">
+			<p ng-hide="pingInfo" translate="testsRunning">
+				&nbsp;
+			</p>
+			<div class="t-center" ng-hide="pingInfo">
+				<img src="images/loading.gif" border="0" />
+			</div>
+
+			<a class="close-reveal-modal close-modal" data-close-reveal ng-show="pingInfo">&#215;</a>
+
+			<h5 class="modal-title" translate="pingResults" ng-show="pingInfo">&nbsp;</h5>
+
+			<ul ng-show="pingInfo">
+				<li>
+					<strong translate="packetsSent">&nbsp;</strong>{{pingInfo.PacketsTransmitted}}/{{count}}
+				</li>
+				<li>
+					<strong translate="packetsReceived">&nbsp;</strong>{{pingInfo.PacketsReceived}}/{{count}}
+				</li>
+				<li>
+					<strong translate="perCentLoss">&nbsp;</strong>{{pingInfo.PerCentLoss}}%
+				</li>
+				<li>
+					<strong translate="pingMin">&nbsp;</strong>{{pingInfo.RoundTripMin}}ms
+				</li>
+				<li>
+					<strong translate="pingMax">&nbsp;</strong>{{pingInfo.RoundTripMax}}ms
+				</li>
+				<li>
+					<strong translate="pingAverage">&nbsp;</strong>{{pingInfo.RoundTripAvg}}ms
+				</li>
+			</ul>
+		</div>
+
+		<div id="tracert-modal" class="reveal-modal" data-reveal ng-class="{loadingResults: !tracertInfo}">
+			<p ng-hide="tracertInfo" translate="testsRunning">
+				&nbsp;
+			</p>
+			<div class="t-center" ng-hide="tracertInfo">
+				<img src="images/loading.gif" border="0" />
+			</div>
+
+			<a class="close-reveal-modal close-modal" data-close-reveal ng-show="tracertInfo">&#215;</a>
+
+			<h5 class="modal-title" ng-show="tracertInfo" translate="tracerouteResults">&nbsp;</h5>
+
+			<ul ng-show="tracertInfo">
+				<div ng-bind-html="tracertInfo"></div>
+			</ul>
+		</div>
+
+		<div id="dnsquery-modal" class="reveal-modal" data-reveal ng-class="{loadingResults: !dnsqueryInfo}">
+			<p ng-hide="dnsqueryInfo" translate="testsRunning">
+				&nbsp;
+			</p>
+			<div class="t-center" ng-hide="dnsqueryInfo">
+				<img src="images/loading.gif" border="0" />
+			</div>
+
+			<a class="close-reveal-modal close-modal" data-close-reveal ng-show="dnsqueryInfo">&#215;</a>
+
+			<h5 class="modal-title" translate="dnsqueryResults" ng-show="dnsqueryInfo">&nbsp;</h5>
+
+			<strong translate="statusDNSQuery" ng-show="dnsqueryInfo && !dnsqueryInfo.Address">&nbsp;</strong>
+			<ul ng-show="dnsqueryInfo.Address">
+				<li>
+					<strong translate="statusSemicolon">&nbsp;</strong>&nbsp;{{dnsqueryInfo.Status}}
+				</li>
+				<li>
+					<strong translate="addressDNSQuery">&nbsp;</strong>{{dnsqueryInfo.Address}}
+				</li>
+			</ul>
+		</div>
+
+	</form>
+</div>
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = true;
+	$(document).foundation(); 
+</script>

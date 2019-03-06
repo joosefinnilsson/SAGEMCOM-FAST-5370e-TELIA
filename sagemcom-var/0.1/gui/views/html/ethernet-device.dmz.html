@@ -1,0 +1,48 @@
+<div class="content">
+	<div wait-loading></div>
+	<div class="content w100 ng-hide" ng-show="!loading" id="dmz">
+		<h4 class="maintitle">DMZ</h4>
+		<form id="dmzForm" name="dmzForm" autocomplete="off" check-unsaved>
+			<div class="row" ng-if="fields.status && dmzDevice.ipAddress !== fields.selectedDevice">
+				<div class="columns small-12">
+					<div>
+						<b><span translate="otherDeviceInDmz1">Other Device is already in DMZ</span> <em>({{fields.selectedDevice}})</em></b>
+						<p translate="otherDeviceInDmz2">Only one device can be set in DMZ. Clicking below will interrupt access to services on previous device.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="row" ng-if="fields.status && dmzDevice.ipAddress === fields.selectedDevice">
+				<div class="medium-6">
+					<p class="color-on">
+						<b translate="deviceInDmz">This Device is in DMZ</b>
+					</p>
+				</div>
+			</div>
+
+			<div class="row" ng-if="!fields.status">
+				<div class="medium-6">
+					<p>
+						<b translate="noDeviceInDmz">No Device in DMZ</b>
+					</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="columns medium-2 end" ng-switch on="!fields.status || dmzDevice.ipAddress !== fields.selectedDevice">
+					<button id="dmzDeviceTip1" class="button tiny radius expand" type="button" translate="add" ng-switch-when="true" ng-click="addDevice()">Add</button>
+					<button id="dmzDeviceTip2" class="button tiny radius expand btn-cancel" type="button" translate="Remove" ng-switch-when="false" ng-click="removeDevice()">Remove</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide"><li translate="dmzDeviceTip1" data-tourtarget="#dmzDeviceTip1">
+    Here you can add or remove this device from DMZ. Please notice that only one device can be active in the DMZ.
+    
+  </li><li translate="dmzDeviceTip1" data-tourtarget="#dmzDeviceTip2">
+    Here you can add or remove this device from DMZ. Please notice that only one device can be active in the DMZ.
+    
+  </li></ul>

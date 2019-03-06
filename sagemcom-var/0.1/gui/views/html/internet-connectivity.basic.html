@@ -1,0 +1,23 @@
+<div class="tabs-content ng-hide" ng-show="true">
+	<div class="content">
+		<a class="shs" href="javascript:void(0)" translate="showSection">Show Sections</a>
+		<dl id="internetConnectiviyBasicTab" class="tabs sub-tabs" data-tab="" tab-click="">
+			<dd ng-if="mapEnable">
+				<a href="javascript:void(0)" click-loading="" ui-sref="user.internetConnectivity.basic.mapT">MAP-T</a>
+			</dd>
+			<dd class="active" check-feature-state="simpleIpv4">
+				<a href="javascript:void(0)" click-loading="" ui-sref="user.internetConnectivity.basic.ipv4" translate="menuIPv4">IPv4</a>
+			</dd>
+			
+			<dd check-feature-state="simpleIpv6">
+				<a href="javascript:void(0)" click-loading="" ui-sref="user.internetConnectivity.basic.simpleIpv6" translate="menuIPv6">IPv6</a>
+			</dd>
+			
+		</dl>
+
+		<div class="tabs-content internet-connectivity" ui-view="">
+
+		</div>
+	</div>
+</div>
+<script>$(document).foundation();</script>

@@ -1,0 +1,95 @@
+<div class="columns medium-12 ng-hide" ng-show="true">
+	<div class="row">
+		<div id="header-page">
+			<div class="columns medium-6">
+				<h3 translate="powerLineDevice">PowerLine Device</h3>
+			</div>
+			<div class="columns medium-6 text-right">
+				<div internet-connectivity></div>
+				<a id="homebtn" title="Home" class="icons-bg border-gray" click-loading ui-sref="user.home"> <img src="images/icon-home.png" alt="Home Icon"> </a>
+			</div>
+		</div>
+	</div>
+	<div messagebox></div>
+	<div id="main-content">
+		<div class="tabs-content">
+			<div class="content ng-hide" ng-show="true">
+				<form novalidate name="plcDeviceForm" autocomplete="off" check-unsaved>
+					<div class="content w100 active" id="device-information">
+						<h4 class="maintitle" translate="deviceinfo">Device Information</h4>
+
+						<div class="row">
+							<div class="columns large-12 medium-12 small-12">
+								<div class="row">
+									<div class="columns medium-2 small-4">
+										<label translate="statusStats">Status</label>
+									</div>
+
+									<div id="plcTip1" class="columns medium-4 small-8 end">
+										<p>
+											<b ng-bind="fields.status | translate" ng-class="fields.status === 'UP' ? 'color-on' : 'color-off'">&nbsp;</b>
+										</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="columns medium-2 small-4">
+										<label class="inline" translate="name">Name</label>
+									</div>
+
+									<div class="columns medium-4 small-8 end">
+										<input id="plcTip2" type="text" name="name" ng-model="fields.name" required maxlength="64" />
+										<small ng-show="plcDeviceForm.name.$error.required && submitted" class="error" translate="fieldRequired">This field cannot be blank.</small>
+									</div>
+								</div>
+								<div class="row">
+									<div class="columns medium-2 small-4">
+										<label translate="connectionTime">Connection Time</label>
+									</div>
+
+									<div id="plcTip3" class="columns medium-4 small-8 end">
+										<p>
+											<b ng-bind="fields.connectionTime">&nbsp;</b>
+										</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="columns medium-2 small-4">
+										<label translate="MACAddress">MAC Address</label>
+									</div>
+
+									<div id="plcTip4" class="columns medium-4 small-8 end">
+										<p>
+											<b ng-bind="fields.macAddress.length > 0 ? fields.macAddress : 'notAvailable' | translate">&nbsp;</b>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="right">
+							<button id="cancelButton" class="button tiny radius btn-cancel" click-loading ui-sref="{{previousMainPage}}" translate="cancel"></button>
+							<button id="applyButton" class="button tiny radius" ng-click="save()" translate="apply"></button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<!-- help button -->
+			<ul id="tlyPageGuide">
+				<li translate="plcTip1" data-tourtarget="#plcTip1">
+				</li>
+				<li translate="plcTip2" data-tourtarget="#plcTip2">
+				</li>
+				<li translate="plcTip3" data-tourtarget="#plcTip3">
+				</li>
+				<li translate="plcTip4" data-tourtarget="#plcTip4">
+				</li>
+				<li translate="cancelTip" data-tourtarget="#cancelButton">
+				</li>
+				<li translate="applyTip" data-tourtarget="#applyButton">
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<script>$(document).foundation();</script>

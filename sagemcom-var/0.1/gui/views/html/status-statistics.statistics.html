@@ -1,0 +1,413 @@
+<div class="owl-carousel" id="statistics" ng-controller="StatisticsController">
+	<div class="item">
+		<h5>LAN Layer 1</h5>
+		<table class="table-form responsive-table" id="lan-table">
+			<thead>
+				<tr class="header-table">
+					<th align="center" translate="interface">Interface</th>
+					<th colspan="4" align="center"  translate="received">Received</th>
+					<th colspan="4" align="center" class="header-table-bl" translate="sent">Sent</th>
+				</tr>
+				<tr>
+					<td align="center">&nbsp;</td>
+					<td translate="bytes">Bytes</td>
+					<td translate="packets">Packets</td>
+					<td translate="errors">Errors</td>
+					<td translate="drops">Drops</td>
+					<td translate="bytes">Bytes</td>
+					<td translate="packets">Packets</td>
+					<td translate="errors">Errors</td>
+					<td translate="drops">Drops</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td align="center" data-title="{{'interface'|translate}}"><b>eth1</b></td>
+					<td data-title="{{'bytesReceived'|translate}}" ng-bind="eth1.bytesreceived">&nbsp;</td>
+					<td data-title="{{'packetsReceived'|translate}}" ng-bind="eth1.packetsreceived">&nbsp;</td>
+					<td data-title="{{'errorsReceived'|translate}}" ng-bind="eth1.errorsreceived">&nbsp;</td>
+					<td data-title="{{'dropsReceived'|translate}}" ng-bind="eth1.discardpacketsreceived">&nbsp;</td>
+					<td data-title="{{'bytesSent'|translate}}" ng-bind="eth1.bytessent">&nbsp;</td>
+					<td data-title="{{'packetsSent'|translate}}" ng-bind="eth1.packetssent">&nbsp;</td>
+					<td data-title="{{'errorsSent'|translate}}" ng-bind="eth1.errorssent">&nbsp;</td>
+					<td data-title="{{'dropsSent'|translate}}" ng-bind="eth1.discardpacketssent">&nbsp;</td>
+				</tr>
+				<tr>
+					<td align="center" data-title="{{'interface'|translate}}"><b>eth2</b></td>
+					<td data-title="{{'bytesReceived'|translate}}" ng-bind="eth2.bytesreceived">&nbsp;</td>
+					<td data-title="{{'packetsReceived'|translate}}" ng-bind="eth2.packetsreceived">&nbsp;</td>
+					<td data-title="{{'errorsReceived'|translate}}" ng-bind="eth2.errorsreceived">&nbsp;</td>
+					<td data-title="{{'dropsReceived'|translate}}" ng-bind="eth2.discardpacketsreceived">&nbsp;</td>
+					<td data-title="{{'bytesSent'|translate}}" ng-bind="eth2.bytessent">&nbsp;</td>
+					<td data-title="{{'packetsSent'|translate}}" ng-bind="eth2.packetssent">&nbsp;</td>
+					<td data-title="{{'errorsSent'|translate}}" ng-bind="eth2.errorssent">&nbsp;</td>
+					<td data-title="{{'dropsSent'|translate}}" ng-bind="eth2.discardpacketssent">&nbsp;</td>
+				</tr>
+				<tr>
+					<td align="center" data-title="{{'interface'|translate}}"><b>eth3</b></td>
+					<td data-title="{{'bytesReceived'|translate}}" ng-bind="eth3.bytesreceived">&nbsp;</td>
+					<td data-title="{{'packetsReceived'|translate}}" ng-bind="eth3.packetsreceived">&nbsp;</td>
+					<td data-title="{{'errorsReceived'|translate}}" ng-bind="eth3.errorsreceived">&nbsp;</td>
+					<td data-title="{{'dropsReceived'|translate}}" ng-bind="eth3.discardpacketsreceived">&nbsp;</td>
+					<td data-title="{{'bytesSent'|translate}}" ng-bind="eth3.bytessent">&nbsp;</td>
+					<td data-title="{{'packetsSent'|translate}}" ng-bind="eth3.packetssent">&nbsp;</td>
+					<td data-title="{{'errorsSent'|translate}}" ng-bind="eth3.errorssent">&nbsp;</td>
+					<td data-title="{{'dropsSent'|translate}}" ng-bind="eth3.discardpacketssent">&nbsp;</td>
+				</tr>
+				<tr>
+					<td align="center" data-title="{{'interface'|translate}}"><b>eth4</b></td>
+					<td data-title="{{'bytesReceived'|translate}}" ng-bind="eth4.bytesreceived">&nbsp;</td>
+					<td data-title="{{'packetsReceived'|translate}}" ng-bind="eth4.packetsreceived">&nbsp;</td>
+					<td data-title="{{'errorsReceived'|translate}}" ng-bind="eth4.errorsreceived">&nbsp;</td>
+					<td data-title="{{'dropsReceived'|translate}}" ng-bind="eth4.discardpacketsreceived">&nbsp;</td>
+					<td data-title="{{'bytesSent'|translate}}" ng-bind="eth4.bytessent">&nbsp;</td>
+					<td data-title="{{'packetsSent'|translate}}" ng-bind="eth4.packetssent">&nbsp;</td>
+					<td data-title="{{'errorsSent'|translate}}" ng-bind="eth4.errorssent">&nbsp;</td>
+					<td data-title="{{'dropsSent'|translate}}" ng-bind="eth4.discardpacketssent">&nbsp;</td>
+				</tr>
+				<tr>
+					<td align="center" data-title="{{'interface'|translate}}"><b>wl0&nbsp;(2.4G)</b></td>
+					<td data-title="{{'bytesReceived'|translate}}" ng-bind="wl0.bytesreceived">&nbsp;</td>
+					<td data-title="{{'packetsReceived'|translate}}" ng-bind="wl0.packetsreceived">&nbsp;</td>
+					<td data-title="{{'errorsReceived'|translate}}" ng-bind="wl0.errorsreceived">&nbsp;</td>
+					<td data-title="{{'dropsReceived'|translate}}" ng-bind="wl0.discardpacketsreceived">&nbsp;</td>
+					<td data-title="{{'bytesSent'|translate}}" ng-bind="wl0.bytessent">&nbsp;</td>
+					<td data-title="{{'packetsSent'|translate}}" ng-bind="wl0.packetssent">&nbsp;</td>
+					<td data-title="{{'errorsSent'|translate}}" ng-bind="wl0.errorssent">&nbsp;</td>
+					<td data-title="{{'dropsSent'|translate}}" ng-bind="wl0.discardpacketssent">&nbsp;</td>
+				</tr>
+				<tr>
+					<td align="center" ddata-title="{{'interface'|translate}}"><b>wifi0&nbsp;(5G)</b></td>
+					<td data-title="{{'bytesReceived'|translate}}" ng-bind="wifi0.bytesreceived">&nbsp;</td>
+					<td data-title="{{'packetsReceived'|translate}}" ng-bind="wifi0.packetsreceived">&nbsp;</td>
+					<td data-title="{{'errorsReceived'|translate}}" ng-bind="wifi0.errorsreceived">&nbsp;</td>
+					<td data-title="{{'dropsReceived'|translate}}" ng-bind="wifi0.discardpacketsreceived">&nbsp;</td>
+					<td data-title="{{'bytesSent'|translate}}" ng-bind="wifi0.bytessent">&nbsp;</td>
+					<td data-title="{{'packetsSent'|translate}}" ng-bind="wifi0.packetssent">&nbsp;</td>
+					<td data-title="{{'errorsSent'|translate}}" ng-bind="wifi0.errorssent">&nbsp;</td>
+					<td data-title="{{'dropsSent'|translate}}" ng-bind="wifi0.discardpacketssent">&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="item">
+		<h5>WAN Layer 1 - xDSL</h5>
+		<table class="table-form table-vert" width="50%" id="xdsl-table-1">
+			<tbody>
+				<tr>
+					<th align="center"><b translate="statusStats">Status:</b></th>
+					<td><b ng-class="xdsl.status ==='UP' ? 'color-on' : 'color-off'" ng-bind="xdsl.status | lowercase | translate">&nbsp;</b></td>
+				</tr>
+				<tr>
+					<th align="center"><b translate="linkStatus">Link Status:</b></th>
+					<td ng-bind="xdsl.linkStatus | lowercase | translate">&nbsp;</td>
+				</tr>
+				<tr>
+					<th align="center" width="180"><b translate="standard">Standard:</b></th>
+					<td ng-bind="xdsl.standard">&nbsp;</td>
+				</tr>
+				<tr>
+					<th align="center"><b translate="lineEncoding">Line Encoding:</b></th>
+					<td ng-bind="xdsl.lineEncoding">&nbsp;</td>
+				</tr>
+				<tr>
+					<th align="center"><b translate="linkEncapsulation">Link Encapsulation:</b></th>
+					<td ng-bind="xdsl.linkEncapsulation">&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="table-form table-vert" width="50%" border="0" cellspacing="0" cellpadding="4" style="text-align:center;" id="xdsl-table-2">
+			<tbody>
+				<tr>
+					<th align="center" width="180"></th>
+					<td width="105" translate="downstream">Downstream</td>
+					<td width="105" translate="upstream">Upstream</td>
+				</tr>
+				<tr>
+					<th align="center"><b translate="actualRate">Actual Rate [Kbps]:</b></th>
+					<td ng-bind="xdsl.actualRateDown">&nbsp;</td>
+					<td ng-bind="xdsl.actualRateUp">&nbsp;</td>
+				</tr>
+				<tr>
+					<th align="center"><b translate="maximumRate">Maximum Rate [Kbps]:</b></th>
+					<td ng-bind="xdsl.maximumRateDown">&nbsp;</td>
+					<td ng-bind="xdsl.maximumRateUp">&nbsp;</td>
+				</tr>
+				<tr>
+					<th align="center"><b translate="noiseMargin">Noise Margin [dB]:</b></th>
+					<td ng-bind="xdsl.noiseMarginDown">&nbsp;</td>
+					<td ng-bind="xdsl.noiseMarginUp">&nbsp;</td>
+				</tr>
+				<tr>
+					<th align="center"><b translate="attenuation">Attenuation [dB]:</b></th>
+					<td ng-bind="xdsl.attenuationDown">&nbsp;</td>
+					<td ng-bind="xdsl.attenuationUp">&nbsp;</td>
+				</tr>
+				<tr>
+					<th align="center"><b translate="power">Power [dBm]:</b></th>
+					<td ng-bind="xdsl.powerDown">&nbsp;</td>
+					<td ng-bind="xdsl.powerUp">&nbsp;</td>
+				</tr>
+				<tr>
+					<th align="center"><b translate="packets">Packets:</b></th>
+					<td ng-bind="xdsl.packetsReceived">&nbsp;</td>
+					<td ng-bind="xdsl.packetsSent">&nbsp;</td>
+				</tr>
+				<tr>
+					<th align="center"><b translate="bytes">Bytes:</b></th>
+					<td ng-bind="xdsl.bytesReceived">&nbsp;</td>
+					<td ng-bind="xdsl.bytesSent">&nbsp;</td>
+				</tr>
+				<tr>
+					<th align="center"><b translate="lossOfFrames">Loss of Frames [s]:</b></th>
+					<td colspan="2" ng-bind="xdsl.lossOfFraming">&nbsp;</td>
+				</tr>
+				<tr>
+					<th align="center"><b translate="statFecError">FEC errors:</b></th>
+					<td colspan="2" ng-bind="xdsl.fecErrors">&nbsp;</td>
+				</tr>
+				<tr>
+					<th align="center"><b translate="crcErrors">CRC errors:</b></th>
+					<td colspan="2" ng-bind="xdsl.crcErrors">&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="item">
+		<h5>WAN Layer 1 - Ethernet</h5>
+		<table class="table-form table-vert" width="50%" id="ethernet-wan">
+			<tbody>
+				<tr>
+					<th width="180"><b translate="statusStats">Status:</b></th>
+					<td><b ng-class="wan.status ==='UP' ? 'color-on' : 'color-off'" ng-bind="wan.status | lowercase | translate">&nbsp;</b></td>
+				</tr>
+				<tr>
+					<th><b>Bitrate [Kbps]:</b></th>
+					<td>AUTO</td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="table-form table-vert" width="50%" border="0" cellspacing="0" cellpadding="4" style="text-align:center;">
+			<tbody>
+				<tr>
+					<th width="180"></th>
+					<td width="105" translate="received">Received</td>
+					<td width="105" translate="sent">Sent</td>
+				</tr>
+				<tr>
+					<th><b translate="packets">Packets:</b></th>
+					<td ng-bind="wan.packetsreceived">0</td>
+					<td ng-bind="wan.packetssent">0</td>
+				</tr>
+				<tr>
+					<th><b>Bytes:</b></th>
+					<td ng-bind="wan.bytesreceived">0</td>
+					<td ng-bind="wan.bytessent">0</td>
+				</tr>
+				<tr>
+					<th><b>Errors:</b></th>
+					<td ng-bind="wan.errorsreceived">0</td>
+					<td ng-bind="wan.errorssent">0</td>
+				</tr>
+				<tr>
+					<th><b>Drops:</b></th>
+					<td ng-bind="wan.discardpacketsreceived">0</td>
+					<td ng-bind="wan.discardpacketssent">0</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="item" ng-if="atm || ptm">
+		<h5>WAN Layer 2 - ATM / PTM</h5>
+		<table class="table-form table-form-large responsive-table" id="atm-ptm-table">
+			<thead>
+				<tr class="header-table">
+					<th align="center" translate="interface">Interface</th>
+					<th align="center" translate="description">Description</th>
+					<th class="header-table-bl" colspan="4" align="center" translate="received">Received</th>
+					<th class="header-table-bl" colspan="4" align="center" translate="sent">Sent</th>
+					<th class="header-table-bl" align="center">CRC</th>
+					<th class="header-table-bl" align="center">HEC</th>
+				</tr>
+				<tr>
+					<td align="center">&nbsp;</td>
+					<td>&nbsp;</td>
+					<td translate="bytes">Bytes</td>
+					<td translate="packets">Packets</td>
+					<td translate="errors">Errors</td>
+					<td translate="drops">Drops</td>
+					<td translate="bytes">Bytes</td>
+					<td translate="packets">Packets</td>
+					<td translate="errors">Errors</td>
+					<td translate="drops">Drops</td>
+					<td translate="errors">Errors</td>
+					<td translate="errors">Errors</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="link in atm">
+					<td align="center" data-title="{{'interface'|translate}}"><b ng-bind="link.alias">&nbsp;</b></td>
+					<td data-title="{{'description'|translate}}" ng-bind="link.ifcName">&nbsp;</td>
+					<td data-title="{{'bytesReceived'|translate}}" ng-bind="link.bytesreceived">&nbsp;</td>
+					<td data-title="{{'packetsReceived'|translate}}" ng-bind="link.packetsreceived">&nbsp;</td>
+					<td data-title="{{'errorsReceived'|translate}}" ng-bind="link.errorsreceived">&nbsp;</td>
+					<td data-title="{{'dropsReceived'|translate}}" ng-bind="link.discardpacketsreceived">&nbsp;</td>
+					<td data-title="{{'bytesSent'|translate}}" ng-bind="link.bytessent">&nbsp;</td>
+					<td data-title="{{'packetsSent'|translate}}" ng-bind="link.packetssent">&nbsp;</td>
+					<td data-title="{{'errorsSent'|translate}}" ng-bind="link.errorssent">&nbsp;</td>
+					<td data-title="{{'dropsSent'|translate}}" ng-bind="link.discardpacketssent">&nbsp;</td>
+					<td data-title="{{'crcErrors'|translate}}" ng-bind="link.crc?link.crc:'0'">&nbsp;</td>
+					<td data-title="{{'hecErrors'|translate}}" ng-bind="link.hec?link.hec:'0'">&nbsp;</td>
+				</tr>
+				<tr ng-repeat="link2 in ptm">
+					<td align="center" data-title="{{'interface'|translate}}"><b ng-bind="link2.alias">&nbsp;</b></td>
+					<td data-title="{{'description'|translate}}" ng-bind="link2.ifcName">&nbsp;</td>
+					<td data-title="{{'bytesReceived'|translate}}" ng-bind="link2.bytesreceived">&nbsp;</td>
+					<td data-title="{{'packetsReceived'|translate}}" ng-bind="link2.packetsreceived">&nbsp;</td>
+					<td data-title="{{'errorsReceived'|translate}}" ng-bind="link2.errorsreceived">&nbsp;</td>
+					<td data-title="{{'dropsReceived'|translate}}" ng-bind="link2.discardpacketsreceived">&nbsp;</td>
+					<td data-title="{{'bytesSent'|translate}}" ng-bind="link2.bytessent">&nbsp;</td>
+					<td data-title="{{'packetsSent'|translate}}" ng-bind="link2.packetssent">&nbsp;</td>
+					<td data-title="{{'errorsSent'|translate}}" ng-bind="link2.errorssent">&nbsp;</td>
+					<td data-title="{{'dropsSent'|translate}}" ng-bind="link2.discardpacketssent">&nbsp;</td>
+					<td data-title="{{'crcErrors'|translate}}" ng-bind="link.crc?link.crc:'0'">&nbsp;</td>
+					<td data-title="{{'hecErrors'|translate}}" ng-bind="link.hec?link.hec:'0'">&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="item">
+		<h5>WAN Layer 3</h5>
+		<table class="table-form responsive-table" id="wan-table">
+			<thead>
+				<tr class="header-table">
+					<th align="center" translate="interface">Interface</th>
+					<th align="center" translate="statusStats">Status</th>
+					<th align="center" translate="description">Description</th>
+					<th class="header-table-bl" colspan="4" align="center" translate="received">Received</th>
+					<th class="header-table-bl" colspan="4" align="center" translate="sent">Sent</th>
+				</tr>
+				<tr>
+					<td align="center">&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td translate="bytes">Bytes</td>
+					<td translate="packets">Packets</td>
+					<td translate="errors">Errors</td>
+					<td translate="drops">Drops</td>
+					<td translate="bytes">Bytes</td>
+					<td translate="packets">Packets</td>
+					<td translate="errors">Errors</td>
+					<td translate="drops">Drops</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="interface in ppp">
+					<td data-title="{{'interface' | translate}}" align="center"><b ng-bind="interface.alias">&nbsp;</b></td>
+					<td data-title="Status"><b ng-class="interface.status ==='UP' ? 'color-on' : 'color-off'" ng-bind="interface.status | lowercase | translate"></b></td>
+					<td data-title="{{'description'|translate}}" ng-bind="interface.ifcName">&nbsp;</td>
+					<td data-title="{{'bytesReceived'|translate}}" ng-bind="interface.bytesreceived">&nbsp;</td>
+					<td data-title="{{'packetsReceived'|translate}}" ng-bind="interface.packetsreceived">&nbsp;</td>
+					<td data-title="{{'errorsReceived'|translate}}" ng-bind="interface.errorsreceived">&nbsp;</td>
+					<td data-title="{{'dropsReceived'|translate}}" ng-bind="interface.discardpacketsreceived">&nbsp;</td>
+					<td data-title="{{'bytesSent'|translate}}" ng-bind="interface.bytessent">&nbsp;</td>
+					<td data-title="{{'packetsSent'|translate}}" ng-bind="interface.packetssent">&nbsp;</td>
+					<td data-title="{{'errorsSent'|translate}}" ng-bind="interface.errorssent">&nbsp;</td>
+					<td data-title="{{'dropsSent'|translate}}" ng-bind="interface.discardpacketssent">&nbsp;</td>
+				</tr>
+				<tr ng-repeat="wanStat in interfaceList">
+					<td data-title="{{'interface' | translate}}" align="center"><b ng-bind="wanStat.alias">&nbsp;</b></td>
+					<td data-title="Status"><b ng-class="wanStat.status ==='UP' ? 'color-on' : 'color-off'" ng-bind="wanStat.status | lowercase | translate"></b></td>
+					<td data-title="{{'description'|translate}}" ng-bind="wanStat.ifcName">&nbsp;</td>
+					<td data-title="{{'bytesReceived'|translate}}" ng-bind="wanStat.bytesreceived">&nbsp;</td>
+					<td data-title="{{'packetsReceived'|translate}}" ng-bind="wanStat.packetsreceived">&nbsp;</td>
+					<td data-title="{{'errorsReceived'|translate}}" ng-bind="wanStat.errorsreceived">&nbsp;</td>
+					<td data-title="{{'dropsReceived'|translate}}" ng-bind="wanStat.discardpacketsreceived">&nbsp;</td>
+					<td data-title="{{'bytesSent'|translate}}" ng-bind="wanStat.bytessent">&nbsp;</td>
+					<td data-title="{{'packetsSent'|translate}}" ng-bind="wanStat.packetssent">&nbsp;</td>
+					<td data-title="{{'errorsSent'|translate}}" ng-bind="wanStat.errorssent">&nbsp;</td>
+					<td data-title="{{'dropsSent'|translate}}" ng-bind="wanStat.discardpacketssent">&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div ng-if="!!sfp">
+		<div class="item">
+			<h5>SFP</h5>
+			<table class="table-form table-form-large responsive-table" id="sfpTable">
+				<thead>
+					<tr class="header-table">
+						<th align="center" translate="statusStats">Status</th>
+						<th class="header-table-bl" colspan="4" align="center" translate="received">Received</th>
+						<th class="header-table-bl" colspan="4" align="center" translate="sent">Sent</th>
+					</tr>
+					<tr>
+						<td align="center">&nbsp;</td>
+						<td translate="bytes">Bytes</td>
+						<td translate="packets">Packets</td>
+						<td translate="errors">Errors</td>
+						<td translate="drops">Drops</td>
+						<td translate="bytes">Bytes</td>
+						<td translate="packets">Packets</td>
+						<td translate="errors">Errors</td>
+						<td translate="drops">Drops</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td data-title="Status"><b ng-class="sfp.Status == 'UP' ? 'color-on' : 'color-off'" ng-bind="sfp.Status"></b></td>
+						<td data-title="{{'bytesReceived'|translate}}" ng-bind="sfp.BytesReceived">&nbsp;</td>
+						<td data-title="{{'packetsReceived'|translate}}" ng-bind="sfp.PacketsReceived">&nbsp;</td>
+						<td data-title="{{'errorsReceived'|translate}}" ng-bind="sfp.ErrorsReceived">&nbsp;</td>
+						<td data-title="{{'dropsReceived'|translate}}" ng-bind="sfp.DiscardPacketsReceived">&nbsp;</td>
+						<td data-title="{{'bytesSent'|translate}}" ng-bind="sfp.BytesSent">&nbsp;</td>
+						<td data-title="{{'packetsSent'|translate}}" ng-bind="sfp.PacketsSent">&nbsp;</td>
+						<td data-title="{{'errorsSent'|translate}}" ng-bind="sfp.ErrorsSent">&nbsp;</td>
+						<td data-title="{{'dropsSent'|translate}}" ng-bind="sfp.DiscardPacketsSent">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<script>
+	$(function() {
+		var carouselOptions = {
+			margin : 10,
+			autoHeight : true,
+			items : 1,
+			singleItem : true
+		};
+
+		var adjustHeights = function() {
+			var letop = $($('.item')[0]).offset().top, leheight;
+			$('.item').css('height', 'auto');
+			for (var x = 0; x < $('.item').length; x++) {
+				leheight = $($('.item')[x]).height();
+				if (letop + leheight < $(window).height() - 60) {
+					$($('.item')[x]).css("height", $(window).height() - letop - $('.owl-controls').height() + "px");
+				}
+			}
+			$('.owl-stage-outer').height('auto');
+		};
+
+		$('#statistics').off('refreshStatistics').on('refreshStatistics', function() {
+			setTimeout(function() {
+				adjustHeights();
+				$("#statistics").trigger('destroy.owl.carousel').owlCarousel(carouselOptions);
+			}, 1000);
+		}).trigger('refreshStatistics');
+
+		var lastHeight = $(window).height();
+		$(window).resize(function() {
+			if (lastHeight !== $(window).height()) {
+				lastHeight = $(window).height();
+				$('#statistics').trigger('refreshStatistics');
+			}
+		});
+	});
+</script>

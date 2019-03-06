@@ -1,0 +1,21 @@
+\<div class="content ng-hide" ng-show="true" id="maintenance-sbox">
+	<a class="shs" href="javascript:void(0)" translate="showSubSection">Show Subsection</a>
+	<dl id="maintenanceTab" class="tabs vertical" ng-class="changeToVertical ? 'vertical' : ''" data-tab tab-click>
+		<dd class="active">
+			<a href="javascript:void(0)" click-loading ui-sref="user.mysagemcombox.maintenance.reset" translate="resets">Resets</a>
+		</dd>
+		<dd>
+			<a href="javascript:void(0)" click-loading ui-sref="user.mysagemcombox.maintenance.filteredUtilities({tool:'Ping'})">Ping</a>
+		</dd>
+		<dd>
+			<a href="javascript:void(0)" click-loading ui-sref="user.mysagemcombox.maintenance.filteredUtilities({tool:'Traceroute'})">Traceroute</a>
+		</dd>
+		<dd>
+			<a href="javascript:void(0)" click-loading ui-sref="user.mysagemcombox.maintenance.filteredUtilities({tool:'DNS Query'})">DNS Query</a>
+		</dd>
+	</dl>
+
+	<div class="tabs-content" ng-class="{ 'vertical' : !horizontalTabs }" >
+		<div class="content active" ui-view></div>
+	</div>
+</div>

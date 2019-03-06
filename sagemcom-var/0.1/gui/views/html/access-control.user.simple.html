@@ -1,0 +1,108 @@
+<div class="anim">
+	<div id="page-content" class="row">
+		<div class="columns small-12">
+			<div class="row">
+				<div id="header-page">
+					<div class="columns medium-6 small-12">
+						<h2 translate="userSettings">User Settings</h2>
+					</div>
+					<div class="columns medium-6 small-12 text-center fullConnectivity">
+						<div internet-connectivity></div>
+						<a id="homebtn" title="Home" click-loading ui-sref="user.home" class="icons-bg border-gray"> <img src="images/icon-home.png" alt="Home Icon"> </a>
+					</div>
+
+					<div class="columns medium-6 small-12 text-right simpleConnectivity">
+						<a href="javascript:void(0)" id="status-internet" ng-class="connectivity.status ? 'is_connected' : 'is_disconnected'">
+						<svg title="Internet: connected" class="icon">
+							<use xlink:href="images/sprite.svg?new#icon-wifi"/>
+						</svg> <span translate="internetConnectivityOn" ng-show="connectivity.status" class="ng-hide"></span> <span translate="internetConnectivityOff"  ng-hide="connectivity.status" class="ng-hide"></span> </a>
+					</div>
+				</div>
+			</div>
+			<div messagebox></div>
+			<div id="main-content">
+			<div wait-loading></div>
+			<div class="tabs-content" ng-show="!loading">
+			  <form name="accessControlUser" autocomplete="off" check-unsaved>
+			    <div class="row">
+			      <div class="columns small-12">
+			        <div class="row">
+			          <div class="columns medium-2 small-4">
+			            <label class="inline" translate="currentUser">Current User</label>
+			          </div>
+			          <div class="columns medium-4 small-8 end">
+			            <label id="accessControlUserTip2" class="inline"  ng-bind="user.userNameSelected">&nbsp;</label>
+			          </div>
+			        </div>
+			        <div class="row">
+			          <div class="columns medium-2 small-4">
+			            <label class="inline" translate="oldPassword">Old Password</label>
+			          </div>
+			          <div class="columns medium-4 small-8 end">
+			            <input id="accessControlUserTip4" type="{{showPasswordsText ? 'text' : 'password'}}" name="oldPassword" ng-model="user.oldPassword" maxlength="64" />
+			            <small ng-if="(accessControlUser.oldPassword.$dirty || submitted) && accessControlUser.oldPassword.$error.required" class="error" translate="fieldRequired">&nbsp;</small>
+			          </div>
+			        </div>
+			        <div class="row">
+			          <div class="columns medium-2 small-4">
+			            <label class="inline" translate="password">Password</label>
+			          </div>
+			          <div class="columns medium-4 small-8 end">
+			            <input id="accessControlUserTip5" type="{{showPasswordsText ? 'text' : 'password'}}" name="password" ng-model="user.password" maxlength="64"  min-requirement/>
+			            <small ng-if="(accessControlUser.password.$dirty || submitted) && accessControlUser.password.$error.required" class="error" translate="fieldRequired">&nbsp;</small>
+			            <small ng-if="(accessControlUser.password.$dirty || submitted) && accessControlUser.password.$error.minRequirement" class="error" translate="userPasswordMinReq">&nbsp;</small>
+			          </div>
+			        </div>
+			        <div class="row">
+			          <div class="columns medium-2 small-4">
+			            <label class="inline" translate="confirmPassword">Confirm Password</label>
+			          </div>
+			          <div class="columns medium-4 small-8 end">
+			            <input id="accessControlUserTip6" type="{{showPasswordsText ? 'text' : 'password'}}" name="confirmPassword" ng-model="user.confirmPassword" maxlength="64" validate-password-fields/>
+			            <small class="error" ng-show="(accessControlUser.confirmPassword.$dirty || submitted) && accessControlUser.confirmPassword.$error.passwordVerify" translate="passwordDoesntMatch">&nbsp;</small>
+			          </div>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="right">
+			      <button id="cancelTip" class="button tiny radius btn-cancel" click-loading ui-sref="user.home" translate="cancel"></button>
+			      <button id="applyTip" class="button tiny radius" type="submit" ng-hide="update" translate="apply" ng-click="changePassword()"></button>
+			    </div>
+			  </form>
+			</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = false;
+	$(document).foundation();
+</script>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li translate="accessControlUserTip1" data-tourtarget="#accessControlUserTip1">
+	</li>
+	<li translate="accessControlUserTip2" data-tourtarget="#accessControlUserTip2">
+	</li>
+	<li translate="accessControlUserTip3" data-tourtarget="#accessControlUserTip3">
+	</li>
+	<li translate="accessControlUserTip4" data-tourtarget="#accessControlUserTip4">
+	</li>
+	<li translate="accessControlUserTip5" data-tourtarget="#accessControlUserTip5">
+	</li>
+	<li translate="accessControlUserTip6" data-tourtarget="#accessControlUserTip6">
+	</li>
+	<li translate="addTip" data-tourtarget="#addTip">
+	</li>
+	<li translate="clearTip" data-tourtarget="#clearTip">
+	</li>
+	<li translate="updateTip" data-tourtarget="#updateTip">
+	</li>
+	<li translate="cancelSimpleTip" data-tourtarget="#cancelSimpleTip">
+	</li>
+	<li translate="tableUsersTip" data-tourtarget="#tableUsersTip">
+	</li>
+</ul>

@@ -1,0 +1,23 @@
+<div class="content ng-hide" ng-show="true" id="upnp-sbox" ng-controller="UPnPController">
+	<h4>UPnP</h4>
+	<!-- p>NOTE: UPnP is activated only when there is a WAN service with NET enabled.</p -->
+	<div class="row">
+		<div class="columns medium-3 small-4">
+			<label class="inline" for="upnp" translate="enableUPnP">Enable UPnP</label>
+		</div>
+		<form autocomplete="off">
+			<div class="columns medium-2 small-3 end">
+				<div class="onoffswitch" id="upnpTip1">
+					<input id="upnp" name="onoffswitch" class="onoffswitch-checkbox" type="checkbox" ng-model="upnpStatus" ng-change="changeStatus()"/>
+					<label class="onoffswitch-label" for="upnp"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+  <li translate="upnpTip1" data-tourtarget="#upnpTip1">
+  </li>
+</ul>

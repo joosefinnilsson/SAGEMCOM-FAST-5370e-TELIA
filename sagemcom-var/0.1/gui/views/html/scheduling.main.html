@@ -1,0 +1,6 @@
+<div ng-if="scheduleType == 'wifiBothBands' && !mainPage" ng-include="'views/wifi.main.dual.html'"></div>
+<div ng-if="scheduleType == 'wifiBothBands' && mainPage === 'accessControl'" ng-include="'views/access-control.main.html'"></div>
+<div ng-if="scheduleType == '2.4GHz'" ng-include="'views/wifi.main.html'"></div>
+<div ng-if="scheduleType == '5GHz'" ng-include="'views/wifi.main.html'"></div>
+<div ng-if="scheduleType == 'dect'" ng-include="'views/dect.main.html'"></div>
+<div ng-if="scheduleType == 'leds'" ng-include="'views/mysagemcombox.led.html'"></div>

@@ -1,0 +1,15 @@
+<div class="content ng-hide" ng-show="true" id="maintenance-log">
+	<dl id="maintenanceLogTab" ng-show="logTabsEnabled > 1" class="tabs" ng-class="{ 'sub-tabs' : horizontalTabs }" data-tab="" tab-click="">
+		<dd class="active" check-feature-state="systemLog">
+			<a click-loading="" ui-sref="user.mysagemcombox.maintenance.log.systemlog" translate="systemLog"></a>
+		</dd>
+		
+		
+		
+	</dl>
+	
+	<div class="tabs-content">
+		<div class="content" ui-view=""></div>
+	</div>
+</div>
+<script>$(document).foundation();</script>

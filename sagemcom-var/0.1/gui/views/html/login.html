@@ -1,0 +1,207 @@
+<script>
+	$(document).ready(function() {
+		//removing everything not related to login
+		$('link[rel=stylesheet]').not('[href^="styles/login"]').not('[href="styles/lib.css"]').prop('disabled', false).prop('disabled', true);
+	});
+</script>
+<div>
+	<div class="form-main">
+		
+		<div id="form-div">
+			<form id="form-login" ng-submit="loginAsync()" role="form" class="form" ng-show="!showReset">
+				<!-- do not remove, this is a trick to avoid autocomplete of fields -->
+				<input type="password" class="ng-hide" title="">
+				<!-- do not remove, this is a trick to avoid autocomplete of fields -->
+				<div style="margin: 0 auto;text-align:center;">
+					<div class="sprite brandlogin" check-feature-state="logo">
+						&nbsp;
+					</div>
+					
+					
+					
+				</div>
+				<div ng-show="failLogin" class="box-error">
+					<img id="alert_login" src="images/alert.png" class="img-error">
+					<label translate="wrongLoginInformation">Wrong login information</label>
+				</div>
+				<div ng-show="operationTimeout" class="box-error msg-error-time-out">
+					<img id="alert_timeout" src="images/alert.png" class="img-error">
+					<label translate="operationTimeout">Communication error with the gateway</label>
+				</div>
+				<p check-feature-state="showUserLogin" class="name">
+					<input type="text" class="feedback-input" ng-class="{'input-error': failLogin}" placeholder="{{'user' | translate}}" id="name" ng-model="username" ng-focus="failLogin = false" ng-disabled="staticLogin" autocomplete="new-login">
+				</p>
+				<p class="password">
+					<input type="password" class="feedback-input" ng-class="{'input-error': failLogin}" placeholder="{{'password' | translate}}" id="password" ng-model="password" ng-focus="failLogin = false" autocomplete="new-password" ng-trim="false">
+				</p>
+				<div class="submit">
+					<button ng-show="!logging" type="submit" value="LOGIN" id="button-blue" translate="login">
+						Login
+					</button>
+					<button ng-show="logging" type="button" id="button-grayed" translate="pleaseWaitLoading">
+						Please wait
+					</button>
+				</div>
+				<div check-feature-state="mobileLinks" ng-if="appleStoreLink || googlePlayLink" style="text-align:center" class="hideOnPortrait mobileDescription">
+					<span translate="downloadApps">Download our app for smartphones and tablets</span>
+				</div>
+				
+				<a ng-if="appleStoreLink" check-feature-state="mobileLinks" href="{{appleStoreLink ? appleStoreLink : 'ios/Swan.ipa'}}" class="hideOnPortrait"><img class="appleStoreLeft" border="0" src="images/logoappstore.png"></a>
+				<a ng-if="googlePlayLink" check-feature-state="mobileLinks" href="{{googlePlayLink}}" class="hideOnPortrait"><img class="googlePlayRight" border="0" src="images/logogplay.png"></a>
+			</form>
+
+			
+
+			
+
+			
+			
+
+			
+
+		</div>
+	</div>
+	<div id="login-logo-centered" ng-if="hasCenteredLogo">
+	</div>
+	<div class=""></div>
+	<!-- start slideshow -->
+	<div ng-class="{'no-slideshow' : !hasSlideShowTitle , 'slideshow' : hasSlideShowTitle}">
+		<div>
+			<span>&nbsp;</span>
+			<div class="title" check-feature-state="slideShowTitleLogin">
+				<h3><label translate="loginSlide1part1">Share multimedia content:</label>
+				<p translate="loginSlide1part2">
+					DLNA Server, My Cloud
+				</p></h3>
+			</div>
+		</div>
+		<div>
+			<span>&nbsp;</span>
+			<div class="title" check-feature-state="slideShowTitleLogin">
+				<h3><label translate="loginSlide2part1">Connect everywhere with Wifi 5G:</label>
+				<p translate="loginSlide2part2">
+					Up to 1.3Gbps
+				</p></h3>
+			</div>
+		</div>
+		<div>
+			<span>&nbsp;</span>
+			<div class="title" check-feature-state="slideShowTitleLogin">
+				<h3><label translate="loginSlide3part1">Easy-to-use features:</label>
+				<p translate="loginSlide3part2">
+					Parental control, Traffic monitoring
+				</p></h3>
+			</div>
+		</div>
+	</div>
+	<!-- end slideshow -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+	var globalDirection;
+	$(document).off('changeDirection').on('changeDirection', function(e, direction) {
+		globalDirection = direction;
+    $('body').css('direction', 'ltr');
+    $('link[rel=stylesheet][href="styles/login.css"]').prop('disabled', false);
+	});
+	$('body').hide();
+	var cbLoadDirection = function() {
+		globalDirection = globalDirection || 'ltr';
+		$(document).trigger('changeDirection', [globalDirection]);
+		$('body').show();
+	};
+	$.RemoteStyleSheet.load($.config.cssLogin, function() {
+    cbLoadDirection();
+	}, cbLoadDirection);
+	//last chance on black login
+	setTimeout(function() {
+		$('body').show();
+	}, 3000);
+	$(document).on('activeFocus', function() {
+		if ($('#name').prop("disabled")) {
+			$('#password').focus();
+		} else {
+			$('#name').focus();
+		}
+	});
+</script>
+<script>
+	$(function() {
+		var isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+
+		if(isFirefox || $('.no-cssanimations').length) {
+			$('.slideshow div span, .slideshow div div').css("animation", "none");
+
+			$('.slideshow > div:gt(0)').css('opacity', '1').hide();
+			$('.slideshow div, .slideshow > div span').css('opacity', '1');
+			var i = 0;
+			var slideShowIdInterval = setInterval(function() {
+				if (!$('.slideshow').length) {
+					clearInterval(slideShowIdInterval);
+				} else {
+					$('.slideshow > div:eq(' + (i % 3) + ')').fadeOut(1000);
+
+					i++;
+					if (i >= $('.slideshow > div').length) {
+						i = 0;
+					}
+
+					$('.slideshow > div:eq(' + (i % 3) + ')').fadeIn(3000);
+				}
+			}, 6000);
+		}
+	});
+	$(function() {
+		var availableTags = ["User"];
+		$("#user").autocomplete({
+			source : availableTags
+		});
+	});
+</script>

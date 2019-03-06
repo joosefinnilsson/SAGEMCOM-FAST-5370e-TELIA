@@ -1,0 +1,142 @@
+<div class="columns medium-12">
+	<div class="row">
+		<div id="header-page">
+			<div class="columns custom-menu-title-size medium-6">
+				<h3>Ethernet</h3>
+			</div>
+
+			<div class="columns custom-menu-itens-size-pages medium-6 text-right header-controls">
+				<span ng-if="reverseHeaderControls">
+					<a id="homebtn" title="Home" class="icons-bg border-gray" click-loading="" ui-sref="user.home"> <img src="images/icon-home.png" alt="Home Icon"> </a>
+					<span class="refresh-button">
+						<a id="refreshContent" class="btn-refresh" ng-click="refreshContent()">
+			                <img src="images/refresh.png">
+							<span translate="refresh">Refresh</span>
+			            </a>
+					</span>
+					
+					<div internet-connectivity=""></div>
+				</span>
+				<span ng-if="!reverseHeaderControls">
+					<div internet-connectivity=""></div>
+					<extended-menu ng-if="extendedMenus"></extended-menu>
+					
+					<a ng-if="!extendedMenus" id="homebtn" title="Home" class="icons-bg border-gray" click-loading="" ui-sref="user.home"> <img src="images/icon-home.png" alt="Home Icon"> </a>
+				</span>
+			</div>
+
+		</div>
+	</div>
+	<div messagebox=""></div>
+	<div id="main-content">
+		<div wait-loading=""></div>
+		<div class="row ethernet" ng-show="!loading">
+			<div class="columns large-{{12/listPorts.length}} medium-{{12/listPorts.length}} small-12" ng-repeat="port in listPorts">
+				<div class="bordered-column">
+					<div class="bordered-title">
+						<h5><strong translate="port">Port</strong>&nbsp;<strong>{{$index + 1}}</strong></h5>
+					</div>
+
+					<div class="bordered-content">
+						<div id="ethernetTip1col{{$index + 1}}" class="status" ng-class="port.status == 'UP' ? 'status-connected' : 'status-standby'">
+							<span translate="statusSemicolon">Status:</span> <span ng-bind="port.status | lowercase | translate"></span>
+						</div>
+
+						<div class="link-speed">
+							<strong translate="linkSpeed">Link speed:</strong> {{port.connectionSpeed}}
+							
+							
+						</div>
+						<p check-feature-state="currentBitRate">
+						    <span translate="currentBitRate">CurrentBitRate</span> / <strong ng-bind="port.currentBitRate"></strong>
+						</p>
+						<p>
+							<span translate="sent">Sent</span> / <strong translate="received">Received</strong>
+						</p>
+
+						<label translate="packets">Packets</label>
+						<p>
+							<span ng-bind="port.packetssent"></span> / <strong ng-bind="port.packetsreceived"></strong>
+						</p>
+
+						<div ng-class="port.status == 'UP' ? '' : 'ng-hide'" ng-show="port.show">
+							<label>Bytes</label>
+							<p>
+								<span ng-bind="port.bytessent"></span> / <strong ng-bind="port.bytesreceived"></strong>
+							</p>
+
+							<label translate="errors">Errors</label>
+							<p>
+								<span ng-bind="port.errorssent"></span> / <strong ng-bind="port.errorsreceived"></strong>
+							</p>
+
+							<label translate="discardedPacket">Discarded Pkt</label>
+							<p>
+								<span ng-bind="port.discardpacketssent"></span> / <strong ng-bind="port.discardpacketsreceived"></strong>
+							</p>
+
+							<label translate="unicastPacket">Unicast Pkt</label>
+							<p>
+								<span ng-bind="port.unicastpacketssent"></span> / <strong ng-bind="port.unicastpacketsreceived"></strong>
+							</p>
+
+							<label translate="multcastPacket">Multicast Pkt</label>
+							<p>
+								<span ng-bind="port.multicastpacketssent"></span> / <strong ng-bind="port.multicastpacketsreceived"></strong>
+							</p>
+
+							<label translate="broadcastPacket">Broadcast Pkt</label>
+							<p>
+								<span ng-bind="port.broadcastpacketssent"></span> / <strong ng-bind="port.broadcastpacketsreceived"></strong>
+							</p>
+
+							<a style="display: none" id="ethernetTip3col{{$index + 1}}" class="btn btn-centered" translate="resetCounters">Reset Counters</a>
+						</div>
+					</div>
+
+					<a id="ethernetTip4col{{$index + 1}}" class="button tiny radius btn-show btn-cancel" ng-click="toggleElement(port)" ng-show="port.show" translate="hide">Hide</a>
+					<a id="ethernetTip2col{{$index + 1}}" class="button tiny radius btn-show" ng-click="toggleElement(port)" ng-hide="port.show" translate="showMore">Show More</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+  <li translate="ethernetTip1" data-tourtarget="#ethernetTip1col1">
+  </li>
+  <li translate="ethernetTip2" data-tourtarget="#ethernetTip2col1">
+  </li>
+  <li translate="ethernetTip4" data-tourtarget="#ethernetTip4col1">
+  </li>
+
+  <li translate="ethernetTip1" data-tourtarget="#ethernetTip1col2">
+  </li>
+  <li translate="ethernetTip2" data-tourtarget="#ethernetTip2col2">
+  </li>
+  <li translate="ethernetTip4" data-tourtarget="#ethernetTip4col2">
+  </li>
+
+  <li translate="ethernetTip1" data-tourtarget="#ethernetTip1col3">
+  </li>
+  <li translate="ethernetTip2" data-tourtarget="#ethernetTip2col3">
+  </li>
+  <li translate="ethernetTip4" data-tourtarget="#ethernetTip4col3">
+  </li>
+
+  <li translate="ethernetTip1" data-tourtarget="#ethernetTip1col4">
+  </li>
+  <li translate="ethernetTip2" data-tourtarget="#ethernetTip2col4">
+  </li>
+  <li translate="ethernetTip4" data-tourtarget="#ethernetTip4col4">
+  </li>
+</ul>
+<!-- auto open the ethernet 1 if its closed -->
+<script>
+	$('#helpButton').on('mousedown', function() {
+		if ($('#ethernetTip5col1').is(':visible')) {
+			$('#ethernetTip5col1').click();
+		}
+	});
+</script>

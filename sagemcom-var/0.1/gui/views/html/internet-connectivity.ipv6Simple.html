@@ -1,0 +1,151 @@
+<div>
+	<div wait-loading=""></div>
+	<div class="content w100 ng-hide" ng-show="!loading" id="ipv6">
+		<fieldset ng-disabled="readOnly" ng-class="readOnly ? 'read-only' : ''">
+			<form name="formIpv6" ng-submit="save()" autocomplete="off" novalidate="" check-unsaved="">
+				<h4 class="maintitle">IPv6</h4>
+				<div ng-if="hasIPv6ExtraFeature">
+					<div class="row hideConnectionType" ng-if="hideFieldsInBrigdeMode">
+						<div class="columns medium-3 small-4">
+							<label class="inline" translate="connectionType">Connection Type</label>
+						</div>
+
+						<div class="columns medium-4 small-8 end">
+							<label class="inline" ng-bind="ipv6Info.connectionType"></label>
+							<div>
+								<label id="connection-type-options" ng-model="data.connectionType">
+							</label></div>
+						</div>
+					</div>
+
+					
+				</div>
+				<div ng-if="!hideFieldsInBrigdeMode">
+					<div class="row">
+						<div class="columns medium-3 small-4">
+							<label class="inline" translate="enableIpv6">Enable</label>
+						</div>
+
+						<div class="columns medium-4 small-8 end">
+							<div class="onoffswitch" id="checkEnable" ng-show="!ipv6SimpleReadOnly">
+								<input class="onoffswitch-checkbox" id="ipv6Enable" type="checkbox" name="ipv6Enable" ng-model="ipv6Info.enable" ng-change="saveIpv6enable()" ng-disabled="ipv6SimpleReadOnly || !editIPv6Simple">
+								<label class="onoffswitch-label" for="ipv6Enable"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+							</div>
+							<div class="ipv6SimpleReadOnly">
+								<span ng-show="ipv6SimpleReadOnly" ng-bind="ipv6Info.enable? 'ON':'OFF'"> </span>
+							</div>
+						</div>
+					</div>
+					<div class="row" ng-show="hasIpv6StatusField">
+						<div class="columns medium-3 small-4">
+							<label class="inline" translate="sStatus">Status</label>
+						</div>
+
+						<div class="columns medium-4 small-8 end">
+							<label ng-model="ipv6Info.status" ng-class="ipv6Info.status ==='UP' ? 'color-on' : 'color-off'" class="inline">{{ipv6Info.status}}</label>
+						</div>
+					</div>
+					
+					<div>
+						<div class="row">
+							<div class="columns medium-3 small-4">
+								<label class="inline" translate="delegatedPrefix">Delegated Prefix</label>
+							</div>
+							<div class="columns medium-4 small-8 end">
+								<input type="text" disabled ng-model="ipv6Info.delegatedprefix" id="ipv6Prefix">
+							</div>
+						</div>
+						<div class="row">
+							<div class="columns medium-3 small-4">
+								<label class="inline" translate="lanIPv6Address">LAN IPv6 Address</label>
+							</div>
+							<div class="columns medium-4 small-8 end">
+								<input type="text" disabled ng-model="ipv6Info.lanIPv6" id="ipv6Lan">
+							</div>
+						</div>
+						<div class="row">
+							<div class="columns medium-3 small-4">
+								<label class="inline" translate="wanIPv6Address">Wan IPv6 Address</label>
+							</div>
+
+							<div class="columns medium-4 small-8 end">
+								<input type="text" disabled ng-model="ipv6Info.wanIPv6" id="ipv6Wan">
+							</div>
+						</div>
+						<div class="row" ng-show="hasIpv6ValidLifetimeField">
+							<div class="columns medium-3 small-4">
+								<label class="inline" translate="validLifeTime">Valid Life Time</label>
+							</div>
+
+							<div class="columns medium-4 small-8 end">
+								<label hour-format="{{ipv6Info.validLifeTime}}" id="ipv6lifeTime"></label>
+							</div>
+						</div>
+
+						<div class="row" check-feature-state="dnsIPv6">
+							<div class="columns medium-3 small-4">
+								<label class="inline">DNS</label>
+							</div>
+
+							<div class="columns medium-4 small-8 end">
+								<select id="dnsType" ng-model="ipv6Info.dnsType" ng-disabled="ipv6SimpleReadOnly || !editIPv6Simple" ng-change="onChangeDnsType()">
+									<option value="DHCP" translate="obtainDns"></option>
+									<option value="STATIC" translate="manualDns"></option>
+								</select>
+							</div>
+						</div>
+						<div class="row" check-feature-state="firstIPv6DNS">
+							<div class="columns medium-3 small-4">
+								<label class="inline" translate="firstIPv6DNS">First IPv6 DNS Server</label>
+							</div>
+
+							<div class="columns medium-4 small-8 end">
+								<input ng-if="ipv6Info.dnsType === 'STATIC'" id="ipv6DNS1" type="text" name="dns1" ng-disabled="ipv6Info.dnsType !== 'STATIC' || !editIPv6Simple" ng-model="ipv6Info.dns1" validate-ipv6="" ng-required="ipv6Info.dnsType === 'STATIC'">
+								<input ng-if="ipv6Info.dnsType !== 'STATIC'" id="ipv6DNS1" type="text" ng-disabled="true" ng-model="ipv6Info.dns1Dhcp">
+								<small class="error" ng-show="(formIpv6.dns1.$invalid && formIpv6.dns1.$dirty && ipv6Info.dnsType === 'STATIC'  || formIpv6.dns1.$error.required) && submitted" translate="invalidIpAddress">Invalid IP Address</small>
+							</div>
+						</div>
+						<div class="row" check-feature-state="secondIPv6DNS">
+							<div class="columns medium-3 small-4">
+								<label class="inline" translate="secondIPv6DNS">Second IPv6 DNS Server</label>
+							</div>
+
+							<div class="columns medium-4 small-8 end">
+								<input ng-if="ipv6Info.dnsType === 'STATIC'" id="ipv6DNS2" type="text" name="dns2" validate-ipv6="" allow-empty="true" ng-disabled="ipv6Info.dnsType !== 'STATIC' || ipv6SimpleReadOnly || !editIPv6Simple" ng-model="ipv6Info.dns2">
+								<input ng-if="ipv6Info.dnsType !== 'STATIC'" id="ipv6DNS2" type="text" ng-disabled="true" ng-model="ipv6Info.dns2Dhcp">
+								<small class="error" ng-show="(formIpv6.dns2.$invalid && formIpv6.dns2.$dirty && !!formIpv6.dns2 && ipv6Info.dnsType === 'STATIC') && submitted" translate="invalidIpAddress">Invalid IP Address</small>
+							</div>
+						</div>
+						
+						
+						
+						
+						
+						
+					</div>
+				</div>
+
+				<div class="right" ng-if="!ipv6SimpleReadOnly && editIPv6Simple">
+					<button class="button tiny radius" type="button" translate="cancel" click-loading="" ui-sref="user.home">
+						&nbsp;
+					</button>
+					<button class="button tiny radius" type="submit" translate="apply">
+						&nbsp;
+					</button>
+				</div>
+			</form>
+		</fieldset>
+	</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li translate="ipv6Enable" data-tourtarget="#checkEnable"></li>
+	<li translate="ipv6EnableFirewallTip" data-tourtarget="#checkipv6EnableFirewall"></li>
+	<li translate="ipv6Prefix" data-tourtarget="#ipv6Prefix"></li>
+	<li translate="ipv6Lan" data-tourtarget="#ipv6Lan"></li>
+	<li translate="ipv6Wan" data-tourtarget="#ipv6Wan"></li>
+	<li translate="dnsType" data-tourtarget="#dnsType"></li>
+	<li translate="ipv6DNS1" data-tourtarget="#ipv6DNS1"></li>
+	<li translate="ipv6DNS2" data-tourtarget="#ipv6DNS2"></li>
+</ul>

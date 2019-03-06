@@ -1,0 +1,16 @@
+<div class="divSection subMenuMobile">
+	<div class="scrollDiv">
+		<dl class="tabs" data-tab>
+			<dd class="active">
+				<a class="itemsDiv" click-loading  ui-sref="user.maintenance.reset" ui-sref-opts="{location: 'replace'}" translate="resets">Resets</a>
+			</dd>
+			<dd>
+				<a class="itemsDiv" click-loading ui-sref="user.maintenance.internetUtilities" ui-sref-opts="{location: 'replace'}" translate="internetUtilities">Internet Utilities</a>
+			</dd>
+		</dl>
+		<div class="content" ui-view>
+			&nbsp;
+		</div>
+	</div>
+</div>
+<script>$(document).foundation();</script>

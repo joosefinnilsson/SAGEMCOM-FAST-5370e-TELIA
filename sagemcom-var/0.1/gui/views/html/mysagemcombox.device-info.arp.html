@@ -1,0 +1,26 @@
+<div wait-loading></div>
+<div class="content ng-hide" ng-show="!loading" id="arp">
+	<h4 class="maintitle" id="maintitle">ARP</h4>
+	<table class="table-form table-form-full no-margin responsive-table text-center" width="100%" border="0" cellspacing="0" cellpadding="4" id="arpTable">
+		<tr class="header-table">
+			<th translate="IPAddress">IP Address</th>
+			<th translate="flags">Flags</th>
+			<th translate="hwAddress">HW Address</th>
+			<th translate="interface">Interface</th>
+		</tr>
+		<tr ng-repeat="arp in list">
+			<td data-title="{{'IPAddress'|translate}}" ng-bind="arp.ipAddress"></td>
+			<td data-title="{{'flags'|translate}}" translate="{{arp.active | lowercase}}"></td>
+			<td data-title="{{'hwAddress'|translate}}" ng-bind="arp.physAddress"></td>
+			<td data-title="{{'interface'|translate}}" ng-bind="arp.interfaceType"></td>
+		</tr>
+	</table>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+  <li translate="arpTip2" data-tourtarget="#arpTable">
+  </li>
+  <li translate="cancelTip" data-tourtarget="#dmzTip4">
+  </li>
+</ul>

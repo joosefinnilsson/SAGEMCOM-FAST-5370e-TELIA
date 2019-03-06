@@ -1,0 +1,18 @@
+<!--Content-->
+<div class="divSection subMenuMobile">
+	<div class="scrollDiv">
+		<dl class="tabs" data-tab>
+			<dd class="active">
+				<a class="itemsDiv" click-loading ui-sref="user.wifi.basic({radio : radioName, mode: 'priv'})" ui-sref-opts="{location: 'replace'}" translate="basic">Basic</a>
+			</dd>
+			<dd>
+				<a class="itemsDiv" click-loading ui-sref="user.wifi.wps({radio : radioName, mode: 'priv'})" ui-sref-opts="{location: 'replace'}">WPS</a>
+			</dd>
+			<dd check-feature-state="mobileWifiSchedule">
+				<a class="itemsDiv" click-loading ui-sref="user.wifi.scheduling" ui-sref-opts="{location: 'replace'}" translate="scheduling">Scheduling</a>
+			</dd>
+		</dl>
+		<div ui-view></div>
+	</div>
+</div><!--.subMenuMobile-->
+<script>$(document).foundation();</script>

@@ -1,0 +1,41 @@
+<div>
+<div wait-loading></div>
+<div class="w100 ng-hide" ng-show="!loading" id="ipv6">
+	<form name="formIpv4" ng-submit="save()" autocomplete="off" novalidate check-unsaved>
+		<div class="row" ng-if="primaryModeEnable">
+			<br>
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="primaryMode">primaryMode:</label>
+			</div>
+			<div class="columns medium-4 small-8 end">
+				<select id="primaryMode-ipv4" ng-model="data.primaryMode" ng-options="option.value as option.name for option in primaryModeOptions">
+				</select>
+			</div>
+		</div>
+		<h4 class="maintitle">IPv4</h4>
+		<div ng-include="'views/partials/ipv4Settings.html'"></div>
+		<div ng-include="'views/partials/iptvVoipSettings.html'"></div>
+		<div class="right" ng-if="showApplyButton && editStaticIp">
+			<button class="button tiny radius btn-cancel" type="button" translate="cancel" click-loading ui-sref="user.home">
+				&nbsp;
+			</button>
+			<button class="button tiny radius" type="submit" translate="apply">
+				&nbsp;
+			</button>
+		</div>
+	</form>
+</div>
+</div>
+
+<ul id="tlyPageGuide">
+	<li translate="basicIpv4Tip1" data-tourtarget="#connection-type"></li>
+	<li translate="basicIpv4Tip2" data-tourtarget="#ppp-login"></li>
+	<li translate="basicIpv4Tip3" data-tourtarget="#ppp-pass"></li>
+	<li translate="addressingTypeTip" data-tourtarget="#addressingType"></li>
+	<li translate="ipv4Tip" data-tourtarget="#ip-ipv4"></li>
+	<li translate="maskIpv4" data-tourtarget="#mask-ipv4"></li>
+	<li translate="gatewayIpv4" data-tourtarget="#gateway-ipv4"></li>
+	<li translate="dnsType" data-tourtarget="#dnsType"></li>
+	<li translate="dns1Ipv4" data-tourtarget="#dns1-ipv4"></li>
+	<li translate="dns2Ipv4" data-tourtarget="#dns2-ipv4"></li>
+</ul>

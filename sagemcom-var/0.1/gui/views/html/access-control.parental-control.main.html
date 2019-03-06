@@ -1,0 +1,16 @@
+<div class="content active ng-hide" ng-show="true" id="parental-control">
+	<a class="shs sub" href="javascript:void(0)">Show Sections</a>
+	<dl id="parentalControlTab" class="tabs sub-tabs" ng-class="changeToVertical ? 'vertical' : ''" data-tab="" tab-click="">
+		<dd class="active" check-feature-state="parentalControl">
+			<a href="javascript:void(0)" click-loading="" ui-sref="user.accessControl.parentalControl.planning" translate="acPcInternetAcessControlPlanning">Internet Access Control Planning</a>
+		</dd>
+		
+		<dd check-feature-state="parentalControlPrivate">
+			<a href="javascript:void(0)" click-loading="" ui-sref="user.accessControl.parentalControl.filtering" translate="privateUrlFiltering">Url Filter</a>
+		</dd>
+	</dl>
+	<div class="tabs-content">
+		<div class="content" ui-view=""></div>
+	</div>
+</div>
+<script>$(document).foundation();</script>

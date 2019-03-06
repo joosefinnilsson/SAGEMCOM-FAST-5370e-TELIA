@@ -1,0 +1,91 @@
+<div wait-loading=""></div>
+<div class="content ng-hide" ng-show="!loading" id="maintenance-ntp">
+	<h4 translate="menuMaintenanceInternetTime">Internet Time (NTP)</h4>
+	<form name="ntpForm" autocomplete="off" novalidate="" check-unsaved="">
+		<div class="row">
+			<div class="columns medium-3 small-4">
+				<label translate="statusStats">Status</label>
+			</div>
+
+			<div class="columns medium-5 small-8 end">
+				<p id="ntpTip1">
+					<b translate="{{status | lowercase}}">&nbsp;</b>
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="columns medium-3 small-4">
+				<label translate="gatewayTime">Gateway Time</label>
+			</div>
+
+			<div class="columns medium-5 small-8 end">
+				<p ng-bind="localTime" id="ntpTip2">
+					&nbsp;
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="firstServer">First Server</label>
+			</div>
+
+			<div class="columns medium-5 small-8 end">
+				<input id="ntpTip3" ng-model="firstServer" type="text" name="firstServer" validate-url="" ignore-protocol="true" ng-disabled="readOnlyNTP" required>
+				<small class="error" ng-if="ntpForm.firstServer.$invalid && (ntpForm.firstServer.$dirty || submitted)" translate="invalidAddress"> </small>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="secondServer">Second Server</label>
+			</div>
+
+			<div class="columns medium-5 small-8 end">
+				<input id="ntpTip4" ng-model="secondServer" type="text" name="secondServer" validate-url="" ignore-protocol="true" ng-disabled="readOnlyNTP">
+				<small class="error" ng-if="ntpForm.secondServer.$invalid && (ntpForm.secondServer.$dirty || submitted)" translate="invalidAddress"> </small>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="timeZone">Time Zone</label>
+			</div>
+			<div class="columns medium-5 small-8 end" ng-show="staticTz">
+				<select id="ntpTip5" ng-model="selectedTimeZone" name="timeZone" ng-options="tZ.value as tZ.label for tZ in listTimeZones" ng-disabled="readOnlyNTP" required>
+					<option value="" translate="select">Select</option>
+				</select>
+				<small class="error" ng-if="ntpForm.timeZone.$invalid && submitted" translate="invalidTimeZone"> </small>
+			</div>
+			<div class="columns medium-5 small-8 end" ng-hide="staticTz">
+				<select id="ntpTip5" ng-model="selectedTimeZoneName" ng-options="tZ as tZ.name for tZ in listTimeZones" ng-disabled="readOnlyNTP">
+				</select>
+			</div>
+		</div>
+
+		
+
+		<div class="row">
+			<br>
+			<br>
+		</div>
+
+		<div class="columns medium-8 text-right" ng-show="!readOnlyNTP">
+			<button type="button" class="button tiny radius btn-cancel" value="Cancel" click-loading="" ui-sref="user.home" translate="cancel" id="cancelTip"></button>
+			<button type="button" class="button tiny radius" value="Apply" ng-click="save()" translate="apply" id="applyTip"></button>
+		</div>
+	</form>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li translate="ntpTip1" data-tourtarget="#ntpTip1">
+	</li>
+	<li translate="ntpTip2" data-tourtarget="#ntpTip2">
+	</li>
+	<li translate="ntpTip3" data-tourtarget="#ntpTip3">
+	</li>
+	<li translate="ntpTip4" data-tourtarget="#ntpTip4">
+	</li>
+	<li translate="ntpTip5" data-tourtarget="#ntpTip5">
+	</li>
+</ul>

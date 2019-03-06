@@ -1,0 +1,52 @@
+<div class="row">
+	<div id="page-content" class="clearfix">
+		<div class="columns small-11 small-centered settings-menu-page">
+
+			<div class="row">
+				<div>
+					<a click-loading ui-sref="user.status.status" class="setting-menu-link">
+						<div class="columns medium-12 small-12 menuinline gray">
+							<span class="header-settings-icon box"></span><span translate="statusStatistics">Status & Statistics</span>
+						</div>
+					</a>
+					
+					<a id="wifiStrength" check-feature-state="mobileWifiStrength" click-loading ui-sref="user.wifiStrength" ui-sref-opts="{location: 'replace'}" class="setting-menu-link">
+						<div class="columns medium-12 small-12 menuinline gray">
+							<span class="header-settings-icon wifi"></span><span translate="wifiStrength">Wifi Strengh</span>
+						</div>
+					</a>
+
+					<a click-loading ui-sref="user.wifi({radio : '2.4GHz', mode: 'priv'})" class="setting-menu-link">
+						<div class="columns medium-12 small-12 menuinline gray" >
+							<span class="header-settings-icon wifi"></span><span>Wifi 2.4G</span>
+						</div>
+					</a>
+
+					<a click-loading ui-sref="user.wifi({radio : '5GHz', mode: 'priv'})" class="setting-menu-link">
+						<div class="columns medium-12 small-12 menuinline gray">
+							<span class="header-settings-icon wifi"></span><span>Wifi 5G</span>
+						</div>
+					</a>
+
+					<a click-loading ui-sref="user.maintenance.reset" class="setting-menu-link">
+						<div class="columns medium-12 small-12 menuinline gray">
+							<span class="header-settings-icon tool"></span><span translate="maintenance">Maintenance</span>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="tabs-content" ui-view>
+			&nbsp;
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		if (typeof SboxInterface === 'undefined' || typeof SboxInterface.getWifiStrength === 'undefined') {
+			$('#wifiStrength').hide();
+		}
+	});
+	
+</script>

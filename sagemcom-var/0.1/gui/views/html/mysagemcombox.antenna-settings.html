@@ -1,0 +1,57 @@
+<div class="content" id="antennaSettings">
+  <h4 translate="antennaSettings">3G/LTE Antenna Settings</h4>
+	<div class="row">
+		<div class="columns large-12 medium-12 small-12">
+			<p translate="antennaSettingsText"></p>
+    </div>
+  </div>
+
+  <div class="alert-box warning large radius medium-11 small-12" data-alert>
+    <i class="fa fa-info-circle fa-center"></i>
+    <div style="margin-left:40px;">
+      <span translate="helpTextMainAntenna"></span>
+    </div>
+  </div>
+
+  <div class="alert-box warning large radius medium-11 small-12" data-alert>
+    <i class="fa fa-info-circle fa-center"></i>
+    <div style="margin-left:40px;">
+      <span translate="helpTextOtherAntenna"></span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="columns large-2 medium-2 small-4">
+      <label class="inline" translate="antennaType">Antenna Type</label>
+    </div>
+		<div class="columns large-3 medium-2 small-8 end">
+      <select ng-model="antennaType" id="antennaType"
+        ng-options="item.value as (item.label | translate) for item in antennaTypes" name="antennaType">
+      </select>
+		</div>
+  </div>
+  <div class="row" ng-if="antennaType === 3">
+    <div class="columns large-12 medium-12 small-12">
+      <img src="images/telia/single_cable_antenna.png"/>
+    </div>
+  </div>
+  <div class="row" ng-if="antennaType === 4">
+    <div class="columns large-12 medium-12 small-12">
+      <img src="images/telia/double_cable_antenna.png"/>
+    </div>
+  </div>
+  <br>
+	<div class="right">
+		<button class="button tiny radius btn-cancel" type="button" translate="cancel" click-loading ui-sref="{{previousMainPage}}">
+			Cancel
+		</button>
+		<button class="button tiny radius" type="submit" translate="apply" ng-click="save()">
+			Apply
+		</button>
+	</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li translate="ledTip1" data-tourtarget="#ledTip1"></li>
+</ul>

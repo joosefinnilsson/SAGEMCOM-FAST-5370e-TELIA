@@ -1,0 +1,345 @@
+<!--[if IE 9]>
+<style>
+select {
+background-image: inherit;
+}
+</style>
+<![endif]-->
+<script>
+	$(function() {
+		//generic change theme function
+		var changeTheme = function(href) {
+			var theme = 'styles/themes/' + href.replace('#', '') + '.css';
+			if(!!$.config.mainTheme){
+				$('#main-theme').attr('href', $.config.mainTheme);
+				$.RemoteStyleSheet.load($.config.mainTheme,function(){
+					console.log('theme loaded :',$.config.mainTheme);
+				},function(){
+					console.log('fail to load the theme :',$.config.mainTheme);
+				},'main-theme');
+			}else{
+				$('#main-theme').attr('href','');
+			}
+			if(theme !== $('#change-theme').attr('href')){
+				$('#change-theme').attr('href', theme);
+			}
+		};
+
+		//theme events
+		$(document).on('click', '.themes a', function(e) {
+			var href = $(this).attr('theme');
+			$.cookie('backgroundColor', href);
+			changeTheme(href);
+		});
+
+		var globalDirection;
+		//changeDirection function, can be used by controllers
+		$(document).on('changeDirection', function(e, direction) {
+			//needs to run only on start
+			if (!globalDirection) {
+				direction === 'ltr' ? $('#drop-lang').css('left', '-9999px') : $('#drop-lang').css('right', '-9999px');
+			}
+			if (direction !== 'init') {
+				globalDirection = direction || 'ltr';
+			}
+      $('html').attr('dir', 'ltr');
+      $('div#footer-container').css('direction', 'ltr');
+      //ltl files
+      $('link[rel=stylesheet][href="styles/vendor.css"]').prop('disabled', false);
+      $('link[rel=stylesheet][href="styles/main.css"]').prop('disabled', false);
+      $('link[rel=stylesheet][href="styles/dev.css"]').prop('disabled', false);
+			$(document).foundation();
+		});
+
+		$(document).ready(function() {
+			//disable everything related to login css
+			$('link[rel=stylesheet][href^="styles/login"]').prop('disabled', false).prop('disabled', true);
+			//initializing css in ltr mode
+			$(document).trigger('changeDirection', ['init']);
+		});
+
+		//initial theme loading
+		var theme = $.cookie('backgroundColor');
+		//getting the filename without extension as themeName
+		var expThemeGroup = $.config.cssTheme.match(/([a-z0-9_\-\.]+)\.css$/i);
+		var themeName = expThemeGroup ? expThemeGroup[1] : '';
+		if( themeName !== '' && themeName !== theme){
+			changeTheme(themeName);
+			//update theme by config
+			$.cookie('backgroundColor',themeName);
+		}
+		if ($.cookie('backgroundColor')) {
+			theme = 'styles/themes/' + $.cookie('backgroundColor').replace('#', '') + '.css';
+		} else {
+			theme = $.config.cssTheme;
+		}
+		if(!!$.config.mainTheme){
+			$('#main-theme').attr('href', $.config.mainTheme);
+			$.RemoteStyleSheet.load($.config.mainTheme,function(){
+				console.log('theme loaded :',$.config.mainTheme);
+			},function(){
+				console.log('fail to load the theme :',$.config.mainTheme);
+			},'main-theme');
+		}
+		$.RemoteStyleSheet.load(theme, function(link) {
+				//theme loaded
+			}, function() {
+				//error loading theme, loading default
+				$.cookie('backgroundColor', '');
+				$.RemoteStyleSheet.load($.config.cssTheme, function(link) {
+				}, function() {
+					//error loading theme
+				}, 'change-theme');
+			}, 'change-theme');
+	});
+</script>
+
+<div id="head-container" ng-controller="HeaderController" ng-if="!hideHeader">
+	<div class="row">
+		
+		<div class="head-img" check-feature-state="logo">
+			<a ng-if="isSimple" click-loading="" ui-sref="user.simple.home" class="logo logo_header ng-hide" ng-show="true"></a>
+			<a ng-if="!isSimple" click-loading="" ui-sref="user.home" class="logo logo_header ng-hide" ng-show="true"></a>
+		</div>
+		
+		<div data-access-level="accessLevels.guest" id="headerLang" class="right">
+			<a class="sprite help left hide-for-small ng-hide" title="Help" ng-if="!isLandPage && !disableHelp" id="helpButton" ng-show="mainUser.username && !isMainTemplate && !isExternalHelp">
+				<i class="fa fa-question-circle"></i>
+			</a>
+			<a class="sprite help left hide-for-small ng-hide isMainTemplate" title="Help" ng-show="mainUser.username && hasExternalHelp && !isExternalHelp && isMainTemplate && !disableHelp && !isCable" ui-sref="user.externalHelp"></a>
+
+			<button class="button dropdown small btn-dropdown" data-dropdown="drop-lang" id="languages-select" data-options="is_hover:true; hover_timeout:5000; pip: center;" onclick="this.blur()" ng-bind="currentLanguage" ng-show="availableLanguages && availableLanguages.length > 1">
+				&nbsp;
+			</button>
+			<ul id="drop-lang" data-dropdown-content="" class="f-dropdown" ng-show="availableLanguages && availableLanguages.length > 1">
+				<li ng-repeat="lang in availableLanguages">
+					<a href="javascript:void(0)" ng-click="changeLanguage(lang)" onclick="setTimeout(function(){destroyTooltip();createTooltip();}, 1000);">{{lang}}</a>
+				</li>
+			</ul>
+
+			<div id="userlog" ng-if="mainUser.username && !expertMode" class="header-tools">
+				<span class="sprite icon-user"></span>
+				<del translate="loggedInAs" style="text-decoration: inherit">Logged in as</del>
+				&nbsp;
+				<span ng-bind="(mainUser.username === 'local_admin') ? 'admin' : mainUser.username" class="user-panel"></span>
+			</div>
+
+			
+			
+
+			
+
+			<a ng-if="modeSelected != 'expert' && expertMode" href="javascript:void(0)" ng-click="changeMode()" class="expertMode" translate="expertMode">Expert Mode</a>
+			<a ng-if="modeSelected == 'expert' && expertMode" href="javascript:void(0)" ng-click="changeMode()" class="expertMode" translate="basicMode">Basic Mode</a>
+
+			
+			
+
+			<a class="ng-hide btn-logout-mobile ch-button button-logout button--inline ch-tiny-button button--black" ng-show="mainUser.username" id="btn-logout" href="javascript:void(0)" ng-click="logout()" translate="logout">Logout</a>
+		</div>
+	</div>
+</div><!--Header-->
+
+<div class="header-welcome" ng-if="isMainTemplate&&isCharter5280">
+<div class="row">
+    <div class="columns medium-9 header-top welcome">
+    </div>
+    <div class="columns medium-3 text-right">
+        <a id="refresh-btn" class="btn-refresh" ng-click="refresh()">
+            <span class="icon icon--secondary icon-refresh" aria-hidden="true"></span>
+            <span translate="clickToRefresh">Refresh</span>
+        </a>
+    </div>
+</div>
+</div>
+<div id="header-page-external" ng-if="!isMainTemplate&&isCharter5280">
+</div>
+
+<div ng-class="{'row': !isExternalHelp}" class="contentSonne">
+	<div id="page-content" class="page-body clearfix" ui-view=""></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ul class="themes" check-feature-state="yallo" ng-if="mainUser.username"></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ul class="themes" check-feature-state="telia_eth" ng-if="mainUser.username"></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--END Content-->
+
+<!--Footer-->
+<div class="gui-bottom bottom ng-hide" ng-show="true" ng-if="!(isCharterAll && isLandPage)">
+	<div id="footer-container" class="row">
+		<div ng-if="!isTalktalk" check-feature-state="logoInternalFooter" class="columns large-2 medium-2">
+			<a class="logo logo-footer" href="{{logoUrl}}" target="_blank"></a>
+		</div>
+		<div ng-if="!isTalktalk" class="columns large-6 medium-6">
+			<p class="copyright copyrightSagemcom copyright-telus">
+				2005 - {{currentYear}} &copy; Sagemcom <span translate="broadband">Broadband</span> SAS. <span translate="allRightsReserved">All Rights Reserved</span>
+			</p>
+		</div>
+		<div ng-if="footerSupportLinkUrl" class="columns large-2 medium-2">
+			<a href="{{footerSupportLinkUrl}}" target="_blank">{{footerSupportLinkText | translate}}</a>
+		</div>
+    <div ng-if="isTalktalk" class="columns large-6 medium-6">
+      <p class="copyright copyrightSagemcom copyright-telus">
+	  	<a class="talktalk-link" href="{{logoUrl}}" target="_blank">&copy; TalkTalk 2017</a>
+      </p>
+    </div>
+		<div ng-if="!isMyrepublic" class="columns large-3 medium-3 ipv6 text-right ipv6-icon">
+			
+		</div>
+		
+	</div>
+</div>
+<div class="gui-bottom bottom ng-hide" ng-show="true" ng-if="isCharterAll && isLandPage">
+	<div id="footer-container" class="row">
+		<div class="columns large-4 medium-4 text-right">
+			<p>{{modelName}}</p>
+		</div>
+    <div class="columns large-4 medium-4 text-center">
+	  	<p>{{serialNumber}}
+    </p></div>
+		<div class="columns large-4 medium-4">
+			<p>{{wanMacAddress}}</p>
+		</div>
+	</div>
+</div>
+
+<script>$(document).foundation();</script>
+
+<!--Facebook Share-->
+
+
+
+<input type="hidden" id="mobileSupport" value="true" check-feature-state="mobile">
+<input type="hidden" id="unsavedDataInput" data-reveal-id="unsaved-data-modal" data-reveal="">
+<input type="hidden" id="inativityDataInput" data-reveal-id="inativity-data-modal" data-reveal="">
+<input type="hidden" id="fibeDisconnectedInput" data-reveal-id="fiber-disconnected-modal" data-reveal="">
+
+<div id="unsaved-data-modal" class="reveal-modal tiny" data-reveal="">
+	<a class="close-reveal-modal close-modal">
+		<span class="btn-close">&#215;</span>
+		<span class="show-word btn-close close" translate="close">Close</span>
+	</a>
+	<h5 class="modal-title" translate="discardChanges">&nbsp;</h5>
+	<p translate="messageDiscardChanges">
+		&nbsp;
+	</p>
+	<div class="right">
+		<button class="button tiny radius btn-cancel" type="button" translate="no" onclick="$('#unsaved-data-modal a.close-reveal-modal').trigger('click');"></button>
+		<button class="button tiny radius" id="confirmUnsavedDataInput" type="button" translate="yes" onclick="$('#unsaved-data-modal a.close-reveal-modal').trigger('click');"></button>
+	</div>
+</div>
+
+<div id="inativity-data-modal" class="reveal-modal tiny" data-reveal="">
+	<a class="close-reveal-modal close-modal continueBrowsing">
+		<span class="btn-close">&#215;</span>
+		<span class="show-word btn-close close" translate="close">Close</span>
+	</a>
+	<h5 class="modal-title" translate="sessionTimeoutTitle">&npsb;</h5>
+	<p>
+		<span translate="sessionTimeoutContent">&npsb;</span>&nbsp;<span style="font-weight: bold;" id="expireTime" ng-class="criticaltime"></span>&nbsp;<span translate="seconds">&npsb;</span>
+	</p>
+	<div class="right">
+		<button class="button tiny radius continueBrowsing" type="button" onclick="$('#inativity-data-modal a.close-reveal-modal').trigger('click');" translate="continue"></button>
+	</div>
+</div>
+
+<div id="fiber-disconnected-modal" class="reveal-modal tiny" data-reveal="">
+	<a class="close-reveal-modal close-modal">
+		<span class="btn-close">&#215;</span>
+		<span class="show-word btn-close close" translate="close">Close</span>
+	</a>
+	<h5 class="modal-title" translate="titleFiberDisconnected">Fiber is disconnected !!</h5>
+	<p translate="msgFiberDisconnected">
+		&nbsp;
+	</p>
+	<div class="right">
+		<button class="button tiny radius" id="confirmUnsavedDataInput" type="button" translate="continue" onclick="$('#fiber-disconnected-modal a.close-reveal-modal').trigger('click');"></button>
+	</div>
+</div>

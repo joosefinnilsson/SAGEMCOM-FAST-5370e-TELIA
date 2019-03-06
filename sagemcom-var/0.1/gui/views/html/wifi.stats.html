@@ -1,0 +1,86 @@
+<div class="content">
+	<div wait-loading=""></div>
+	<!-- user.wifi.stats -->
+	
+	<div class="content w100 ng-hide" ng-show="!loading" id="wifi-stats">
+		<div class="row ethernet wifi-stats-container">
+			<div class="large-12 medium-12 small-12">
+				<div class="">
+					<div class="">
+						<h5 translate="statusWifi">Wifi Stats</h5>
+					</div>
+					<div class="bordered-content" id="wifi-stats">
+						<div id="tip0" class="status" ng-class="lestatus === 'UP' ? 'status-connected' : 'status-standby'">
+							<span translate="statsUpDownWifi">Status:</span> <span ng-bind="lestatus | lowercase | translate"></span>
+						</div>					
+						<div id="tip1" class="link-speed" check-feature-state="wifiSpeedInfo">
+							<strong translate="linkSpeed">Link speed:</strong> <span ng-bind="link"></span>Mbit/s
+						</div>
+						<p>
+							<span translate="sent">Sent</span> / <strong translate="received">Received</strong>
+						</p>
+						<div class="row">
+							<div id="tip2" class="large-3 columns">
+								<label translate="packets">Packets</label>
+								<p>
+									<span ng-bind="packetssent"></span> / <strong ng-bind="packetsreceived"></strong>
+								</p>
+							</div>
+							<div id="tip3" class="large-3 columns">
+								<label translate="bytes">Bytes</label>
+								<p>
+									<span ng-bind="bytessent"></span> / <strong ng-bind="bytesreceived"></strong>
+								</p>
+							</div>
+							<div id="tip4" class="large-3 columns">
+								<label translate="errors">Errors</label>
+								<p>
+									<span ng-bind="errorssent"></span> / <strong ng-bind="errorsreceived"></strong>
+								</p>
+							</div>
+							<div id="tip5" class="large-3 columns">
+								<label translate="discardedPacket">Discarded Pkt</label>
+								<p>
+									<span ng-bind="discardpacketssent"></span> / <strong ng-bind="discardpacketsreceived"></strong>
+								</p>
+							</div>
+						</div>
+						<div class="row">
+							<div id="tip6" class="large-3 columns">
+								<label translate="unicastPacket">Unicast Pkt</label>
+								<p>
+									<span ng-bind="unicastpacketssent"></span> / <strong ng-bind="unicastpacketsreceived"></strong>
+								</p>
+							</div>
+							<div id="tip7" class="large-3 columns">
+								<label translate="multcastPacket">Multicast Pkt</label>
+								<p>
+									<span ng-bind="multicastpacketssent"></span> / <strong ng-bind="multicastpacketsreceived"></strong>
+								</p>
+							</div>
+							<div id="tip8" class="large-3 columns end">
+								<label translate="broadcastPacket">Broadcast Pkt</label>
+								<p>
+									<span ng-bind="broadcastpacketssent"></span> / <strong ng-bind="broadcastpacketsreceived"></strong>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li translate="wifiStatsTip0" data-tourtarget="#tip0"></li>
+	<li translate="wifiStatsTip1" data-tourtarget="#tip1"></li>
+	<li translate="wifiStatsTip2" data-tourtarget="#tip2"></li>
+	<li translate="wifiStatsTip3" data-tourtarget="#tip3"></li>
+	<li translate="wifiStatsTip4" data-tourtarget="#tip4"></li>
+	<li translate="wifiStatsTip5" data-tourtarget="#tip5"></li>
+	<li translate="wifiStatsTip6" data-tourtarget="#tip6"></li>
+	<li translate="wifiStatsTip7" data-tourtarget="#tip7"></li>
+	<li translate="wifiStatsTip8" data-tourtarget="#tip8"></li>
+</ul>

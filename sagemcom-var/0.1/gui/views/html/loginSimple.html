@@ -1,0 +1,64 @@
+<div class="columns medium-6 text-center medium-centered" ngcontroller="LoginController" id="loginPage">
+	
+	<div id="login" class="box-map">
+		<div class="header-box">
+			<p>
+				<strong translate="login">Login</strong>
+			</p>
+		</div>
+
+		<form id="form-login" ng-submit="login()" role="form">
+			<!-- do not remove, this is a trick to avoid autocomplete of fields -->
+			<input type="password" class="ng-hide" title="">
+			<!-- do not remove, this is a trick to avoid autocomplete of fields -->
+			<div class="row">
+				<div class="columns small-4" check-feature-state="showUserLogin">
+					<label class="inline" translate="user">User</label>
+				</div>
+
+				<div class="columns small-8">
+					<input type="text" id="user" data-ng-model="username" autofocus="autofocus" ng-class="{'input-error': failLogin}" ng-focus="failLogin = false" ng-disabled="staticLogin">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="columns small-4">
+					<label class="inline" translate="password">Password</label>
+				</div>
+
+				<div class="columns small-8">
+					<input id="password" type="password" data-ng-model="password" ng-class="{'input-error': failLogin}" ng-focus="failLogin = false">
+				</div>
+
+				<div class="row msg-error" ng-show="failLogin">
+					<div class="columns small-12">
+						<p>
+							Wrong login information
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div ng-class="btLoginCenter ? 'text-center' : 'text-left columns medium-8 pull-right'">
+					<input type="submit" class="button tiny radius" id="button-blue" value="Login">
+				</div>
+			</div>
+		</form>
+	</div><!--BoxMap-->
+</div>
+<script>
+	$(document).on('activeFocus', function() {
+		if ($('#name').prop("disabled")) {
+			$('#password').focus();
+		} else {
+			$('#name').focus();
+		}
+	});
+	$(function() {
+		var availableTags = ["User"];
+		$("#user").autocomplete({
+			source : availableTags
+		});
+	});
+</script>

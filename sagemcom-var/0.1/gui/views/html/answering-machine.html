@@ -1,0 +1,79 @@
+<div class="row">
+	<br>
+	<div class="large-12 columns">
+		<h3 translate="answeringMachine"></h3>
+	</div>
+</div>
+<div class="row">
+	<div class="small-12 columns">
+		<div class="player">
+			<div class="player-controls" ng-show="playing">
+				<button onclick="$(document).trigger('playAudio', currentAudio-1)" class="player-controls-previous"
+				title="Previous"></button>
+				<button onclick="$(document).trigger('playAndPause', currentAudio)" class="player-controls-play no-sound"
+				title="Pause"></button>
+				<button onclick="$(document).trigger('playAudio', currentAudio+1)" class="player-controls-next"
+				title="Next"></button>
+			</div>
+
+			<div ng-show="playing" class="player-track-info">
+				<b translate="amCurrentSelected">Current selected:</b>
+				<span translate="amCallFrom">Call from</span>&nbsp;<strong>{{playing.CallingPartyNumber}}</strong>
+				<span translate="amAt">at</span>&nbsp;{{playing.Start}}
+			</div>
+
+			<div class="player-slider" ng-show="playing"></div>
+
+			<div class="player-alert">
+				<div class="player-alert-content">
+					<span ng-bind="newMessages"></span>&nbsp;<span translate="amNewMessages">new messages</span>
+				</div>
+			</div>
+			<audio autoplay id="myVideo">
+				<source src="{{song}}" type="audio/wav">
+				<span translate="amBrowserNotSupported">Your browser does not support the audio element.</span>
+			</audio>
+			<ol class="player-list">
+				<li ng-repeat="message in messagesList" ng-class="{'playing' : message.uid === playing.uid, 'played' : !message.IsNew}" class="player-list-track">
+					<div class="containerPlayer">
+						<a class="player-list-link" ng-click="listen($index)">
+						<p>
+							{{$index+1}}. [{{message.Start}}]
+						</p>
+						<p>
+							<strong>From: </strong><strong>{{message.CallingPartyNumber}}</strong>
+						</p>
+						<p>
+							<strong>To: +55 92 3530-0001</strong><b>[ Line - {{message.UsedLine}} ]</b>
+						</p>
+						<p>
+							<span class="player-list-track-duration"
+							title="{{'amCallDuration' | translate">{{message.Duration}}</span>
+						</p> </a>
+					</div>
+					<span class="playerIcons"> <a href="javascript:void(0)" ng-click="download($index)" class="ng-hide"><img src="images/download166.png"></a> <a href="javascript:void(0)"><img src="images/rubbish7.png" data-reveal-id="confirm-remove-answering-machine-modal" ng-click="prepareRemove(message)"></a> </span>
+
+				</li>
+
+			</ol>
+		</div>
+		<a id="downloadTmp" download hidden></a>
+	</div>
+</div>
+<div id="confirm-remove-answering-machine-modal" class="reveal-modal tiny" data-reveal>
+	<a class="close-reveal-modal close-modal">&#215;</a>
+	<h5 class="modal-title" translate="confirmRemoveTitle"></h5>
+	<p translate="confirmRemoveMessage">
+		&nbsp;
+	</p>
+	<div class="right">
+		<button class="button tiny radius" type="button" translate="cancel" onclick="$('#confirm-remove-answering-machine-modal a.close-reveal-modal').trigger('click');"></button>
+		<button class="button tiny radius" type="button" translate="yes" type="button" ng-click="remove()" onclick="$('#confirm-remove-answering-machine-modal a.close-reveal-modal').trigger('click');"></button>
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+		$(document).foundation();
+	});
+</script>
+<script src="js/answering-machine.js"></script>

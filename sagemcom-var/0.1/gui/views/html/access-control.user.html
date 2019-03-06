@@ -1,0 +1,166 @@
+<div class="content">
+<div wait-loading></div>
+<div class="content w100 ng-hide" ng-show="!loading">
+	<h4 class="maintitle" translate="user">&nbsp;</h4>
+	<div class="row">
+		<div class="columns medium-10 medium-centered small-12">
+			<form class="row add-port" name="accessControlUser" autocomplete="off" check-unsaved>
+				<div class="row">
+					<div class="columns medium-6 small-12">
+						<div class="row" ng-show="!simpleUserPage">
+							<div class="columns medium-5 small-12">
+								<label class="inline" translate="fullname">Full Name</label>
+							</div>
+							<div class="columns medium-7 small-12">
+								<input id="accessControlUserTip1" name="fullname" ng-model="user.fullName" type="text" maxlength="256" />
+							</div>
+						</div>
+						<div class="row" ng-show="simpleUserPage">
+							<div class="columns medium-5 small-12">
+								<label class="inline" translate="username">User Name</label>
+							</div>
+							<div class="columns medium-7 small-12">
+								<input id="accessControlUserTip2" name="usernameSelect" ng-model="user.userNameSelected" type="text" readonly="readonly" ng-if="!allowEditOtherUsers"/>
+								<select id="accessControlUserTip2" ng-model="user.userNameSelected" ng-if="allowEditOtherUsers" ng-change="changeUser()">
+								   <option value="{{item}}" ng-repeat="item in listUsersSupport">{{item}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="row" ng-show="!simpleUserPage">
+							<div class="columns medium-5 small-12">
+								<label class="inline" translate="username">User Name</label>
+							</div>
+							<div class="columns medium-7 small-12" check-feature-state="addNewUser">
+
+								<input id="accessControlUserTip3" name="username" ng-model="user.userName" type="text" maxlength="64" ng-required="!simpleUserPage" ng-disabled="!allowDeleteUser(user.userName)"/>
+
+								<small ng-if="(accessControlUser.username.$dirty || submitted) && accessControlUser.username.$error.required" class="error" translate="fieldRequired">&nbsp;</small>
+								<small ng-if="(accessControlUser.username.$dirty || submitted) && isExist" class="error" translate="userExists">&nbsp;</small>
+							</div>
+						</div>
+						<div class="row" ng-show="update || simpleUserPage">
+							<div class="columns medium-5 small-12">
+								<label class="inline" translate="oldPassword">Old Password</label>
+							</div>
+							<div class="columns medium-7 small-12">
+								<input id="accessControlUserTip4" type="password" pass-reveal="{{revealOnFocus.accessControlUser}}" pr-visible="{{showPasswordsText}}" name="oldPassword" ng-model="user.oldPassword" maxlength="64" ng-trim="false"/>
+								<small ng-if="(accessControlUser.oldPassword.$dirty || submitted) && accessControlUser.oldPassword.$error.required" class="error" translate="fieldRequired">&nbsp;</small>
+							</div>
+						</div>
+						<div class="row" check-feature-state="userSessionTimeout" ng-if="userSessionTimeout">
+							<div class="columns medium-5 small-12">
+								<label class="inline" translate="userSessionTimeout">User session timeout</label>
+							</div>
+							<div class="columns medium-7 small-12">
+								<input type="text" name="sessionTimeout" ng-model="user.sessionTimeout" only-numbers required maxlength="4" ng-trim="false"/>
+								<small ng-if="(accessControlUser.sessionTimeout.$dirty || submitted) && accessControlUser.sessionTimeout.$error.required" class="error" translate="fieldRequired">&nbsp;</small>
+								<small ng-if="(accessControlUser.sessionTimeout.$dirty || submitted) && accessControlUser.sessionTimeout.$error.lengthError" class="error" translate="sessionTimeoutLengthError">&nbsp;</small>
+							</div>
+						</div>
+					</div>
+					<div class="columns medium-6 small-12">
+						<div class="row">
+							<div class="columns medium-5 small-12">
+								<label class="inline" translate="password">Password</label>
+							</div>
+							<div class="columns medium-7 small-12">
+								<input id="accessControlUserTip5" pass-reveal="{{revealOnFocus.accessControlUser}}" pr-visible="{{showPasswordsText}}" type="password" name="password" ng-model="user.password" maxlength="64" required min-requirement ng-trim="false"/>
+								<small ng-if="(accessControlUser.password.$dirty || submitted) && accessControlUser.password.$error.required" class="error" translate="fieldRequired">&nbsp;</small>
+                <small ng-if="(accessControlUser.password.$dirty || submitted) && accessControlUser.password.$error.minRequirement" class="error" translate="userPasswordMinReq">&nbsp;</small>
+                <small ng-if="(accessControlUser.password.$dirty || submitted) && accessControlUser.password.$error.allowCharacters" class="error" translate="invalidPassword">&nbsp;</small>
+							</div>
+						</div>
+						<div class="row">
+							<div class="columns medium-5 small-12">
+								<label class="inline" translate="confirmPassword">Confirm Password</label>
+							</div>
+							<div class="columns medium-7 small-12">
+								<input id="accessControlUserTip6" type="password" pass-reveal="{{revealOnFocus.accessControlUser}}" pr-visible="{{showPasswordsText}}" name="confirmPassword" ng-model="user.confirmPassword" maxlength="64" validate-password-fields ng-trim="false"/>
+								<small class="error" ng-show="(accessControlUser.confirmPassword.$dirty || submitted) && accessControlUser.confirmPassword.$error.passwordVerify" translate="passwordDoesntMatch">&nbsp;</small>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="row">
+				<div class="left">
+					<label class="inline" id="showPasswordTip" ng-show="!revealOnFocus.accessControlUser">
+						<input type="checkbox" id="showPasswordid" ng-model="showPasswordsText"> <label for="showPasswordid" translate="showUserPassword" >Show Password</label>
+					</label>
+				</div>
+				<div class="right">
+					<button id="cancelTip" ng-if="simpleUserPage" class="button tiny radius btn-cancel" click-loading ui-sref="user.home" translate="cancel"></button>
+					<button id="applyTip" ng-if="simpleUserPage" class="button tiny radius" type="submit" ng-hide="update" translate="apply" ng-click="changePassword()"></button>
+					<button id="clearTip" ng-if="!simpleUserPage"class="button tiny radius btn-cancel" type="button" ng-hide="update" translate="clear" ng-click="cancel()"></button>
+					<button id="addTip" ng-if="!simpleUserPage" class="button tiny radius" type="submit" ng-hide="update" translate="add" ng-click="saveUser()"></button>
+					<button id="cancelSimpleTip" ng-if="!simpleUserPage" class="button tiny radius btn-cancel" type="button" ng-show="update" translate="cancel" ng-click="cancel()"></button>
+					<button id="updateTip" ng-if="!simpleUserPage" class="button tiny radius" type="submit" ng-show="update" translate="update" ng-click="saveUser()"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row"  ng-show="!simpleUserPage">
+		<div class="columns small-12">
+			<table id="tableUsersTip" class="table-form table-form-full responsive-table">
+				<thead>
+					<tr>
+						<th translate="fullname">Full Name</th>
+						<th translate="username">User Name</th>
+						<th translate="permissions">Permissions</th>
+						<th translate="options">Options</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="user in userList">
+						<td data-title="{{ 'fullname' | translate }}" ng-bind="user.LastName"></td>
+						<td data-title="{{ 'username' | translate }}" ng-bind="user.Login">&nbsp;</td>
+						<td data-title="{{ 'ordinary' | translate }}">Ordinary</td>
+						<td data-title="{{ 'options' | translate }}">
+							<input id="edit" class="icon-edit" type="button" value="Edit" ng-click="edit(user)"/>
+							<input id="remove" ng-show="allowDeleteUser(user.Login)" class="icon-delete ng-hide" data-reveal-id="confirm-remove-modal" data-reveal type="button" value="Delete" ng-click="prepareDelete(user)"/>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id="confirm-remove-modal" class="reveal-modal tiny" data-reveal>
+		<a class="close-reveal-modal close-modal">&#215;</a>
+		<h5 class="modal-title" translate="confirmRemoveUserTitle">&nbsp;</h5>
+		<p translate="confirmRemoveUserTip">
+			&nbsp;
+		</p>
+		<div class="right">
+			<button class="button tiny radius btn-cancel" type="button" translate="no" onclick="$('#confirm-remove-modal a.close-reveal-modal').trigger('click');"></button>
+			<button class="button tiny radius" type="button" translate="yes" type="button" ng-click="deleteUser()" onclick="$('#confirm-remove-modal a.close-reveal-modal').trigger('click');"></button>
+		</div>
+	</div>
+</div>
+</div>
+
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = false;
+	$(document).foundation();
+</script>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li translate="accessControlUserTip1" data-tourtarget="#accessControlUserTip1">
+	</li>
+	<li translate="accessControlUserTip2" data-tourtarget="#accessControlUserTip2">
+	</li>
+	<li translate="accessControlUserTip3" data-tourtarget="#accessControlUserTip3">
+	</li>
+	<li translate="accessControlUserTip5" data-tourtarget="#accessControlUserTip5">
+	</li>
+	<li translate="accessControlUserTip4" data-tourtarget="#accessControlUserTip4">
+	</li>
+	<li translate="accessControlUserTip6" data-tourtarget="#accessControlUserTip6">
+	</li>
+	<li translate="updateTip" data-tourtarget="#updateTip">
+	</li>
+	<li translate="tableUsersTip" data-tourtarget="#tableUsersTip">
+	</li>
+	<li translate="showPasswordTip" data-tourtarget="#showPasswordTip" ng-if="!revealOnFocus.accessControlUser">
+	</li>
+</ul>

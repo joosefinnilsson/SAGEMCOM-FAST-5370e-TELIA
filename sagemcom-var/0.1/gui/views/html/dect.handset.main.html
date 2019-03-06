@@ -1,0 +1,33 @@
+<div class="columns small-12 ng-hide" ng-show="true">
+	<div class="row">
+		<div id="header-page">
+			<div class="columns small-6">
+				<h3 translate="dectHandsetSettings">DECT Handset Settings</h3>
+			</div>
+
+			<div class="columns small-6 text-right">
+				<div internet-connectivity></div>
+				<a id="homebtn" title="Home" click-loading ui-sref="user.home" class="icons-bg border-gray"> <img src="images/icon-home.png" alt="Home Icon"> </a>
+			</div>
+		</div>
+	</div>
+	<div messagebox></div>
+	<div id="main-content">
+		<a class="shs" href="javascript:void(0)" translate="showSection">Show Sections</a>
+		<dl id="dectHandsetTab" class="tabs" data-tab tab-click>
+			<dd class="active">
+				<a href="javascript:void(0)" click-loading ui-sref="user.dectHandset.handset({uid: mainUID})" translate="dectHandset">DECT Handset</a>
+			</dd>
+			<dd>
+				<a href="javascript:void(0)" click-loading ui-sref="user.dectHandset.advanced({uid: mainUID})" translate="advanced">Advanced</a>
+			</dd>
+		</dl>
+
+		<div class="tabs-content" ui-view>
+			&nbsp;
+		</div>
+	</div>
+</div>
+<script>
+	$(document).foundation();
+</script>

@@ -1,0 +1,27 @@
+<div class="content" id="ledDimmed">
+  <h4 translate="dimmedMode">Dimmed mode</h4>
+	<div check-feature-state="ledDimmedMode" class="row">
+		<div class="columns large-2 medium-2 small-4">
+			<label class="inline" translate="dimmedMode">Dimmed mode</label>
+		</div>
+		<div class="columns large-3 medium-2 small-8 end">
+			<div class="onoffswitch">
+				<input class="onoffswitch-checkbox" ng-model="dimmedMode" id="dimmedMode" name="dimmedMode" type="checkbox">
+				<label class="onoffswitch-label" for="dimmedMode"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+			</div>
+		</div>
+	</div>
+	<div class="right" ng-show="!onChangeSave">
+		<button class="button tiny radius btn-cancel" type="button" translate="cancel" click-loading ui-sref="{{previousMainPage}}">
+			Cancel
+		</button>
+		<button class="button tiny radius" type="submit" translate="apply" ng-click="save()">
+			Apply
+		</button>
+	</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li translate="ledTip1" data-tourtarget="#ledTip1"></li>
+</ul>

@@ -1,0 +1,108 @@
+<div class="content w100" id="wifi-scheduling-24">
+    <h4 class="maintitle" translate="wifiScheduling">Wifi Scheduling</h4>
+    <div class="row">
+        <div class="columns medium-2 small-3">
+            <label class="inline" translate="enable">Enable</label>
+        </div>
+        <div class="columns medium-4 small-9 end">
+            <div id="wifiSchedulingTip1" class="onoffswitch">
+                <input class="onoffswitch-checkbox" id="enable" name="enable" type="checkbox" ng-model="scheduling.Enable" ng-change="save(true)"/>
+                <label class="onoffswitch-label" for="enable">
+                    <div class="onoffswitch-inner"></div>
+                    <div class="onoffswitch-switch"></div>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div ng-show="scheduling.Enable" class="row">
+        <div class="columns medium-3 small-4 pad-top">
+            <p>
+                <strong translate="acPcWeekTimeSlots">
+                Week Time Slots
+                </strong>
+            </p>
+        </div>
+        <div class="columns medium-5 small-8 pad-top">
+            <div class="row">
+                <div class="columns small-6">
+                    <p>
+                        <i class="time-slot allowed"></i>&nbsp;
+                        <span translate="acPcAllowed">Allowed</span>
+                    </p>
+                </div>
+                <div class="columns small-6 end">
+                    <p>
+                        <i class="time-slot denied"></i>&nbsp;
+                        <span translate="acPcDenied">Denied</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="wifiSchedulingTip2" class="columns medium-4 small-12 text-center">
+            <div class="row">
+                <div class="columns small-6">
+                    <button class="button tiny radius expand btn-deny-all" type="submit" ng-click="denyAll()" translate="acPcDenyAll"></button>
+                </div>
+                <div class="columns small-6">
+                    <button class="button tiny radius expand btn-allow-all" type="submit" ng-click="allowAll()" translate="allowAll"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-show="scheduling.Enable" class="row week-time-slots">
+        <div class="columns small-12">
+            <table id="wifiSchedulingTip3" class="t-a-d">
+                <tr>
+                    <th>0h</th>
+                    <th width="11%">4h</th>
+                    <th width="11%">8h</th>
+                    <th width="11%">12h</th>
+                    <th width="11%">16h</th>
+                    <th width="11%">20h</th>
+                    <th width="11%">24h</th>
+                    <th width="15%"></th>
+                </tr>
+                <tr ng-repeat="day in scheduling.WeekDays">
+                    <th ng-bind="day.Label|translate"></th>
+                    <td colspan="6">
+                        <div class="time-inputs">
+                            <rzslider
+                            rz-slider-floor="0"
+                            rz-slider-ceil="1439"
+                            rz-slider-model="day.Start"
+                            rz-slider-high="day.End"
+                            rz-slider-translate="converter"
+                            rz-slider-hide-limit-labels="false"
+                            rz-slider-step="5">
+                            </rzslider>
+                            
+                        </div>
+                    </td>
+                    <td id="wifiSchedulingTip4">
+                        <button class="button mini radius btn-deny" ng-click="deny($index)" type="button" translate="deny">&nbsp;</button>
+                        <button class="button mini radius btn-allow" ng-click="allow($index)" type="button" translate="allow">&nbsp;</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="right columns medium-4 small-12 text-right">
+            <button id="cancelTip" class="button tiny radius btn-cancel" type="button" click-loading ui-sref="user.home" translate="cancel">Cancel</button>
+            <button id="applyTip" class="button tiny radius" type="submit" ng-click="save()" translate="apply" >Apply</button>
+        </div>
+    </div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+    <li translate="tabTip" data-tourtarget="#wifiTab"></li>
+    <li translate="wifiSchedulingTip1" data-tourtarget="#wifiSchedulingTip1"></li>
+    <li translate="wifiSchedulingTip2" data-tourtarget="#wifiSchedulingTip2"></li>
+    <li translate="wifiSchedulingTip3" data-tourtarget="#wifiSchedulingTip3"></li>
+    <li translate="wifiSchedulingTip4" data-tourtarget="#wifiSchedulingTip4"></li>
+    <li translate="cancelTip" data-tourtarget="#cancelTip"></li>
+    <li translate="applyTip" data-tourtarget="#applyTip"></li>
+    
+</ul>

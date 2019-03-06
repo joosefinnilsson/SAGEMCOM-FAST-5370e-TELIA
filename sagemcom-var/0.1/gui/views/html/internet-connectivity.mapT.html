@@ -1,0 +1,105 @@
+<div class="content">
+	<div wait-loading></div>
+	<div class="content w100 ng-hide" ng-show="!loading" id="mapT">
+		<h4 class="maintitle">MAP-T</h4>
+		<div class="row">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="bRelayIpv6Prefix">Border Relay IPv6 Prefix</label>
+			</div>
+
+			<div class="columns medium-4 small-8 end">
+				<input type="text" disabled ng-model="mapT.bRelayIpv6Prefix" id="bRelayIpv6Prefix"/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="ipv6PrefixRule">IPv6 Prefix Rule</label>
+			</div>
+
+			<div class="columns medium-4 small-8 end">
+				<input type="text" disabled ng-model="mapT.ipv6PrefixRule" id="ipv6PrefixRule"/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="ipv4PrefixRule">IPv4 Prefix Rule</label>
+			</div>
+
+			<div class="columns medium-4 small-8 end">
+				<input type="text" disabled ng-model="mapT.ipv4PrefixRule" id="ipv4PrefixRule"/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="psidOffset">PSID Offset</label>
+			</div>
+
+			<div class="columns medium-4 small-8 end">
+				<input type="text" disabled ng-model="mapT.psidOffset" id="psidOffset"/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="psidLength">PSID Length</label>
+			</div>
+
+			<div class="columns medium-4 small-8 end">
+				<input type="text" disabled ng-model="mapT.psidLength" id="psidLength"/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="psid">PSID</label>
+			</div>
+
+			<div class="columns medium-4 small-8 end">
+				<input type="text" disabled ng-model="mapT.psid" id="psid"/>
+			</div>
+		</div>
+		<h4 class="maintitle" translate="customerConfig">Customer configuration</h4>
+		<div class="row">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="sharedIPv4Address">Shared IPv4 Address</label>
+			</div>
+
+			<div class="columns medium-4 small-8 end">
+				<input type="text" disabled ng-model="mapT.sharedIPv4Address" id="sharedIPv4Address"/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="columns medium-3 small-4">
+				<label class="inline" translate="listAvailablePorts">List of available ports</label>
+			</div>
+
+			<div class="columns medium-4 small-8 end">
+				<button class="button tiny radius" type="button" translate="clickHereToShow" data-reveal-id="port-range-modal" data-reveal></button>
+			</div>
+		</div>
+		<div class="right">
+			<button class="button tiny radius" type="button" translate="cancel" click-loading ui-sref="user.home"></button>
+		</div>
+	</div>
+	<!-- Model for restart -->
+	<div id="port-range-modal" class="reveal-modal medium" data-reveal>
+		<a class="close-reveal-modal close-modal" data-close-reveal>
+			<span class="btn-close">&#215;</span>
+			<span class="show-word btn-close close" translate="close">Close</span>
+		</a>
+		<h5 class="modal-title" translate="listPortRanges">List of all available port ranges</h5>
+		<p translate="textPortRanges">
+			Your gateway is configured to work with mapping of address and port using translation (MAP-T) and your port forwarding rules must respect the avaliable port ranges below.
+		</p>
+		<div class="portSetTableDiv">
+			<table>
+			<tr ng-repeat="portSet in mapT.portSets">
+				<td>Port set {{$index}}</td>
+				<td>{{portSet}}</td>
+			</tr>
+			</table>
+		</div>
+	</div>
+</div>
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = false;
+	$(document).foundation();
+</script>

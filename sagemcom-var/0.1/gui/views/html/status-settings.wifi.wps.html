@@ -1,0 +1,105 @@
+<div class="content" id="wps">
+	<div messagebox></div>
+	<div class="row">
+		<div class="columns small-12">
+			<h4 class="maintitle" translate="wpsProtectedSetup">Wi-Fi Protected Setup</h4>
+
+			<div class="row">
+				<div class="columns medium-2 small-6">
+					<label class="inline" for="enable-wps" translate="enableWPS">Enable WPS</label>
+				</div>
+
+				<div class="columns medium-2 small-6">
+					<div class="onoffswitch" ng-click="enableDisableWPS()" id="wpsTip1" ng-show="!waitEnable">
+						<input class="onoffswitch-checkbox" id="enable-wps" name="onoffswitch" type="checkbox" ng-model="enable"/>
+						<label class="onoffswitch-label" for="enable-wps"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+					</div>
+					<div>
+						<img ng-show="waitEnable" src="images/loading2.gif" style="padding: 9px 0;">
+					</div>
+				</div>
+
+				<div class="columns small-12 small-centered2">
+					<div class="alert-box warning radius" data-alert translate="wpsAlert">
+						If Wi-Fi Protected Setup is disabled here, the button on your router will also be disabled.
+					</div>
+				</div>
+			</div>
+			<div id="wps-container" ng-show="enable">
+				<p translate="wpsInstruction1" ng-if="methodsQty > 1">
+					Use one of the methods below to connect your device using Wi-Fi Protected Setup.
+				</p>
+
+				<div class="row">
+					<div class="columns medium-4 small-12" ng-show="hasPushButton">
+						<div class="wps-box">
+							<h6 translate="pushButton">Push Button</h6>
+							<!-- p>If your cliente has a Wi-Fi Protected Setup button, click or press that button and then click the button below.</p -->
+
+							<ol>
+								<li translate="wpsInstruction2">
+									Click the button below.
+								</li>
+
+								<!-- input class="button tiny radius" type="button" value="Connect" /-->
+								<button class="button-wps" title="Connect" ng-click="startPhysicalWPS()">
+									<!--span class="sprite icon-wps"></span-->
+									<img alt="WPS Icon" src="images/wps-icon.png" />
+								</button>
+
+								<li translate="wpsInstruction3">
+									Activate WPS on the wireless client within 2 minutes after clicking the button.
+								</li>
+							</ol>
+						</div>
+					</div>
+
+					<div class="columns medium-4 small-12" ng-show="hasPin">
+						<div class="wps-box">
+							<h6 translate="gatewayPin">Gateway pin</h6>
+							<p translate="wpsInstruction4">
+								1. If your client device asks for the Gateway's PIN number, enter the value below in your client device.
+							</p>
+							<small class="fistpin-msg" translate="wpsInstruction5">Click on button below to create Pin Code</small>
+							<p id="pin-code" ng-show="pinCode || loading ? true : false" class="text-center">
+								<strong translate="pinCode"></strong>
+								<img id="loading" ng-show="loading ? true : false" src="images/loading2.gif">
+								<b class="color-on" ng-bind="pinCode"></b>
+							</p>
+							<hr>
+							<button class="button tiny radius expand pin-generate" type="button" value="Generate New PIN Number" ng-click="generatePinCodeWPS()" translate="wpsGenerate" >
+								Generate New PIN Number
+							</button>
+						</div>
+					</div>
+
+					<div class="columns medium-4 small-12" ng-show="hasPin">
+						<div class="wps-box">
+							<h6 translate="devicePin">Device pin</h6>
+							<ol>
+								<li translate="wpsInstruction6">
+									Enter the client PIN Code and click "Register".
+								</li>
+								<li translate="wpsInstruction7">
+									Activate WPS on the Wireless client within 2 minutes after clicking "Register".
+								</li>
+							</ol>
+
+							<div class="row">
+								<div class="small-7 columns">
+									<input class="left" type="text" />
+								</div>
+
+								<div class="small-5 columns">
+									<button class="button tiny radius expand" type="button" value="Register" translate="wpsRegister">
+										Register
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

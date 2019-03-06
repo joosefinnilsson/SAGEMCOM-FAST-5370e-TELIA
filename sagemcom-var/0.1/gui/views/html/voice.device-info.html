@@ -1,0 +1,209 @@
+<div class="content">
+	<div class="columns row small-12">
+		<div messagebox></div>
+		<div>
+			<div class="row">
+				<form ng-submit="apply()" name="voiceDeviceInfoForm" check-unsaved>
+					<div class="columns small-12">
+						<h4 class="maintitle" translate="vDLine">Line</h4>
+
+						<div class="row">
+							<div class="columns small-12">
+								<div class="row">
+									<div class="columns medium-2 small-6">
+										<p translate="vDNumber">
+											Number
+										</p>
+									</div>
+									<div id="directoryNumber" class="columns medium-3 small-6">
+										<p>
+											<b ng-show="line.DirectoryNumber">{{line.DirectoryNumber}}</b>
+											<b ng-show="!line.DirectoryNumber">--</b>
+										</p>
+									</div>
+
+									<div style="display: none;" class="columns medium-7 small-12">
+										<div class="right">
+											<a href="phonebook.html" id="phonebook-link-voice" class="button tiny radius"><span id="phonebook-icon" class="sprite"></span>Phonebook</a>
+
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="medium-2 small-6 columns">
+										<p translate="busyOnBusy">
+											Busy on Busy
+										</p>
+									</div>
+									<div class="medium-8 small-6 columns end">
+										<div class="onoffswitch">
+										<input class="onoffswitch-checkbox noValidate" id="busyEnable" type="checkbox" ng-model="bobEnableView" ng-change="changeMultiCallEnable()"  ng-class="{'disabled-input':bobEnableView}" name="line-multiCallEnable">
+										<label class="onoffswitch-label" for="scheduleEnable">
+											<div class="onoffswitch-inner"></div>
+											<div class="onoffswitch-switch"></div>
+										</label>
+									</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="medium-2 small-6 columns">
+										<p translate="callWaiting">
+										Call Waiting
+									</p>
+									</div>
+									<div class="medium-8 small-6 columns end">
+										<div class="onoffswitch">
+											<input class="onoffswitch-checkbox noValidate" id="callWaitingEnableEnable" type="checkbox" ng-model="line.callWaitingEnable"  ng-change="changeMultiCallEnable()" name="line-callWaitingEnable" ng-disabled="bobEnableView">
+											<label class="onoffswitch-label" for="callWaitingEnableEnable">
+												<div class="onoffswitch-inner"></div>
+												<div class="onoffswitch-switch"></div>
+											</label>
+										</div>
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="columns medium-2 small-6">
+										<p translate="vDRegStatus">
+											Registration Status
+										</p>
+									</div>
+
+									<div id="registrationStatus" class="columns medium-4 small-6 end">
+										<p>
+											{{line.StatusReason}}
+										</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="medium-2 small-6 columns">
+										<p translate="vDTests">
+											Tests
+										</p>
+									</div>
+									<div class="medium-8 small-6 columns end">
+										<button type="button" ng-hide="inTest" id="ringTest" class="button tiny radius" ng-click="ringTest()" translate="vDRingTest">
+											Ring Test
+										</button>
+										<button type="button" ng-show="inTest" id="stopTest" class="button tiny radius" ng-click="stopTest()" >
+											Stop Test
+										</button>
+										<input style="display: none;" type="button" class="button tiny radius" value="Caller ID Test">
+										<input style="display: none;" type="button" class="button tiny radius" value="Flash Key Duration Test">
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="large-12 columns">
+										<h5 id="maintitle" translate="vDCallHist">Call History</h5>
+									</div>
+								</div>
+								<div class="row" ng-show="!callLogs.length">
+									<div class="large-12 columns">
+										<p translate="vDnoCallHistory">There is no call history.</p>
+									</div>
+								</div>
+								<div class="row" ng-show="callLogs.length">
+									<div class="columns medium-8 medium-centered small-12">
+										<table id="table-form" class="table-form responsive-table">
+											<thead>
+												<tr>
+													<th translate="vDType">Type</th>
+													<th translate="vDNumber">Number</th>
+													<th translate="vDDate">Date</th>
+													<th translate="vDHour">Hour</th>
+													<th translate="vDDuration">Duration</th>
+													<th translate="options">Options</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr ng-repeat="log in callLogs | orderBy: 'DateHour':true | filter:{toBeDeleted:'!true'}">
+													<td data-title="Type"><i class="sprite {{log.Type}}"  aria-hidden="true"></i></td>
+													<td data-title="Number" align="center" ng-bind="log.Number"></td>
+													<td data-title="Date" align="center" ng-bind="log.Date"></td>
+													<td data-title="Hour" align="center"ng-bind="log.Hour"></td>
+													<td data-title="Duration" ng-bind="log.Duration"></td>
+													<td data-title="Options">
+													<input class="icon-delete" data-reveal-id="confirm-remove-modal" data-reveal title="Delete" type="button" value="Delete" ng-click="deleteRule(log)" onclick="$('#confirm-remove-modal').foundation('reveal', 'open');"/>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+
+										<button id="refresh" class="button tiny radius" type="button" ng-click="refresh()" translate="vDRefresh">
+											Refresh
+										</button>
+										<button class="button tiny radius" translate="clearHistory" type="button"  onclick="$('#confirm-remove-all-modal').foundation('reveal', 'open');">
+											Clear History
+										</button>
+									</div>
+								</div>
+								<div class="right">
+									<button id="cancelButton" class="button tiny radius btn-cancel ng-scope" click-loading="" ui-sref="user.home" translate="cancel">Cancel</button>
+									<button id="applyButton" class="button tiny radius ng-scope" ng-click="save()" translate="apply">Apply</button>
+								</div>
+							</div>
+						</div>
+
+						
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal for remove -->
+<div id="confirm-remove-modal" class="reveal-modal tiny" data-reveal>
+	<a class="close-reveal-modal">&#215;</a>
+
+	<h5 class="modal-title" translate="confirmRemoveGenericTitle"></h5>
+
+	<p translate="confirmRemoveGenericTip"></p>
+
+	<div class="right">
+		<button class="button tiny radius" type="button" translate="cancel" ng-click="cancelRemove()" onclick="$('#confirm-remove-modal').foundation('reveal', 'close');"></button>
+		<button  class="button tiny radius" type="button" translate="yes" type="button" ng-click="confirmRemove()" onclick="$('#confirm-remove-modal').foundation('reveal', 'close');"></button>
+	</div>
+</div>
+
+<div id="confirm-remove-all-modal" class="reveal-modal tiny" data-reveal>
+	<a class="close-reveal-modal">&#215;</a>
+
+	<h5 class="modal-title" translate="confirmRemoveAllTitle"></h5>
+
+	<p translate="confirmRemoveAllTip"></p>
+
+	<div class="right">
+		<button class="button tiny radius" type="button" translate="cancel" ng-click="cancelRemove()" onclick="$('#confirm-remove-all-modal').foundation('reveal', 'close');"></button>
+		<button  class="button tiny radius" type="button" translate="apply" type="button" ng-click="deleteRule(null, true)" onclick="$('#confirm-remove-all-modal').foundation('reveal', 'close');"></button>
+	</div>
+</div>
+
+<!-- help button -->
+<ol class="joyride-list" data-joyride data-options="next_button:false;">
+	<li data-id="directoryNumber">
+		<p translate="vDTip1"></p>
+		<a class="small button joyride-next-tip" translate="next"></a>
+	</li>
+	<li data-id="registrationStatus">
+		<p translate="vDTip2"></p>
+		<a class="small button joyride-next-tip" translate="next"></a>
+	</li>
+	<li data-id="ringTest">
+		<p translate="vDTip3"></p>
+		<a class="small button joyride-next-tip" translate="next"></a>
+	</li>
+	<li data-id="table-form">
+		<p translate="vDTip4"></p>
+		<a class="small button joyride-next-tip" translate="next"></a>
+	</li>
+	<li data-id="refresh">
+		<p translate="vDTip5"></p>
+		<a class="small button joyride-next-tip" translate="next"></a>
+	</li>
+	<li data-id="cancel">
+		<p translate="cancelTip"></p>
+		<a class="small button joyride-next-tip" translate="next"></a>
+	</li>
+</ol>

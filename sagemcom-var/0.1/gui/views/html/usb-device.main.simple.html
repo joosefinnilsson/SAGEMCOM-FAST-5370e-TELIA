@@ -1,0 +1,36 @@
+<div class="columns medium-12 ng-hide" ng-show="true">
+	<div class="row">
+		<div id="header-page">
+			<div class="columns medium-6">
+				<h3 translate="usbDevice">USB Device</h3>
+			</div>
+			<div class="columns medium-6 small-12 text-center fullConnectivity">
+				<div internet-connectivity></div>
+				<a id="homebtn" title="Home" click-loading ui-sref="user.home" class="icons-bg border-gray"> <img src="images/icon-home.png" alt="Home Icon"> </a>
+			</div>
+
+			<div class="columns medium-6 small-12 text-right simpleConnectivity">
+				<a href="javascript:void(0)" id="status-internet" ng-class="connectivity.status ? 'is_connected' : 'is_disconnected'">
+				<svg title="Internet: connected" class="icon">
+					<use xlink:href="images/sprite.svg?new#icon-wifi"/>
+				</svg> <span translate="internetConnectivityOn" ng-show="connectivity.status" class="ng-hide"></span> <span translate="internetConnectivityOff"  ng-hide="connectivity.status" class="ng-hide"></span> </a>
+			</div>
+		</div>
+	</div>
+	<div messagebox></div>
+	<div id="main-content">
+		<a class="shs" href="javascript:void(0)" translate="showSection">Show Sections</a>
+		<dl id="tabstip" class="tabs" data-tab tab-click>
+			<dd class="active">
+				<a click-loading ui-sref="user.simple.usbDevice.deviceInfo({ uid : uid })" translate="deviceinfo">Device Information</a>
+			</dd>
+			<dd check-feature-state="massStorageUSB">
+				<a click-loading ui-sref="user.simple.usbDevice.massStorage({ uid : uid })" translate="massStorage">Mass Storage</a>
+			</dd>
+		</dl>
+		<div class="tabs-content" ui-view>
+			&nbsp;
+		</div>
+	</div>
+</div>
+<script>$(document).foundation();</script>

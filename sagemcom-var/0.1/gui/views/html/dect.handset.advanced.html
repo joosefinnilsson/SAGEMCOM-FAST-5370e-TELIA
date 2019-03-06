@@ -1,0 +1,50 @@
+<div class="content">
+<div wait-loading></div>
+<div class="content ng-hide" ng-show="!loading">
+	<form name="dectHandsetForm">
+		<div class="row">
+			<div class="columns small-12 medium-3 large-3">
+				<label class="inline" translate="ipei">IPEI</label>
+			</div>
+			<div class="columns small-12 medium-5 large-4 end">
+				<label id="ipei" class="inline" type="text" ng-bind="c.IPEI" name="ipei"></label>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="columns small-12 medium-3 large-3">
+				<label class="inline" translate="ipui">IPUI</label>
+			</div>
+			<div class="columns small-12 medium-5 large-4 end">
+				<label id="ipui" class="inline" type="text" ng-bind="c.IPUI" name="ipui"></label>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="columns small-12 medium-5 large-3">
+				<label class="inline" translate="standard">Standard</label>
+			</div>
+			<div class="columns small-12 medium-3 large-3 end">
+				<label id="standard" class="inline" type="text" name="handsetType" ng-bind="c.HandsetType"></label>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="columns small-12 medium-3 large-3">
+				<label class="inline" translate="subscriptionTime">Subscription time</label>
+			</div>
+			<div class="columns small-12 medium-5 large-4 end">
+				<label id="subscription" class="inline" type="text" ng-model="c.SubscriptionTime" name="subscription"></label>
+			</div>
+		</div>
+	</form>
+</div>
+</div>
+
+<!-- help -->
+<ul id="tlyPageGuide">
+	<li translate="dectHandsetTip6" data-tourtarget="#ipei"></li>
+	<li translate="dectHandsetTip7" data-tourtarget="#standard"></li>
+	<li translate="dectHandsetTip8" data-tourtarget="#subscription"></li>
+	<li translate="dectHandsetTabTip" data-tourtarget="#dectHandsetTab"></li>
+</ul>

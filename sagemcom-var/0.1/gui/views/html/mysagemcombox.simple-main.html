@@ -1,0 +1,19 @@
+<div class="columns medium-12 ng-hide" ng-show="true">
+	<div class="row">
+		<div id="header-page">
+			<div class="columns medium-6">
+				<h3 ng-if="!titlePage" translate="mySagemcomBox">&nbsp;</h3>
+				<h3 ng-if="titlePage" ng-bind="titlePage">&nbsp;</h3>
+			</div>
+			<div class="columns medium-6 text-right">
+				<a class="button tiny radius external-link-button-style" ui-sref="anon.login" translate="goToLogin" >Go to Login</a>
+			</div>
+		</div>
+	</div>
+	<div id="main-content">
+		<div class="tabs-content" ui-view>
+			&nbsp;
+		</div>
+	</div>
+</div>
+<script>$(document).foundation();</script>

@@ -1,0 +1,180 @@
+<div class="content content-mobile">
+<div wait-loading=""></div>
+<div check-feature-state="wifiDualTabsWPS" class="wifi-dual-sub-tabs-menu ng-hide" ng-show="!loading">
+	<a class="shs sub" href="javascript:void(0)">Show Sections</a>
+	<dl id="wifi-dual-advanced" class="tabs sub-tabs" ng-class="changeToVertical ? 'vertical' : ''" data-tab="" tab-click="">
+		<dd>
+			<a href="javascript:void(0)" click-loading="" ui-sref="user.wifi.wps({radio : '2.4GHz', mode: 'priv'})" tabindex="1">2.4 GHz</a>
+		</dd>
+		<dd>
+			<a href="javascript:void(0)" click-loading="" ui-sref="user.wifi.wps({radio : '5GHz', mode: 'priv'})" tabindex="2">5 GHz</a>
+		</dd>
+	</dl>
+</div>
+<div class="content w100 ng-hide" ng-show="!loading" id="wps-24">
+	<div><div bread-crumbs=""></div></div>
+	<h4 class="maintitle" translate="wpsProtectedSetup">Wi-Fi Protected Setup</h4>
+	<div class="row showInfo">
+		<div class="columns small-12">
+			<p translate="wpsDescription">
+				Wi-Fi Protected Setup allows users to setup secure wireless network easily.
+			</p>
+		</div>
+	</div>
+	<form name="wpsForm" novalidate="" autocomplete="off" check-unsaved="">
+		<div class="row">
+			<div class="columns medium-2 small-4">
+				<label class="inline" for="enable-wps" translate="enableWPS">Enable WPS</label>
+			</div>
+
+			<div class="columns medium-2 small-5 wps-enable-width">
+				<div class="onoffswitch" id="wpsTip1" ng-show="!waitEnable">
+					<input class="onoffswitch-checkbox" id="enable-wps" name="onoffswitch" type="checkbox" ng-disabled="!wifiIsEnabled || !broadcast" ng-model="enable">
+					<label class="onoffswitch-label" for="enable-wps"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+				</div>
+				<div>
+					<img class="wpsClass1" ng-show="waitEnable" src="images/loading2.gif">
+				</div>
+			</div>
+
+			<div class="columns medium-8 small-12 wps-enable-hint">
+				<div class="alert-box warning medium radius" data-alert="">
+					    <i class="fa fa-info-circle fa-center"></i>
+					    <span translate="wpsAlert">If Wi-Fi Protected Setup is disabled here, the button on your router will also be disabled.</span>
+				</div>
+			</div>
+
+			
+
+			
+
+			<div class="right">
+				<button class="button tiny radius btn-cancel" id="wifiMACFilterTip7" translate="cancel" click-loading="" ui-sref="user.home">
+					Cancel
+				</button>
+				<button class="button tiny radius" id="wifiMACFilterTip6" value="Apply" translate="apply" ng-show="!skipModal && enable" data-reveal-id="apply-changes-modal" data-reveal="">
+					Apply
+				</button>
+				<button class="button tiny radius" id="wifiMACFilterTip6" value="Apply" translate="apply" ng-show="skipModal || !enable" ng-click="enableDisableWPS()" data-reveal="">
+					Apply
+				</button>
+
+				<!-- Modal for warning -->
+				<div id="apply-changes-modal" class="reveal-modal tiny" data-reveal="">
+					<a class="close-reveal-modal close-modal" data-close-reveal="">
+						<span class="btn-close">&#215;</span>
+						<span class="show-word btn-close close" translate="close">Close</span>
+					</a>
+
+					<h5 class="modal-title" translate="macFilter">MAC Filter</h5>
+
+					<p translate="wpsMacFilterDisabled">
+						Enabling WPS will disable MAC Filtering mode.
+					</p>
+
+					<div class="right">
+						<button class="button tiny radius btn-cancel" type="button" translate="cancel" onclick="$('#apply-changes-modal a.close-reveal-modal').trigger('click');" data-close-reveal=""></button>
+						<button class="button tiny radius" type="button" translate="continue" onclick="$('#apply-changes-modal a.close-reveal-modal').trigger('click');" ng-click="enableDisableWPS()"></button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</form>
+	
+	
+	<div id="wps-container" class="ng-hide" ng-show="reallySaved && (hasPushButton || hasPin)" ng-if="wifiIsEnabled">
+		<p translate="wpsInstruction1" ng-show="wpsModePIN || wpsModePushButton">
+
+		</p>
+
+		<div class="row">
+			<!-- Will fix alignment of wps tiles -->
+			<div class="columns dummy-column" ng-class="{ 'medium-4' : wpsTiles === 1 , 'medium-2' : wpsTiles === 2}" ng-show="wpsTiles === 1 || wpsTiles === 2">
+				<!-- dummy columns to align wps-boxes -->
+				<p>&nbsp;</p>
+			</div>
+			<div class="columns medium-4 small-12 ng-hide" ng-show="hasPushButton && wpsModePushButton">
+				<div class="wps-box" id="wps-push-button">
+					<h6 translate="pushButton">Push Button</h6>
+					<ol>
+						<li translate="wpsInstruction2">
+							Click the button below.
+						</li>
+						<button class="button-wps" title="Connect" ng-click="startPhysicalWPS()" ng-hide="loadingWps">
+							<img alt="WPS Icon" src="images/wps-icon-da.png" ng-if="currentLanguage === 'DA'">
+							<img alt="WPS Icon" src="images/wps-icon.png" ng-if="currentLanguage !== 'DA'">
+						</button>
+						
+						<div class="loading-wps">
+							<img id="loadingWps" ng-show="loadingWps" src="images/loading2.gif">
+						</div>
+						<li translate="wpsInstruction3">
+							Activate WPS on the wireless client within 2 minutes after clicking the button.
+						</li>
+					</ol>
+				</div>
+			</div>
+			<div class="columns medium-4 small-12 ng-hide" ng-show="hasPin && wpsModePIN">
+				<div class="wps-box" id="wps-gateway-pin">
+					<h6 translate="gatewayPin">Gateway pin</h6>
+					<p translate="wpsInstruction4">
+						1. If your client device asks for the Gateway's PIN number, enter the value below in your client device.
+					</p>
+					<small class="fistpin-msg" translate="wpsInstruction5">Click on button below to create Pin Code</small>
+					<p ng-show="pinCode || loadingPin ? true : false" class="text-center">
+						<strong translate="pinCode">Pin Code:</strong>
+						<img id="loading" ng-show="loadingPin" src="images/loading2.gif">
+						<b class="color-on" ng-bind="pinCode">&nbsp;</b>
+					</p>
+					<hr>
+					<button class="button tiny radius expand pin-generate" type="button" value="Generate New PIN Number" ng-click="generatePinCodeWPS()" translate="wpsGenerate">
+						Generate New PIN Number
+					</button>
+				</div>
+			</div>
+
+			<div class="columns medium-4 small-12 end ng-hide" ng-show="hasPin && wpsModePIN">
+				<div class="wps-box" id="wps-device-pin">
+					<h6 translate="devicePin">Device pin</h6>
+					<ol>
+						<li translate="wpsInstruction6">
+							Enter the client PIN Code and click "Register".
+						</li>
+						<li translate="wpsInstruction7">
+							Activate WPS on the Wireless client within 2 minutes after clicking "Register".
+						</li>
+					</ol>
+
+					<div class="row">
+						<div class="small-7 columns">
+							<input class="left" type="text" ng-model="enrolleePin" ng-hide="loadingEnrollee">
+							<img id="loadingEnrollee" ng-show="loadingEnrollee" src="images/loading2.gif">
+						</div>
+
+						<div class="small-5 columns">
+							<button class="button tiny radius" type="button" value="Register" translate="wpsRegister" ng-click="setEnrolleePin()" ng-hide="loadingEnrollee">
+								Register
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li translate="wpsTip1" data-tourtarget="#wpsTip1"></li>
+	<li translate="wpsTip5" data-tourtarget="#wpsModeTip"></li>
+	<li translate="wpsTip2" data-tourtarget="#wps-push-button"></li>
+	<li translate="wpsTip3" data-tourtarget="#wps-gateway-pin"></li>
+	<li translate="wpsTip4" data-tourtarget="#wps-device-pin"></li>
+</ul>
+
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = false;
+	$(document).foundation();
+</script>

@@ -1,0 +1,116 @@
+<div class="content">
+<div wait-loading></div>
+<div class="content ng-hide" ng-show="!loading" id="mass-storage">
+	<h4 class="maintitle" translate="usbStorageDevice">&nbsp;</h4>
+
+	<div style="display:inline-block;">
+		<div class="row columns">
+			<div class="alert-box warning radius" data-alert>
+			    <i class="fa fa-info-circle fa-center center"></i>
+			    <span translate="usbDriveTip">&nbsp;</span>
+			</div>
+		</div>
+
+		<div class="row columns" ng-if="!statusSamba && uid != null" style="float:left;">
+			<div class="alert-box warning radius" data-alert>
+			    <i class="fa fa-exclamation-triangle fa-center center"></i>
+			    <span translate="sambaDisabled">&nbsp;</span>
+			</div>
+		</div>
+	</div>
+
+	<div style="display:inline-block;">
+	<form id="formMassStorage" name="massStorageForm" autocomplete="off" ng-submit="save()">
+		<div class="row">
+			<div class="columns medium-2 small-4">
+				<label class="inline" for="dlna" translate="share">Share</label>
+			</div>
+
+			<div class="columns large-3 medium-2 small-8 end" >
+				<div class="onoffswitch"  id="massStorageTip1">
+					<input class="onoffswitch-checkbox" id="dlna" ng-model="enableDevice" ng-change="enableShare()" name="onoffswitch" type="checkbox"  />
+					<label class="onoffswitch-label" for="dlna"> 
+						<div class="onoffswitch-inner"></div> 
+						<div class="onoffswitch-switch"></div> 
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="row columns">
+			<div class="alert-box warning radius" data-alert>
+			    <i class="fa fa-info-circle fa-center center"></i>
+			    <span translate="usbDriveTip2">&nbsp;</span>
+			</div>
+		</div>
+		
+		<div class="row" >
+			<div class="columns medium-2 small-4 ng-hide" ng-show="uid == null">
+				<label class="inline" for="samba" translate="sambaServer">Samba file server</label>
+			</div>
+
+			<div class="columns medium-2 small-8 ng-hide" ng-show="uid == null">
+				<div class="onoffswitch" id="massStorageTip2">
+					<input class="onoffswitch-checkbox" id="samba" name="onoffswitch" type="checkbox" ng-model="statusSamba"/>
+					<label class="onoffswitch-label" for="samba"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+				</div>
+			</div>
+
+			<div class="columns medium-8 small-12 {{uid != null? 'end' : ''}} ng-hide" ng-show="statusSamba">
+				<div class="row">
+					<div id="massStorageTip3" class="columns medium-8 small-12 ">
+
+						<div class="row collapse ng-hide" ng-show="displaySambaHost">
+							<div class="columns small-8">
+								<input id="clipboard_text" type="text" ng-model="sambaHost" disabled />
+							</div>
+						</div>
+
+						<div class="row collapse">
+							<div class="columns small-8">
+								<input id="clipboard_text2" type="text" ng-model="sambaIp" disabled />
+							</div>
+						</div>
+						<p></p>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		
+		<div class="row" >
+			<div class="columns medium-6 small-12">
+				<p>
+				<img src="images/mass-storage-help.png" alt="" />
+				</p>
+			</div>		
+		</div>
+		<div class="right">
+			<button class="button tiny radius btn-cancel" translate="cancel" click-loading ui-sref="{{previousMainPage}}" id="cancelTip" ng-if="uid == null"></button>
+			<button class="button tiny radius" translate="apply" type="submit" id="applyTip" ng-if="uid == null"></button>
+		</div>
+	</form>
+	</div>
+</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide"><li translate="massStorageTip1" data-tourtarget="#massStorageTip1">
+		
+		
+	</li><li translate="massStorageTip2" data-tourtarget="#massStorageTip2">
+		
+		
+	</li><li translate="massStorageTip3" data-tourtarget="#massStorageTip3">
+		
+		
+	</li><li translate="cancelTip" data-tourtarget="#cancelTip">
+		
+		
+	</li><li translate="applyTip" data-tourtarget="#applyTip">
+		
+		
+	</li><li translate="tabTip" data-tourtarget="#tabstip">
+		
+		
+	</li></ul>

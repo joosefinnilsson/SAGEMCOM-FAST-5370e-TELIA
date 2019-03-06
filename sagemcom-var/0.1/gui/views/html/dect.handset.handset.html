@@ -1,0 +1,44 @@
+<div class="content">
+<div wait-loading></div>
+<div class="content ng-hide" ng-show="!loading">
+	<form name="dectHandsetForm" novalidate autocomplete="off" ng-submit="save()" check-unsaved>
+		<div class="row">
+			<div class="columns small-12 medium-3 large-3">
+				<label class="inline" translate="unpairThisDevice">Unpair this device</label>
+			</div>
+			<div class="columns small-12 medium-5 large-4 end">
+				<button id="unpair" class="button tiny radius" translate="unpair" type="button" ng-disabled="!dectEnabled" ng-click="unPair()"></button>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="columns small-12 medium-3 large-3">
+				<label class="inline" translate="name">Name</label>
+			</div>
+			<div class="columns small-12 medium-5 large-4 end">
+				<input id="description" type="text" ng-model="c.Description" name="description" required clear-validation-on-focus="true" maxlength="23">
+				<small class="error" ng-if="dectHandsetForm.description.$invalid && submitted" translate="fieldRequired">&nbsp;</small>
+			</div>
+		</div>
+
+		<br/>
+
+		<div class="right">
+			<button id="cancel" class="button tiny radius btn-cancel" translate="cancel" type="button" click-loading ui-sref="{{previousMainPage}}"></button>
+			<button id="saveBtn" class="button tiny radius" translate="apply" type="submit"></button>
+		</div>
+	</form>
+</div>
+</div>
+
+<!-- help -->
+<ul id="tlyPageGuide">
+	<li translate="dectHandsetTip1" data-tourtarget="#unpair"></li>
+	<li translate="dectHandsetTip2" data-tourtarget="#description"></li>
+	<li translate="dectHandsetTip3" data-tourtarget="#status"></li>
+	<li translate="dectHandsetTip4" data-tourtarget="#handsetRole"></li>
+	<li translate="dectHandsetTip5" data-tourtarget="#lockPin"></li>
+	<li translate="cancelTip" data-tourtarget="#cancel"></li>
+	<li translate="applyTip" data-tourtarget="#saveBtn"></li>
+	<li translate="dectHandsetTabTip" data-tourtarget="#dectHandsetTab"></li>
+</ul>

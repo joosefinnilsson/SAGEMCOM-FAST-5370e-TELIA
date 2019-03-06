@@ -1,0 +1,285 @@
+<!-- <div wifi-dual-form model="{{radios['2.4GHz']}}"></div>
+<div wifi-dual-form model="{{radios['5GHz']}}"></div> -->
+<div class="content">
+	<div wait-loading></div>
+	<div class="content w100 ng-hide" ng-show="!loading" id="basic-24">
+		<form name="wifiForm" novalidate autocomplete="off" check-unsaved>
+			<div class="row">
+				<div class="columns small-12">
+					<!-- header wifi general -->
+					<h4 class="maintitle" translate="basic">Basic</h4>
+					<!-- band steering -->
+					<div class="row wifi-config" id="hide">
+						<div class="columns small-12">
+							<div class="row" ng-if="wifiBandSteeringSupport">
+								<div class="columns medium-2 small-8">
+									<label class="inline" for="enable-band-steering" translate="BandSteering">Band steering</label>
+								</div>
+								<!-- inout switch -->
+								<div class="columns medium-2 small-4 end">
+									<div class="onoffswitch" id="wifiBandSteeringCheckBox" ng-class="{'onoffswitch-disabled': !(radios['2.4GHz'].wifiEnable && radios['5GHz'].wifiEnable)}">
+
+										<input class="onoffswitch-checkbox noValidate" id="enable-band-steering" type="checkbox" ng-change="saveWifiBandSteeringStatus()" ng-disabled="!(radios['2.4GHz'].wifiEnable && radios['5GHz'].wifiEnable)" ng-model="field.bandSteeringEnabled" name="enable-band-steering" />
+										<label class="onoffswitch-label" for="enable-band-steering">
+											<div class="onoffswitch-inner"></div>
+											<div class="onoffswitch-switch"></div>
+										</label>
+									</div>
+								</div>
+								<!-- <div class="columns medium-2 small-0">
+									&nbsp;
+								</div> -->
+								<!-- info warinng -->
+								<div class="columns medium-8 small-12" ng-show="wifiBandSteering">
+									<div class="alert-box warning medium radius" data-alert>
+									<i class="fa fa-info-circle fa-center"></i>
+									<span translate="bandSteeringOnAlert">If you change the SSID or Security settings, the same modification will be setted on both bands (2.4G and 5G).
+									If you want to change just the current band, you should disable "Band steering" before.</span>
+									</div>
+								</div>
+								<div class="columns medium-8 small-12" ng-show="!wifiBandSteering && !isSameBandsSettings">
+									<div class="alert-box warning medium radius" data-alert>
+									<i class="fa fa-info-circle fa-center"></i>
+									<span translate="bandSteeringOffAlert">You should configure both bands (2.4G and 5G) to have the same SSID and Security settings, then you can enable the Band Steering.</span>
+									</div>
+								</div>
+							</div>
+						</div>
+          </div>
+
+					<div class="wifi-dual-desktop" ng-include="'views/partials/wifi.basic.dual.generic.desktop.html'"></div>
+          <div class="wifi-dual-mobile" ng-include="'views/partials/wifi.basic.dual.generic.mobile.html'"></div>
+
+				</div>
+			</div>
+			<div class="right">
+				<button id="wifiGeneralTip8" class="button tiny radius btn-cancel" translate="cancel" type="button" click-loading ui-sref="user.home"></button>
+				<button id="wifiGeneralTip9" class="button tiny radius" translate="apply" type="button" ng-click="beforeSave()"></button>
+				<!-- Modal for reset -->
+				<div id="apply-changes-modal" class="reveal-modal tiny" data-reveal>
+					<a class="close-reveal-modal close-modal" data-close-reveal>
+						<span class="btn-close">&#215;</span>
+						<span class="show-word btn-close close" translate="close">Close</span>
+					</a>
+
+					<h5 class="modal-title" translate="wifiModalTitle">Wi-fi Settings</h5>
+
+					<p translate="wifiModalDescription">
+						Changing any values in this page may cause any users connected in Wi-Fi a loss of connectivity.
+					</p>
+
+					<p translate="wifi5GChannelWarning" check-feature-state="wifiAlertSupportedChannel" ng-show="channel >= 100">
+						The SSID may disappear to clients that do not support this channel.
+					</p>
+
+					<!-- <p translate="wifiStbWarning" ng-if="existStb && originalStatus && !wifiEnable">
+						&nbsp;
+					</p> -->
+
+					<div class="right">
+						<button class="button tiny radius btn-cancel" type="button" translate="cancel" onclick="$('#apply-changes-modal a.close-reveal-modal').trigger('click');" data-close-reveal></button>
+						<button class="button tiny radius" type="button" translate="continue" onclick="$('#apply-changes-modal a.close-reveal-modal').trigger('click');" ng-click="save()"></button>
+					</div>
+				</div>
+
+				<!-- Modal for warning when ssid and psk are equal -->
+				<div id="warning-psk-modal" class="reveal-modal tiny" data-reveal>
+					<a class="close-reveal-modal close-modal" data-close-reveal>&#215;</a>
+					<h5 class="modal-title" translate="wifiDualConflictingTitle">Warning</h5>
+
+					<p translate="wifiDualConflicting"></p>
+
+					<div class="right">
+						<button id="closeWarningPSKModal" class="button tiny radius" type="button" translate="continue" onclick="$('#warning-psk-modal a.close-reveal-modal').trigger('click');" data-close-reveal></button>
+					</div>
+				</div>
+
+				<!-- Modal for warning invalid psk -->
+				<div id="warning-psk-invalid-modal" class="reveal-modal tiny" data-reveal>
+					<a class="close-reveal-modal close-modal" data-close-reveal>&#215;</a>
+					<h5 class="modal-title" translate="descWarning">Warning</h5>
+
+					<p>
+						<span translate="illegalCharactersWarning1">
+							&nbsp;
+						</span>
+						<span id="illegalCharsList"></span>
+					</p>
+					<p translate="illegalCharactersWarning2">
+						&nbsp;
+					</p>
+
+					<div class="right">
+						<button id="closeWarningInvalidPSKModal" class="button tiny radius" type="button" translate="ok"
+							onclick="$('#warning-psk-modal a.close-reveal-modal').trigger('click');" data-close-reveal></button>
+					</div>
+				</div>
+				<!-- Modal for tv message -->
+				<div id="modalTVMessage" class="reveal-modal tiny" data-reveal>
+					<a class="close-reveal-modal close-modal" data-close-reveal>
+						<span class="btn-close">&#215;</span>
+						<span class="show-word btn-close close" translate="close">Close</span>
+					</a>
+
+					<h5 class="modal-title">Do you really want to disable the Wi-Fi 5GHz?</h5>
+
+					<p>
+						The television won't work anymore.
+					</p>
+
+					<div class="right">
+						<button class="button tiny radius" type="button" translate="no" ng-click="revertStatus()" onclick="$('#modalTVMessage a.close-reveal-modal').trigger('click');"></button>
+						<button  class="button tiny radius" type="button" translate="yes" ng-click="saveStatus()" onclick="$('#modalTVMessage a.close-reveal-modal').trigger('click');"></button>
+					</div>
+				</div>
+
+				<!-- Modal for warning 'restore default wait' -->
+				<div id="warning-restore-default-modal" class="reveal-modal tiny" data-reveal>
+					<!-- Before gateway reboots-->
+					<a class="close-reveal-modal close-modal" data-close-reveal ng-show="!rebooting">&#215;</a>
+					<h5 class="modal-title" translate="descWarning" ng-show="!rebooting">Warning</h5>
+					<p translate="restoreDefaultWarning" ng-show="!rebooting">
+						This operation may take up to 1 minute to complete. Please don’t reboot the Gateway in the meantime.
+					</p>
+
+					<div class="right" ng-show="!rebooting">
+						<button id="closeWarningRestoreDefaultModal" class="button tiny radius" type="button" translate="ok" ng-click="restoreDefault()"
+							></button>
+					</div>
+					<!--While gateway rebooting-->
+					<!--<a class="close-reveal-modal close-modal" data-close-reveal>&#215;</a>-->
+					<h5 class="modal-title" translate="pleaseWaitLoading" ng-show="rebooting">Please Wait...</h5>
+
+					<p translate="responseDescription" ng-show="rebooting">
+						Please wait for Gateway response....
+					</p>
+					<div class="t-center" ng-show="rebooting">
+						<img src="images/loading.gif" border="0">
+					</div>
+
+				</div>
+
+				<!-- Modal for Wi-fi GUEST -->
+				<div id="wifi-basic-guest-modal" class="reveal-modal tiny" ng-if="radios['2.4GHz'].securityMode !== 'NONE' || radios['5GHz'].securityMode !== 'NONE'" data-reveal>
+					<a class="close-reveal-modal close-modal" data-close-reveal>
+						<span class="btn-close">&#215;</span>
+						<span class="show-word btn-close close" translate="close">Close</span>
+					</a>
+
+					<h5 class="modal-title" translate="wifiGuest">WI-FI - GUEST ACCESS</h5>
+
+					<div class="row justified">
+						<div class="alert-box warning large radius right medium-9 small-12" data-alert>
+							<i class="fa fa-info-circle fa-center"></i>
+							<span translate="passwordTip6">
+								WPA requires a 8-63 character password. Only the following characters can be used: a-z, A-Z, 0-9 and + * % = - _ !
+							</span>
+						</div>
+					</div>
+
+					<div class="row columns justified">
+						<p translate="guestPassword">
+							Please enter WI-FI GUEST password
+						</p>
+					</div>
+
+					<div class="row justified">
+						<div class="columns small-12 medium-4 large-4">
+								<label class="inline" translate="passwordWiFi">Password</label>
+						</div>
+						<div class="columns small-12 medium-8 large-8">
+								<input type="password" ng-model="radios['2.4GHz'].password" name="password2" ng-change="changePassword()" validate-wifi-password data-security-mode="radios['2.4GHz'].securityMode" class="password"/>
+								<!-- validation msg -->
+								<small class="error" ng-if="wifiForm.password2.$error.invalidPassword && (wifiForm.password2.$dirty || submitted || wifiForm.$dirty)" translate="invalidPassword">Invalid Password</small>
+								<small class="error" ng-if="wifiForm.password2.$error.invalidPasswordLength && radios['2.4GHz'].securityMode.indexOf('WEP') !== -1 && (wifiForm.password2.$dirty || submitted || wifiForm.$dirty)" translate="invalidPassword">Invalid Password</small>
+								<small class="error" ng-if="wifiForm.password2.$error.invalidPasswordLength && wifiSpecificKeyRule && (wifiForm.password2.$dirty || submitted || wifiForm.$dirty)" translate="invalidPassword">Invalid Password</small>
+								<small class="error" ng-if="wifiForm.password2.$error.invalidPasswordLength && wifiForm.password2.$error.minLengthError && (wifiForm.password2.$dirty || submitted )" translate="passwordMinLength">Too short.</small>
+								<small class="error" ng-if="wifiForm.password2.$error.invalidPasswordLength && wifiForm.password2.$error.maxLengthError && (wifiForm.password2.$dirty || submitted || wifiForm.$dirty)" translate="passwordMaxLength">Too long.</small>
+						</div>
+					</div>
+
+					<div class="row justified">
+						<div class="columns small-12 medium-4 large-4">
+							<label class="inline" translate="confirmPasswordWiFi">Confirm Password</label>
+						</div>
+						<div class="columns small-12 medium-8 large-8">
+							<input type="password"ng-model="radios['2.4GHz'].confirmPassword" name="confirmPassword" ng-change="changePassword()"  password-field="password2" password-radio="2.4GHz" required class="password" ng-disabled="radios['2.4GHz'].securityMode === 'NONE'"/>
+							<small class="error" ng-if="wifiForm.confirmPassword.$error.passwordVerify && radios['2.4GHz'].securityMode !== 'NONE' && (wifiForm.confirmPassword.$dirty || submitted || wifiForm.$dirty)" translate="passwordDoesntMatch">&nbsp;</small>
+						</div>
+					</div>
+
+					<div class="right">
+						<button class="button tiny radius btn-cancel" type="button" translate="cancel" onclick="$('#wifi-basic-guest-modal a.close-reveal-modal').trigger('click');"
+						 data-close-reveal ng-click="closePasswordModal()"></button>
+						<button class="button tiny radius" type="button" translate="apply" onclick="$('#wifi-basic-guest-modal a.close-reveal-modal').trigger('click');"
+						 ng-click="beforeSave()"></button>
+					</div>
+				</div>
+
+			</div>
+		</form>
+	</div>
+</div>
+
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li ng-if="mode !== 'guest'" translate="wifiGeneralTip1" data-tourtarget="#wifiGeneralTip1">
+	</li>
+	<li ng-if="mode !== 'guest'" translate="wifiGeneralTip12" data-tourtarget="#wifiGeneralTip12">
+	</li>
+	<li ng-if="mode !== 'guest'" translate="wifiGeneralTip2" data-tourtarget="#wifiGeneralTip2">
+	</li>
+	<li ng-if="mode !== 'guest'" translate="wifiGeneralTip2" data-tourtarget="#wifiGeneralTipSSID">
+	</li>
+	<li ng-if="mode !== 'guest'" translate="wifiGeneralTip12" data-tourtarget="#wifiGeneralTipSSId5">
+	</li>
+	<li ng-if="mode !== 'guest'" translate="wifiGeneralTip2" data-tourtarget="#wifiGeneralTipSSId5status">
+	</li>
+	<li ng-if="mode !== 'guest'" translate="wifiGeneralTip3" data-tourtarget="#wifiGeneralTip3">
+	</li>
+	<li ng-if="mode !== 'guest'" translate="wifiGeneralTip10" data-tourtarget="#wifiGeneralTip10">
+	</li>
+	<li ng-if="mode !== 'guest'" translate="wifiGeneralTip4" data-tourtarget="#wifiGeneralTip5">
+	</li>
+	<li ng-if="mode !== 'guest'" translate="wifiGeneralTip4" data-tourtarget="#wifiGeneralTip24">
+	</li>
+	<li ng-if="mode !== 'guest'" translate="wifiGeneralTip5" data-tourtarget="#wifiGeneralTip24SecurityType">
+	</li>
+	<li ng-if="mode !== 'guest'" translate="wifiGeneralTip5" data-tourtarget="#wifiGeneralTip5SecurityType">
+	</li>
+	<li ng-if="mode !== 'guest'" translate="wifiGeneralTip6" data-tourtarget="#wifiGeneralTip24password">
+	</li>
+	<li ng-if="mode !== 'guest'" translate="wifiGeneralTip6" data-tourtarget="#wifiGeneralTip5password">
+	</li>
+	<li ng-if="mode !== 'guest'" translate="wifiGeneralTip7" data-tourtarget="#togglePasswordInput">
+	</li>
+	<li ng-if="mode !== 'guest'" translate="wifiGeneralTip7" data-tourtarget="#togglePasswordInput5">
+	</li>
+	<li ng-if="mode !== 'guest'" translate="wifiGeneralTip15" data-tourtarget="#wifiGeneralTip15">
+	</li>
+	<li ng-if="mode !== 'guest'" translate="wifiGeneralTip17" data-tourtarget="#wifiGeneralTip17">
+	</li>
+	<li ng-if="mode === 'guest'" translate="wifiGeneralTip1Guest" data-tourtarget="#wifiGeneralTip1">
+	</li>
+	<li ng-if="mode === 'guest'" translate="wifiGeneralTip12Guest" data-tourtarget="#wifiGeneralTip12">
+	</li>
+	<li ng-if="mode === 'guest'" translate="wifiGeneralTip2Guest" data-tourtarget="#wifiGeneralTip2">
+	</li>
+	<li ng-if="mode === 'guest'" translate="wifiGeneralTip3Guest" data-tourtarget="#wifiGeneralTip3">
+	</li>
+	<li ng-if="mode === 'guest'" translate="wifiGeneralTip10Guest" data-tourtarget="#wifiGeneralTip10">
+	</li>
+	<li ng-if="mode === 'guest'" translate="wifiGeneralTip4Guest" data-tourtarget="#wifiGeneralTip4">
+	</li>
+	<li ng-if="mode === 'guest'" translate="wifiGeneralTip5Guest" data-tourtarget="#wifiGeneralTip5">
+	</li>
+	<li ng-if="mode === 'guest'" translate="wifiGeneralTip11Guest" data-tourtarget="#wifiGeneralTip11">
+	</li>
+	<li ng-if="mode === 'guest'" translate="wifiGeneralTip6Guest" data-tourtarget="#wifiGeneralTip6">
+	</li>
+	<li ng-if="mode === 'guest'" translate="wifiGeneralTip6Guest" data-tourtarget="#wifiGeneralTip5">
+	</li>
+<!-- 	<li translate="wifiGeneralTip7" data-tourtarget="#wifiGeneralTip7">
+	</li> -->
+</ul>

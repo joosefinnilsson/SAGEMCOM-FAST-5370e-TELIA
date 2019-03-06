@@ -1,0 +1,59 @@
+<div class="content" id="statistics">
+	<h4 translate="mptcpStatistics">Statistics</h4>
+	<div class="row">
+		<div class="columns large-4 medium-2 small-4">
+			<label class="inline" translate="mptcpTotalBytes">Total bytes (Sent/Received)</label>
+		</div>
+		<div class="columns large-3 medium-2 small-8 end">
+			<label class="inline"><span ng-bind="data.totalBytesSent ? data.totalBytesSent : '0'"></span> / <span ng-bind="data.totalBytesReceived ? data.totalBytesReceived : '0'"></span></label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns large-4 medium-2 small-4">
+			<label class="inline" translate="mptcpTotalPackets">Total packets (Sent/Received)</label>
+		</div>
+		<div class="columns large-3 medium-2 small-8 end">
+			<label class="inline"><span ng-bind="data.totalPacketsSent ? data.totalPacketsSent : '0'"></span> / <span ng-bind="data.totalPacketsReceived ? data.totalPacketsReceived : '0'"></span></label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns large-4 medium-2 small-4">
+			<label class="inline" translate="mptcpTotalErrors">Total errors (Sent/Received)</label>
+		</div>
+		<div class="columns large-3 medium-2 small-8 end">
+			<label class="inline"><span ng-bind="data.totalErrosSent ? data.totalErrosSent : '0'"></span> / <span ng-bind="data.totalErrosReceived ? data.totalErrosReceived : '0'"></span></label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns large-4 medium-2 small-4">
+			<label class="inline" translate="mptcpTotalDiscardPackets">Total discard packets (Sent/Received)</label>
+		</div>
+		<div class="columns large-3 medium-2 small-8 end">
+			<label class="inline"><span ng-bind="data.totalDiscardPacketsSent ? data.totalDiscardPacketsSent : '0'"></span> / <span ng-bind="data.totalDiscardPacketsReceived ? data.totalDiscardPacketsReceived : '0'"></span></label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns large-4 medium-2 small-4">
+			<label class="inline" translate="mptcpTotalUnicastPackets">Total unicast packets (Sent/Received)</label>
+		</div>
+		<div class="columns large-3 medium-2 small-8 end">
+			<label class="inline"><span ng-bind="data.totalUnicastPacketsSent ? data.totalUnicastPacketsSent : '0'"></span> / <span ng-bind="data.totalUnicastPacketsReceived ? data.totalUnicastPacketsReceived : '0'"></span></label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns large-4 medium-2 small-4">
+			<label class="inline" translate="mptcpTotalMulticastPackets">Total multicast packets (Sent/Received)</label>
+		</div>
+		<div class="columns large-3 medium-2 small-8 end">
+			<label class="inline"><span ng-bind="data.totalMulticastPacketsSent ? data.totalMulticastPacketsSent : '0'"></span> / <span ng-bind="data.totalMulticastPacketsReceived ? data.totalMulticastPacketsReceived : '0'"></span></label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="columns large-4 medium-2 small-4">
+			<label class="inline" translate="mptcpTotalBroadcastPackets">Total broadcast packets (Sent/Received)</label>
+		</div>
+		<div class="columns large-3 medium-2 small-8 end">
+			<label class="inline"><span ng-bind="data.totalBroadcastPacketsSent ? data.totalBroadcastPacketsSent : '0'"></span> / <span ng-bind="data.totalBroadcastPacketsReceived ? data.totalBroadcastPacketsReceived : '0'"></span></label>
+		</div>
+	</div>
+</div>

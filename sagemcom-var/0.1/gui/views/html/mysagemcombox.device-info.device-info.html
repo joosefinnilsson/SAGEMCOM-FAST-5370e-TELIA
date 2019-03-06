@@ -1,0 +1,516 @@
+<div wait-loading=""></div>
+<div class="content active ng-hide" ng-show="!loading" id="deviceinfo">
+	<h5 translate="deviceinfo">Device Info</h5>
+	<div class="row">
+		<div class="columns medium-8 small-12" id="deviceInfoTip1">
+			<table class="table-form table-vert">
+				<tr ng-if="deviceName">
+					<th translate="deviceName">Device Name</th>
+					<td ng-bind-template="{{deviceInfo.deviceName1}} {{deviceInfo.deviceName2}}"></td>
+				</tr>
+				<tr>
+					<th width="40%" translate="serialNumber">Serial Number</th>
+					<td class="breakWord" ng-bind="deviceInfo.serialNumber==''?'-':deviceInfo.serialNumber"></td>
+				</tr>
+				<tr>
+					<th translate="hardwareVersion">Hardware Version</th>
+					<td ng-bind="deviceInfo.hardwareVersion==''?'-':deviceInfo.hardwareVersion"></td>
+				</tr>
+				<tr>
+					<th translate="softwareVersion">Software Version</th>
+					<td class="breakWord" ng-bind="deviceInfo.softwareVersion==''?'-':deviceInfo.softwareVersion"></td>
+				</tr>
+				<tr check-feature-state="guiVersion">
+					<th translate="guiVersion">GUI Version</th>
+					<td ng-bind="deviceInfo.guiVersion==''?'-':deviceInfo.guiVersion"></td>
+				</tr>
+				
+				<tr>
+					<th translate="uptime">UpTime</th>
+					<td ng-show="uptimeCounter"><time-counter time="deviceInfo.uptimeInSeconds"></time-counter></td>
+					<td ng-show="!uptimeCounter" hour-format="{{deviceInfo.upTime}}"></td>
+				</tr>
+				
+				<tr check-feature-state="WANMACaddressField">
+					<th translate="wanMACAddress">WAN MAC Address</th>
+					<td class="breakWord" ng-bind="deviceInfo.wanMacAddress==''?'-':deviceInfo.wanMacAddress"></td>
+				</tr>
+				<tr ng-if="modelName">
+					<th translate="modelName">Model Name</th>
+					<td ng-bind="deviceInfo.modelName==''?'-':deviceInfo.modelName"></td>
+				</tr>
+				
+				
+				
+			</table>
+		</div>
+	</div>
+	<hr>
+	<h5 translate="sNetwork">Network</h5>
+	<div class="row">
+		<div class="columns medium-8 small-12" id="deviceInfoTip2">
+			<table class="table-form table-vert">
+				<tr ng-if="primaryModeEnable">
+					<th translate="primaryMode">primaryMode:</th>
+					<td class="breakWord" ng-bind="deviceInfo.primaryMode ? deviceInfo.primaryMode : '-'"></td>
+				</tr>
+				<tr>
+					<th width="40%" translate="localIpv4Address">Local IPv4 Address</th>
+					<td class="breakWord" ng-bind="deviceInfo.localIpv4 ? deviceInfo.localIpv4 : '-'"></td>
+				</tr>
+				<tr>
+					<th width="40%" translate="localSubnetMask">Local Subnet Mask</th>
+					<td class="breakWord" ng-bind="deviceInfo.localSubnetMask ? deviceInfo.localSubnetMask : '-'"></td>
+				</tr>
+				<tr>
+					<th width="40%" translate="localEthernetMac">Local Ethernet Mac Address</th>
+					<td class="breakWord" ng-bind="deviceInfo.localEthernetMac ? deviceInfo.localEthernetMac : '-'"></td>
+				</tr>
+				<tr>
+					<th translate="publicIpv4Address">Public IPv4 Address</th>
+					<td ng-if="!mapEnable" class="breakWord" ng-bind="deviceInfo.publicIpv4 ? deviceInfo.publicIpv4 :'-'"></td>
+					<td ng-if="mapEnable" class="breakWord" ng-bind="deviceInfo.publicIpv4MAPT ? deviceInfo.publicIpv4MAPT :'-'"></td>
+				</tr>
+				<tr>
+					<th translate="publicSubnetMask">Public Subnet Mask</th>
+					<td class="breakWord" ng-bind="deviceInfo.publicSubnetMask ? deviceInfo.publicSubnetMask : '-'"></td>
+				</tr>
+				<tr ng-if="ipv4OnlineDuration">
+					<th translate="ipv4Duration">IPv4 Online Duration</th>
+					<td class="breakWord" hour-format="{{deviceInfo.ipv4Duration}}"></td>
+				</tr>
+				<tr>
+					<th translate="defaultGateway">Default Gateway</th>
+					<td class="breakWord" ng-bind="deviceInfo.defaultGateway ? deviceInfo.defaultGateway : '-'"></td>
+				</tr>
+				<tr>
+					<th translate="PrimaryDNSServer">Primary DNS Server</th>
+					<td class="breakWord" ng-bind="deviceInfo.primaryDns ? deviceInfo.primaryDns : '-'"></td>
+				</tr>
+				<tr>
+					<th translate="secondaryDNSServer">Secondary DNS Server</th>
+					<td class="breakWord" ng-bind="deviceInfo.secondaryDns ? deviceInfo.secondaryDns : '-'"></td>
+				</tr>
+
+				<tr ng-if="!isTalktalk">
+					<th translate="linkLocalIpv6">Link Local Gateway Address (IPv6):</th>
+					<td class="breakWord" ng-bind="deviceInfo.linkLocalIpv6 ? deviceInfo.linkLocalIpv6 : '-'"></td>
+				</tr>
+
+				<tr ng-if="!isTalktalk">
+					<th translate="globalGatewayAddressIpv6">Global Gateway Address (IPv6):</th>
+					<td class="breakWord" ng-bind="deviceInfo.globalLinkIpv6 ? deviceInfo.globalLinkIpv6 : '-'"></td>
+				</tr>
+				<tr ng-if="!isTalktalk">
+					<th translate="defaultGatewayAddressIpv6">Default Gateway IPv6 Address:</th>
+					<td class="breakWord" ng-bind="deviceInfo.defaultLinkIpv6 ? deviceInfo.defaultLinkIpv6 : '-'"></td>
+				</tr>
+				<tr ng-if="!isTalktalk">
+					<th translate="dnsServerAddressIpv6">DNS server IPv6 Address</th>
+					<td ng-bind="deviceInfo.dnsServerAddressIpv6 ? deviceInfo.dnsServerAddressIpv6 : '-'"></td>
+				</tr>
+				<tr ng-if="ipVersionStatus">
+					<th translate="ipVersion">IP Version:</th>
+					<td class="breakWord" ng-bind="deviceInfo.ipVersion ? deviceInfo.ipVersion : '-'"></td>
+				</tr>
+				<tr ng-if="displayConnectionStatus">
+					<th translate="ipv4ConnectionStatus">IPv4 connection status:</th>
+					<td class="breakWord" ng-bind="deviceInfo.ipv4Enable ? deviceInfo.ipv4Enable : '-'"></td>
+				</tr>
+				<tr ng-if="displayConnectionStatus">
+					<th translate="ipv6ConnectionStatus">IPv6 connection status:</th>
+					<td class="breakWord" ng-bind="deviceInfo.ipv6Enable ? deviceInfo.ipv6Enable : '-'"></td>
+				</tr>
+				<tr ng-if="displayIpv6DNSServers">
+					<th translate="ipv6PrimaryDNS">IPv6 primary DNS:</th>
+					<td class="breakWord" ng-bind="deviceInfo.ipv6PrimaryDns ? deviceInfo.ipv6PrimaryDns : '-'"></td>
+				</tr>
+				<tr ng-if="displayIpv6DNSServers">
+					<th translate="ipv6SecondaryDNS">IPv6 secondary DNS:</th>
+					<td class="breakWord" ng-bind="deviceInfo.ipv6SecondaryDns ? deviceInfo.ipv6SecondaryDns : '-'"></td>
+				</tr>
+				<tr check-feature-state="deviceInfoNAT">
+					<th>NAT</th>
+					<td class="breakWord" ng-bind="deviceInfo.nat"></td>
+				</tr>
+				<tr ng-if="displayIpv4VOIPTVMGMT">
+					<th translate="voipIpv4Address">VOIP IPv4 Address:</th>
+					<td class="breakWord" ng-bind="deviceInfo.voipIpv4Address ? deviceInfo.voipIpv4Address : '-'"></td>
+				</tr>
+				<tr ng-if="displayIpv4VOIPTVMGMT">
+					<th translate="tvIpv4Address">TV IPv4 Address:</th>
+					<td class="breakWord" ng-bind="deviceInfo.tvIpv4Address ? deviceInfo.tvIpv4Address : '-'"></td>
+				</tr>
+				<tr ng-if="displayIpv4VOIPTVMGMT">
+					<th translate="mgmtIpv4Address">MGMT IPv4 Address:</th>
+					<td class="breakWord" ng-bind="deviceInfo.mgmtIpv4Address ? deviceInfo.mgmtIpv4Address : '-'"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<hr check-feature-state="nowifi">
+	<h5 translate="wifi" check-feature-state="nowifi">Wifi</h5>
+	<div class="row">
+		<div class="columns medium-8 small-12" id="deviceInfoTip3" check-feature-state="nowifi">
+			<table class="table-form table-vert">
+				<tbody>
+					<tr>
+						<th width="40%" translate="ssidWifi24">SSID Wifi 2.4 GHz</th>
+						<td class="breakWord" ng-bind="deviceInfo.wifi['wifi24'].ssid==''?'-':deviceInfo.wifi['wifi24'].ssid">&nbsp;</td>
+					</tr>
+					<tr>
+						<th translate="sStatus">Status</th>
+						<td><b ng-class="deviceInfo.wifi['wifi24'].status == 'Enabled' ? 'color-on' : 'color-off'" ng-bind="deviceInfo.wifi['wifi24'].status | lowercase | translate">&nbsp;</b></td>
+					</tr>
+					<tr>
+						<th translate="sUptime">Uptime</th>
+						<td hour-format="{{deviceInfo.wifi['wifi24'].uptime}}">&nbsp;</td>
+					</tr>
+					<tr>
+						<th translate="sMacaddres">MAC Address</th>
+						<td class="breakWord" ng-bind="deviceInfo.wifi['wifi24'].macAddress">&nbsp;</td>
+					</tr>
+					<tr>
+						<th translate="sMode">Mode</th>
+						<td>802.11 <span ng-bind="deviceInfo.wifi['wifi24'].operatingMode"></span></td>
+					</tr>
+					<tr ng-if="!isTalktalk" check-feature-state="bitrate">
+						<th translate="sBitrate">Bitrate</th>
+						<td><span ng-bind="deviceInfo.wifi['wifi24'].maxSpeed"></span> Mbps</td>
+					</tr>
+					<tr>
+						<th translate="sSecurity">Security</th>
+						<td ng-bind="deviceInfo.wifi['wifi24'].securityMode | lowercase | translate">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<table class="table-form table-vert" ng-if="deviceInfo.wifi['wifi5'].ssid" check-feature-state="wifi5g">
+				<tbody>
+					<tr>
+						<th width="40%" translate="ssidWifi50">SSID Wifi 5.0 GHz</th>
+						<td class="breakWord" ng-bind="!deviceInfo.wifi['wifi5'].ssid ? '-' : deviceInfo.wifi['wifi5'].ssid">&nbsp;</td>
+					</tr>
+					<tr>
+						<th translate="sStatus">Status</th>
+						<td><b ng-class="deviceInfo.wifi['wifi5'].status == 'Enabled' ? 'color-on' : 'color-off'" ng-bind="deviceInfo.wifi['wifi5'].status | lowercase | translate">&nbsp;</b></td>
+					</tr>
+					<tr>
+						<th translate="sUptime">Uptime</th>
+						<td hour-format="{{deviceInfo.wifi['wifi5'].uptime}}">&nbsp;</td>
+					</tr>
+					<tr>
+						<th translate="sMacaddres">MAC Address</th>
+						<td class="breakWord" ng-bind="deviceInfo.wifi['wifi5'].macAddress">&nbsp;</td>
+					</tr>
+					<tr>
+						<th translate="sMode">Mode</th>
+						<td>802.11 <span ng-bind="deviceInfo.wifi['wifi5'].operatingMode"></span></td>
+					</tr>
+					<tr ng-if="!isTalktalk" check-feature-state="bitrate">
+						<th translate="sBitrate">Bitrate</th>
+						<td><span ng-bind="deviceInfo.wifi['wifi5'].maxSpeed"></span> Mbps</td>
+					</tr>
+					<tr>
+						<th translate="sSecurity">Security</th>
+						<td ng-bind="deviceInfo.wifi['wifi5'].securityMode | lowercase | translate">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<table class="table-form table-vert" check-feature-state="guestInfo" ng-if="deviceInfo.wifi['wifi24Guest'].ssid">
+				<tbody>
+					<tr>
+						<th width="40%" translate="ssidGuestWifi24">SSID Guest Wifi 2.4 GHz</th>
+						<td class="breakWord" ng-bind="!deviceInfo.wifi['wifi24Guest'].ssid ? '-' : deviceInfo.wifi['wifi24Guest'].ssid">&nbsp;</td>
+					</tr>
+					<tr>
+						<th translate="sStatus">Status</th>
+						<td><b ng-class="deviceInfo.wifi['wifi24Guest'].status == 'Enabled' ? 'color-on' : 'color-off'" ng-bind="deviceInfo.wifi['wifi24Guest'].status | lowercase | translate">&nbsp;</b></td>
+					</tr>
+					<tr>
+						<th translate="sUptime">Uptime</th>
+						<td hour-format="{{deviceInfo.wifi['wifi24Guest'].uptime}}">&nbsp;</td>
+					</tr>
+					<tr>
+						<th translate="sMacaddres">MAC Address</th>
+						<td class="breakWord" ng-bind="deviceInfo.wifi['wifi24Guest'].macAddress">&nbsp;</td>
+					</tr>
+					<tr>
+						<th translate="sMode">Mode</th>
+						<td>802.11 <span ng-bind="deviceInfo.wifi['wifi24Guest'].operatingMode"></span></td>
+					</tr>
+					<tr ng-if="!isTalktalk" check-feature-state="bitrate">
+						<th translate="sBitrate">Bitrate</th>
+						<td><span ng-bind="deviceInfo.wifi['wifi24Guest'].maxSpeed"></span> Mbps</td>
+					</tr>
+					<tr>
+						<th translate="sSecurity">Security</th>
+						<td ng-bind="deviceInfo.wifi['wifi24Guest'].securityMode | lowercase | translate">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<table class="table-form table-vert" check-feature-state="guestInfo" ng-if="deviceInfo.wifi['wifi5Guest'].ssid">
+				<tbody>
+					<tr>
+						<th width="40%" translate="ssidGuestWifi50">SSID Guest Wifi 5.0 GHz</th>
+						<td class="breakWord" ng-bind="!deviceInfo.wifi['wifi5Guest'].ssid ? '-' : deviceInfo.wifi['wifi5Guest'].ssid">&nbsp;</td>
+					</tr>
+					<tr>
+						<th translate="sStatus">Status</th>
+						<td><b ng-class="deviceInfo.wifi['wifi5Guest'].status == 'Enabled' ? 'color-on' : 'color-off'" ng-bind="deviceInfo.wifi['wifi5Guest'].status | lowercase | translate">&nbsp;</b></td>
+					</tr>
+					<tr>
+						<th translate="sUptime">Uptime</th>
+						<td hour-format="{{deviceInfo.wifi['wifi5Guest'].uptime}}">&nbsp;</td>
+					</tr>
+					<tr>
+						<th translate="sMacaddres">MAC Address</th>
+						<td class="breakWord" ng-bind="deviceInfo.wifi['wifi5Guest'].macAddress">&nbsp;</td>
+					</tr>
+					<tr>
+						<th translate="sMode">Mode</th>
+						<td>802.11 <span ng-bind="deviceInfo.wifi['wifi5Guest'].operatingMode"></span></td>
+					</tr>
+					<tr ng-if="!isTalktalk" check-feature-state="bitrate">
+						<th translate="sBitrate">Bitrate</th>
+						<td><span ng-bind="deviceInfo.wifi['wifi5Guest'].maxSpeed"></span> Mbps</td>
+					</tr>
+					<tr>
+						<th translate="sSecurity">Security</th>
+						<td ng-bind="deviceInfo.wifi['wifi5Guest'].securityMode | lowercase | translate">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	
+	
+	<hr ng-if="stbs">
+	<h5 ng-if="stbs" translate="stboxes">Set-top Boxes</h5>
+	<table class="table-form responsive-table left" id="stb-table" ng-if="stbs">
+		<thead>
+			<tr class="header-table">
+				<th align="center" check-feature-state="stbManufaturer" translate="sManufacturer">Manufacturer</th>
+				<th align="center" translate="connectionStatus">Status</th>
+				<th align="center" translate="MACAddress">Mac Address</th>
+				<th align="center" translate="IPAddress">IP Address</th>
+				<th align="center" translate="connectionType">Connection Type</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="device in stbs">
+				<td data-title="Manufacturer" check-feature-state="stbManufaturer" ng-bind="device.manufacturer">&nbsp;</td>
+				<td data-title="Status" ng-switch="" on="device.active"><span ng-switch-when="true" translate="active">Active</span><span ng-switch-when="false" translate="pcInactive">Inactive</span></td>
+				<td data-title="Mac Address" ng-bind="device.PhysAddress">&nbsp;</td>
+				<td data-title="IP Address" ng-bind="device.ipAddress">&nbsp;</td>
+				<td data-title="Connection Type" ng-bind="device.InterfaceType">&nbsp;</td>
+			</tr>
+		</tbody>
+	</table>
+	<hr>
+	<div ng-if="!isModeGponSupported" check-feature-state="deviceInfoWANxdslSection" ng-switch="" on="deviceInfo.xdsl.wanConnectivity">
+		<h5 ng-switch-when="true" translate="xdsl">xDSL</h5>
+		<div class="row" ng-switch-when="true">
+			<div class="columns large-12 medium-10 small-12" id="deviceInfoTip5">
+				<table class="table-form table-vert" id="tablexDsl" style="max-width:1000px;">
+					<tr>
+						<th class="large-2"></th>
+						<td class="large-5"><b translate="line1"></b></td>
+						<td class="large-5" ng-show="isBondingPlus"><b translate="line2"></b></td>
+					</tr>
+					<tr>
+						<th align="center"><b translate="statusStats">Status:</b></th>
+						<td><b ng-class="deviceInfo.xdsl.status ==='UP' ? 'color-on' : 'color-off'" ng-bind="deviceInfo.xdsl.status | lowercase | translate">&nbsp;</b></td>
+						<td ng-show="isBondingPlus"><b ng-class="deviceInfo.xdsl2.status ==='UP' ? 'color-on' : 'color-off'" ng-bind="deviceInfo.xdsl2.status | lowercase | translate">&nbsp;</b></td>
+					</tr>
+					<tr>
+						<th translate="connectionTime">Connection Time</th>
+						<td hour-format="{{deviceInfo.xdsl.connectionTimeDsl}}">&nbsp;</td>
+						<td ng-show="isBondingPlus" hour-format="{{deviceInfo.xdsl2.connectionTimeDsl}}">&nbsp;</td>
+					</tr>
+					<tr>
+						<th align="center"><b translate="linkStatus">Link Status:</b></th>
+						<td><b ng-class="deviceInfo.xdsl.linkStatus ==='UP' ? 'color-on' : 'color-off'" ng-bind="deviceInfo.xdsl.linkStatus | lowercase | translate">&nbsp;</b></td>
+						<td ng-show="isBondingPlus"><b ng-class="deviceInfo.xdsl2.linkStatus ==='UP' ? 'color-on' : 'color-off'" ng-bind="deviceInfo.xdsl2.linkStatus | lowercase | translate">&nbsp;</b></td>
+					</tr>
+					<tr>
+						<th align="center" width="180"><b translate="standard">Standard:</b></th>
+						<td ng-bind="deviceInfo.xdsl.standard">&nbsp;</td>
+						<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.standard">&nbsp;</td>
+					</tr>
+					<tr>
+						<th align="center"><b translate="lineEncoding">Line Encoding:</b></th>
+						<td ng-bind="deviceInfo.xdsl.lineEncoding">&nbsp;</td>
+						<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.lineEncoding">&nbsp;</td>
+					</tr>
+					<tr>
+						<th align="center"><b translate="linkEncapsulation">Link Encapsulation:</b></th>
+						<td ng-bind="deviceInfo.xdsl.linkEncapsulation">&nbsp;</td>
+						<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.linkEncapsulation">&nbsp;</td>
+					</tr>
+					<tr ng-if="hasXdslNumericFeature">
+						<th align="center"><b translate="firmwareVersions">Firmware Version:</b></th>
+						<td ng-bind="deviceInfo.xdsl.firmwareVersion">&nbsp;</td>
+						<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.firmwareVersion">&nbsp;</td>
+					</tr>
+					<tr ng-if="hasXdslNumericFeature">
+						<th align="center"><b translate="currentProfile">Current Profile:</b></th>
+						<td ng-bind="deviceInfo.xdsl.currentProfile">&nbsp;</td>
+						<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.currentProfile">&nbsp;</td>
+					</tr>
+				</table>
+				<table class="table-form table-vert" style="max-width:1000px;">
+					<tbody>
+						<tr>
+							<th class="large-2"></th>
+							<td class="large-5" colspan="2"><b translate="line1"></b></td>
+							<td class="large-5" ng-show="isBondingPlus" colspan="2"><b translate="line2"></b></td>
+						</tr>
+						<tr>
+							<th align="center" width="180"></th>
+							<td translate="downstream">Downstream</td>
+							<td translate="upstream">Upstream</td>
+							<td ng-show="isBondingPlus" translate="downstream">Downstream</td>
+							<td ng-show="isBondingPlus" translate="upstream">Upstream</td>
+						</tr>
+						<tr>
+							<th align="center"><b translate="actualRate">Actual Rate [Kbps]:</b></th>
+							<td ng-bind="deviceInfo.xdsl.actualRateDown">&nbsp;</td>
+							<td ng-bind="deviceInfo.xdsl.actualRateUp">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.actualRateDown">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.actualRateUp">&nbsp;</td>
+						</tr>
+						<tr>
+							<th align="center"><b translate="maximumRate">Maximum Rate [Kbps]:</b></th>
+							<td ng-bind="deviceInfo.xdsl.maximumRateDown">&nbsp;</td>
+							<td ng-bind="deviceInfo.xdsl.maximumRateUp">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.maximumRateDown">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.maximumRateUp">&nbsp;</td>
+						</tr>
+						<tr>
+							<th align="center"><b translate="noiseMargin">Noise Margin [dB]:</b></th>
+							<td ng-bind="deviceInfo.xdsl.noiseMarginDown">&nbsp;</td>
+							<td ng-bind="deviceInfo.xdsl.noiseMarginUp">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.noiseMarginDown">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.noiseMarginUp">&nbsp;</td>
+						</tr>
+						<tr>
+							<th align="center"><b translate="attenuation">Attenuation [dB]:</b></th>
+							<td ng-show="!isBondingPlus" ng-bind="deviceInfo.xdsl.attenuationDown">&nbsp;</td>
+							<td ng-show="!isBondingPlus" ng-bind="deviceInfo.xdsl.attenuationUp">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl.attenuationDownPerBand">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl.attenuationUpPerBand">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.attenuationDownPerBand">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.attenuationUpPerBand">&nbsp;</td>
+						</tr>
+						<tr>
+							<th align="center"><b translate="power">Power [dBm]:</b></th>
+							<td ng-bind="deviceInfo.xdsl.powerDown">&nbsp;</td>
+							<td ng-bind="deviceInfo.xdsl.powerUp">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.powerDown">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.powerUp">&nbsp;</td>
+						</tr>
+						<tr ng-if="hasXdslNumericFeature">
+							<th align="center"><b translate="dataPath">Data Path:</b></th>
+							<td ng-bind="deviceInfo.xdsl.dataPath">&nbsp;</td>
+							<td ng-bind="deviceInfo.xdsl.dataPathus">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.dataPath">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.dataPathus">&nbsp;</td>
+						</tr>
+						<tr ng-if="hasXdslNumericFeature">
+							<th align="center"><b translate="interLeaveDepth">Interleave Depth:</b></th>
+							<td ng-bind="deviceInfo.xdsl.interLeaveDepth">&nbsp;</td>
+							<td ng-bind="deviceInfo.xdsl.interLeaveDepthus">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.interLeaveDepth">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.interLeaveDepthus">&nbsp;</td>
+						</tr>
+						<tr ng-if="hasXdslNumericFeature">
+							<th align="center"><b translate="interLeaveDelay">Interleave Delay:</b></th>
+							<td ng-bind="deviceInfo.xdsl.interLeaveDelay">&nbsp;</td>
+							<td ng-bind="deviceInfo.xdsl.interLeaveDelayus">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.interLeaveDelay">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.interLeaveDelayus">&nbsp;</td>
+						</tr>
+						<tr ng-if="hasXdslNumericFeature">
+							<th align="center"><b translate="inp">INP:</b></th>
+							<td ng-bind="deviceInfo.xdsl.inp">&nbsp;</td>
+							<td ng-bind="deviceInfo.xdsl.inpus">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.inp">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.inpus">&nbsp;</td>
+						</tr>
+						<tr ng-if="hasXdslNumericFeature">
+							<th align="center"><b translate="lossOfSignal">Loss of Signal:</b></th>
+							<td ng-bind="deviceInfo.xdsl.lossOfSignal">&nbsp;</td>
+							<td ng-bind="deviceInfo.xdsl.lossOfSignalus">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.lossOfSignal">&nbsp;</td>
+							<td ng-show="isBondingPlus" ng-bind="deviceInfo.xdsl2.lossOfSignalus">&nbsp;</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<h5 check-feature-state="cableEthernetWan" ng-switch-when="false">Ethernet WAN</h5>
+		<div check-feature-state="cableEthernetWan" class="row" ng-switch-when="false">
+			<div class="columns medium-8 small-12" id="deviceInfoTipWan">
+				<table class="table-form table-vert">
+					<tbody>
+						<tr>
+							<th translate="sStatus"> Status </th>
+							<td ng-if="!mapEnable"><b ng-class="deviceInfo.wanStatus ==='Connected' ? 'color-on' : 'color-off'" ng-bind="deviceInfo.wanStatus | lowercase | translate">&nbsp;</b></td>
+							<td ng-if="mapEnable"><b ng-class="connectivity.status ? 'color-on' : 'color-off'" ng-bind="connectivity.status ? 'connected' : 'disconnected' | translate">&nbsp;</b></td>
+						</tr>
+						<tr>
+							<th translate="connectionTime" width="40%">Connection Time</th>
+							<td hour-format="{{deviceInfo.wanConnectionTime}}">&nbsp;</td>
+						</tr>
+						<tr>
+							<th><b translate="sBitrate">Bitrate</b></th>
+							<td><span ng-bind="deviceInfo.wanBitrate">&nbsp;</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<br>
+	</div>
+	<div ng-if="isModeGponSupported">
+		<h5>GPON</h5>
+		<div class="row">
+			<div class="columns medium-8 small-12" id="deviceInfoTipWan">
+				<table class="table-form table-vert">
+				<tbody>
+					<tr>
+						<th translate="gponState" width="40%"></th>
+						<td ng-bind="deviceInfo.gponStatus.GponState"></td>
+					</tr>
+					<tr>
+						<th translate="gponOpticalSignalLevel"></th>
+						<td ng-bind="deviceInfo.gponStatus.OpticalSignalLevel"></td>
+					</tr>
+					<tr check-feature-state="isModeGponSupported">
+						<th translate="gponTransmitOpticalLevel"></th>
+						<td ng-bind="deviceInfo.gponStatus.TransmitOpticalLevel"></td>
+					</tr>
+				</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+		
+	</div>
+
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li translate="deviceInfoTip1" data-tourtarget="#deviceInfoTip1"></li>
+	<li translate="deviceInfoTip2" data-tourtarget="#deviceInfoTip2"></li>
+	<li translate="deviceInfoTip3" data-tourtarget="#deviceInfoTip3"></li>
+	<li translate="deviceInfoTip4" data-tourtarget="#deviceInfoTip4"></li>
+	<li translate="deviceInfoTip5" data-tourtarget="#deviceInfoTip5"></li>
+	<li translate="deviceInfoTip6" data-tourtarget="#deviceInfoTipWan"></li>
+</ul>
+

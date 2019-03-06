@@ -1,0 +1,82 @@
+<div class="anim">
+	<div id="page-content" class="row">
+		<div class="columns small-12">
+			<div class="row">
+				<div id="header-page">
+					<div class="columns medium-6 small-12">
+						<h2 translate="contentSharing">Content Sharing</h2>
+					</div>
+					<div class="columns medium-6 small-12 text-center fullConnectivity">
+						<div internet-connectivity></div>
+						<a id="homebtn" title="Home" click-loading ui-sref="user.home" class="icons-bg border-gray"> <img src="images/icon-home.png" alt="Home Icon"> </a>
+					</div>
+
+					<div class="columns medium-6 small-12 text-right simpleConnectivity">
+						<a href="javascript:void(0)" id="status-internet" ng-class="connectivity.status ? 'is_connected' : 'is_disconnected'">
+						<svg title="Internet: connected" class="icon">
+							<use xlink:href="images/sprite.svg?new#icon-wifi"/>
+						</svg> <span translate="internetConnectivityOn" ng-show="connectivity.status" class="ng-hide"></span> <span translate="internetConnectivityOff"  ng-hide="connectivity.status" class="ng-hide"></span> </a>
+					</div>
+				</div>
+			</div>
+			<div messagebox></div>
+			<div id="main-content">
+				<div wait-loading></div>
+				<div class="tabs-content" ng-show="!loading">
+					<form name="mediaForm" novalidate autocomplete="off" check-unsaved>
+						<div class="row">
+							<div class="columns small-12">
+								<div class="row">
+									<div class="columns medium-2 small-12">
+										<label class="inline" translate="enableDlnaServer">Enable DLNA Server</label>
+									</div>
+									<div class="columns medium-4 small-12 end">
+										<div id="dlnaEnable" class="onoffswitch" style="margin: 0">
+											<input ng-model="fields.dlna" ng-change="enableDLNA()" class="onoffswitch-checkbox" id="enable-dlna" name="enable-dlna" type="checkbox" />
+											<label class="onoffswitch-label" for="enable-dlna"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="columns medium-2 small-12">
+										<label class="inline" for="" translate="mediaServerName">Media Server Name</label>
+									</div>
+									<div class="columns medium-4 small-12 end">
+										<input type="text" ng-model="fields.name">
+									</div>
+								</div>
+								<div class="row">
+									<div class="columns medium-2 small-12">
+										<label class="inline" translate="mediaServerIp">Media Server IP</label>
+									</div>
+									<div class="columns medium-4 small-12 end">
+										<label class="inline">
+											<span ng-bind="fields.samba.ip"></span>
+										</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="columns medium-2 small-12">
+										<label class="inline" translate="networkFolderName">Network Folder Name</label>
+									</div>
+									<div class="columns medium-4 small-12 end">
+										<label class="inline">
+											<span ng-bind="sambaFields.sambaIp"></span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="right">
+							<button  class="button tiny radius btn-cancel" translate="cancel" type="button" click-loading ui-sref="user.home"></button>
+							<button  class="button tiny radius" translate="apply" type="button" ng-disabled="" ng-click="save()" data-reveal></button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>$(document).foundation();</script>

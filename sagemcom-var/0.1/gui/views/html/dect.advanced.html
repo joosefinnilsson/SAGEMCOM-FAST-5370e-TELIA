@@ -1,0 +1,118 @@
+<div class="content">
+	<div wait-loading></div>
+	<div class="content ng-hide" ng-show="!loading">
+		<form name="dectDockAdvancedForm" autocomplete="off" ng-submit="save()" check-unsaved>
+			<div class="row">
+				<div class="columns small-12 medium-3 large-3">
+					<label class="inline" translate="standard">Standard</label>
+				</div>
+				<div class="columns small-12 medium-5 large-4 end">
+					<label class="inline" ng-bind="info.Standard"></label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="columns small-6 medium-3 large-3">
+					<label class="inline" translate="dectClockMastered">Clock Mastered</label>
+				</div>
+				<div class="columns small-6 medium-3 large-3 end">
+					<div class="onoffswitch" id="clockMastered">
+						<input class="onoffswitch-checkbox" id="clock-mastered" type="checkbox" name="clock-mastered" ng-model="info.ClockMastered"/>
+						<label class="onoffswitch-label" for="clock-mastered"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="columns small-12 medium-3 large-3">
+					<label class="inline">Description</label>
+				</div>
+				<div class="columns small-12 medium-5 large-4 end">
+					<input type="text" ng-model="info.Description" translate="description" name="description" id="description" maxlength="64"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="columns small-12 medium-3 large-3">
+					<label class="inline" translate="dectRfpi">RFPI</label>
+				</div>
+				<div class="columns small-12 medium-5 large-4 end">
+					<label class="inline" ng-bind="info.RFPI" name="rfpi" id="rfpi"></label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="columns small-12 medium-3 large-3">
+					<label translate="firmwareVersion" class="inline">FirmwareVersion</label>
+				</div>
+				<div class="columns small-12 medium-5 large-4 end">
+					<label class="inline" ng-bind="info.FirmwareVersion" name="firmwareVersion" id="firmwareVersion"></label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="columns small-12 medium-3 large-3">
+					<label class="inline" translate="fuPercent">FUPercent</label>
+				</div>
+				<div class="columns small-12 medium-5 large-4 end">
+					<label class="inline" ng-bind="info.FUPercent" name="fuPercent" id="fuPercent"></label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="columns small-12 medium-3 large-3">
+					<label translate="eepromVersion" class="inline">EepromVersion</label>
+				</div>
+				<div class="columns small-12 medium-5 large-4 end">
+					<label class="inline" ng-bind="info.EepromVersion" name="eepromVersion" id="eepromVersion"></label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="columns small-12 medium-3 large-3">
+					<label translate="hardwareVersion" class="inline">HardwareVersion</label>
+				</div>
+				<div class="columns small-12 medium-5 large-4 end">
+					<label class="inline" ng-bind="info.HardwareVersion"  name="hardwareVersion" id="hardwareVersion"></label>
+				</div>
+			</div>
+
+			<br/>
+			<div class="right">
+				<button class="button tiny radius btn-cancel" translate="cancel" type="button" click-loading ui-sref="user.home"></button>
+				<button class="button tiny radius" translate="apply" type="submit"></button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!-- help -->
+<ul id="tlyPageGuide">
+	<li translate="dectAdvancedTip1" data-tourtarget="#standard">
+		&nbsp;
+	</li>
+	<li translate="dectAdvancedTip2" data-tourtarget="#clockMastered">
+		&nbsp;
+	</li>
+	<li translate="dectAdvancedTip3" data-tourtarget="#description">
+		&nbsp;
+	</li>
+	<li translate="dectAdvancedTip5" data-tourtarget="#rfpi">
+		&nbsp;
+	</li>
+	<li translate="dectAdvancedTip6" data-tourtarget="#firmwareVersion">
+		&nbsp;
+	</li>
+	<li translate="dectAdvancedTip7" data-tourtarget="#fuPercent">
+		&nbsp;
+	</li>
+	<li translate="dectAdvancedTip8" data-tourtarget="#eepromVersion">
+		&nbsp;
+	</li>
+	<li translate="dectAdvancedTip9" data-tourtarget="#hardwareVersion">
+		&nbsp;
+	</li>
+	<li translate="dectTabTip" data-tourtarget="#dectTab">
+		&nbsp;
+	</li>
+</ul>

@@ -1,0 +1,216 @@
+<div class="content">
+	<div wait-loading></div>
+	<div class="content w100 ng-hide" ng-show="!loading" id="port-triggering">
+		<h4 class="maintitle" translate="portTriggering">&nbsp;</h4>
+		<div class="row">
+			<div class="columns medium-10 medium-centered small-12">
+				<form class="row add-port" name="formPortTriggering" autocomplete="off" check-unsaved>
+					<div class="row">
+						<div class="columns small-12">
+							<div class="row">
+								<div class="columns medium-3 small-4">
+									<label class="inline" translate="serviceNameTriggering">&nbsp;</label>
+								</div>
+								<div class="columns medium-9 small-8">
+									<input type="text" ng-model="lesProprietes.ServiceName" name="serviceName" clear-validation-on-focus="true" id="serviceName">
+									<small class="error" ng-if="formPortTriggering.serviceName.$invalid" translate="invalidServiceName"> </small>
+								</div>
+							</div>
+						</div>
+						<div class="columns medium-6 small-12">
+							<div class="row">
+								<div class="columns medium-5 small-12">
+									<label class="inline" translate="triggerProtocol">&nbsp;</label>
+								</div>
+								<div class="columns medium-7 small-12">
+									<select ng-model="lesProprietes.Trigger.Protocol" id="triggerProtocol" name="triggerProtolcol">
+										<option value="TCP">TCP</option>
+										<option value="UDP">UDP</option>
+									</select>
+								</div>
+							</div>
+							<div class="row">
+								<div class="columns medium-5 small-12">
+									<label class="inline" translate="triggerFromPort">&nbsp;</label>
+								</div>
+								<div class="columns medium-7 small-12">
+									<input type="text" ng-model="lesProprietes.Trigger.DstPortStart" name="triggerStart" clear-validation-on-focus="true" id="triggerStart" />
+									<small class="error" ng-if="formPortTriggering.triggerStart.$invalid" translate="invalidPort"> </small>
+								</div>
+							</div>
+							<div class="row">
+								<div class="columns medium-5 small-12">
+									<label class="inline" translate="triggerToPort">&nbsp;</label>
+								</div>
+								<div class="columns medium-7 small-12">
+									<input type="text" ng-model="lesProprietes.Trigger.DstPortEnd" name="triggerEnd" clear-validation-on-focus="true" id="triggerEnd" />
+									<small class="error" ng-if="formPortTriggering.triggerEnd.$invalid" translate="invalidPort"> </small>
+								</div>
+							</div>
+						</div>
+						<div class="columns medium-6 small-12">
+							<div class="row">
+								<div class="columns medium-5 small-12">
+									<label class="inline" translate="openProtocol">&nbsp;</label>
+								</div>
+								<div class="columns medium-7 small-12">
+									<select ng-model="lesProprietes.Open.Protocol" id="openProtocol" name="openProtocol">
+										<option value="TCP">TCP</option>
+										<option value="UDP">UDP</option>
+									</select>
+								</div>
+							</div>
+							<div class="row">
+								<div class="columns medium-5 small-12">
+									<label class="inline" translate="openFromPort">&nbsp;</label>
+								</div>
+								<div class="columns medium-7 small-12">
+									<input type="text" ng-model="lesProprietes.Open.DstPortStart" name="openStart" clear-validation-on-focus="true" id="openStart" />
+									<small class="error" ng-if="formPortTriggering.openStart.$invalid" translate="invalidPort"> </small>
+								</div>
+							</div>
+							<div class="row">
+								<div class="columns medium-5 small-12">
+									<label class="inline" translate="openToPort">&nbsp;</label>
+								</div>
+								<div class="columns medium-7 small-12">
+									<input type="text" ng-model="lesProprietes.Open.DstPortEnd" name="openEnd" clear-validation-on-focus="true" id="openEnd" />
+									<small class="error" ng-if="formPortTriggering.openEnd.$invalid" translate="invalidPort"> </small>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				<div class="row">
+					<div class="right">
+						<!-- adding -->
+						<button class="button tiny radius btn-cancel" type="button" ng-hide="update" translate="clear" ng-click="clearLesProprietes()" id="clear"></button>
+						<button class="button tiny radius" type="submit" ng-hide="update" translate="add" ng-click="addLesProprietes()" id="add"></button>
+						<!-- editing -->
+						<button class="button tiny radius btn-cancel" type="button" ng-show="update" translate="cancel" ng-click="cancelEdit()" id="cancel"></button>
+						<button class="button tiny radius" type="submit" ng-show="update" translate="update" ng-click="updateTrigger()" id="update"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="columns small-12">
+				<table class="table-form table-form-full responsive-table" id="table">
+					<thead>
+						<tr>
+							<th width="13%" translate="enable">&nbsp;</th>
+							<th width="15%" translate="serviceNameTriggering">&nbsp;</th>
+							<th translate="triggerProtocol">&nbsp;</th>
+							<th translate="triggerFromPort">&nbsp;</th>
+							<th translate="triggerToPort">&nbsp;</th>
+							<th translate="openProtocol">&nbsp;</th>
+							<th translate="openFromPort">&nbsp;</th>
+							<th translate="openToPort">&nbsp;</th>
+							<th translate="options">&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in listPortTriggering" ng-if="listPortTriggering.length > 0">
+							<td data-title="Enable">
+								<div class="onoffswitch" id="enable" ng-class="{'onoffswitch-disabled': update}">
+									<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="tigger-0{{$index}}" ng-model="item.Enable" ng-change="switchEnableTrigger(item)" ng-disabled="update">
+									<label class="onoffswitch-label" for="tigger-0{{$index}}">
+										<div class="onoffswitch-inner"></div>
+										<div class="onoffswitch-switch"></div>
+									</label>
+								</div>
+							</td>
+							<td data-title="Service"><div ng-bind="item.ServiceName" class="breakRulePro">&nbsp;</div></td>
+							<td data-title="Protocol" ng-bind="item.Trigger.Protocol">&nbsp;</td>
+							<td data-title="From Port" ng-bind="item.Trigger.DstPortStart">&nbsp;</td>
+							<td data-title="To Port" ng-bind="item.Trigger.DstPortEnd">&nbsp;</td>
+							<td data-title="Protocol" ng-bind="item.Open.Protocol">&nbsp;</td>
+							<td data-title="From Port" ng-bind="item.Open.DstPortStart">&nbsp;</td>
+							<td data-title="To Port" ng-bind="item.Open.DstPortEnd">&nbsp;</td>
+							<td data-title="Options">
+								<input class="icon-delete" data-reveal-id="confirm-remove-modal" data-reveal type="button" value="Delete" ng-click="removeTrigger(item.uid)" id="remove" />
+								<input class="icon-edit" type="button" value="Edit" ng-click="editTrigger(item)" id="edit"/>
+							</td>
+						</tr>
+						<tr ng-if="listPortTriggering.length === 0">
+							<td colspan="9" translate="noPortTriggering">There are no port triggering rules</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="row" ng-if="!portTriggeringSaveEnableWithoutApply">
+				<div class="columns small-12 end">
+					<div class="right">
+						<!-- enable/disable rules -->
+						<button class="button tiny radius btn-cancel" type="button" translate="cancel" click-loading ui-sref="{{previousMainPage}}">
+							Cancel
+						</button>
+						<button id="applyEnable" translate="apply" class="button tiny radius ng-scope" ng-click="saveChanges()">Apply</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="confirm-remove-modal" class="reveal-modal tiny" data-reveal>
+			<a class="close-reveal-modal close-modal">
+				<span class="btn-close">&#215;</span>
+				<span class="show-word btn-close close" translate="close">Close</span>
+			</a>
+			<h5 class="modal-title" translate="confirmRemoveTitle">&nbsp;</h5>
+			<p translate="confirmRemoveTip">
+				&nbsp;
+			</p>
+			<div class="right">
+				<button class="button tiny radius btn-cancel" type="button" translate="no" ng-click="cancelTrigger()" onclick="$('#confirm-remove-modal a.close-reveal-modal').trigger('click');"></button>
+				<button class="button tiny radius" type="button" translate="yes" type="button" ng-click="confirmRemoveTrigger()" onclick="$('#confirm-remove-modal a.close-reveal-modal').trigger('click');"></button>
+			</div>
+		</div>
+
+		<div id="special-port-modal" class="reveal-modal tiny" data-reveal>
+			<a class="close-reveal-modal close-modal">
+				<span class="btn-close">&#215;</span>
+				<span class="show-word btn-close close" translate="close">Close</span>
+			</a>
+			<h5 class="modal-title" translate="confirmSpecialPortTitle">&nbsp;</h5>
+			<p translate="confirmSpecialPortTip">
+				&nbsp;
+			</p>
+			<div class="right">
+				<button class="button tiny radius btn-cancel" type="button" translate="no" onclick="$('#special-port-modal a.close-reveal-modal').trigger('click');"></button>
+				<button class="button tiny radius" type="button" translate="yes" type="button" ng-click="save([lesProprietes])" onclick="$('#special-port-modal a.close-reveal-modal').trigger('click');"></button>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = false;
+	$(document).foundation();
+</script>
+
+<ul id="tlyPageGuide">
+	<li translate="triggerTip1" data-tourtarget="#serviceName">
+	</li>
+	<li translate="triggerTip2" data-tourtarget="#triggerProtocol">
+	</li>
+	<li translate="triggerTip5" data-tourtarget="#openProtocol">
+	</li>
+	<li translate="triggerTip3" data-tourtarget="#triggerStart">
+	</li>
+	<li translate="triggerTip6" data-tourtarget="#openStart">
+	</li>
+	<li translate="triggerTip4" data-tourtarget="#triggerEnd">
+	</li>
+	<li translate="triggerTip7" data-tourtarget="#openEnd">
+	</li>
+	<li translate="triggerTip11" data-tourtarget="#update">
+	</li>
+	<li translate="triggerTip12" data-tourtarget="#table">
+	</li>
+	<li translate="triggerTip13" data-tourtarget="#enable">
+	</li>
+	<li translate="triggerTip14" data-tourtarget="#remove">
+	</li>
+	<li translate="triggerTip15" data-tourtarget="#edit">
+	</li>
+</ul>

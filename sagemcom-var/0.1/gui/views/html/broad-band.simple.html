@@ -1,0 +1,188 @@
+<div class="anim">
+	<div id="page-content" class="row">
+		<div class="columns small-12">
+			<div class="row">
+				<div id="header-page">
+					<div class="columns medium-6 small-12">
+						<h2 translate="sBroadBand">Broad Band</h2>
+					</div>
+					<div class="columns medium-6 small-12 text-center fullConnectivity">
+						<div internet-connectivity></div>
+						<a id="homebtn" title="Home" click-loading ui-sref="user.home" class="icons-bg border-gray"> <img src="images/icon-home.png" alt="Home Icon"> </a>
+					</div>
+
+					<div class="columns medium-6 small-12 text-right simpleConnectivity">
+						<a href="javascript:void(0)" id="status-internet" ng-class="connectivity.status ? 'is_connected' : 'is_disconnected'">
+						<svg title="Internet: connected" class="icon">
+							<use xlink:href="images/sprite.svg?new#icon-wifi"/>
+						</svg> <span translate="internetConnectivityOn" ng-show="connectivity.status" class="ng-hide"></span> <span translate="internetConnectivityOff"  ng-hide="connectivity.status" class="ng-hide"></span> </a>
+					</div>
+				</div>
+			</div>
+			<div messagebox></div>
+			<div id="main-content">
+				<div wait-loading></div>
+				<div class="tabs-content" ng-show="!loading">
+					<form name="broadBandForm" novalidate autocomplete="off" check-unsaved>
+						<div class="row">
+							<div class="columns medium-6 small-12">
+								<h4 class="maintitle" translate="connectionInfo">Connection Information</h4>
+								<div class="row">
+									<div class="columns medium-5">
+										<label class="inline" translate="sStatus">Status</label>
+									</div>
+									<div class="columns medium-7">
+										<label class="inline">
+											<span ng-bind="connectionInfo.ipv4Status"></span> <br>
+											<span ng-bind="connectionInfo.ipv6Status"></span> 
+										</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="columns medium-5">
+										<label class="inline" translate="Uptime">Uptime</label>
+									</div>
+									<div class="columns medium-7">
+										<label class="inline">
+											<span ng-bind="connectionInfo.uptime"></span>
+										</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="columns medium-5">
+										<label class="inline" translate="dataTransfered">Data Transfered</label>
+									</div>
+									<div class="columns medium-7">
+										<label class="inline">
+											<span ng-bind="connectionInfo.dataTransferedSent"></span> (Send)<br>
+											<span ng-bind="connectionInfo.dataTransferedReceived"></span>  (Received)
+										</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="columns medium-5">
+										<label class="inline" translate="ipv4Address">IPv4 Address</label>
+									</div>
+									<div class="columns medium-7">
+										<label class="inline">
+											<span ng-bind="connectionInfo.ipv4Address"></span>
+										</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="columns medium-5">
+										<label class="inline" translate="primaryDNS">Primary DNS</label>
+									</div>
+									<div class="columns medium-7">
+										<label class="inline">
+											<span ng-bind="connectionInfo.primaryDns"></span>
+										</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="columns medium-5">
+										<label class="inline" translate="secondaryDNS">Secondary DNS</label>
+									</div>
+									<div class="columns medium-7">
+										<label class="inline">
+											<span ng-bind="connectionInfo.secondaryDns"></span>
+										</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="columns medium-5">
+										<label class="inline" translate="ipv6Address">IPv6 Address</label>
+									</div>
+									<div class="columns medium-7">
+										<label class="inline">
+											<span ng-bind="connectionInfo.ipv6Address"></span>
+										</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="columns medium-5">
+										<label class="inline" translate="ipv6AddressServer">IPv6 Address Server</label>
+									</div>
+									<div class="columns medium-7">
+										<label class="inline">
+											<span ng-bind="connectionInfo.ipv6AddressServer"></span>
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="columns medium-6 small-12">
+								<h4 class="maintitle" translate="connectionSettings">Connection Settings</h4>
+								<div class="row">
+									<div class="columns medium-5">
+										<label class="inline" translate="pvcInfo">PVC Info (VPI.VCI)</label>
+									</div>
+									<div class="columns medium-7">
+										<label class="inline">
+											<span ng-bind="connectionSettings.pvcInfo"></span> 
+										</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="columns medium-5">
+										<label class="inline" translate="type">Type</label>
+									</div>
+									<div class="columns medium-7">
+										<label class="inline">
+											<span ng-bind="connectionSettings.type"></span>
+										</label>
+									</div>
+								</div>
+								<hr>
+								<h5 class="maintitle" translate="pppoeSettings">PPPoE Settings</h5>
+								<div class="row">
+								  <div class="columns medium-5">
+								    <label for="pppoe-username" class="inline" translate="username">Username</label>
+								  </div>
+								  <div class="columns medium-7">
+								    <input type="text" ng-model="connectionSettings.ppp.username" name="pppoe-username">
+								  </div>
+								</div>
+								<div class="row">
+								  <div class="columns medium-5">
+								    <label for="pppoe-password" class="inline" translate="password">Password</label>
+								  </div>
+								  <div class="columns medium-7">
+								    <input type="text" ng-model="connectionSettings.ppp.password" name="pppoe-password">
+								  </div>
+								</div>
+								<!-- div class="row">
+								  <div class="columns medium-5">
+								    <label for="confirmPassword" class="inline" translate="confirmPassword">Confirm Password</label>
+								  </div>
+								  <div class="columns medium-7">
+								    <input type="text" name="confirmPassword">
+								  </div>
+								</div -->
+								<div class="row">
+								  <div class="columns medium-5">
+								    <label class="inline" translate="mode">Mode</label>
+								  </div>
+								  <div class="columns medium-7">
+								    <label class="inline" >
+											<span ng-bind="connectionSettings.pppoe.mode"></span>
+										</label>
+								  </div>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="right">
+							<button  class="button tiny radius btn-cancel" translate="cancel" type="button" click-loading ui-sref="user.home"></button>
+							<button  class="button tiny radius" translate="apply" type="button" ng-disabled="" ng-click="save()" data-reveal></button>
+							
+
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<script>$(document).foundation();</script>

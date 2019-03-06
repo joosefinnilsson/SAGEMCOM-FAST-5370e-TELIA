@@ -1,0 +1,7 @@
+<div ng-if="extendedMenus">
+<a ng-class="$parent.active === 'home' ? 'active'  : ''" title="Home" class="extendedbtns home" click-loading ui-sref="user.home">Home</a>
+<a ng-class="$parent.active === 'connectivity' ? 'active'  : ''" title="Connectivity" class="extendedbtns connectivity" click-loading ui-sref="user.internetConnectivity">Connectivity</a>
+<a ng-class="$parent.active === 'router' ? 'active'  : ''" title="Router" class="extendedbtns router" click-loading ui-sref="user.mysagemcombox">Router</a>
+<a ng-class="$parent.active === 'access' ? 'active'  : ''" title="Access" class="extendedbtns access" click-loading ui-sref="user.accessControl">Access</a>
+<a ng-class="$parent.active === 'wifi' ? 'active'  : ''" title="Wi-Fi" class="extendedbtns wifi" click-loading ui-sref="user.wifi({radio : '2.4GHz', mode: 'priv'})">Wi-Fi</a>
+</div>

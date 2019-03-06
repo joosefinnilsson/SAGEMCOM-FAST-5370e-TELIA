@@ -1,0 +1,23 @@
+<div wait-loading></div>
+<div class="content w100 ng-hide" ng-show="!loading" id="data-traffic">
+	<table class="table-form table-vert">
+		<tr>
+			<th with="40%" translate="sTotalSendReceive">Total Send/Receive (in MB)</th>
+			<td>
+				<span ng-bind="traffic.sendAndReceive">&nbsp;</span>
+			</td>
+		</tr>
+		<tr>
+			<th translate="sTotalSent">Total Sent (in MB)</th>
+			<td>
+				<span ng-bind="traffic.send">&nbsp;</span>
+			</td>
+		</tr>
+		<tr>
+			<th translate="sTotalReceive">Total Receive (in MB)</th>
+			<td>
+				<span ng-bind="traffic.receive">&nbsp;</span>
+			</td>
+		</tr>
+	</table>
+</div>

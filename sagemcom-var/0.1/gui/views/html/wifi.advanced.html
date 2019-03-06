@@ -1,0 +1,108 @@
+<div class="content">
+	<div wait-loading=""></div>
+	
+	<div class="content w100 ng-hide" ng-show="!loading" id="advanced-24">
+		<form ng-submit="save()" name="formWifiAdvanced" check-unsaved="">
+		<h4 class="maintitle" translate="advancedConfig">Advanced Configuration</h4>
+		<div class="row">
+			<div class="columns medium-3 small-12">
+				<label translate="wifiMode">Wireless Mode</label>
+
+				<select id="wifi24advancedTip1" ng-model="operatingStandards" ng-options="standard.method as standard.label for standard in possibleStandards" name="wirelessMode" ng-change="changeWifiMode()"></select>
+				<div id="wifi24advancedTip11" class="wifiStatus columns small-12 medium-7 large-4 wifi-empty-possible-standards">
+					<span name="operatingStandards" ng-bind="operatingStandards" ng-show="!possibleStandards.length"></span>
+				</div>
+			</div>
+
+			
+
+			<div class="columns large-2 medium-2 small-12">
+				<label translate="bandWidth">Bandwidth</label>
+
+				<select id="bandwidth" ng-model="channelBandwidth" name="channelBandwidth" ng-options="chBdwidth.value as chBdwidth.label for chBdwidth in supportedChannelBandwidth | orderBy: 'order'">
+				</select>
+			</div>
+			<div id="extension-channel" ng-hide="channelBandwidth === '20MHZ' || channelBandwidth === 'AUTO'">
+				<div class="columns large-3 medium-3 small-12 end" check-feature-state="wifiExtensionChannel">
+					<label translate="extensionChannel">Extension Channel</label>
+					<select id="wifi24advancedTip4" ng-model="extensionChannel" name="extensionChannel">
+						<option value="AUTO">Auto</option>
+						<option value="BELOWCONTROLCHANNEL">Below</option>
+						<option value="ABOVECONTROLCHANNEL">Above</option>
+					</select>
+				</div>
+			</div>
+
+			
+
+			<div class="columns large-2 medium-2 small-12 end" check-feature-state="globalMaxClients">
+				<label translate="maxClients">Global Max Clients</label>
+
+				<input id="wifi24advancedTip6" type="text" ng-model="globalMaxClients" disabled="disabled" ng-disabled="!isDtagXdsl">
+			</div>
+			
+		</div>
+
+		<hr check-feature-state="wirelessFullAdvanced" ng-hide="wmmHiden">
+
+		<h6 check-feature-state="wirelessFullAdvanced" translate="wifiWmm" ng-hide="wmmHiden">WMM - Wifi Multimedia</h6>
+
+		<div class="row" check-feature-state="wirelessFullAdvanced" ng-hide="wmmHiden">
+			
+
+			<div class="columns medium-3 small-12" style="display:none">
+				<label for="wmm-no-acknowledgement">No Acknowledgement</label>
+
+				<div id="wifi24advancedTip8" class="onoffswitch" ng-class="{'onoffswitch-disabled': !wmmEnable}">
+					<input class="onoffswitch-checkbox" id="wmm-no-acknowledgement" name="onoffswitch" type="checkbox" ng-disabled="!wmmEnable">
+					<label class="onoffswitch-label" for="wmm-no-acknowledgement"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label>
+				</div>
+			</div>
+
+			<div class="columns medium-3 small-12 end">
+				<label for="wmm-apsd">APSD</label>
+
+				<div id="wifi24advancedTip9" class="onoffswitch" ng-class="{'onoffswitch-disabled': !wmmEnable}">
+					<input class="onoffswitch-checkbox" id="wmm-apsd" name="onoffswitch" type="checkbox" ng-model="apsd" ng-disabled="!wmmEnable">
+					<label class="onoffswitch-label" for="wmm-apsd"><div class="onoffswitch-inner"></div><div class="onoffswitch-switch"></div></label>
+				</div>
+			</div>
+		</div>
+
+		
+
+		
+
+		<div class="right">
+			<button id="wifi24advancedTip10" class="button tiny radius btn-cancel" translate="cancel" type="button" click-loading="" ui-sref="user.home">Cancel</button>
+			<button id="wifi24advancedTip11" class="button tiny radius" translate="apply" type="submit">Apply</button>
+		</div>
+		</form>
+	</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide"><li translate="wifi24advancedTip1" data-tourtarget="#wifi24advancedTip1">
+
+
+  </li><li translate="wifi24advancedTip2" data-tourtarget="#wifi24advancedTip2">
+
+
+  </li><li translate="wifi24advancedTip3" data-tourtarget="#bandwidth">
+
+
+  </li><li translate="wifi24advancedTip4" data-tourtarget="#wifi24advancedTip4">
+
+
+  </li><li translate="wifi24advancedTip5" data-tourtarget="#wifi24advancedTip5">
+
+
+  </li><li translate="wifi24advancedTip6" data-tourtarget="#wifi24advancedTip6">
+
+
+  </li><li translate="wifi24advancedTip7" data-tourtarget="#wifi24advancedTip7">
+
+
+  </li><li translate="wifi24advancedTip9" data-tourtarget="#wifi24advancedTip9">
+
+  </li></ul>

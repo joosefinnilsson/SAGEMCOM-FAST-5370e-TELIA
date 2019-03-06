@@ -1,0 +1,105 @@
+<div class="content content-mobile">
+	<div wait-loading=""></div>
+	
+	<div class="content active w100 ng-hide" ng-show="!loading" id="wireless-enviroment-24">
+		<div><div bread-crumbs="" override-breadcrumb="wifi.channelMap.{{selectedChannelRadio}}"></div></div>
+		<h4 class="maintitle" translate="displayWirelessEnviroment"></h4>
+		<div class="row">
+			<div class="columns small-12 text-right end">
+				<a check-feature-state="wifi5g" ng-show="radioName == '2.4GHz'" class="button tiny radius external-link-button-style gotoWifiEnv full-width" ui-sref="user.wifi.environment.scan({radio : '5GHz', mode: mode})" translate="goToWifi5G">Go to Wifi 5GHz</a>
+				<a check-feature-state="wifi5g" ng-show="radioName == '5GHz'" class="button tiny radius external-link-button-style gotoWifiEnv full-width" ui-sref="user.wifi.environment.scan({radio : '2.4GHz', mode: mode})" translate="goToWifi24G">Go to Wifi 2.4GHz</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="columns medium-5 small-12 small-centered btn-center">
+				<a ng-disabled="!wifiEnable || loadingData || buttonCh" class="button tiny radius full-width" ng-click="getWifiAnalyseData(true)" id="wifi-environment" translate="wifiEnvironmentStartScan">Start Scan</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="columns medium-10 medium-centered small-12 small-centered" ng-if="!showWifiEnviromentTable">
+				<div id="wifi-env" style="height:500px; width: 100%;" ng-show="!loadingData && showGrid"></div>
+				<div ng-show="loadingData">
+					<div ng-if="!logoWaiting" class="t-center">
+						<img src="images/loading.gif" border="0">
+					</div>
+					<div ng-if="logoWaiting" class="t-center">
+						<div class="logo-waiting">
+							<p translate="pleaseWaitLoading"> Please wait... </p>
+	                    </div>
+	                </div>
+					<br>
+				</div>
+				<p class="text-center" ng-show="showGrid && !countSSID" translate="legendWifi">Click in the legends above to show and hide the wifi networks</p>
+				<p ng-if="wifiEnable" id="current-channel" class="text-center">
+					<span class="wifi-env-legend full-width"> <span translate="channelInUse">Channel in use:</span> <strong ng-bind="currentData.channel"></strong><br>
+					(SSID: <strong ng-bind="currentData.ssid"></strong>) </span>
+				</p>
+			</div>
+			<div class="columns medium-10 medium-centered small-12 small-centered" ng-if="showWifiEnviromentTable">
+				<div ng-show="loadingData">
+					<div ng-if="!logoWaiting" class="t-center">
+						<img src="images/loading.gif" border="0">
+					</div>
+					<div ng-if="logoWaiting" class="t-center">
+						<div class="logo-waiting">
+							<p translate="pleaseWaitLoading"> Please wait... </p>
+						</div>
+					</div>
+					<br>
+				</div>
+				<table id="pfTip10" class="table-form table-form-full responsive-table" ng-show="!loadingData">
+					<thead>
+						<tr>
+							<th translate="networkName">Network Name</th>
+							<th translate="wifiEnvironmentChannel">Channel</th>
+							<th translate="wifiEnvironmentSignalStrength">Signal Strength</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="result in resultData" ng-if="!!resultData">
+							<td ng-bind="result.ssid"></td>
+							<td ng-bind="result.channel"></td>
+							<td ng-bind="result.signal"></td>
+						</tr>
+						<tr ng-if="!resultData">
+							<td colspan="3" translate="noPortForwarding">There are no result to show</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li translate="wifiEnvironmentTip1" data-tourtarget="#wifi-environment"></li>
+	<li translate="wifiScanTip0" data-tourtarget="#wifi-env"></li>
+	<li translate="channelInfo" data-tourtarget="#current-channel"></li>
+	<li translate="tabTip" data-tourtarget="#wifiEnvTab"></li>
+	<li translate="tabTip" data-tourtarget="#wifiTab"></li>
+</ul>
+
+<script type="text/javascript">
+	$(document).undelegate('#wifi-env', 'refreshZoom').delegate('#wifi-env', 'refreshZoom', function() {
+		if ($(document).width() < 1280) {
+			$('#wifi-env').css('zoom', '85%');
+		} else {
+			$('#wifi-env').css('zoom', '100%');
+		}
+	});
+	$(document).off('refreshGraphHeight').on('refreshGraphHeight', '#wifi-env', function(e, ssidQty){
+		if(ssidQty){
+			var newHeight;
+			if(ssidQty  <= 4){
+				newHeight = 500;
+			}else{
+				newHeight = 439 + Math.ceil(ssidQty/4)* 36;
+			}
+			$('#wifi-env').css('height', newHeight + 'px');
+		}
+	});
+	$('<div id="tooltip" class="graph-tooltip"></div>').appendTo('body'); 
+	
+		
+</script>

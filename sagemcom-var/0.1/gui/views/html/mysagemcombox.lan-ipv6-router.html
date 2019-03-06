@@ -1,0 +1,35 @@
+<div class="content">
+	<div wait-loading></div>
+	<div class="content" ng-show="!loading" id="lanipv6-sbox">
+		<h4 ng-bind="'LAN IPv6'">LAN / DHCP</h4>
+
+		<form id="lanIPv6Form" name="lanIPv6Form" ng-submit="saveIpv6()" autocomplete="off" novalidate check-unsaved>
+			
+			<div class="row">
+				<div class="columns medium-3 small-4">
+					<label for="enable-ipv6" translate="enableIPv6">Enable IPv6</label>
+				</div>
+				
+				<div id="enable-ipv6" class="columns medium-4 small-8 end">
+					<div class="onoffswitch switch-enable" ng-class="hideLanIPv6Options || disableLanIPv6AddressSettings? 'bt-disabled': ''">
+						<input class="onoffswitch-checkbox" name="enable-ipv6" type="checkbox" ng-model="dhcpv6Enable"/>
+						<label class="onoffswitch-label" for="enable-ipv6">
+							<div class="onoffswitch-inner"></div>
+							<div class="onoffswitch-switch"></div>
+						</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="right">
+				<button id="btnCancel" type="button" class="button tiny radius btn-cancel" translate="cancel" click-loading ui-sref="user.home"></button>
+				<button id="btnApply" type="submit" class="button tiny radius" translate="apply"></button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li translate="lanIpv6EnableTip" data-tourtarget="#enable-ipv6"></li>
+</ul>

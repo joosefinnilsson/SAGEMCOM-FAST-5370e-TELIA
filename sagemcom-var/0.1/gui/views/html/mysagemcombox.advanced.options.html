@@ -1,0 +1,143 @@
+<div wait-loading></div>
+<div class="content active ng-hide" ng-show="!loading" id="advancedOptions">
+	<form id="advancedOptionsForm" name="advancedOptionsForm" ng-submit="save()" check-unsaved>
+		<h4 class="maintitle" translate="mybox_advanced_options_title">Advanced options</h4>
+
+		<p translate="mybox_advanced_options_description" >This page allows configuration of advanced features of your Residential Gateway.</p>
+		<!-- Wan blocking -->
+		<div class="row" ng-show="isOptionAvailable('wanBlockingEnable')">
+			<div class="columns medium-3 small-4">
+				<label class="inline" for="wanBlockingEnable" translate="wan_blocking">Wan Blocking</label>
+			</div>
+
+			<div class="columns medium-2 small-8 end">
+				<div class="onoffswitch">
+					<input ng-model="options.wanBlockingEnable" class="onoffswitch-checkbox" id="wanBlockingEnable" name="onoffswitch" type="checkbox"/>
+					<label class="onoffswitch-label" for="wanBlockingEnable"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+				</div>
+			</div>
+		</div>
+
+		<!-- Ipsec PassThrough -->
+		<div class="row" ng-show="isOptionAvailable('ipSecEnable')">
+			<div class="columns medium-3 small-4">
+				<label class="inline" for="ipSecPassThroughEnable" translate="ipsec_passthrough">Ipsec PassThrough</label>
+			</div>
+
+			<div class="columns medium-2 small-8 end">
+				<div class="onoffswitch">
+					<input ng-model="options.ipSecEnable" class="onoffswitch-checkbox" id="ipSecPassThroughEnable" name="onoffswitch" type="checkbox"/>
+					<label class="onoffswitch-label" for="ipSecPassThroughEnable"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+				</div>
+			</div>
+		</div>
+
+		<!-- PPTP PassThrough -->
+		<div class="row" ng-show="isOptionAvailable('pptpEnable')">
+			<div class="columns medium-3 small-4">
+				<label class="inline" for="pptpPassThroughEnable" translate="pptp_passthrough">PPTP PassThrough</label>
+			</div>
+
+			<div class="columns medium-2 small-8 end">
+				<div class="onoffswitch">
+					<input ng-model="options.pptpEnable" class="onoffswitch-checkbox" id="pptpPassThroughEnable" name="onoffswitch" type="checkbox"/>
+					<label class="onoffswitch-label" for="pptpPassThroughEnable"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+				</div>
+			</div>
+		</div>
+
+		<!-- Multicast -->
+		<div class="row" ng-show="isOptionAvailable('multicast')">
+			<div class="columns medium-3 small-4">
+				<label class="inline" for="MulticastEnable" translate="multicast">Multicast</label>
+			</div>
+
+			<div class="columns medium-2 small-8 end">
+				<div class="onoffswitch">
+					<input ng-model="options.multicast" class="onoffswitch-checkbox" id="MulticastEnable" name="onoffswitch" type="checkbox"/>
+					<label class="onoffswitch-label" for="MulticastEnable"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+				</div>
+			</div>
+		</div>
+		<!-- Port Scan Detection -->
+		<div class="row" ng-show="isOptionAvailable('portScanDetection')">
+			<div class="columns medium-3 small-4">
+				<label class="inline" for="portScanDetection" translate="portScanDetection">Port Scan Detection</label>
+			</div>
+
+			<div class="columns medium-2 small-8 end">
+				<div class="onoffswitch">
+					<input ng-model="options.portScanDetection" class="onoffswitch-checkbox" id="portScanDetection" name="onoffswitch" type="checkbox"/>
+					<label class="onoffswitch-label" for="portScanDetection"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+				</div>
+			</div>
+		</div>
+
+		<!-- Remote config Management -->
+		<div class="row" ng-show="isOptionAvailable('remoteConfig')">
+			<div class="columns medium-3 small-4">
+				<label class="inline" for="remoteConfigEnable" translate="remote_config_management">Remote Config Management</label>
+			</div>
+
+			<div class="columns medium-2 small-8 end">
+				<div class="onoffswitch">
+					<input ng-model="options.remoteConfig" class="onoffswitch-checkbox" id="remoteConfigEnable" name="onoffswitch" type="checkbox"/>
+					<label class="onoffswitch-label" for="remoteConfigEnable"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+				</div>
+			</div>
+		</div>
+		<div class="row" ng-show="options.remoteConfig && options.remoteIPAddress && options.remoteServicePort">
+			<div class="columns medium-12 small-12">
+				
+			</div>
+			<div class="alert-box info radius medium-8' small-8" data-alert>
+				<i class="fa fa-info-circle fa-center center"></i>
+				<span>The remote access will be available on </span> <a ng-href="{{options.remoteUrl}}" target="_blank" ng-bind="options.remoteUrl"></a>
+			</div>
+		</div>
+
+		<!-- UPnP -->
+		<div class="row" ng-show="isOptionAvailable('upnpEnable')">
+			<div class="columns medium-3 small-4">
+				<label class="inline" for="upnpEnable" translate="upnp">UPnP</label>
+			</div>
+
+			<div class="columns medium-2 small-8 end">
+				<div class="onoffswitch">
+					<input ng-model="options.upnpEnable" class="onoffswitch-checkbox" id="upnpEnable" name="onoffswitch" type="checkbox"/>
+					<label class="onoffswitch-label" for="upnpEnable"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+				</div>
+			</div>
+		</div>
+
+		<!-- SIP ALG -->
+		<div class="row" ng-show="isOptionAvailable('sipAlgEnable')">
+			<div class="columns medium-3 small-4">
+				<label class="inline" for="sipAlgEnable" translate="sip_alg">SIP ALG</label>
+			</div>
+
+			<div class="columns medium-2 small-8 end">
+				<div class="onoffswitch">
+					<input ng-model="options.sipAlgEnable" class="onoffswitch-checkbox" id="sipAlgEnable" name="onoffswitch" type="checkbox"/>
+					<label class="onoffswitch-label" for="sipAlgEnable"> <div class="onoffswitch-inner"></div> <div class="onoffswitch-switch"></div> </label>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="right">
+			<button type="button" class="button tiny radius ng-scope" translate="cancel" click-loading ui-sref="user.home" id="cancelTip" ></button>
+			<button id="applyTip" class="button tiny radius ng-scope" translate="apply" type="submit">Apply</button>
+		</div>
+	</form>
+</div>
+
+<!-- help button -->
+<ul id="tlyPageGuide">
+	<li translate="myboxWanBlockingTip" data-tourtarget="#wanBlockingEnable"></li>
+	<li translate="myboxIpSecPassThroughTip" data-tourtarget="#ipSecPassThroughEnable"></li>
+	<li translate="myboxPPTPPassThroughTip" data-tourtarget="#pptpPassThroughEnable"></li>
+	<li translate="myboxRemoteConfigTip" data-tourtarget="#remoteConfigEnable"></li>
+	<li translate="myboxUpnpTip" data-tourtarget="#upnpEnable"></li>
+	<li translate="myboxSipAlgTip" data-tourtarget="#sipAlgEnable"></li>
+</ul>

@@ -1,0 +1,183 @@
+<div class="columns medium-4">
+	<div class="row text-center">
+		<div id="ethernet-devices" class="box-map device-box">
+			<div class="header-box">
+				<span class="sprite-mobile header-box-icon-device ethernet"></span>
+
+				<h6 translate="ethernet">Ethernet</h6>
+
+			</div>
+
+			<div ng-show="isEmpty(listEthernetDevices)">
+				<p id="description" style="padding: 25px 0" translate="noConnectedDevices"></p>
+			</div>
+
+			<a class="box-item clearfix"  ng-repeat="device in listEthernetDevices" ng-click="openDevice(device)"> <div class="sprite-mobile icon-device {{device.userDeviceType | deviceIcon}}"></div>
+			<div class="info-device">
+				<p class="title">
+					<span ng-bind="device.hostname"></span>
+				</p>
+				<p>
+					IP:&nbsp;<span ng-bind="device.ipAddress"></span>
+				</p>
+				<p>
+					<span ng-bind="device.manufacturer"></span>
+				</p>
+			</div> </a>
+		</div>
+
+	</div>
+
+	<div class="row text-center" check-feature-state="voicePorts">
+		<div id="voice-ports" class="box-map device-box">
+			<div class="header-box">
+				<span class="sprite-mobile header-box-icon-device voice"></span>
+
+				<h6 translate="voicePorts">Voice Ports</h6>
+			</div>
+			<div ng-show="!verifyTelephone">
+				<p id="description" style="padding-top: 25px" translate="noLinesEnabled"></p>
+			</div>
+			<a class="box-item clearfix" ng-show="verifyTelephone" ng-class="telephone.state == 'incall' ? 'disabled blink' : telephone.state == 'disabled' ? 'faded' : telephone.state == 'available' ? '' : 'error'"
+			ng-repeat="telephone in listTelephoneDevices" click-loading ui-sref="user.voiceDevice({uid : telephone.uid })"> <div class="sprite-mobile icon-device phone"></div>
+			<div class="info-device">
+				<p class="title">
+					{{telephone.lineName}}
+				</p>
+				<p>
+					{{telephone.lineNumber}}
+				</p>
+				<p>
+					{{telephone.status}}
+				</p>
+			</div> </a>
+
+			<div id="dect-box" class="device-box" style="display: none;">
+				<div class="header-box">
+					<span class="sprite-mobile header-box-icon-device dect"></span>
+
+					<h6 translate="dect">DECT</h6>
+
+					<a class="sprite-mobile header-box-settings" href="dect-settings.html" translate="settings"> Settings </a>
+				</div>
+
+				<a class="box-item clearfix" href="dect-device.html"> <div class="sprite-mobile icon-device phone"></div>
+				<div class="info-device">
+					<p class="title">
+						&nbsp;
+					</p>
+					<p>
+						&nbsp;
+					</p>
+				</div> </a>
+			</div>
+		</div>
+	</div><!--BoxMap-->
+
+</div>
+<div class="columns medium-4">
+
+	<!--BoxMap-->
+	<div class="row text-center">
+		<div id="wifi-24" class="box-map device-box">
+			<div class="header-box">
+				<span class="sprite-mobile header-box-icon-device " ng-class="wifi24Status.status == 'ON' ? 'wifi' : 'wifi-off'"></span>
+				<a class="sprite-mobile header-box-icon qrcode-icon-mini" data-reveal-id="qr-modal24" data-reveal> </a>
+				<a click-loading ui-sref="user.wifi({radio : '2.4GHz', mode: 'priv'})">
+					<h6 translate="wifi2G4">Wi-Fi 2.4GHz</h6>
+				</a>	
+			</div>
+
+			<p class="info">
+				<strong translate="ssidName">SSID Name:</strong>&nbsp;<span ng-bind="wifi24Status.ssid"></span>
+				<br>
+				<strong translate="speedSemicolon">Speed:</strong>&nbsp;<span ng-bind="wifi24Status.actualWifiSpeed"></span>&nbsp;Mbit/s
+			</p>
+
+			<div ng-show="isEmpty(listWifi24Devices)">
+				<p id="description" style="padding: 10px 0;" translate="noConnectedDevices"></p>
+			</div>
+
+			<a class="box-item clearfix" ng-repeat="device in listWifi24Devices" ng-click="openDevice(device)"> <div class="sprite-mobile icon-device {{device.userDeviceType | deviceIcon}}"></div>
+			<div class="info-device">
+				<p class="title">
+					<span ng-bind="device.hostname"></span>&nbsp;
+				</p>
+				<p>
+					IP:&nbsp;<span ng-bind="device.ipAddress"></span>
+				</p>
+				<p>
+					<span ng-bind="device.manufacturer"></span>
+				</p>
+			</div> </a>
+
+		</div>
+	</div><!--BoxMap -->
+
+	<div class="row text-center">
+		<div id="usb-devices" class="box-map device-box" ng-show="{{verifyUSB}}">
+			<div class="header-box">
+				<span class="sprite-mobile header-box-icon-device usb"></span>
+
+				<h6 translate="usb" class="header-box__title">USB</h6>
+			</div>
+
+			<div ng-show="isEmpty(listUSBDevices)">
+				<p id="description" style="padding: 25px 0" translate="noConnectedDevices"></p>
+			</div>
+
+			<a class="box-item clearfix" click-loading ui-sref="user.usbDeviceInfo({ uid : device.uid })" ng-repeat="device in listUSBDevices"> <div class="sprite-mobile icon-device usb"></div>
+			<div class="info-device">
+				<p class="title">
+					{{device.name}}
+				</p>
+				<p>
+					{{device.port}}
+				</p>
+				<p>
+					&nbsp;
+				</p>
+			</div> </a>
+		</div>
+	</div>
+
+</div>
+<div class="columns medium-4">
+
+	<div class="row text-center" ng-show="verifyWifi5">
+		<div id="wifi-5" class="box-map device-box">
+			<div class="header-box">
+				<span class="sprite-mobile header-box-icon-device " ng-class="wifi5Status.status == 'ON' ? 'wifi' : 'wifi-off'"></span>
+				<a class="sprite-mobile header-box-icon qrcode-icon-mini" data-reveal-id="qr-modal5" data-reveal> </a>
+				<a click-loading ui-sref="user.wifi({radio : '5GHz', mode: 'priv'})">
+					<h6 translate="wifi5G">Wi-Fi 5GHz</h6>
+				</a>
+			</div>
+
+			<p class="info">
+				<strong translate="ssidName">SSID Name:</strong>&nbsp;<span ng-bind="wifi5Status.ssid"></span>
+				<br>
+				<!--<strong translate="statusSemicolon">Status:</strong> {{wifi24Status.status}}-->
+				<strong translate="speedSemicolon">Speed:</strong>&nbsp;<span ng-bind="wifi5Status.actualWifiSpeed"></span>&nbsp;Mbit/s
+			</p>
+
+			<div ng-show="isEmpty(listWifi5Devices)">
+				<p id="description" style="padding: 10px 0;" translate="noConnectedDevices"></p>
+			</div>
+
+			<a class="box-item clearfix" ng-repeat="device in listWifi5Devices" ng-click="openDevice(device)"> <div class="sprite-mobile icon-device {{device.userDeviceType | deviceIcon}}"></div>
+			<div class="info-device">
+				<p class="title">
+					<span ng-bind="device.hostname"></span>&nbsp;
+				</p>
+				<p>
+					IP:&nbsp;<span ng-bind="device.ipAddress"></span>
+				</p>
+				<p>
+					<span ng-bind="device.manufacturer"></span>
+				</p>
+			</div> </a>
+
+		</div>
+	</div><!--BoxMap-->
+</div>

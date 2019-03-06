@@ -1,0 +1,140 @@
+<div class="content no-padding">
+	<div wait-loading></div>
+	<div class="content w100 active ng-hide" ng-show="!loading" id="mac-filter-24">
+		<div><div bread-crumbs override-breadcrumb="wifi.accessControl.macFilterMainTitle{{ radioName === '2.4GHz' ? '2' : '5' }}"></div></div>
+		<form name="wifi24MacFilterForm" autocomplete="off" check-unsaved novalidate>
+			<h4 ng-show="radioName === '2.4GHz' || radioName === 'wifiBothBands'" translate="macFilterMainTitle2" class="maintitle"></h4>
+			<h4 ng-show="radioName === '5GHz'" translate="macFilterMainTitle5" class="maintitle"></h4>
+			<div class="row showInfo">
+				<div class="columns small-12">
+					<p class="justified" translate="macFilterDescription">
+						You can control the Wifi access to the gateway using the below Mac-Filter settings.
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="columns large-3 medium-5 small-6 full-width">
+					<label class="inline" translate="macFilterMode">MAC Filtering Mode</label>
+				</div>
+				<div class="columns large-4 medium-4 small-6 end full-width">
+					<select id="macfilter-select" ng-model="macFilterMode" ng-change="submitted=false;" name="macMode">
+						<option value="DISABLED" translate="allowAllMacfilter">Allow All</option>
+						<option value="WHITELIST" selected translate="allow">Allow</option>
+						<option value="BLACKLIST" translate="deny">Deny</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="alert-box warning large radius large-7 medium-9 small-12" data-alert>
+				    <i class="fa fa-info-circle fa-center"></i>
+				    <div style="margin-left:28px;">
+				    	<span><b><span translate="allowAllMacfilter">Allow all</span>:</b> <span translate="noFiltering">no filtering</span></span>
+						<br>
+						<span><b><span translate="allow">Allow</span>:</b> <span translate="allowBelow">Allow access <strong>only</strong> for devices in table below</span></span>
+						<br>
+						<span><b><span translate="deny">Deny</span>:</b> <span translate="denyBelow">Deny access for devices in table below</span></span>
+				    </div>
+				</div>
+			</div>
+			<div class="ba">
+				<h6 class="ng-hide" translate="addWifiDevice" ng-show="macFilterMode != 'DISABLED'">Add Wi-Fi Devices</h6>
+				<div class="row ng-hide" ng-show="macFilterMode != 'DISABLED'">
+					<div class="columns large-4 medium-5 small-8 full-width" id="wifiMACFilterTip3">
+						<label translate="deviceName">Device Name</label>
+						<select name="macDeviceName" ng-options="c as c.hostname for c in activeDevices" ng-model="selectedDevice" ng-change="submitted=false;">
+							<option value="" translate="other">Other</option>
+						</select>
+					</div>
+					<div class="columns large-4 medium-5 small-8 full-width" id="wifiMACFilterTip4">
+						<label translate="MACAddress">MAC Address</label>
+						<input validate-mac validate-unique="mac" name="mac" class="mac-address" type="text" ng-model="selectedDevice.PhysAddress" ng-disabled="wifi24MacFilterForm.macDeviceName.$viewValue && selectedDevice.hostname" />
+						<div>
+							<small class="error" ng-if="wifi24MacFilterForm.$invalid && submitted && wifi24MacFilterForm.mac.$error.validMac" translate="invalidMacAddress">&nbsp;</small>
+							<small class="error" ng-if="wifi24MacFilterForm.$invalid && submitted && wifi24MacFilterForm.mac.$error.invalidUniqueMac" translate="macAddressAlreadyExists">&nbsp;</small>
+						</div>
+					</div>
+					<div class="columns large-1 medium-2 small-3 end full-width">
+						<label>&nbsp;</label>
+						<button class="button tiny radius btn-pull-right" id="wifiMACFilterTip5" type="button" translate="add" ng-click="addMacAddress()">&nbsp;</button>
+					</div>
+				</div>
+				<div class="row" ng-if="hasMaxDeviceNumber">
+					<div class="js-wifi24-security-none">
+						<div data-alert="" class="alert-box alert" translate="maxWifiDevicesFilterWarning">
+							The maximum number of devices is 256.
+						</div>
+					</div>
+				</div>
+				<h6 class="ng-hide" translate="wifiControlList" ng-show="macFilterMode != 'DISABLED'">Wi-Fi Control List</h6>
+				<div class="row ng-hide" ng-show="macFilterMode != 'DISABLED'">
+					<div class="columns small-12">
+						<table id="macfilter-table" class="table-form responsive-table" ng-class="[macFilterMode === 'BLACKLIST' ? 'deny' : 'allow']">
+							<tr>
+								<th translate="deviceName">Device Name</th>
+								<th translate="MACAddress">MAC Address</th>
+								<th translate="options">Options</th>
+							</tr>
+							<tr ng-repeat="wifiDevice in listMac">
+								<td data-title="Device Name" ng-bind="wifiDevice.hostName">&nbsp;</td>
+								<td align="center" data-title="MAC Address" ng-bind="wifiDevice.MACAddress">&nbsp;</td>
+								<td data-title="Options">
+									<input class="icon-delete" type="button" ng-click="assignRemoveIndex($index)" data-reveal-id="confirm-remove-modal" data-reveal/>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="right">
+				<button class="button tiny radius btn-cancel" id="wifiMACFilterTip6" translate="cancel" click-loading ui-sref="user.home">
+					Cancel
+				</button>
+				<button class="button tiny radius" id="wifiMACFilterTip7" value="Apply" translate="apply" data-reveal-id="apply-changes-modal" data-reveal>
+					Apply
+				</button>
+			</div>
+			<div id="apply-changes-modal" class="reveal-modal tiny" data-reveal>
+				<a class="close-reveal-modal close-modal" data-close-reveal>
+					<span class="btn-close">&#215;</span>
+					<span class="show-word btn-close close" translate="close">Close</span>
+				</a>
+				<h5 class="modal-title" translate="macFilter">MAC Filter</h5>
+				<p translate="wifiWpsModalDescription" ng-show="macFilterMode !== 'DISABLED'">
+					Enabling Mac filtering will disable WPS feature and may cause loss of connectivity. Do you want to apply this settings?
+				</p>
+				<p translate="wifiModalDescription" ng-show="macFilterMode === 'DISABLED'">
+					Are you sure you want to apply this settings? Changing any values in this page may cause any users connected in Wi-Fi a loss of connectivity.
+				</p>
+				<div class="right">
+					<button class="button tiny radius btn-cancel" type="button" translate="cancel" onclick="$('#apply-changes-modal a.close-reveal-modal').trigger('click');" data-close-reveal>&nbsp;</button>
+					<button class="button tiny radius" type="button" translate="continue" onclick="$('#apply-changes-modal a.close-reveal-modal').trigger('click');" ng-click="save()">&nbsp;</button>
+				</div>
+			</div>
+
+			<div id="confirm-remove-modal" class="reveal-modal tiny" data-reveal>
+				<a class="close-reveal-modal close-modal">
+					<span class="btn-close">&#215;</span>
+					<span class="show-word btn-close close" translate="close">Close</span>
+				</a>
+				<h5 class="modal-title" translate="applyChanges">&nbsp;</h5>
+				<p translate="removeDevice">&nbsp;</p>
+				<div class="right">
+					<button class="button tiny radius btn-cancel" type="button" translate="no" onclick="$('#confirm-remove-modal a.close-reveal-modal').trigger('click');"></button>
+					<button class="button tiny radius" type="button" translate="yes" type="button" ng-click="removeDevice()" onclick="$('#confirm-remove-modal a.close-reveal-modal').trigger('click');"></button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<ul id="tlyPageGuide">
+	<li translate="wifiMACFilterTip1" data-tourtarget="#macfilter-select"></li>
+	<li translate="wifiMACFilterTip3" data-tourtarget="#wifiMACFilterTip3"></li>
+	<li translate="wifiMACFilterTip4" data-tourtarget="#wifiMACFilterTip4"></li>
+	<li translate="wifiMACFilterTip6" data-tourtarget="#macfilter-table"></li>
+</ul>
+
+<script>
+	Foundation.libs.reveal.settings.close_on_background_click = false;
+	$(document).foundation();
+</script>
