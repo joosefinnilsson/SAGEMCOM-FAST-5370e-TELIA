@@ -399,6 +399,10 @@ $.xmo.getValuesTree("Device/Managers/NetworkLan/GuestAccessControlEnable");
     $scope.checkUrlPath()
      });
 
+###### Change values to true after changes:
+
+     $.xmo.addChild($.xpaths.advanced.remoteManagement.usersUpdate.enable = "true")
+
 ###### VOIP
 
      $.xmo.getValuesTree("Device/Services/VoiceServices/VoiceService[@uid=1]/VoiceProfiles/VoiceProfile[@uid=1]/Enable");
