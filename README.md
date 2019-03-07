@@ -18,8 +18,11 @@
 
 - Big thanks to [kevdagoat](https://github.com/kevdagoat) who got me on the right track.
 
-### Before you start reading you must know what userID is and wich userID to set, userID is the ID of a user, users are added by id numbers and not nicknames or usernames, so for set a setting for your user then you can use uid OR anything else that will match your UserAccount, for example instead of @uid='1' you can use Login="Administrator" or you can useLastName='Administrator", aslong as it can identify you as your current userlogin it will work, this is the trick they are using since the few wikis/how-to about sagemcom onlinefor all models saying use UID, but they might have used something else and that's the reason why you probably will get null as answer, you must list the settings as IT was addedby the developers, you can find how things has been added in scrpts.js file, search for push and you will find everything they have pushed above the push commands. So now you of course want to use wich ID your user got, to list settings as they find settings for set permissions is the command below, it will list everything about your client:
-
+###### Before you start reading you must know what userID is and wich userID to set, userID is the ID of a user, users are added by id numbers and not nicknames or usernames. This means if you want to set a setting for your user then you can use uid OR anything 
+else that will match your UserAccount, for example instead of @uid='1' you can use Login="Administrator" or you can useLastName='Administrator", aslong as it can identify you as your current userlogin it will work, this is the trick they are using since the few 
+wikis/how-to saying use UID's all the time but this is not required, but they might have used something else during the add then uid and then you must use the same for find the setting. That's the reason why you probably will get null as answer until you will 
+find the correct way to list settings, you must list the settings as IT was added by the developers, you can find how things has been added in scripts.js file, search for push and you will find everything they have pushed above the push commands. So now you of 
+course want to use wich ID your user got, to list settings as they do whemn they will set a value type below command (i have uploaded a customized file so you can try and understand how things are done under script folders, useradd for example):
  
      $.xmo.client 
 
@@ -34,30 +37,39 @@
      _nonce: "1558292282"
 
 
-### Many times they just need user name for set the permissions and the way they find these settings is by:
+###### Many times they just need user name for set the permissions and the way they find these settings is by:
 
     $.xmo.client.user
 
     "Administrator"
 
-### To get the UID wich is mostly used (use the value when you set settings for @uid='1'
+###### To get the UID wich is mostly used (use the value when you set settings for @uid='1'
 
     $.xmo.client._eventId
     1
 
-### This is a smart way to do it, but not smart enough. Since they using this method, we also can do it of course and because of this we will find that 5 users are added but with hidden nicks, use your brain to find these nicks, noone knows more then they developers so you must guess. But since there is 5 passwords still added after the firmware upgrade when they have fixed many vulnerabilities (3.43.2 is like a cheddar cheese, 3.43.3 things has been much more protected - upgrade was released in 6th February 2019, you never got any info about this it just upgraded itself during the night and there is nothing in GUI that will give you a hint that the firmware upgrade was done) .. Please see the above pictures how they tried to hide they users. The usually command to list users is by $.xmo.getValuesTree("Device/UserAccounts") but this has been removed in last version, but when we use $.xmo.getValuesTree("Device/UserAccounts/*/*)" - We gonna find our users specs, but we just will find 1 user and that is the user we are using, but see this expose just on this wiki (2019-03-06)  - They werent smart enough - See video two steps below for get a better knowledge and overview
+###### This is a smart way to do it, but not smart enough. Since they using this method, we also can do it of course and because of this we will find that 5 users are added but with hidden nicks, use your brain to find these nicks, noone knows more then the guys 
+who created the users so you must guess the login names to be able to change things. But since there is 5 passwords still added after the firmware upgrade from last months many vulnerabilities (3.43.2 is like a cheddar cheese, 3.43.3 things has been much more 
+protected - upgrade was released in 6th February 2019, you never got any info about this it just upgraded itself during the night and there is nothing in GUI that will give you a hint that the firmware upgrade was done) .. Please see the above pictures how they 
+tried to hide the users. The command to list users is from $.xmo.getValuesTree("Device/UserAccounts") but this has been removed in last version, but when we use $.xmo.getValuesTree("Device/UserAccounts/*/*)" - We gonna find our user specs(Administrator) but i 
+will show you how it is possible to list the usernames that is not listed under any settings.
 
 ![Screenshot](https://nr1.nu/admin-login.png)
 
-### Sagem devs, the passwords was a mistake to not hide passwords (All users that have no clue how to find the user Logins, guess, guess and again guess the nicks thats the only way) and don't be lazy, you really want them to spy on your router wich is the last point to the big world wide net wich means ALL devies go through this last point (gosh, dangerous!)
+###### You are not alone on your network even if your settings list that 0 users is added after the security update and this is not only for our router, it is ALL isps worldwide that using SagemCom as router provider, they still can be found - Big Brother 
+Watching! See video below for a better overview.
 
-![Screenshot](https://nr1.nu/justpasswordforgotten.png)
+![Screenshot](misc/youarenotalone-sagemcom.gif)
 
-### You are not alone on your network even if you settings list 0 users after the security update foro ALL isps worldwide that using SagemCom as router provider, they still can be found - Big Brother Watching! See video below for a better overview.
+##### The router also accept javascript injections, you can try edit the session by:
 
-![Screenshot](misc/youarenotalone.gif)
+      javascript:void(document.cookie="sessionhere")
 
-####
+Verify that you have injected the cookie by: 
+
+       javascript:alert(document.cookie);
+
+If you change username, you will be logged in as username but if you don't know the correct username or profile, you gonna get limited settings.
 
 #### Find hidden settings in latest firmware (3.42.3)
 
@@ -105,7 +117,8 @@
 
 ![Screenshot](https://nr1.nu/sagem/telia-telnet.gif)
 
-Alright, after few weeks with this "most powerful router" from Telia i finally managed to find a way to get root access. For all who does not like this kind of exposing please remember it's not me who adding backdoors to all swedes that using this router(~1 million). This repo have been made for expose Telia and Sagemcom's backdoors **again**.
+Alright, after few weeks with this "most powerful router" from Telia i finally managed to find a way to get root access. For all who does not like this kind of exposing please remember it's not me who adding backdoors to all swedes that using this router(~1 
+million). This repo have been made for expose Telia and Sagemcom's backdoors **again**.
 
 ###### As on earlier versions from Telia they use backdoors without our knowledge for be able to telnet/ssh into our network wich means they can sniff **EVERYTHING** on your network.
 
@@ -416,7 +429,8 @@ $.xmo.getValuesTree("Device/Managers/NetworkLan/GuestAccessControlEnable");
     $scope.populate = function() {
         $scope.antennaTypes = $.constants.antennaTypes;
         var data = AntennaSettings.populate();
-        data.autoDetectionAntenna ? $scope.antennaType = 1 : data.enableExtMainAntenna || data.enableExtRXAntenna ? data.enableExtMainAntenna && !data.enableExtRXAntenna ? $scope.antennaType = 3 : data.enableExtMainAntenna && data.enableExtRXAntenna && ($scope.antennaType = 4) : $scope.antennaType = 2
+        data.autoDetectionAntenna ? $scope.antennaType = 1 : data.enableExtMainAntenna || data.enableExtRXAntenna ? data.enableExtMainAntenna && !data.enableExtRXAntenna ? $scope.antennaType = 3 : data.enableExtMainAntenna && data.enableExtRXAntenna && 
+($scope.antennaType = 4) : $scope.antennaType = 2
     }
     ,
     $scope.populate(),
@@ -463,7 +477,8 @@ $.xmo.getValuesTree("Device/Managers/NetworkLan/GuestAccessControlEnable");
      sboxApp.controller("ExtendedMenuController", function($scope, $rootScope) {
          $scope.checkUrlPath = function() {
         $scope.active = "",
-        "user.home" === $rootScope.currentRouteName ? $scope.active = "home" : $rootScope.currentRouteName.indexOf("user.internetConnectivity") > -1 ? $scope.active = "connectivity" : $rootScope.currentRouteName.indexOf("user.mysagemcombox") > -1 ? $scope.active = "router" : $rootScope.currentRouteName.indexOf("user.accessControl") > -1 ? $scope.active = "access" : $rootScope.currentRouteName.indexOf("user.wifi") > -1 && ($scope.active = "wifi")
+        "user.home" === $rootScope.currentRouteName ? $scope.active = "home" : $rootScope.currentRouteName.indexOf("user.internetConnectivity") > -1 ? $scope.active = "connectivity" : $rootScope.currentRouteName.indexOf("user.mysagemcombox") > -1 ? $scope.active 
+= "router" : $rootScope.currentRouteName.indexOf("user.accessControl") > -1 ? $scope.active = "access" : $rootScope.currentRouteName.indexOf("user.wifi") > -1 && ($scope.active = "wifi")
     }
     ,
     $scope.checkUrlPath()
@@ -617,7 +632,8 @@ $.xmo.getValuesTree("Device/Managers/NetworkLan/GuestAccessControlEnable");
 
 ###### There is plenty of configuration files on the router and for download all these we need use newRequest and we also will use a function for this, edit the filename if you found another conf or file you want to download:
 
-    $.config.modules.backupConfigurationAllBackup === !0 ? a.downloadSpecificFile($.xpaths.mySagemcomBox.maintenance.saveRestore.save, "device.cfg", 1, function() {}, function(a) {}) : $.xmo.client.newRequest..downloadFile($.xpaths.mySagemcomBox.maintenance.saveRestore.save, function() {}, function(a) {}), $.xmo.client.newRequest.send;
+    $.config.modules.backupConfigurationAllBackup === !0 ? a.downloadSpecificFile($.xpaths.mySagemcomBox.maintenance.saveRestore.save, "device.cfg", 1, function() {}, function(a) {}) : 
+$.xmo.client.newRequest..downloadFile($.xpaths.mySagemcomBox.maintenance.saveRestore.save, function() {}, function(a) {}), $.xmo.client.newRequest.send;
 
 ![Screenshot](https://nr1.nu/sagem/download-files.gif)
 
@@ -1108,7 +1124,8 @@ $.xmo.getValuesTree("Device/Managers/NetworkLan/GuestAccessControlEnable");
      $.xmo.getValuesTree($.xpaths.wifiRestoreDefault)
      $.xmo.getValuesTree($.xpaths.wizard)
 
-##### Some other intresting links without any required login you can visit (there is tons of settings to enable to get a really powerful router. This you must figured out yourself since it's to much work to fix a wiki for this atm, I maybe fixing later - have fun! :)):
+##### Some other intresting links without any required login you can visit (there is tons of settings to enable to get a really powerful router. This you must figured out yourself since it's to much work to fix a wiki for this atm, I maybe fixing later - have 
+fun! :)):
 
 http://192.168.1.1/0.1/gui/js/answering-machine.js
 
@@ -2039,4 +2056,5 @@ Visit my websites and profiles for the latest info and updated tools
 https://github.com/wuseman/ && https://nr1.nu && https://stackoverflow.com/users/9887151/wuseman
 
 #### END!
+
 
