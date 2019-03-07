@@ -48,11 +48,7 @@ course want to use wich ID your user got, to list settings as they do whemn they
     $.xmo.client._eventId
     1
 
-###### This is a smart way to do it, but not smart enough. Since they using this method, we also can do it of course and because of this we will find that 5 users are added but with hidden nicks, use your brain to find these nicks, noone knows more then the guys 
-who created the users so you must guess the login names to be able to change things. But since there is 5 passwords still added after the firmware upgrade from last months many vulnerabilities (3.43.2 is like a cheddar cheese, 3.43.3 things has been much more 
-protected - upgrade was released in 6th February 2019, you never got any info about this it just upgraded itself during the night and there is nothing in GUI that will give you a hint that the firmware upgrade was done) .. Please see the above pictures how they 
-tried to hide the users. The command to list users is from $.xmo.getValuesTree("Device/UserAccounts") but this has been removed in last version, but when we use $.xmo.getValuesTree("Device/UserAccounts/*/*)" - We gonna find our user specs(Administrator) but i 
-will show you how it is possible to list the usernames that is not listed under any settings.
+###### This is a smart way to do it, but not smart enough. Since they using this method, we also can do it of course and because of this we will find that 5 users are added but with hidden nicks, use your brain to find these nicks, noone knows more then the guys who created the users so you must guess the login names to be able to change things. But since there is 5 passwords still added after the firmware upgrade from last months many vulnerabilities (3.43.2 is like a cheddar cheese, 3.43.3 things has been much more protected - upgrade was released in 6th February 2019, you never got any info about this it just upgraded itself during the night and there is nothing in GUI that will give you a hint that the firmware upgrade was done) .. Please see the above pictures how they tried to hide the users. The command to list users is from $.xmo.getValuesTree("Device/UserAccounts") but this has been removed in last version, but when we use $.xmo.getValuesTree("Device/UserAccounts/*/*)" - We gonna find our user specs(Administrator) but i will show you how it is possible to list the usernames that is not listed under any settings.
 
 ![Screenshot](https://nr1.nu/admin-login.png)
 
