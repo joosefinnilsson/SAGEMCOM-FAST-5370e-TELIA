@@ -61,11 +61,11 @@ Watching! See video below for a better overview.
 
       javascript:void(document.cookie="sessionhere")
 
-Verify that you have injected the cookie by: 
+##### Verify that you have injected the cookie by: 
 
        javascript:alert(document.cookie);
 
-If you change username, you will be logged in as username but if you don't know the correct username or profile, you gonna get limited settings.
+##### If you change username, you will be logged in as username but if you don't know the correct username or profile, you gonna get limited settings.
 
 #### Find hidden settings in latest firmware (3.42.3)
 
