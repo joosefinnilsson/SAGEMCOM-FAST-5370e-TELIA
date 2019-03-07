@@ -55,7 +55,7 @@ course want to use wich ID your user got, to list settings as they do whemn they
 ###### You are not alone on your network even if your settings list that 0 users is added after the security update and this is not only for our router, it is ALL isps worldwide that using SagemCom as router provider, they still can be found - Big Brother 
 Watching! See video below for a better overview.
 
-![Screenshot](misc/youarenotalone-sagemcom.gif)
+![Screenshot](misc/youarenotalone.gif)
 
 ##### The router also accept javascript injections, you can try edit the session by:
 
