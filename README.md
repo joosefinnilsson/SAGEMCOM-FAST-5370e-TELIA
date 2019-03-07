@@ -55,7 +55,7 @@
 
 ### You are not alone on your network even if you settings list 0 users after the security update foro ALL isps worldwide that using SagemCom as router provider, they still can be found - Big Brother Watching! See video below for a better overview.
 
-![Screenshot](misc/youarenotalone-sagemcom.gif)
+![Screenshot](misc/youarenotalone.gif)
 
 ####
 
