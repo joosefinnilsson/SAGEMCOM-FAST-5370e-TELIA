@@ -929,7 +929,7 @@ $.xmo.client.newRequest..downloadFile($.xpaths.mySagemcomBox.maintenance.saveRes
 
 ###### Default login screen:
 
-![Screenshot](https://nr1.nu/sagem/sagemcom-default-login.png)
+![Screenshot](https://nr1.nu/sagemcom-default-login.png)
 
 ###### Go visit 192.168.1.1:9000 to enjoy the hidden Twonky interface:
 
