@@ -116,7 +116,7 @@ Watching! See video below for a better overview.
 Alright, after few weeks with this "most powerful router" from Telia i finally managed to find a way to get root access. For all who does not like this kind of exposing please remember it's not me who adding backdoors to all swedes that using this router(~1 
 million). This repo have been made for expose Telia and Sagemcom's backdoors **again**.
 
-###### As on earlier versions from Telia they use backdoors without our knowledge for be able to telnet/ssh into our network wich means they can sniff **EVERYTHING** on your network.
+###### As on earlier versions from Telia they use backdoors without our knowledge for be able to telnet/ssh into our network wich means they can sniff **EVERYTHING** on your network
 
 ![Screenshot](https://nr1.nu/sagem/sagem-backdoor.png)
 
