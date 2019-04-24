@@ -12,7 +12,7 @@
 
 ### Important: 
 
-_Text below might be confusing until you have seen example of set settings on the router if you scroll down.
+_Text below might be confusing until you have seen example of set settings on the router if you scroll down._
 
 ###### When you will change a setting on your device you must know wich userID the current deffault user is added under for change settings, userID is the ID of users added on router. They added account(s) by ID-Nr instead of a nick or username. So, when you will update a setting for current default user you probably wanna use the @UID as default unless the setting has been added under another value under $.xmo.client, 
 
