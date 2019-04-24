@@ -50,14 +50,11 @@
      IAPDEnable: {enable: false}
      MTU: {enable: false}
 
-#### Below is a preview how it will look when you have successfully hacked the router.
+#### Below is a preview when we shell access with root privileges via telnet:
 
 ![Screenshot](https://nr1.nu/sagem/telia-telnet.gif)
 
-Alright, after few weeks with this "most powerful router" from Telia i finally managed to find a way to get root access. For all who does not like this kind of exposing please remember it's not me who adding backdoors to all swedes that using this router(~1 
-million). This repo have been made for expose Telia and Sagemcom's backdoors **again**.
-
-###### As on earlier versions from Telia they use backdoors without our knowledge for be able to telnet/ssh into our network wich means they can sniff **EVERYTHING** on your network
+###### As on earlier versions from Telia they added backdoors without customers knowledge: 
 
 ![Screenshot](https://nr1.nu/sagem/sagem-backdoor.png)
 
