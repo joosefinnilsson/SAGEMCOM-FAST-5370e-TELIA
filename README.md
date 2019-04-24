@@ -1,5 +1,7 @@
 # README
 
+#### This README is on hold until I will get a new router from my ISP since i bought another one atm.
+
 #### This wiki and **all** scripts that will be added under this repo has been made by wuseman and is licensed under GPL Version 3.
 
 ##### This is the first wiki online that will help you to bring the power back from Telia and Sagemcom developers via _telnet_.
@@ -50,7 +52,7 @@
      IAPDEnable: {enable: false}
      MTU: {enable: false}
 
-#### Below is a preview when we shell access with root privileges via telnet:
+#### Below is a preview when we have shell access with full root privileges:
 
 ![Screenshot](https://nr1.nu/sagem/telia-telnet.gif)
 
