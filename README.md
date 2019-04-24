@@ -8,7 +8,7 @@
 
 ![Screenshot](https://nr1.nu/sagem/felia1.jpg)
 
-###### There is hidden users added on Sagemcom routers:
+###### There is hidden users added on Sagemcom routers even if they are hidden as since there is no text inside the quotes, let me show you a proof (usernames might be different on your device so you must guess cause you wont be able to find them anwhere in plain-text, when password is listed you found the correct username, then you can try to crack the password and then login as the user)
 
 ![Screenshot](misc/youarenotalone.gif)
 
