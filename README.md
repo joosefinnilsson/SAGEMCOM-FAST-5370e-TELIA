@@ -1,6 +1,6 @@
 # README
 
-#### This README is on hold until I will get a new router from my ISP since i bought another one atm.
+#### This README is on hold until I will get a new router from TELIA since i bought a private router for now, I will probably get a new one this summer for free. :)
 
 #### This wiki and **all** scripts that will be added under this repo has been made by wuseman and is licensed under GPL Version 3.
 
