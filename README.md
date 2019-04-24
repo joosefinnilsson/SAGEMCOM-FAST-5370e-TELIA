@@ -1,6 +1,6 @@
 # README
 
-#### This README is on hold until I will get a new router from TELIA since i bought a private router for now, I will probably get a new one this summer so don't expect this repo to get updated in the upcomming weeks. Of course all commands in this wiki is available still if you are on firmware 3.42.2. In firmware 3.43.3 all important settings has been removed so you can't enable telnet and ssh access via the console by the exploits in this wiki anymore. (3.42.3 FIRMWARE UPGRADE WAS SENT OUT TO ALL TO ALL ROUTERS WORLD WIDE SO THIS FIRMWARE UPGRADE WAS A GLOBAL ONE .....).
+#### This README is on hold until I will get a new router from TELIA since i bought a private router for now, I will probably get a new one this summer so don't expect this repo to get updated in the upcomming weeks. Of course all commands in this wiki is available still if you are on firmware 3.42.2. In firmware 3.43.3 all important settings has been removed so you can't enable telnet and ssh access via the console by the exploits in this wiki anymore. (3.42.3 FIRMWARE UPGRADE WAS SENT TO ALL ROUTERS WORLD WIDE SO THIS FIRMWARE UPGRADE WAS A GLOBAL ONE .....).
 
 #### This wiki and **all** scripts that will be added under this repo has been made by wuseman and is licensed under GPL Version 3.
 
