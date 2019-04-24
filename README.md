@@ -1,6 +1,6 @@
 # README
 
-#### This README is on hold until I will get a new router from TELIA since i bought a private router for now, I will probably get a new one this summer for free. :)
+#### This README is on hold until I will get a new router from TELIA since i bought a private router for now, I will probably get a new one this summer so don't expect this repo to get updated in the upcomming weeks. Of course all commands in this wiki is available still if you are on firmware 3.42.2. In firmware 3.43.3 almost every public settings you will find below has been removed or changed to read only so this wiki has been made for 4.43.2 firmware.
 
 #### This wiki and **all** scripts that will be added under this repo has been made by wuseman and is licensed under GPL Version 3.
 
