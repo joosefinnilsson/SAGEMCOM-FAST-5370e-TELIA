@@ -18,15 +18,18 @@
 
 - Big thanks to [kevdagoat](https://github.com/kevdagoat) who got me on the right track.
 
-###### Before you start reading you must know what userID is and wich userID to set, userID is the ID of a user, users are added by id numbers and not nicknames or usernames. This means if you want to set a setting for your user then you can use uid OR anything 
-else that will match your UserAccount, for example instead of @uid='1' you can use Login="Administrator" or you can useLastName='Administrator", aslong as it can identify you as your current userlogin it will work, this is the trick they are using since the few 
-wikis/how-to saying use UID's all the time but this is not required, but they might have used something else during the add then uid and then you must use the same for find the setting. That's the reason why you probably will get null as answer until you will 
-find the correct way to list settings, you must list the settings as IT was added by the developers, you can find how things has been added in scripts.js file, search for push and you will find everything they have pushed above the push commands. So now you of 
-course want to use wich ID your user got, to list settings as they do whemn they will set a value type below command (i have uploaded a customized file so you can try and understand how things are done under script folders, useradd for example):
- 
+### Important: 
+
+_Text below might be confusing until you have seen example of set settings on the router if you scroll down.
+
+###### When you will change a setting on your device you must know wich userID the current deffault user is added under for change settings, userID is the ID of users added on router. They added account(s) by ID-Nr instead of a nick or username. So, when you will update a setting for current default user you probably wanna use the @UID as default unless the setting has been added under another value under $.xmo.client, 
+
+###### Example: Instead of using _@uid='1'_ wich is used in mostly cases(IDNR) you can use the username instead as: _Login="Administrator"_ or set a setting by using the lastname setting by _useLastName='Administrator"_, aslong as it can be be connected with your userID it wont matter what you gonna use. This is how they added things after the firmware upgrade (2.2>2.3) for hide users and settings. They might have added a setting under @uid="15912845" or something else and you can't list the settings under device since it's hidden. You must use the exactly same userID Sagemcom used when they added their user otherwise you will be replied with a "null" answer if you trying with a wrong UID. A tips is for figure out how they added the users and wich values that has been used you check the /scripts.js file. When you have script.js opened you can search for 'push' and now you should see how things was added or you can just simply type $.xmo.client as below:
+
      $.xmo.client 
 
      user: "Administrator"
+     _userID: 0
      _eventCount: 0
      _eventId: 1
      _eventRequest: null
@@ -37,23 +40,12 @@ course want to use wich ID your user got, to list settings as they do whemn they
      _nonce: "1558292282"
 
 
-###### Many times they just need user name for set the permissions and the way they find these settings is by:
-
-    $.xmo.client.user
-
-    "Administrator"
-
 ###### To get the UID wich is mostly used (use the value when you set settings for @uid='1'
 
     $.xmo.client._eventId
     1
 
-###### This is a smart way to do it, but not smart enough. Since they using this method, we also can do it of course and because of this we will find that 5 users are added but with hidden nicks, use your brain to find these nicks, noone knows more then the guys who created the users so you must guess the login names to be able to change things. But since there is 5 passwords still added after the firmware upgrade from last months many vulnerabilities (3.43.2 is like a cheddar cheese, 3.43.3 things has been much more protected - upgrade was released in 6th February 2019, you never got any info about this it just upgraded itself during the night and there is nothing in GUI that will give you a hint that the firmware upgrade was done) .. Please see the above pictures how they tried to hide the users. The command to list users is from $.xmo.getValuesTree("Device/UserAccounts") but this has been removed in last version, but when we use $.xmo.getValuesTree("Device/UserAccounts/*/*)" - We gonna find our user specs(Administrator) but i will show you how it is possible to list the usernames that is not listed under any settings.
-
-![Screenshot](https://nr1.nu/admin-login.png)
-
-###### You are not alone on your network even if your settings list that 0 users is added after the security update and this is not only for our router, it is ALL isps worldwide that using SagemCom as router provider, they still can be found - Big Brother 
-Watching! See video below for a better overview.
+###### There is hidden users added on Sagemcom routers:
 
 ![Screenshot](misc/youarenotalone.gif)
 
