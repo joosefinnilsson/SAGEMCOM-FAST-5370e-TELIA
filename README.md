@@ -8,16 +8,6 @@
 
 ![Screenshot](https://nr1.nu/sagem/felia1.jpg)
 
-##### The router also accept javascript injections, you can try edit the session by:
-
-      javascript:void(document.cookie="sessionhere")
-
-##### Verify that you have injected the cookie by: 
-
-       javascript:alert(document.cookie);
-
-##### If you change 'Administrator' to 'MyUsername' you will be logged in as 'MyUsername' but this wont let you change any settings so there is no reason for change the username. 
-
 #### Find hidden settings in latest firmware (3.42.3)
 
 ![Screenshot](misc/hidden-settings.gif)
