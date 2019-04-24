@@ -1,6 +1,6 @@
 # README
 
-#### This README is on hold until I will get a new router from TELIA since i bought a private router for now, I will probably get a new one this summer so don't expect this repo to get updated in the upcomming weeks. Of course all commands in this wiki is available still if you are on firmware 3.42.2. In firmware 3.43.3 all settings has been removed so you can't enable telnet and ssh access via the browser anymore. Sagemcom has removed all the settings that could be interesting in firmware 3.43.2 (THIS IS NOT JUST FOR TELIA, THIS UPGRADE WAS A GLOBAL WORLD UPGRADE FOR ALL INTERNET PROVIDERS, TELSTRA, ORANGE ETC).
+#### This README is on hold until I will get a new router from TELIA since i bought a private router for now, I will probably get a new one this summer so don't expect this repo to get updated in the upcomming weeks. Of course all commands in this wiki is available still if you are on firmware 3.42.2. In firmware 3.43.3 all important settings has been removed so you can't enable telnet and ssh access via the browser anymore. Sagemcom has removed all the settings that could be interesting in firmware 3.43.2 (THIS IS NOT JUST FOR TELIA, THIS UPGRADE WAS A GLOBAL WORLD UPGRADE FOR ALL INTERNET PROVIDERS, TELSTRA, ORANGE ETC).
 
 #### This wiki and **all** scripts that will be added under this repo has been made by wuseman and is licensed under GPL Version 3.
 
