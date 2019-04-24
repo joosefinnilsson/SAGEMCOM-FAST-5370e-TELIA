@@ -20,7 +20,7 @@
 
        javascript:alert(document.cookie);
 
-##### If you change username, you will be logged in as username but if you don't know the correct username or profile, you gonna get limited settings.
+##### If you change 'Administrator' to 'MyUsername' you will be logged in as 'MyUsername' but this wont let you change any settings so there is no reason for change the username. 
 
 #### Find hidden settings in latest firmware (3.42.3)
 
