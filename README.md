@@ -8,7 +8,7 @@
 
 ![Screenshot](https://nr1.nu/sagem/felia1.jpg)
 
-###### Hidden users has been added on the device even if you can't read them in plain text but you will be able to figure out how many users there is added since they must add a password for all users by hash. Let me show you a proof (users and id's is probably different on your device if you have anoher internet provider. There is only one way to figure out the usernames and that is by guessing. It's not possible to find the username(s) in plain-text anywhere on the router - If you find the password for a hash then you can crack the hash and then login as the user + password via ($.xmo.login(username, password); 
+###### Hidden users has been added on the device even if you can't read them in plain text but you will be able to figure out how many users there is added since they must add a password for all users by hash. Let me show you a proof (users and id's is probably different on your device if you have anoher internet provider. There is only one way to figure out the usernames and that is by guessing. It's not possible to find the username(s) in plain-text anywhere on the router - If you figure out the usernames for a specifik hash(usually 5 or 7 accouns is added) then you can crack the hash and then finally you will be able to  login as the user you found via ($.xmo.login(username, password); 
 
 ![Screenshot](misc/youarenotalone.gif)
 
