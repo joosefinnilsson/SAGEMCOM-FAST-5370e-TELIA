@@ -12,8 +12,6 @@
 
 ### Important: 
 
-_Text below might be confusing until you have seen example of set settings on the router if you scroll down._
-
 ###### When you will change a setting on your device you must know wich userID the current deffault user is added under for change settings, userID is the ID of users added on router. They added account(s) by ID-Nr instead of a nick or username. So, when you will update a setting for current default user you probably wanna use the @UID as default unless the setting has been added under another value under $.xmo.client, 
 
 ###### Example: Instead of using _@uid='1'_ wich is used in mostly cases(IDNR) you can use the username instead as: _Login="Administrator"_ or set a setting by using the lastname setting by _useLastName='Administrator"_, aslong as it can be be connected with your userID it wont matter what you gonna use. This is how they added things after the firmware upgrade (2.2>2.3) for hide users and settings. They might have added a setting under @uid="15912845" or something else and you can't list the settings under device since it's hidden. You must use the exactly same userID Sagemcom used when they added their user otherwise you will be replied with a "null" answer if you trying with a wrong UID. A tips is for figure out how they added the users and wich values that has been used you check the /scripts.js file. When you have script.js opened you can search for 'push' and now you should see how things was added or you can just simply type $.xmo.client as below:
