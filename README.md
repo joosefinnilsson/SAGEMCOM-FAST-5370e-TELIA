@@ -8,7 +8,7 @@
 
 ![Screenshot](https://nr1.nu/sagem/felia1.jpg)
 
-###### Hidden users is added even if you just see empty fields above hash passwords. Let me show you a proof (usernames might be different on your device so you must guess cause you wont be able to find them anwhere in plain-text, when password is listed you found the correct username, then you can try to crack the password and then login as the user - All commands that is being used in the video is listed further down in this readme)
+###### Hidden users has been added on the device even if you can't read them in plain text but you will be able to figure out how many users there is added since they must add a password for all users by hash. Let me show you a proof (users and id's is probably different on your device if you have anoher internet provider. There is only one way to figure out the usernames and that is by guessing. It's not possible to find the username(s) in plain-text anywhere on the router - If you find the password for a hash then you can crack the hash and then login as the user + password via ($.xmo.login(username, password); 
 
 ![Screenshot](misc/youarenotalone.gif)
 
