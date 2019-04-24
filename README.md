@@ -37,7 +37,7 @@
     $.config.reinitializeWithFactory
     and so on..
 
-### For list every feature that has been disable from default:
+### For list all features that has been disable from default:
 
      $.config.showedpages
 
@@ -50,7 +50,7 @@
      IAPDEnable: {enable: false}
      MTU: {enable: false}
 
-#### Below is a preview for how it will look when you have successfully hacked the router.
+#### Below is a preview how it will look when you have successfully hacked the router.
 
 ![Screenshot](https://nr1.nu/sagem/telia-telnet.gif)
 
