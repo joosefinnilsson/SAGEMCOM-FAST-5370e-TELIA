@@ -8,7 +8,7 @@
 
 ![Screenshot](https://nr1.nu/sagem/felia1.jpg)
 
-###### Hidden users is added even if you just see empty fields above hash passwords. Let me show you a proof (usernames might be different on your device so you must guess cause you wont be able to find them anwhere in plain-text, when password is listed you found the correct username, then you can try to crack the password and then login as the user - All commands that is using in video is listed below)
+###### Hidden users is added even if you just see empty fields above hash passwords. Let me show you a proof (usernames might be different on your device so you must guess cause you wont be able to find them anwhere in plain-text, when password is listed you found the correct username, then you can try to crack the password and then login as the user - All commands that is using in the video is listed further down in this readme)
 
 ![Screenshot](misc/youarenotalone.gif)
 
