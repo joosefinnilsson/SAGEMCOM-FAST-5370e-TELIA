@@ -8,7 +8,7 @@
 
 ##### No intrusion on Telia or Sagemcom's servers has occurred and no damage on hardware has been done. It's all about extremely poor security in the firmware.
 
-![Screenshot](https://nr1.nu/sagemcom-hacking/felia1.jpg)
+![Screenshot](https://nr1.nu/archive/sagemcom-hacking/felia1.jpg)
 
 #### Find hidden settings in latest firmware (3.42.3)
 
@@ -54,15 +54,15 @@
 
 #### Below is a preview when we have shell access with full root privileges:
 
-![Screenshot](https://nr1.nu/sagemcom-hacking/telia-telnet.gif)
+![Screenshot](https://nr1.nu/archive/sagemcom-hacking/telia-telnet.gif)
 
 ###### As on earlier versions from Telia they added backdoors without customers knowledge: 
 
-![Screenshot](https://nr1.nu/sagemcom-hacking/sagem-backdoor.png)
+![Screenshot](https://nr1.nu/archive/sagemcom-hacking/sagem-backdoor.png)
 
 ###### And it's not only Telia that got backdoors on our device, also sagemcom that can use our network and sniff traffic, here is a proof for how to find info about all settings they have configured:
 
-![Screenshot](https://nr1.nu/sagemcom-hacking/sagem-owned2.png)
+![Screenshot](https://nr1.nu/archive/sagemcom-hacking/sagem-owned2.png)
 
 ###### Stop/Start LXC From TelialXC Rootfs:
 
@@ -516,19 +516,19 @@ $.xmo.getValuesTree("Device/Managers/NetworkLan/GuestAccessControlEnable");
 
      $.xmo.getValuesTree('Device')
 
-![Screenshot](https://nr1.nu/sagemcom-hacking/device-info.png)
+![Screenshot](https://nr1.nu/archive/sagemcom-hacking/device-info.png)
 
 ###### Gather info for users
 
     $.xmo.getValuesTree("Device/UserAccounts/Users");
 
-![Screenshot](https://nr1.nu/sagemcom-hacking/userpass.png)
+![Screenshot](https://nr1.nu/archive/sagemcom-hacking/userpass.png)
 
 ###### Gather info about deviceInfo, advancedOptions, dns, firewall and other things like maintaince tabs then use:
 
     $.xmo.getValuesTree($.xpaths.mySagemcomBox);
 
-![Screenshot](https://nr1.nu/sagemcom-hacking/sagemcombox.png)
+![Screenshot](https://nr1.nu/archive/sagemcom-hacking/sagemcombox.png)
 
 ###### Here is some other things you can do in console if you are lazy:
 
@@ -571,11 +571,11 @@ $.xmo.getValuesTree("Device/Managers/NetworkLan/GuestAccessControlEnable");
     $.config.modules.backupConfigurationAllBackup === !0 ? a.downloadSpecificFile($.xpaths.mySagemcomBox.maintenance.saveRestore.save, "device.cfg", 1, function() {}, function(a) {}) : 
 $.xmo.client.newRequest..downloadFile($.xpaths.mySagemcomBox.maintenance.saveRestore.save, function() {}, function(a) {}), $.xmo.client.newRequest.send;
 
-![Screenshot](https://nr1.nu/sagemcom-hacking/download-files.gif)
+![Screenshot](https://nr1.nu/archive/sagemcom-hacking/download-files.gif)
 
 ###### REMOVE THE ANNOYING AUTO LOGOUT BY CHANGE TIMEOUT TO 0(Unlimited):
 
-![Screenshot](https://nr1.nu/sagemcom-hacking/annoying-logout.png)
+![Screenshot](https://nr1.nu/archive/sagemcom-hacking/annoying-logout.png)
      
      $.xmo.setValuesTree(0, "Device.UserInterface.Httpd.SessionTimeout"); 
 
@@ -869,11 +869,11 @@ $.xmo.client.newRequest..downloadFile($.xpaths.mySagemcomBox.maintenance.saveRes
 
 ###### Default login screen:
 
-![Screenshot](https://nr1.nu/sagemcom-hackingcom-default-login.png)
+![Screenshot](https://nr1.nu/archive/sagemcom-hackingcom-default-login.png)
 
 ###### Go visit 192.168.1.1:9000 to enjoy the hidden Twonky interface:
 
-![Screenshot](https://nr1.nu/sagemcom-hacking/twonky-sagemcom.png)
+![Screenshot](https://nr1.nu/archive/sagemcom-hacking/twonky-sagemcom.png)
 
 ###### Please notice that 9000 is the SSH port, you can reset settings by:
 
@@ -885,7 +885,7 @@ $.xmo.client.newRequest..downloadFile($.xpaths.mySagemcomBox.maintenance.saveRes
     curl 192.168.1.1:9000/nmc/rpc
     curl 192.168.1.1:9000/webconfig/config.js
 
-![Screenshot](https://nr1.nu/sagemcom-hacking/sagemcom-5370e.png)
+![Screenshot](https://nr1.nu/archive/sagemcom-hacking/sagemcom-5370e.png)
 
 ##### List folders by an exploit:
 
